@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-
-
 if hash terminus 2>/dev/null; then
 
     terminus auth login $PANTHEON_USER --password=$PANTHEON_PASSWORD

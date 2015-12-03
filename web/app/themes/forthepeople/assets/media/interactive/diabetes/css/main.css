@@ -1,0 +1,765 @@
+@font-face {
+    font-family: 'Formata-BoldCondensed';
+    src: url('../fonts/Formata-BoldCondensed.eot?') format('eot'), 
+         url('../fonts/Formata-BoldCondensed.otf')  format('opentype'),
+         url('../fonts/Formata-BoldCondensed.woff') format('woff'), 
+         url('../fonts/Formata-BoldCondensed.ttf')  format('truetype'),
+         url('../fonts/Formata-BoldCondensed.svg#Formata-BoldCondensed') format('svg');
+}
+
+@font-face {
+    font-family: 'FacebookLetterFaces';
+    src: url('../fonts/FacebookLetterFaces.eot?') format('eot'), 
+         url('../fonts/FacebookLetterFaces.otf')  format('opentype'),
+         url('../fonts/FacebookLetterFaces.woff') format('woff'), 
+         url('../fonts/FacebookLetterFaces.ttf')  format('truetype'),
+         url('../fonts/FacebookLetterFaces.svg#FacebookLetterFaces') format('svg');
+}
+
+.fractl {
+    font: 16px/26px Helvetica, Helvetica Neue, Arial;
+    font-size: 1em;
+    color: #222;
+    margin: 0;
+}
+
+.fractl a {
+    text-decoration: none;
+}
+
+.fractl ul {
+    list-style: none;
+}
+
+.fractl hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+.fractl h1, .fractl h2, .fractl h3, .fractl h4 {
+    font-weight: normal;
+}
+
+.fractl audio,
+.fractl canvas,
+.fractl img,
+.fractl video {
+    vertical-align: middle;
+}
+
+.fractl fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.fractl textarea {
+    resize: vertical;
+}
+
+.fractl .browsehappy {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+.fractl .wrapper {
+    width: 90%;
+    margin: 0 5%;
+}
+
+.fractl .header-container header {
+    background: #F3F3F3;
+}
+
+.fractl .main {
+    padding: 0 0 30px;
+    background: url('../images/bg.png');
+}
+
+.fractl .main section {
+    width: 940px;
+    margin: 40px auto;
+}
+
+.fractl .hfirst, .hsecond {
+    font-family: 'Formata-BoldCondensed';
+    border: 1px solid #999999;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    border-radius: 25px;
+}
+
+.fractl .hfirst {
+    background: #fff url('../images/bgline.png') no-repeat bottom center;
+    font-size: 15px;
+    overflow: hidden;
+}
+
+.fractl .hfirst article {
+    float: left;
+}
+
+.fractl .hfirst article header {
+    position: relative;
+    overflow: hidden;
+}
+
+.fractl .hfirst article header figure {
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.fractl .hfirst article header p {
+    background: url('../images/num-bg.png') repeat-x top center;
+    color: #595959;
+    text-align: center;
+    margin: 6px 0 6px 32px;
+    padding: 0 10px;
+    border: 1px solid #999999;
+    -webkit-border-radius: 0 25px 25px 0;
+    -moz-border-radius: 0 25px 25px 0;
+    border-radius: 0 25px 25px 0;
+}
+
+.fractl .hfirst .result {
+    background: url('../images/input-bg.png') repeat-x top left;
+    font-size: 24px;
+    color: #BE1E2D;
+    text-align: center;
+    line-height: 0.6;
+    border: 1px solid #999999;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    border-radius: 25px;
+    width: 221px;
+    margin: 4px auto;
+    padding: 10px 0 7px;
+}
+
+.fractl .hfirst .result span {
+    font-size: 10px;
+    color: #77787B;
+}
+
+.fractl .drop {
+	width: 926px;
+    margin: 17px 7px 10px;
+}
+
+.fractl .drop header {
+	width: 190px;
+	float: left;
+}
+
+.fractl .drop header figure {
+	margin-left: 14px!important;
+}
+
+.fractl .drop header p {
+	background: transparent!important;
+	font-size: 20px;
+	text-align: right!important;
+	border: none!important;
+}
+
+.fractl .drop p {
+	font-size: 20px;
+	color: #595959;
+	float: left;
+}
+
+.fractl .drop .result {
+	background: transparent;
+	border: none;
+	float: left;
+}
+
+.fractl .drop .runnumber {
+	font-size: 106px!important;
+	margin: 38px 40px 0;
+	display: block;
+	float: left;
+}
+
+.fractl .drop .runsec {
+	font-size: 25px;
+	width: 100px;
+	margin: 16px 0 6px 0;
+}
+
+.fractl .skull {
+    margin: 25px 9px;
+}
+
+.fractl .leg {
+    margin: 25px 15px;
+}
+
+.fractl .eye {
+    margin: 25px 52px 20px;
+}
+
+.fractl .baby {
+    margin: 25px 40px 20px;
+}
+
+.fractl .child {
+    margin: 25px 24px;
+}
+
+.fractl .pocket {
+    position: relative;
+}
+
+.fractl .hsecond {
+    background: #fff url('../images/vertical.png') no-repeat 50% 0;
+    font-size: 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+.fractl .hsecond article {
+    float: left;
+}
+
+.fractl .hsecond article header p {
+    background: url('../images/cost-bg.png') repeat-x top center;
+    font-size: 20px;
+    color: #595959;
+    text-align: center;
+    margin: 6px 0 6px;
+    padding: 2px 10px;
+    border: 1px solid #999999;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    border-radius: 25px;
+}
+
+.fractl .hsecond .result {
+    background: url('../images/big-bg.png') repeat-x top left;
+    font-size: 32px;
+    color: #BE1E2D;
+    text-align: center;
+    line-height: 0.6;
+    border: 1px solid #999999;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    border-radius: 25px;
+    width: 287px;
+    margin: 14px auto;
+    padding: 10px 0 7px;
+}
+
+.fractl .hsecond .result span {
+    font-size: 13px;
+    color: #77787B;
+}
+
+.fractl .median {
+    margin: 24px 61px;
+}
+
+.fractl .out {
+    margin: 24px 88px;
+}
+
+.fractl .person {
+    margin: 24px 75px;
+}
+
+.fractl .total {
+    margin: 24px 57px;
+}
+
+.fractl .cost {
+    position: absolute;
+    top: 138px;
+    left: 50%;
+    margin-left: -56.5px;
+    z-index: 999;
+}
+
+.fractl .contslider {
+    width: 940px;
+    margin: 0 auto;
+}
+
+.fractl .causes {
+    background: #E6E7E8 url('../images/corner.png') no-repeat bottom right;
+    font-family: 'FacebookLetterFaces';
+    border-top: 10px solid #00A69C;
+    margin: 0!important;
+    overflow: hidden;
+}
+
+.fractl .causes header {
+    background: url('../images/line.png') repeat-x 0 50%;
+    overflow: hidden;
+}
+
+.fractl .causes h2 {
+    background: #00A69C;
+    font-size: 36px;
+    color: #fff;
+    -webkit-border-radius: 0 25px 25px 0;
+    -moz-border-radius: 0 25px 25px 0;
+    border-radius: 0 25px 25px 0;
+    padding: 14px 35px;
+    float: left;
+}
+
+.fractl .causes ul {
+    width: 374px;
+    font-size: 23px;
+    color: #404041;
+    float: left;
+}
+
+.fractl .causes ul li {
+    background: url('../images/listcircle.png') no-repeat top left;
+    margin-bottom: 15px;
+    padding-left: 60px;
+}
+
+.fractl .causes figure {
+    float: right;
+    margin: 20px 100px 40px 0;
+}
+
+.fractl .arrows a {
+    margin: 0 6px;
+}
+
+.fractl .percent {
+    font-family: 'FacebookLetterFaces';
+    width: 980px!important;
+    margin-top: 25px!important;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 0 !important;
+}
+
+.fractl .per {
+    background: url('../images/circle.png') no-repeat center center;
+    font-family: 'Formata-BoldCondensed';
+    position: absolute;
+    top: 64px;
+    left: 50%;
+    margin-left: -111px;
+}
+
+.fractl .percent ul {
+    font-size: 26px;
+    color: #fff;
+    padding: 0;
+}
+
+.fractl .percent .left {
+    float: left;
+}
+
+.fractl .percent .right {
+    float: right;
+}
+
+.fractl .percent .left li {
+    padding: 12px 30px 13px 55px;
+    text-align: left;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+
+.fractl .percent .right li {
+    padding: 12px 55px 13px 30px;
+    text-align: right;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.fractl .c1 {
+    background: url('../images/causes1.png') no-repeat top left;
+}
+
+.fractl .c2 {
+    background: url('../images/causes2.png') no-repeat top left;
+}
+
+.fractl .c3 {
+    background: url('../images/causes3.png') no-repeat top left;
+}
+
+.fractl .c4 {
+    background: url('../images/causes4.png') no-repeat top left;
+}
+
+.fractl .c5 {
+    background: url('../images/causes5.png') no-repeat top right;
+}
+
+.fractl .c6 {
+    background: url('../images/causes6.png') no-repeat top right;
+}
+
+.fractl .c7 {
+    background: url('../images/causes7.png') no-repeat top right;
+}
+
+.fractl .c8 {
+    background: url('../images/causes8.png') no-repeat top right;
+}
+
+.fractl .c9 {
+    background: url('../images/causes9.png') no-repeat top right;
+}
+
+.fractl .mount {
+    width: 1014px!important;
+}
+
+.fractl .mount ul {
+    font-family: 'FacebookLetterFaces';
+    margin: 40px 107px 70px;
+    padding: 0;
+    overflow: hidden;
+}
+
+.fractl .counter {
+    overflow: hidden;
+}
+
+.fractl .counternum {
+    font-family: 'FacebookLetterFaces';
+    margin: 40px 0 45px 40px;
+    float: left;
+    width: 415px;
+}
+
+.fractl .counternum h3 {
+    font-size: 40px;
+    color: #1B75BB;
+    line-height: 1.1;
+    border-bottom: 5px solid #26A9E0;
+    margin: 6px 0;
+}
+
+.fractl .counternum p {
+    font-size: 40px;
+    color: #00A69C;
+    line-height: 1;
+    margin: 0;
+}
+
+.fractl .counter ul {
+    margin: 0 92px 0 10px;
+    float: right;
+}
+
+.fractl .counter ul li {
+    font-size: 17px;
+    color: #fff;
+    margin: 14px 0;
+    padding: 15px 20px 15px 68px;
+}
+
+.fractl .m1 {
+    background: url(../images/cost1.png) no-repeat left center;
+}
+
+.fractl .m2 {
+    background: url(../images/cost2.png) no-repeat left center;
+}
+
+.fractl .m3 {
+    background: url(../images/cost3.png) no-repeat left center;
+}
+
+.fractl .mountli li {
+    background: #00A69C;
+    font-size: 20px;
+    margin: 0 20px;
+    padding: 4px 10px;
+    float: left;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    border-radius: 25px;
+}
+
+.fractl .mountli li a {
+    color: #fff;
+}
+
+.fractl .contstates {
+    margin-top: 40px;
+}
+
+.montana, .social, .help {
+     width: 990px!important;
+}
+
+.fractl .footer-container footer {
+    background: url('../images/footer.png') no-repeat top center;
+    padding: 11px 0 0;
+}
+
+.fractl .footer-container h3 {
+    font-family: 'FacebookLetterFaces';
+    font-size: 27px;
+    color: #fff;
+    margin: 0 0 40px;
+}
+
+.fractl .bxslider, .causesslider {
+    text-align: center;
+}
+
+.fractl .center {
+    text-align: center;
+}
+
+@media only screen and (min-width: 480px) {
+
+
+
+}
+
+@media only screen and (min-width: 768px) {
+
+
+
+}
+
+@media only screen and (min-width: 1140px) {
+
+    .fractl .wrapper {
+        width: 1024px;
+        margin: 0 auto;
+    }
+
+}
+
+.fractl .ir {
+    background-color: transparent;
+    border: 0;
+    overflow: hidden;
+    *text-indent: -9999px;
+}
+
+.fractl .ir:before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 150%;
+}
+
+.fractl .hidden {
+    display: none !important;
+    visibility: hidden;
+}
+
+.fractl .visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+.fractl .visuallyhidden.focusable:active,
+.fractl .visuallyhidden.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+}
+
+.fractl .invisible {
+    visibility: hidden;
+}
+
+.fractl .clearfix:before,
+.fractl .clearfix:after {
+    content: " ";
+    display: table;
+}
+
+.fractl .clearfix:after {
+    clear: both;
+}
+
+.fractl .clearfix {
+    *zoom: 1;
+}
+
+.fractl .runnumber{
+    font-size: 24px!important;
+    color: #BE1E2D!important;
+}
+
+.fractl #bx-pager a {
+    margin: 0 3px;
+}
+
+.fractl #bx-pager a.active img {
+    /*border: solid #216d9d 1px;*/
+}
+
+.fractl .contstates .bx-wrapper .bx-controls-direction a {
+    top: 45%;
+}
+
+.fractl .contstates .bx-wrapper .bx-prev {
+    left: -70px;
+}
+
+.fractl .contstates .bx-wrapper .bx-next {
+    right: -70px;
+}
+
+.fractl .share, .fractl .help { 
+    overflow: hidden;
+}
+
+.fractl .share article {
+    background: #F1F1F2;
+    width: 305px;
+    min-height: 306px;
+    margin: 10px 8px;
+    padding: 16px 0 0;
+    border: 4px solid #A6A8AB;
+    float: left;
+}
+
+.fractl .share article img {
+    margin-bottom: 10px;
+}
+
+.fractl .share article p {
+    font-family: 'FacebookLetterFaces';
+    font-size: 26px;
+    color: #BE1E2D;
+    margin: 15px 0;
+    line-height: 33px;
+}
+
+.fractl .links {
+    margin: 34px 0 0;
+}
+
+.fractl .links a {
+    margin: 0 3px;
+}
+
+.fractl .help h2 {
+    font-family: 'FacebookLetterFaces';
+    font-size: 32px;
+    color: #404041;
+}
+
+.fractl .help article {
+    background: #fff;
+    width: 242px;
+    margin: 0 24px;
+    padding: 20px 20px;
+    float: left;
+}
+
+.fractl .help article p {
+    font-family: 'FacebookLetterFaces';
+    font-size: 23px;
+    color: #404041;
+    text-align: left;
+    border-top: 2px solid #808184;
+    padding: 14px 0 0;
+}
+
+.fractl .angel {
+    margin: 30px 40px 15px;
+}
+
+.fractl .spanper{
+    font-family: Helvetica, Helvetica Neue, Arial;
+}
+
+.fractl .montana .bx-prev{
+    left: 425px!important;
+}
+
+.fractl .montana .bx-next{
+    right: 425px!important;
+}
+
+.fractl .montana{
+    margin-bottom: 100px!important;
+}
+
+.fractl .subheader,.subheader-affects{
+    text-align: center;
+}
+
+.fractl .subheader{
+    margin-top: 40px;
+}
+
+.fractl .subheader-affects{
+    margin-top: 110px;
+}
+
+.fractl .undercounter{
+    width: 540px;
+    font-size: 14px !important;
+    margin: 0 10px;
+}
+
+.fractl footer .span.runnumber{
+    font-family: 'FacebookLetterFaces';
+    font-size: 27px;
+    color: #fff !important;
+}
+
+.fractl .states a{
+    cursor: pointer;
+}
+
+.fractl .c1hover,.fractl .c2hover,.fractl .c3hover,.fractl .c4hover,.fractl .c5hover,.fractl .c6hover,.fractl .c7hover,.fractl .c8hover,.fractl .c9hover{
+    display: none;
+    margin: 0;  
+    font-size: 20px;
+}
+
+.fractl .blurb{
+    height: 50px;
+    width: 930px;
+    margin: 0 auto 50px auto;
+}
+
+.fractl .pocket{
+    display: none;
+}
+
+
+.fractl .counter {
+    margin: 40px 0;
+}
+
+.fractl .share h2{
+    font-family: 'FacebookLetterFaces';
+    font-size: 32px;
+    color: #404041;
+}
+
+.fractl .prevt{
+    margin: 40px 0;
+}

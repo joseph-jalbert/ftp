@@ -1,0 +1,146 @@
+//
+// Attorney Profile
+//
+// - profile specific styles
+// --------------------------------
+
+
+
+#profile-wrap,.contactus-block{
+	position:relative;
+	top:-1px;
+	min-height:192px;
+	background:url('@{setURL}assets/images/structure/grey-noise-texture2.png') repeat-x;
+}
+#profile-wrap .location,.contactus-block .subtitle{
+	color:#c2c2c2;
+	font-size:12px;
+	font-weight:300;
+}
+
+.contactus-block{
+	margin-bottom:-65px;
+
+	h1{
+		color:#FFF!important;
+		font-weight:200;
+		font-size:32px;
+		margin:0;
+		padding:0 0 7px 0;
+	}
+	.container{padding-top:40px;}
+	.subtitle{font-family:@fontSansSerif;}
+}
+
+#profile-wrap{
+	h1{
+		font-family: @fontProfileH1;
+		color:#FFF;
+		font-size:48px;
+		font-weight:normal;
+		letter-spacing:2px;
+		color:#ffffff;
+		margin:0;
+		padding:0 0 10px 0;
+	}
+	.row-leading{margin-top:35px!important;}
+	.span9{padding-left:20px;}
+	.span3{padding-right:12px;}
+}
+
+.profile-head{
+	position:relative;
+	height:158px;
+}
+
+.profile-tab-hr{
+	background:url('@{setURL}assets/images/structure/heading-hr-sprite.png') right no-repeat;
+	background-position:0px -165px;
+	height:3px;
+	margin:26px 0 0 0;
+}
+
+#profileTabs{
+	li a{
+		color:#FFF;
+		font-weight:200;
+		font-size:12px;
+		padding:5px 15px;
+		line-height:20px;
+		border:none;
+		background-clip:padding-box;
+	}
+	&.nav-tabs{
+		border:none;
+		margin:0;
+		padding:10px 0 0 0;
+
+		li{
+			position:relative;
+		}
+
+	}
+}
+
+#profileTabs.nav-tabs >.active:after{
+	position:absolute;
+	content:' ';
+	background:url('@{setURL}assets/images/structure/arrow-sprite.png') no-repeat;
+	height:8px;
+	width:14px;
+	background-position:0 1px;
+	top:36px;
+	left:50%;
+	margin-left:-7px;
+}
+
+#profileTabs.nav-tabs >.active >a, #profileTabs.nav-tabs >.active >a:hover, #profileTabs.nav >li >a:hover{
+	border-radius:23px;
+	box-shadow:inset 0 2px 6px rgba(0,0,0,.35);
+	color:#FFF;
+	background-color:#292C2E;
+	background-color:rgba(0,0,0,.14);
+}
+
+#profileTabContent{
+	padding:20px 0 0 0;
+	width:100%;
+
+	h3{
+		padding-bottom:20px;
+	}
+	p{
+		text-align: justify;
+	}
+}
+
+.profile-module{
+	position:relative;
+	margin-top:40px;
+
+	.heading{
+		display:block;
+		color:#004b82;
+		text-transform:uppercase;
+		font-size:14px;
+		border-bottom:solid 1px #e0e0e0;
+		margin-bottom:20px;
+		padding-bottom:5px;
+	}
+	ul{
+		margin-left:0px;
+		padding-left:0px;
+	}
+}
+
+.profile-module li, #profileTabContent li{
+	list-style-type:none;
+	background:url('@{setURL}assets/images/structure/bullet-sprite.png') no-repeat;
+	background-position:0 6px;
+	padding:0 0 0 16px;
+}
+
+.av-rated{
+	position: relative;
+	margin-top: 20px;
+}

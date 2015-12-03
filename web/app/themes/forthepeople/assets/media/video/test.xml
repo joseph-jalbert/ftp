@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+  <url>
+    <loc>http://www.microsystools.com/products/sitemap-generator/videos/sitemap-builder-sitemaps-tool/</loc>
+    <video:video>
+      <video:player allow_embed="yes">http://www.youtube.com/v/xZ-LrxSA3Yo?fs=1</video:player>
+      <video:thumbnail_loc>http://i1.ytimg.com/vi/xZ-LrxSA3Yo/default.jpg</video:thumbnail_loc>
+      <video:title>A1 Sitemap Generator - Videos [ sitemap builder sitemaps tool ]</video:title>
+      <video:description>Video: A1 Sitemap Generator - build sitemaps quick demonstration</video:description>
+      <video:category>sitemaps</video:category>
+      <video:tag>a1</video:tag>
+      <video:tag>sitemap</video:tag>
+      <video:tag>generator</video:tag>
+      <video:tag>google</video:tag>
+      <video:tag>xml</video:tag>
+      <video:tag>html</video:tag>
+      <video:tag>sitemaps</video:tag>
+    </video:video>
+    <video:video>
+    ...
+    </video:video>
+  </url>
+</urlset>

@@ -1,0 +1,63 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+*::-moz-selection {
+  background: #000;
+  color: #fff;
+  text-shadow: none;
+}
+*::selection {
+  background: #000;
+  color: #fff;
+  text-shadow: none;
+}
+
+*::-moz-selection {
+  background: #000;
+  color: #fff;
+  text-shadow: none;
+}
+
+*::-webkit-selection {
+  background: #000;
+  color: #fff;
+  text-shadow: none;
+}
+
+img {
+  display: block;
+  border: 0;
+  margin: 0 auto;
+}
+
+body {
+  font-family: "Open Sans", Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 0;
+  background-color: #FFF;
+  font-size: 18px;
+}
+
+.container {
+  width: 975px;
+  border: 10px solid #000;
+  margin: 50px auto;
+  padding: 50px;
+}
+
+p {
+  margin: 40px auto;
+}
+
+.jump {
+  border: 1px dotted #000;
+  padding: 25px;
+}
+
+.jump > img {
+  display: inline;
+  margin-right: 15px;
+}
+
+.jump > p {
+  margin: 0 0 10px;
+  font-size: 22px;
+  font-weight: bold;
+}

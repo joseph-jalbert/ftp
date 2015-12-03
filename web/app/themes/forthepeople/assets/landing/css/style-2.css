@@ -1,0 +1,947 @@
+/* CSS Reset
+**************************************/
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, cite, code, del, dfn, em, ins, q, small, strike, strong, sub, sup, tt, b, u, i, img, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, caption {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after, q:before, q:after {
+	content: '';
+	content: none
+}
+:focus {
+	outline: 1px dotted #414244
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0
+}
+img {
+	display: block
+}
+/* GLOBAL STYLES
+**************************************/
+body {
+	background: #ffffff;
+	color: #414244;
+	font-family: 'Droid Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
+	line-height: 1;
+}
+h1, h2, h3, .title {
+	color: #791518;
+	font-size: 32px;
+	font-weight: 400;
+	line-height: 1em;
+}
+.subtitle {
+	font-size: 1.5em;
+	line-height: 1em;
+	color: #303134;
+	margin-bottom: 10px;
+}
+.serving-headline {
+	color: #7e1005;
+	font: italic normal 1.25em/2em Georgia, "Times New Roman", Times, serif;
+	text-shadow: 2px 0 1px #fff;
+}
+a {
+	color: #8c8c8c;
+	text-decoration: none;
+}
+a:hover {
+	color: #720f12;
+}
+.link {
+	color: #720f12;
+	text-decoration: none;
+}
+.link:hover {
+	text-decoration: none;
+	border-bottom: 1px solid;
+}
+p {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 15px;
+	font-weight: 300;
+	color: #414244;
+	line-height: 25px;
+	margin-bottom: 20px;
+}
+
+/* PAGE STRUCTURE
+**************************************/
+.container {
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+}
+.wrapper {
+	position: relative;
+	margin: 0 auto;
+	width: 994px;
+}
+.bg-fill {
+	background: #f1f1f1;
+	border-top: solid 1px #dcdcdc;
+	border-bottom: solid 1px #dcdcdc;
+}
+.pad-top {
+	padding-top: 42px;
+}
+.pad-top-bot {
+	padding: 42px 0;
+}
+.pad-bot {
+	padding-bottom: 16px;
+}
+.alpha-padding {
+	padding: 42px 0;
+}
+.alpha-padding-top {
+	padding-top: 42px;
+}
+.beta-padding {
+	padding: 22px 0;
+}
+.beta-pad-top-bot {
+	padding: 22px 0;
+}
+/* HEADER
+**************************************/
+.header {
+	padding-bottom: 1em;
+}
+.header .logo {
+	margin-top: 1em;
+}
+.header .info {
+	text-align: right;
+	margin-top: 36px;
+}
+.header .slogan {
+	display: block;
+	clear: left;
+	text-decoration: none;
+	color: #414244;
+	font-size: 17px;
+	line-height: 20px;
+	margin-bottom: 6px;
+	margin-top: 9px;
+}
+.header .num, .header .num:hover {
+	text-decoration: none;
+	font-size: 33px;
+	padding-bottom: 6px;
+	cursor: default;
+}
+/* BANNER
+**************************************/
+.cta-banner {
+	height: 432px;
+	width: 612px;
+}
+.cta-banner>img {
+	max-width: 100%;
+	border-top-right-radius: 20px;
+}
+.cta-caption {
+	width: 560px;
+	height: auto;
+	padding: 40px 25px 35px;
+	overflow: hidden;
+	background-color: #fff;
+	border: 1px solid #dcdcdc;
+	border-top: 0;
+}
+.cta-caption .subtitle {
+	margin-bottom: 0;
+	padding-bottom: 25px;
+}
+.cta-caption ul {
+	list-style: none;
+  margin-left: 0;
+}
+.cta-caption .two-col li {
+  padding-left: 1em;
+	margin-bottom: 1em;
+}
+.cta-caption .two-col li:before {
+	position: absolute;
+  left: 0;
+	content: '▸';
+}
+.cta-caption li>a {
+	color: #064069;
+	font-size: 14px;
+}
+.cta-caption li>a:hover, .cta-caption li>a:focus {
+	color: #851a1d;
+}
+/* MAIN CONTENT
+**************************************/
+.main-content {
+	position: relative;
+	margin: 0 auto;
+	width: 612px;
+	min-height: 454px;
+	padding-top: 55px;
+	z-index: 10;
+}
+.main-content .title, .content .title {
+	margin-bottom: 0.5em;	
+}
+.half-content .title {
+	font-size: 1.85em;
+	letter-spacing: -1px;
+	margin-bottom: 0.5em;
+}
+.john-morgan {
+	position: absolute;
+	bottom: 0;
+	right: -155px;
+	width: 635px;
+	height: 509px;
+	background: url(/wp-content/themes/forthepeople/assets/landing/images/john-morgan.jpg) no-repeat;
+	z-index: 1;
+}
+.half-content {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+	width: 50%;
+	padding: 20px 0;
+	padding-right: 30px;
+}
+.half-content + .half-content {
+	padding-right: 0;
+}
+.half-content p {
+	text-align: justify;
+}
+
+/* LAWINFO CONTENT
+**************************************/
+.lawinfo .cta-banner {
+	width: auto;
+	height: auto;
+}
+.lawinfo .main-content {
+	padding: 32px 0 22px;
+}
+.lawinfo p {
+	margin-bottom: 10px;
+}
+/* FORM
+**************************************/
+.form-wrapper {
+	width: 340px;
+}
+.cta-text {
+	color: #303134;
+	font-size: 1.7em;
+	line-height: 1.2em;
+	word-spacing: -2px;
+}
+.cta-text span {
+	font-size: 32px;
+}
+.cta-text-sm {
+	line-height: 1em;
+	margin-bottom: 5px;
+}
+#formLandingPage {
+	margin-top: 1.5em;
+}
+#formLandingPage input[type="text"] {
+	border: 1px solid #dcdcdc;
+	padding: 7px 11px;
+	font-size: 13px;
+	width: 314px;
+	max-width: 314px;
+	margin-bottom: 7px;
+	color: #a1a1a1;
+}
+#formLandingPage input[type="submit"] {
+background-color: #7C3134;
+}
+#formLandingPage.accident input[type="submit"] {
+background-color: #064069;
+}
+#formLandingPage.injury input[type="submit"] {
+background-color: #85a915;
+}
+#formLandingPage .ginput_container {
+margin-top: 0;
+}
+#formLandingPage textarea {
+	height: 52px;
+	max-height: 52px;
+}
+#formLandingPage .input-small {
+	width: 35px;
+}
+#formLandingPage label {
+	font-size: 13px;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	display: block;
+	padding-bottom: 5px;
+}
+#formLandingPage .actions {
+	padding-top: 12px;
+}
+#formLandingPage .validation {
+	float: left;
+}
+#formLandingPage .validation span {
+	font-size: 20px;
+	padding-right: 10px;
+}
+.btn-submit {
+	cursor: pointer;
+	margin-top: 12px;
+	float: right;
+	border: 0;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	-moz-background-clip: padding;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+	background-color: #791518;
+	padding: 10px 30px;
+	color: #FFF;
+	font-size: 1em;
+	text-transform: uppercase;
+	-webkit-appearance: none;
+}
+.btn-submit:hover {
+	background-color: #7C3134;
+}
+/* LAWINFO FORM
+**************************************/
+.apiForm input[type=text], .apiForm textarea {
+	border: 1px solid #dcdcdc;
+	padding: 7px 11px;
+	font-size: 13px;
+	width: 314px;
+	max-width: 314px;
+	margin-bottom: 5px;
+	color: #525252;
+}
+.apiForm p {
+	margin-bottom: 0;
+}
+.apiForm br {
+	display: none;
+}
+.apiForm textarea {
+	height: 52px;
+	max-height: 52px;
+}
+.apiForm b {
+	font-size: 0.95em;
+}
+.apiForm #captchaImage, .apiForm #captchaT {
+	float: left;
+	margin: 10px 0 10px 40px;
+}
+.apiForm #captchaT {
+	width: 100px;
+}
+.apiForm .submit {
+	float: right;
+	margin-right: 43px;
+	cursor: pointer;
+	margin-top: 3px;
+	border: 0;
+	border-radius: 3px;
+	-moz-background-clip: padding;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+	background-color: #791518;
+	padding: 8px 94px;
+	color: #FFF;
+	font-size: 1.2em;
+	text-transform: uppercase;
+	-webkit-appearance: none;
+}
+.apiForm .submit:hover {
+	background-color: #7C3134;
+}
+/* PAGE THEME - BRAND COLOR
+**************************************/
+.brand, .brand:hover {
+	color: #720f12;
+}
+.btn-brand {
+	background-color: #720f12;
+}
+.btn-brand:hover {
+	background-color: #7C3134;
+}
+img.frame {
+	border:3px solid #fff;
+	border-radius:8px;
+	-webkit-background-clip:padding-box;
+	-moz-background-clip:padding;
+	background-clip:padding-box;
+	background-color:#cbcbcb;
+	-webkit-box-shadow:0 0 5px rgba(0,0,0,0.63);
+	-moz-box-shadow:0 0 5px rgba(0,0,0,0.63);
+	box-shadow:0 0 5px rgba(0,0,0,0.63);
+	margin-top: 6px;
+}
+
+/* LIST STYLES
+**************************************/
+.list {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 15px;
+	font-weight: 300;
+	color: #414244;
+	line-height: 25px;
+  margin: 0 0 1em 1em;
+}
+
+.list li {
+  margin-bottom: 0.5em;
+}
+
+.two-col > li {
+  position: relative;
+  display: inline-block;
+  width: 46%;
+  padding-left: 1em;
+  float: left;
+}
+
+.two-col > li:before {
+  position: absolute;
+  left: 0;
+  color: #7E7E7E;
+  content: '\2022';
+}
+
+/* PAGE MODULES
+**************************************/
+.verdicts {
+	width: 50%;
+	margin-top: 20px;
+}
+.verdicts dt {
+	width: 200px;
+	padding: 0;
+	color: #303134;
+	font-size: 33px;
+	float: left;
+}
+.verdicts dd {
+	font-size: 16px;
+	width: 272px;
+	margin-bottom: 42px;
+	line-height: 22px;
+	float: left;
+}
+.testimonials {
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+}
+.testimonials p {
+	position: relative;
+	width: 730px;
+	margin: auto;
+	overflow: visible;
+	font-size: 17px;
+	line-height: 26px;
+	text-align: justify;
+}
+.testimonials p:before, .testimonials p:after {
+	color: #c0c0c0;
+	font-size: 74px;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	content: '\201C';
+	position: absolute;
+	top: 20px;
+	left: -40px;
+}
+.testimonials p:after {
+	content: '\201D';
+	top: inherit;
+	bottom: -20px;
+	left: inherit;
+	right: -30px;
+}
+.testimonials small {
+	display: block;
+	width: 730px;
+	margin: 20px auto 0;
+	font-size: 15px;
+	font-style: italic;
+	text-align: right;
+}
+.testimonials small:before {
+	content: "\2014";
+	padding-right: 8px;
+}
+
+/* jQuery Slider - Be careful!
+**************************************/
+.slide-container {
+	width: 100%;
+	min-height: 140px;
+	margin-top: 10px;
+	overflow: visible;
+	position: relative;
+	display: none
+}
+#slider .slide {
+	padding: 0px 20px;
+	width: 940px;
+	display: block
+}
+#slider .next, #slider .prev {
+	position: absolute;
+	top: 107px;
+	left: -39px;
+	width: 24px;
+	height: 43px;
+	display: block;
+	z-index: 101
+}
+#slider .next {
+	left: 585px
+}
+.pagination {
+	margin: 0px auto;
+	width: 80px
+}
+.pagination li {
+	float: left;
+	margin: 0 1px;
+	list-style: none
+}
+.pagination li a {
+	display: block;
+	width: 12px;
+	height: 0;
+	padding-top: 12px;
+	background-image: url(/wp-content/themes/forthepeople/assets/landing/images/pagination.png);
+	background-position: 0 0;
+	float: left;
+	overflow: hidden
+}
+.pagination li.current a {
+	background-position: 0 -12px
+}
+/* FOOTER
+**************************************/
+.footer {
+	background: #303134;
+	padding: 40px 0px;
+}
+.ft-logo {
+	width: 72px;
+	height: 63px;
+	background: url(/wp-content/themes/forthepeople/assets/landing/images/mm-logo-footer.png) no-repeat;
+	margin-top: 0;
+	float: left;
+}
+.ft-info {
+	float: right;
+	text-align: right;
+}
+.ft-info p {
+	color: #FFF;
+	font-size: 22px;
+	line-height: 1em;
+	margin-bottom: 0;
+	padding: 0px 0px 12px 0px;
+}
+.ft-info span {
+	color: #707176;
+	font-size: 22px;
+}
+.ft-num, a.ft-num {
+	color: #ffffff;
+	text-decoration: none;
+	cursor: default;
+}
+.ft-info .sm, .ft-info .sm span {
+	font-size: 1em;
+}
+/* HELPER CLASSES
+**************************************/
+.clear {
+	clear: both;
+}
+.pull-left {
+	float: left;
+}
+.pull-right {
+	float: right;
+}
+.text-center {
+	text-align: center;
+}
+.mleft {
+	margin-left: 15px;
+}
+.mright {
+	margin-right: 25px;
+}
+.clearfix, .cf {
+ *zoom: 1;
+}
+.clearfix:before, .clearfix:after, .cf:before, .cf:after {
+	display: table;
+	content: "";
+}
+.clearfix:after, .cf:after {
+	clear: both;
+}
+
+/* MEDIA QUERIES
+**************************************/
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+.wrapper {
+	width: auto;
+ 	overflow: hidden;
+}
+.header > .wrapper, .footer > .wrapper {
+	max-width: 96%;
+	margin: 0 2%;
+}
+.bg-fill {
+	width: 100%;
+}
+.logo {
+	max-width: 400px;
+}
+.header .slogan {
+	font-size: 14px;
+	margin-top: 4px;
+}
+.cta-banner, .form-wrapper {
+	padding-top: 40px;
+}
+.cta-banner {
+	width: 50%;
+	height: auto;
+	margin: auto;
+	text-align: center;
+}
+.cta-banner > img {
+	margin-top: 30px;
+	margin-left: 10px;
+}
+.form-wrapper {
+	margin: 0 10px 0 0;
+}
+.form-wrapper > .cta-text {
+	position: absolute;
+	width: 100%;
+	top: 40px;
+	left: 100px;
+	font-size: 1.5em;
+}
+.main-content {
+	max-width: 65%;
+}
+.verdicts {
+	width: 40%;
+	margin: 0 5%;
+}
+#slider .slide {
+	width: 680px;
+}
+.slide p {
+	font-size: 16px;
+}
+}
+@media screen and (max-width: 40em) {
+.wrapper, .main-content, .footer>.wrapper {
+	width: 96%;
+	margin: 0 2%;
+	overflow: hidden;
+}
+.header .logo>img {
+	max-width: 100%;
+	margin-bottom: 0.5em;
+}
+.header .info {
+	margin-top: 0;
+	text-align: center;
+}
+.header .num:before {
+	display: inline-block;
+	content: url('/wp-content/themes/forthepeople/assets/landing/images/icon-phone.png');
+	padding-right: 5px;
+	vertical-align: middle;
+}
+.header .num, .header .num:hover {
+	color: #333333 !important;
+	font-size: 1.25em;
+	line-height: 1em;
+	cursor: pointer;
+	vertical-align: middle;
+}
+.header .slogan, .footer .slogan {
+	font-size: 0.85em;
+}
+.btn-call {
+	display: inline-block;
+ *display: inline;
+ *zoom: 1;
+	padding: 6px 12px 4px;
+	margin-bottom: 0;
+	font-size: 14px;
+	line-height: 20px;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+	color: #333333;
+	text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+	background-color: #f5f5f5;
+	background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
+	background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+	background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+	background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
+	background-repeat: repeat-x;
+ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);
+	border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+ *background-color: #e6e6e6;
+ filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+	border: 1px solid #cccccc;
+ *border: 0;
+	border-bottom-color: #b3b3b3;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+ *margin-left: .3em;
+	-webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+	-moz-box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+	box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+}
+.btn-call:hover, .btn-call:focus, .btn-call:active, .btn-call.active, .btn-call.disabled, .btn-call[disabled] {
+	color: #333333;
+	background-color: #e6e6e6;
+ *background-color: #d9d9d9;
+}
+.cta-banner {
+	width: auto;
+	height: auto;
+	margin-bottom: 2em;
+}
+.cta-caption {
+	width: auto;
+	padding: 1.5em 1em 1em;
+}
+.cta-caption ul>li {
+	width: 100%;
+}
+.main-content {
+	padding-top: 3em;
+}
+.half-content {
+	width: 100%;
+	padding: 1em .5em 0;
+}
+.title {
+	font-size: 1.5em;
+}
+.john-morgan, .testimonials {
+	display: none;
+}
+.form-wrapper {
+	width: auto;
+}
+.verdicts {
+	width: auto;
+	margin-top: 1em;
+}
+.verdicts dt {
+	font-size: 1.5em;
+}
+.verdicts dd {
+	width: auto;
+}
+.pad-top {
+	padding-top: 32px;
+}
+.pad-top-bot {
+	padding: 32px 0;
+}
+.pull-left, .pull-right {
+	float: none;
+}
+img.pull-left {
+	float: left;
+}
+img.pull-right {
+	float: right;
+}
+}
+
+/* Gravity Forms Styling for the PPC Landing Pages */
+
+/**
+**/
+
+.gform_wrapper {
+	margin-top: 0;
+	max-width: 100% !important;
+}
+
+.gform_wrapper span.gform_description {
+	color: #303134;
+	font-size: 1.6em;
+	line-height: 1.2em;
+ 	word-spacing: -2px;
+}
+
+.gform_wrapper span.gform_description span {
+	color: #85a915;
+}
+.gform_wrapper .top_label .gfield_label {
+	display: none !important;
+	font-weight:normal !important;
+	margin: 0 !important;
+	font-size: 13px;
+	text-indent: 1px;
+}
+
+.gform_wrapper .top_label input.large, 
+.gform_wrapper .top_label select.large, 
+.gform_wrapper .hidden_label input.large, 
+.gform_wrapper .hidden_label select.large,
+.gform_wrapper .top_label input.medium, 
+.gform_wrapper .top_label select.medium, 
+.gform_wrapper .hidden_label input.medium, 
+.gform_wrapper .hidden_label select.medium{
+	border: 1px solid #dcdcdc;
+    padding: 7px 11px;
+    font-size: 13px;
+    width: 314px;
+    max-width: 314px;
+    margin-bottom: 7px;
+    color: #a1a1a1;
+}
+
+.gform_wrapper textarea.large,
+.gform_wrapper textarea.medium, 
+.gform_wrapper textarea {
+	border: 1px solid #dcdcdc;
+ 	padding: 7px 11px;
+	font-size: 13px;
+	width: 314px;
+	max-width: 314px;
+	margin-bottom: 7px;
+	color: #a1a1a1;
+	height: 52px;
+	max-height: 52px;
+}
+
+body .gform_wrapper label.gfield_label + div.ginput_container,
+.gform_wrapper .ginput_container {
+	margin-top: 0;
+}
+
+.gform_wrapper .gform_footer {
+	margin: 0 !important;
+	padding: 0 2px !important;
+}
+
+.gform_wrapper .gform_footer input.button, 
+.gform_wrapper .gform_footer input[type=submit], 
+.gform_wrapper .gform_footer input[type=image]{
+	cursor: pointer;
+    margin-top: 12px;
+    float: right;
+    border: 0;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    background-color: #85a915;
+    padding: 10px 30px;
+    color: #FFF;
+    font-size: 1em;
+    text-transform: uppercase;
+    -webkit-appearance: none;	
+}
+
+#caraccident .brand, #caraccident .brand:hover {
+	color: #064069;
+}
+#caraccident .btn-brand {
+	background-color: #064069;
+}
+#caraccident .btn-brand:hover {
+	background-color: #0f4e7a;
+}
+
+#caraccident .bg-fill.alpha-padding {
+	display: none;
+}
+
+
+#personalinjury .brand, #personalinjury .brand:hover, #personalinjury .cta-caption li:before {
+	color: #85a915;
+}
+#personalinjury .brand li a:hover {
+	color: #7C962C;
+}
+#personalinjury .btn-brand {
+	background-color: #85a915;
+}
+#personalinjury .btn-brand:hover {
+	background-color: #7C962C;
+}
+#personalinjury .link, #personalinjury .link:hover, #personalinjury .link:focus {
+	color: #7C962C;
+}
+
+#nha.nursinghomeabuse .cta-caption ul li {
+  font-size: 14px;
+  color: #414244;
+}
+
+#nha.nursinghomeabuse #formLandingPage input[type="submit"] {
+  float: none;
+  max-width: 335px;
+  text-align: center;
+  width: 100%;
+  background: #FF6600;
+}
+
+#nha .cta-caption h3.subtitle {
+  margin-top: 0px;
+}
+
+body.landing .advert-txt {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #c3c3c3;
+}
+
+body.landing .advert-txt a {
+  color: #c3c3c3;
+}
+
+body.landing .advert-txt a:hover {
+  color: #fff;
+}

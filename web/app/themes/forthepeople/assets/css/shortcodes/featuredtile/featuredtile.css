@@ -1,0 +1,31 @@
+.newstile-wrap{position: relative;  width: 100%; margin-bottom: 20px; }
+.newstile-wrap a.large, .newstile-wrap a.medium, .newstile-wrap a.small{text-align: center;}
+.newstile-wrap a img{width: 100%;}
+.newstile-wrap h5{text-shadow:none; color:#fff; text-align: center; margin: 0;}
+
+.newstile-wrap a.large h5{padding: 2% 10%;line-height: 95%; font-size: 180%}
+.newstile-wrap a.medium h5{padding: 2% 10%; line-height: 120%; font-size: 118%}
+.newstile-wrap a.small h5{padding: 2% 10%; line-height: 120%; font-size: 100%}
+
+.newstile-wrap figure,.newstile-wrap figcaption{margin:0; padding: 0;}
+.newstile-wrap a figure{position:relative;display: block;height: 100%;width: 100%;overflow: hidden;}
+.newstile-wrap a figure figcaption span{padding: 5% 10%;display: block;}
+
+.newstile-wrap a.large figure figcaption span{font-size: 120%;}
+.newstile-wrap a.small figure figcaption span{font-size: 90%;}
+
+.newstile-wrap a figure figcaption{
+	height: 100%;
+	width: 100%;
+	top: 70%;
+	position: absolute;
+	background: url('/wp-content/themes/forthepeople/assets/css/shortcodes/featuredtile/alpha-50.png') repeat;
+	color:#fff;
+	-webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+}
+
+.newstile-wrap:hover figure figcaption{top:0;}
+.newstile-wrap:hover h5{color:#FFF290;}

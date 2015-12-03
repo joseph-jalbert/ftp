@@ -1,0 +1,255 @@
+@font-face {
+    font-family: 'Conv_Formata-Condensed';
+    src: url('../fonts/Formata-Condensed.eot');
+    src: local('☺'), url('/wp-content/themes/forthepeople/assets/media/interactive/robocallers/fonts/Formata-Condensed.woff') format('woff'), url('/wp-content/themes/forthepeople/assets/media/interactive/robocallers/fonts/Formata-Condensed.ttf') format('truetype'), url('/wp-content/themes/forthepeople/assets/media/interactive/robocallers/fonts/Formata-Condensed.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Conv_Formata-MediumCondensed';
+    src: url('/wp-content/themes/forthepeople/assets/media/interactive/robocallers/fonts/Formata-MediumCondensed.eot');
+    src: local('☺'), url('/wp-content/themes/forthepeople/assets/media/interactive/robocallers/fonts/Formata-MediumCondensed.woff') format('woff'), url('/wp-content/themes/forthepeople/assets/media/interactive/robocallers/fonts/Formata-MediumCondensed.ttf') format('truetype'), url('/wp-content/themes/forthepeople/assets/media/interactive/robocallers/fonts/Formata-MediumCondensed.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html,
+button,
+input,
+select,
+textarea {
+    color: #4D4D4D;
+}
+
+html {
+    font-size: 1em;
+    line-height: 1.4;
+}
+
+::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+b {
+    font-family: 'Conv_Formata-MediumCondensed';
+}
+
+hr {
+    display: block;
+    height: 27px;
+    border: 0;
+    margin: 40px 0;
+    padding: 0;
+}
+
+hr.left {
+    background: url(../images/left-line.png) no-repeat top center;
+}
+
+hr.right {
+    background: url(../images/right-line.png) no-repeat top center;
+}
+
+audio,
+canvas,
+img,
+video {
+    vertical-align: middle;
+}
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.browsehappy {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+body {
+    font: 20px/26px 'Conv_Formata-Condensed', Helvetica, Helvetica Neue, Arial;
+}
+
+.wrapper {
+    width: 768px;
+    margin: 0 auto;
+}
+
+.header-container {
+    background: url(../images/header-bg.png) repeat-x top center;
+}
+
+.header-container header {
+    background: url(../images/robocallers.png) no-repeat top center;
+    height: 300px;
+    margin: 10px 0 0;
+}
+
+.header-container figure {
+    margin: 40px 0 0;
+}
+
+.main-container {
+    background: url(../images/bg.png) repeat-x top center;
+    margin: 40px 0 0;
+}
+
+.map {
+    background: url(../images/map.png) no-repeat top center;
+    margin: 50px 0 0;
+}
+
+article {
+    position: relative;
+}
+
+article h2 {
+    font-family: 'Conv_Formata-MediumCondensed';
+    font-size: 19px;
+    color: #C54753;
+    text-transform: uppercase;
+    margin-bottom: 0;
+}
+
+article p {
+    padding: 0 54px;
+}
+
+.s2 {
+    margin: 30px auto 40px;
+}
+
+.intro {
+    position: absolute;
+    top: 40px;
+}
+
+.chart2 {
+    margin: 30px 0;
+}
+
+.s4 {
+    margin: -110px auto 80px;
+    z-index: 999;
+}
+
+.title {
+    margin-bottom: 25px;
+}
+
+.calculator {
+    width: 673px;
+    margin: 6px auto;
+}
+
+.col {
+    width: 33.33%;
+    text-align: center;
+    float: left;
+}
+
+.col select, .col input {
+    width: 165px;
+    padding: 5px 0px;
+    text-align: center;
+    border: 1px solid #42454A;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+#slider {
+    width: 490px;
+    margin: 30px auto 0;
+}
+
+.contact {
+    font-size: 14px;
+    line-height: 1.4;
+    margin-top: 0;
+}
+
+.main footer {
+    margin-top: 30px;
+}
+
+.center {
+    text-align: center;
+}
+
+.ir {
+    background-color: transparent;
+    border: 0;
+    overflow: hidden;
+    *text-indent: -9999px;
+}
+
+.ir:before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 150%;
+}
+
+.hidden {
+    display: none !important;
+    visibility: hidden;
+}
+
+.visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1;
+}

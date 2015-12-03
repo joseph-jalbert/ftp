@@ -1,0 +1,129 @@
+body {
+  background: #fff;
+}
+.guide-section > p {
+  font: 300 16px/24px Helvetica, Arial, sans-serif;
+}
+.guide-section > h1,
+.guide-section > h2,
+.guide-section > h3 {
+  font-family: "HelveticaNeue", "Helvetica", Arial, sans-serif;
+}
+h2 {
+  clear: both;
+}
+.guide-section > h3 {
+  font-size: 1.5em;
+}
+.style-head {
+  background: #222;
+  overflow: hidden;
+  color: #FFF;
+  padding: 0 1em;
+  margin-bottom: 2em;
+}
+.style-head h1 {
+  color: #FFF;
+  letter-spacing: 1px;
+  font-size: 1.5em;
+  text-transform: uppercase;
+}
+.style-head h1 span {
+  font-weight: 400;
+  font-weight: bold;
+  letter-spacing: 0;
+}
+.content {
+  padding: 0 2em;
+  border-left: 1px solid #e8e8e8;
+  margin-left: 9em;
+}
+.sidebar {
+  padding: 0 1em;
+  position: fixed;
+}
+.sidebar .title {
+  font-size: 1em;
+}
+.sidebar ul li {
+  margin-bottom: 0;
+  font-weight: 400;
+}
+.guide-section {
+  margin-bottom: 2em;
+  clear: both;
+  overflow: hidden;
+}
+.guide-section > h1,
+.guide-section > h2,
+.guide-section > h3 {
+  text-align: left;
+}
+.minion {
+  font-family: "minion-pro-display", 'Times New Roman', Times, serif !important;
+  font-size: 24px;
+}
+.basic-gothic {
+  font-family: "ff-basic-gothic-web-pro", 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  font-size: 24px;
+}
+.colors li {
+  width: 75px;
+  height: 75px;
+  float: left;
+  margin-right: 1em;
+}
+.color-text {
+  background: #e04d47;
+}
+.color-link {
+  background: #06c;
+}
+pre {
+  padding: 0;
+  word-wrap: normal;
+}
+ul.guide-nav {
+  width: 147px;
+  border: 1px solid #E8E8E8;
+  border-radius: 3px;
+  background: #FAFAFA;
+}
+.sidebar ul li {
+  margin-bottom: 0;
+  font-weight: 400;
+  border-bottom: 1px solid #E8E8E8;
+}
+.guide-nav a {
+  font-weight: normal;
+  font-size: 15px;
+  font-family: "HelveticaNeue", "Helvetica", Arial, sans-serif;
+  display: inline-block;
+  padding: 10px;
+}
+.guide-example {
+  border: 1px solid #DDDCDC;
+  border-radius: 3px;
+  position: relative;
+  padding: 2em;
+}
+.guide-example:before {
+  content: "Example";
+  background: #eee;
+  font-size: 0.8em;
+  position: absolute;
+  top: 0;
+  font-family: "HelveticaNeue", "Helvetica", Arial, sans-serif;
+  border: 1px solid #DDDCDC;
+  border-radius: 0 0 3px;
+  padding: 5px;
+  border-top: 0;
+  border-left: 0;
+  left: 0;
+}
+pre[class*="language-"]:before,
+pre[class*="language-"]:after {
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+}

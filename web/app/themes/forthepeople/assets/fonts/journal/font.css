@@ -1,0 +1,17 @@
+@font-face {
+    font-family: 'journalregular';
+    src: url('journal-webfont.eot');
+    src: url('journal-webfont.eot?#iefix') format('embedded-opentype'),
+		 url('journal-webfont.svg') format('svg'),
+         url('journal-webfont.woff') format('woff'),
+         url('journal-webfont.ttf') format('truetype');
+       
+    font-weight: normal;
+    font-style: normal;
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+@font-face {
+    font-family: 'journalregular';
+	src: url('journal-webfont.svg') format('svg');
+}
+}

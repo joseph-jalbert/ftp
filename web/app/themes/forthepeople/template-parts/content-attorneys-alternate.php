@@ -1,0 +1,99 @@
+<?php
+/**
+ * The template used for displaying page content in our-attorneys-alternate.php
+ *
+ * @package ForThePeople
+ */
+?>
+
+
+<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+	<div class="entry-content">
+    	<div class="content-pane-border"></div>
+		<h1 class="pagetitle"><?php the_field('page_title'); ?></h1>
+        <div class="subtitle"><?php the_field('sub_title'); ?></div>
+        <div class="heading-hr"></div>
+        
+        <div class="socialmediawidget vertical offpage">
+			<span class='st_plusone_hcount' displayText='Google +1'></span>
+			<span class='st_facebook_hcount' displayText='Facebook'></span>
+			<span class='st_twitter_hcount' displayText='Tweet'></span>
+			<span class='st_email_hcount' displayText='Email'></span>
+		</div>
+		
+		<?php the_content(); ?>
+        
+        <div id="pageFilter"></div>
+		
+        <div class="attoreyList-all row-fluid">
+
+
+<?php
+
+$location = get_field('location');
+
+$args = array(
+   'post_type' => 'attorney',
+   'posts_per_page' => -1,
+   'orderby' => 'meta_value',
+   'meta_key' => 'last_name',
+   'order' => 'ASC',
+   'tax_query' => array(
+		array(
+			'taxonomy' => 'location',
+			'field'    => 'slug',
+			'terms'    => $location,
+		),
+	),
+);
+
+$query = new WP_Query($args);
+
+
+$by_letter = array();
+while( $query->have_posts() ) { $query->the_post();
+  global $post;
+  $letter = substr(get_field('last_name'), 0, 1);
+  if ( ! isset($by_letter[$letter]) ) $by_letter[$letter] = array();
+  $by_letter[$letter][] = $post;
+}
+wp_reset_postdata();
+
+
+if(!empty($by_letter)) {
+
+  ksort($by_letter); 
+
+?>
+
+<div class="span4">  
+
+<?php 
+$break = (int) ceil(count($by_letter) / 3); $n = 0;
+  foreach( $by_letter as $letter => $posts ) {
+  $n++;
+  ?>
+  	<strong class="allcaps"><?php echo $letter; ?></strong>
+	<ul class="unstyled">
+    <?php
+    if ( ! empty($posts) ) {
+      foreach ( $posts as $post ) {
+        setup_postdata($post);
+        echo '<li><a href="' . get_permalink() . '">' . get_field('last_name') . ', ' . get_field('first_name') . '</a></li>';
+      }
+    }
+    ?>
+    </ul>
+  <?php $break2 = $break * 2; if($n === $break || $n === $break2) echo '</div><div class="span4">';
+  }
+  ?>
+  </div>
+  <?php 
+  wp_reset_postdata();
+}
+?>
+
+        
+    </div>
+	</div>
+</article>

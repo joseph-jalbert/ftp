@@ -1,0 +1,235 @@
+//
+// Utility
+//
+// - margin / padding helpers
+// - text formatting
+// - animations
+// --------------------------------
+
+.no-margin-topbottom {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.margin-bottom-20 {
+    margin-bottom: 20px;
+}
+
+.no-margin-top {
+    margin-top: 0!important;
+}
+
+.no-margin-bot {
+    margin-bottom: 0;
+}
+.no-pad-left{padding-left:0px!important; }
+
+.no-margin-no-pad {
+    padding: 0!important;
+    margin: 0!important;
+}
+
+.mtop-10 {
+    margin-top: 10px;
+}
+
+.mtop-20 {
+    margin-top: 20px;
+}
+
+.mtop-30 {
+    margin-top: 30px;
+}
+
+.mtop-40 {
+    margin-top: 40px !important;
+}
+
+.mleft-30 {
+    margin-left: 30px !important;
+}
+
+.mleft-40 {
+    margin-left: 40px;
+}
+
+.mleft-60 {
+    margin-left: 60px;
+}
+
+.mbot-20 {
+    margin-bottom: 20px;
+}
+
+.padtop-8 {
+    padding-top: 8px;
+}
+
+.w100 {
+    width: 100px;
+}
+
+.w150 {
+    width: 150px;
+}
+
+.h40 {
+    height: 40px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.row-leading {
+    margin-top: 20px!important;
+}
+
+.row-follow {
+    padding-bottom: 30px;
+}
+
+.justifytext {
+    text-align: justify!important;
+}
+
+.force-fullwidth {
+    width: auto!important;
+}
+.img-left{
+    display:inline-block;
+    float:left;
+    margin:0 10px 5px 0;
+}
+.img-right{
+    display:inline-block;
+    float:right;
+    margin:0 0 5px 10px;
+}
+.with-padding{
+    padding:0 0 15px;
+}
+.with-image img{
+    width:100%;
+    height:auto;
+    margin:0 auto 5px;
+}
+.style-plain{ box-shadow:none;}
+.style-straight{ border-radius:0px;}
+
+.no-letter-spacing p:first-child {
+    letter-spacing: normal;
+}
+
+.format.red {
+    color: #91332a;
+}
+
+.format.blue {
+    color: #004b81;
+}
+
+.format.green {
+    color: #1b8100;
+}
+
+.format.italic {
+    font-style: italic;
+}
+
+.format.bold {
+    font-weight: bold;
+}
+
+.format.size16 {
+    font-size: 16px;
+}
+
+.format.block {
+    display: block;
+    margin-bottom: 30px;
+}
+
+.flyout {
+    position: fixed;
+    right: 0;
+    z-index: 2;
+    width: 280px;
+    height: 100px;
+    background-color: #004272;
+    background-color: rgba(0,96,166,0.8);
+    background-image: url('@{setURL}assets/images/logos/mm-logo-blue.png');
+    background-repeat: no-repeat;
+    background-position: 95% 45%;
+    color: #ffffff;
+    padding: 20px;
+    padding-right: 100px;
+}
+
+.flyout-heading {
+    font-size: 1.15em;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.flyout .num {
+    display: block;
+    clear: left;
+    font-size: 1.5em;
+    font-weight: bold;
+    letter-spacing: -1px;
+    line-height: 1.45em;
+}
+
+.animated {
+    animation-fill-mode: both;
+    animation-duration: 2s;
+    animation-delay: 10s;
+}
+
+@-webkit-keyframes fadeInRightBig {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateX(2000px);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateX(0);
+    }
+}
+
+@-moz-keyframes fadeInRightBig {
+    0% {
+        opacity: 0;
+        -moz-transform: translateX(2000px);
+    }
+    100% {
+        opacity: 1;
+        -moz-transform: translateX(0);
+    }
+}
+
+@-o-keyframes fadeInRightBig {
+    0% {
+        opacity: 0;
+        -o-transform: translateX(2000px);
+    }
+    100% {
+        opacity: 1;
+        -o-transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRightBig {
+    0% {
+        opacity: 0;
+        transform: translateX(2000px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.fadeInRightBig {
+    animation-name: fadeInRightBig;
+}

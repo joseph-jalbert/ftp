@@ -1,0 +1,755 @@
+/*
+*{
+  -webkit-font-smoothing: antialiased;
+}
+*/
+/* ----------------------------------------------------------------
+/*
+/* Business Litigation Lawyers / The Business Trial Group Page
+/*
+/*----------------------------------------------------------------*/
+.section .container-wide {
+  width: 980px;
+}
+.section.text-heavy p,
+.section.text-heavy li {
+  color: #4D4D4D;
+  font-size: 1em;
+  line-height: 1.5em;
+  margin-bottom: 1.8em;
+  text-align: justify;
+}
+.section.text-heavy ol {
+  counter-reset: li;
+  margin-left: 0;
+  padding-left: 0;
+}
+.section.text-heavy ol > li {
+  position: relative;
+  list-style: none;
+}
+.section.text-heavy ol > li:before {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  color: #DBDBDB;
+  content: counter(li);
+  counter-increment: li;
+  font-family: "Helvetica Neue";
+  font-size: 2.1em;
+  left: -1.3em;
+  margin-right: 8px;
+  padding: 4px;
+  position: absolute;
+  width: 2em;
+}
+.section.text-heavy p.text-right {
+  text-align: right;
+}
+.section.text-heavy p.text-center {
+  text-align: center;
+}
+.section.text-heavy p.m-top {
+  margin-top: 5em;
+}
+.section.actions .span5 {
+  position: relative;
+}
+.section.actions h3 {
+  margin-top: 0;
+}
+.section.actions .vertical-pike {
+  height: 943px;
+  right: -93px;
+  top: -56px;
+}
+.section.cases .span5 {
+  position: relative;
+}
+.section.cases .subtitle {
+  font-size: 2.2em;
+  font-weight: 300;
+  letter-spacing: -1px;
+  line-height: 1.2em;
+  text-align: right;
+}
+.section.cases h3 {
+  background: none;
+  font-size: 1.23em;
+  font-weight: 100;
+  line-height: 1.2em;
+  position: relative;
+  text-align: right;
+  color: #e04d47;
+  font-family: "ff-basic-gothic-web-pro", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  letter-spacing: -1px;
+}
+.section.cases p {
+  margin-bottom: 1.8em;
+}
+.section.cases p.text-right {
+  margin-top: 4em;
+}
+.section.cases .span5 p {
+  text-align: right;
+}
+.section.cases .span7 p {
+  margin-bottom: 2em;
+  margin-top: 0.6em;
+}
+.section.cases .span5.offset2 h3 {
+  text-align: left;
+}
+.section.cases .span5.offset2 .sec-icons {
+  left: -123px;
+}
+.section.cases .span5.offset2 p {
+  text-align: left;
+}
+.section.cases li {
+  list-style: none;
+  margin-bottom: 1em;
+  position: relative;
+}
+.section.cases li:before {
+  color: #e04d47;
+  content: "\2022";
+  font-size: 2em;
+  left: -25px;
+  position: absolute;
+  top: -3px;
+}
+.section.cases .container-wide {
+  margin-bottom: 1.5em;
+}
+.section.cases .vertical-pike {
+  height: 905px;
+  right: -95px;
+  top: 0;
+  width: 3px;
+}
+.section.btg.success {
+  padding-top: 2em;
+}
+.section.btg.success h3 {
+  background: none;
+  line-height: 1.2em;
+  font-family: "ff-basic-gothic-web-pro", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  letter-spacing: -1px;
+  font-size: 1.53em;
+  color: #e04d47;
+}
+.section.btg.success .span5.text-right h3 {
+  text-align: right;
+}
+.section.btg.success .text-right,
+.section.btg.success .text-right p {
+  text-align: right;
+}
+.section.btg.success .text-left,
+.section.btg.success .text-left p {
+  text-align: left;
+}
+.section.btg.success .text-center,
+.section.btg.success .text-center p {
+  text-align: center;
+}
+.section.btg.success p.text-justify {
+  text-align: justify;
+}
+.section.btg.success .span5 {
+  position: relative;
+  margin-bottom: 2em;
+}
+.section.btg.success .vertical-pike {
+  height: 470px;
+  right: -68px;
+}
+.section.btg.success .contact-us {
+  margin-top: 4em;
+}
+.circle.who-we-are {
+  background: url('../images/circle-who-we-are.png') no-repeat;
+  display: block;
+  height: 171px;
+  position: relative;
+  width: 171px;
+}
+.section.btg.attorneys {
+  background: #ffffff url('../images/btg-attorneys.jpg') no-repeat top center;
+  background-size: cover;
+  color: #fff;
+  height: 715px;
+  text-align: center;
+  width: 100%;
+}
+.section.btg.attorneys .circle {
+  left: -85px;
+  margin-left: 54%;
+  margin-top: -85px;
+  top: 50%;
+}
+.section.btg.business .img-btg-office {
+  background-position: 96px 0;
+  background: #ffffff url('../images/btg-morgan-glass.jpg') no-repeat top right;
+  background-size: cover;
+  height: 1122px;
+  position: absolute;
+  right: -105px;
+  top: 0;
+  width: 1255px;
+  z-index: -1;
+}
+.section.btg.mosaic {
+  height: 550px;
+  overflow: hidden;
+  padding: 0;
+}
+.img-btg-mosaic {
+  background: url('../images/btg-mosaic.jpg') no-repeat center;
+  height: 546px;
+  margin: 0 auto;
+  position: relative;
+  width: 903px;
+}
+.jumbotron {
+  background: #458ed5 url('../images/btg-hero.jpg') no-repeat top center;
+  background-size: cover;
+}
+.jumbotron h1 {
+  color: #fff9c4;
+  font-size: 3.6em;
+  letter-spacing: 0;
+  margin-bottom: 0.25em;
+  margin-top: 0;
+}
+.jumbotron h2 {
+  color: #fff;
+  font-family: ff-basic-gothic-web-pro, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 1.24em;
+  font-weight: 100;
+  line-height: 1.3;
+  margin: 3.5em 0;
+  text-shadow: none;
+  letter-spacing: 0;
+}
+.jumbotron p {
+  color: #a1d1e8;
+  letter-spacing: 0.05em;
+  line-height: 15px;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 0.7em;
+  margin-bottom: 2.7em;
+}
+.jumbotron .btn-outline {
+  margin-bottom: 4em;
+}
+/* ----------------------------------------------------------------
+/*
+/* Contingency-Fee Benefits Page
+/*
+/*----------------------------------------------------------------*/
+.contingency-fee-benefits.jumbotron {
+  background: #458ed5 url('../images/contingency-fee/jumbotron.jpg') no-repeat;
+  background-size: cover;
+  height: 530px;
+}
+.contingency-fee-benefits.jumbotron p {
+  line-height: 28px;
+}
+@media (max-width: 900px) {
+  .contingency-fee-benefits.jumbotron {
+    height: auto;
+  }
+}
+@media (max-width: 425px) {
+  .contingency-fee-benefits.jumbotron h1 {
+    font-size: 48px;
+  }
+}
+.contingency-fee-benefits.playing-field-section {
+  background: #f6f6f6 url('../images/contingency-fee/section-playing-field_bg.jpg') no-repeat left;
+}
+.contingency-fee-benefits.section p:last-child {
+  margin-bottom: 2em;
+}
+.contingency-fee-benefits.two-columns .vertical-pike:before {
+  display: none;
+}
+#form1.widgetWrap.aside {
+  margin-bottom: 0;
+  margin-top: -568px;
+}
+.span4 .form-images {
+  margin: 20px 0 -15px;
+}
+.breach-contract.jumbotron {
+  background: url('../images/breach-contract/jumbotron.jpg') no-repeat;
+  background-size: cover;
+  text-align: left;
+}
+.breach-contract.form-homepage-offset {
+  margin-top: -423px;
+}
+.breach-contract.jumbotron p {
+  color: #fff;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.06em;
+  letter-spacing: 0;
+  line-height: 28px;
+  text-transform: none;
+}
+.breach-contract.two-column-pike ul li {
+  color: #3988C2;
+  font-size: 1.06em;
+  margin-bottom: 8px;
+}
+.breach-contract.two-column-pike .span5 .vertical-pike {
+  height: 293px;
+  position: absolute;
+  right: -64px;
+  top: -31px;
+}
+.breach-contract.two-column-pike .span5:first-child li {
+  text-align: right;
+}
+.section.contingency-fee-section {
+  background: #f8f8f8 url('../images/breach-contract/contingency-fee.jpg') no-repeat -100px 0;
+  position: relative;
+  z-index: 0;
+}
+.section.contingency-fee-section h2 {
+  text-align: left;
+}
+.section.contingency-fee-section p.contact-button {
+  text-align: left;
+}
+.legal-remedies.two-columns h2 {
+  font-size: 2.1em;
+}
+.legal-remedies.two-columns .title-heavy {
+  font-size: 1.53em;
+  line-height: 30px;
+  margin-top: 20px;
+}
+.legal-remedies p.contact-button {
+  margin-top: 75px;
+  text-align: left;
+}
+.section.breach-contract-section {
+  background: #f8f8f8 url('../images/breach-contract/breach-contracts_bg.jpg') no-repeat right;
+  position: relative;
+  z-index: 0;
+}
+/* ----------------------------------------------------------------
+/*
+/* Attorney Referrals Page
+/*
+/*----------------------------------------------------------------*/
+.attorney-referrals.jumbotron {
+  background: #1770d9 url('../images/attorney-referrals/jumbotron.jpg') no-repeat top center;
+}
+.attorney-referrals.jumbotron h1 {
+  line-height: 0.85em;
+}
+.attorney-referrals.jumbotron h1 span {
+  padding-top: 20px;
+}
+.attorney-referrals .accordion-group li {
+  color: #e04d47;
+}
+.attorney-referrals .accordion-group .vertical-pike {
+  height: 305px;
+  right: -77px;
+}
+.attorney-referrals #form1.widgetWrap.aside {
+  margin-top: -405px;
+}
+@media only screen and (max-width: 1600px) {
+  .section.btg.attorneys {
+    background-position-x: -140px;
+    height: 600px;
+  }
+  .section.btg.attorneys .circle {
+    margin-top: -125px;
+  }
+}
+@media only screen and (max-width: 1425px) {
+  .section.btg.attorneys {
+    background-position-x: 0;
+    height: 450px;
+  }
+  .section.btg.attorneys .circle {
+    margin-top: -87px;
+  }
+}
+@media only screen and (max-width: 1245px) {
+  .section.btg.business .img-btg-office {
+    background-position: 200px 0;
+  }
+  .section.btg.attorneys {
+    background-position-x: 0;
+    height: 400px;
+  }
+  .section.btg.attorneys .circle.who-we-are {
+    background-size: cover;
+    height: 120px;
+    left: -60px;
+    width: 120px;
+  }
+}
+@media only screen and (max-width: 1024px) {
+  .section {
+    padding: 3em 0 2.5em 0;
+  }
+  .section .container-wide {
+    overflow: hidden;
+    padding: 0 0.5em;
+    width: auto;
+  }
+  .jumbotron {
+    padding-top: 100px;
+  }
+  .jumbotron h1 {
+    font-size: 2.82em;
+  }
+  .jumbotron h2 {
+    padding-left: 2em;
+    padding-right: 2em;
+  }
+  .jumbotron .container {
+    width: auto;
+  }
+  .section.btg.business .contact-us p {
+    padding-right: 0 !important;
+  }
+  .section.btg.attorneys {
+    background-position-x: -12px;
+    height: 300px;
+  }
+  .section.btg.attorneys .circle.who-we-are {
+    left: -104px;
+    margin-top: -75px;
+  }
+  .section.text-heavy ol > li:before {
+    left: -1em;
+  }
+  .section.cases .subtitle {
+    font-size: 1.8em;
+    margin: 0.5em 0 1em;
+    text-align: left;
+  }
+  .section.cases .vertical-pike {
+    height: 1200px;
+  }
+  .section.cases h3 {
+    font-size: 1em;
+  }
+  .img-btg-mosaic {
+    width: 700px;
+  }
+  .breach-contract.jumbotron h1 span {
+    padding-top: 5px;
+  }
+  .breach-contract.two-column-pike ul li {
+    font-size: 1em;
+  }
+  .section.contingency-fee-section:after,
+  .breach-contract-section:after {
+    background: rgba(255, 255, 255, 0.3);
+    content: "";
+    height: 100%;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+  }
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+  .contingency-fee-benefits.playing-field-section {
+    background-position: -200px 0;
+  }
+  .section.contingency-fee-section {
+    background-position: -220px 0;
+  }
+  .section.contingency-fee-section .span10 {
+    width: auto;
+  }
+  .section.breach-contract-section {
+    background-position: 300px 0;
+  }
+  .section.breach-contract-section .fancy-list li {
+    font-size: 0.88em;
+    margin-bottom: 15px;
+  }
+  .section.btg.business .img-btg-office {
+    background-position: 300px 0 !important;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .jumbotron {
+    height: 475px;
+  }
+  .jumbotron h1 {
+    font-size: 2.47em;
+    margin-bottom: 5px;
+  }
+  .jumbotron .subtitle {
+    font-size: 1.23em;
+  }
+  .section h2 {
+    font-size: 2.2em;
+  }
+  .section.actions h3 {
+    line-height: 1.2em;
+  }
+  .section.actions .vertical-pike {
+    height: 1316px;
+    right: -73px;
+  }
+  .section.btg.success .span5.text-right h3 {
+    text-align: center;
+  }
+  .section.btg.business .img-btg-office {
+    background-position: 500px 0;
+  }
+  .section.btg.attorneys {
+    background-position-x: -71px;
+    height: 310px;
+  }
+  .section.btg.attorneys .circle.who-we-are {
+    left: -83px;
+  }
+  .section.cases .list .span5.right .vertical-pike {
+    height: 1222px;
+    left: -68px;
+  }
+  .section.cases h3 {
+    text-align: center !important;
+  }
+  .section.cases .vertical-pike {
+    right: -87px;
+  }
+  .section.cases .span5 p,
+  .section.cases .span5.offset2 p {
+    text-align: center;
+  }
+  .section.btg.success {
+    display: block;
+    width: 100%;
+    position: relative;
+  }
+  .section.btg.success .container {
+    position: relative;
+    display: block;
+    width: auto;
+  }
+  .section.btg.success .span5 {
+    text-align: center;
+  }
+  .section.btg.success .span5 p {
+    text-align: center;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .contingency-fee-benefits.playing-field-section {
+    background-image: none;
+  }
+}
+/* Extra Small Devices, Phones */
+@media only screen and (max-width: 736px) {
+  .section {
+    overflow-x: hidden;
+  }
+  .section h2 {
+    font-size: 1.8em;
+  }
+  .jumbotron {
+    height: 533px;
+  }
+  .jumbotron h1 {
+    font-size: 2.12em;
+    font-weight: 600;
+  }
+  .jumbotron h2 {
+    font-size: 1.18em;
+    line-height: 1.2em;
+    padding: 0 15px;
+  }
+  .section.takeaction .container,
+  .section.actions .span5,
+  .section.cases .span4,
+  .section.cases .span7 {
+    padding: 0 1.2em;
+  }
+  .section.btg.attorneys {
+    height: 230px;
+    background-position-x: 0;
+  }
+  .section.btg.business .span8 {
+    display: block;
+    margin: 0;
+    padding: 0 1.2em;
+    width: 100%;
+  }
+  .vertical-pike,
+  .horizontal-pike,
+  .img-takeaction {
+    display: none;
+  }
+  .section.cases p {
+    margin-bottom: 1.5em;
+  }
+  .section.cases .subtitle {
+    text-align: left;
+  }
+  .section.cases .list .span5.left,
+  .section.cases .list .span5.right.offset2 {
+    display: block;
+    float: none;
+    margin-left: 0;
+    padding: 0 1.2em;
+    width: 100%;
+  }
+  .section.cases .list .span5.left p.text-right {
+    margin-bottom: 2em;
+    position: relative;
+    text-align: left;
+  }
+  .breach-contract.jumbotron {
+    height: auto;
+  }
+  .breach-contract.jumbotron h1 {
+    font-size: 2.59em;
+    font-weight: normal;
+  }
+  .section.contingency-fee-section,
+  .section.breach-contract-section {
+    background-size: cover;
+  }
+  .section.breach-contract-section {
+    background-image: none;
+  }
+}
+@media only screen and (max-width: 736px) and (max-width: 736px) {
+  .contingency-fee-benefits h1 {
+    font-weight: normal;
+  }
+}
+@media only screen and (max-width: 580px) {
+  .jumbotron .btn-outline {
+    margin-top: 1.5em;
+  }
+  .section.btg.attorneys {
+    background-position-x: -2px;
+    height: 140px;
+  }
+  .section.btg.attorneys .circle.who-we-are {
+    left: -60px;
+  }
+  .img-btg-mosaic {
+    left: -89px;
+  }
+  .section.btg.success .span5 {
+    display: block;
+    margin-left: 0;
+    position: relative;
+    text-align: center;
+    width: 100%;
+  }
+  .section.btg.success .span5 p {
+    text-align: center;
+  }
+  .section h2 {
+    font-size: 1.8em;
+  }
+  .jumbotron {
+    padding-top: 50px;
+  }
+  .jumbotron h1 {
+    font-size: 30px;
+    margin-bottom: 0;
+    padding-bottom: 5px;
+  }
+  .jumbotron .subtitle {
+    font-size: 1.06em;
+  }
+  .jumbotron h2 {
+    text-align: justify;
+    padding: 0;
+    margin: 1em 0;
+  }
+  .contact-us .pull-left {
+    float: none;
+  }
+  .contact-us .call-us {
+    float: left;
+  }
+  .section p.call-us {
+    float: none !important;
+    text-align: center !important;
+  }
+  .section.btg.attorneys .circle.who-we-are {
+    margin-top: -60px;
+    margin-left: 50%;
+  }
+  .section.cases p.subtitle {
+    text-align: center;
+  }
+  .section p.contact-button {
+    text-align: center;
+  }
+  .section.contingency-fee-section h2,
+  .section.contingency-fee-section p.contact-button {
+    text-align: center;
+  }
+  .section.contingency-fee-section:after {
+    background: rgba(255, 255, 255, 0.9);
+  }
+  .section.cases h3 {
+    font-size: 21px;
+  }
+}
+@media only screen and (max-width: 425px) {
+  .img-btg-mosaic {
+    left: -160px;
+  }
+  .attorney-referrals.section .title-heavy {
+    font-size: 1.4em !important;
+    line-height: 1.3;
+  }
+  .attorney-referrals.jumbotron h1 {
+    line-height: 1.2em;
+  }
+  .attorney-referrals.jumbotron h1 span {
+    font-size: 0.533em;
+  }
+}
+@media only screen and (max-width: 375px) {
+  .circle.who-we-are {
+    left: -59px;
+  }
+  .btn-outline {
+    font-size: 0.82em;
+    padding: 7px 40px;
+  }
+  .section.btg.attorneys {
+    background-position-x: -18px;
+  }
+  .img-btg-mosaic {
+    left: -176px;
+  }
+}
+@media only screen and (max-width: 320px) {
+  .section.btg.attorneys {
+    background-position-x: -35px;
+    height: 134px;
+  }
+  .section.btg.attorneys .circle.who-we-are {
+    left: -56px;
+  }
+  .img-btg-mosaic {
+    left: -203px;
+  }
+}

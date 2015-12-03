@@ -1,0 +1,73 @@
+//
+// BootStrap 2 Enhancements
+// - additions to grid flexability - CMS v2 layout helpers
+// --------------------------------
+
+#col0, #col1, #col2, #col3, #col100{position:relative; }
+
+#interior-page #col1.span8 { padding-right: 30px }
+
+.span0 { display: none!important }
+
+#col1.span8{
+	padding-right: 80px;
+
+	& > p{
+	 	text-align: justify;
+	}
+	& > ul, & > ol {
+		margin-left: 34px;
+	}
+	& > ul + p{
+		margin-top: 20px;
+	}
+	& > ul li {
+	 	line-height: 24px;
+	 	margin-bottom: 10px;
+	}
+	& > ul.no-margin-left {
+		margin-left: 0;
+	}
+	& > ul.no-margin li {
+		margin-bottom: 0;
+	}
+	& > ul.two_col {
+		margin-left: 20px;
+	}
+	& > ul.two_col li {
+		line-height: 22px;
+		width: 46%;
+		float: left;
+	}
+	& > ul.two_col li:nth-child(odd) {
+		padding-right: 40px;
+	}
+}
+.row-fluid {
+	[class*="span"] { min-height: 0px }
+	.push12 {margin-right:104.25531914893617%;}
+	.push12:first-child {margin-right:102.12765957446808%;}
+	.push11 {margin-right:95.74468085106382%;}
+	.push11:first-child {margin-right:93.61702127659574%;}
+	.push10 {margin-right:87.23404255319149%;}
+	.push10:first-child {margin-right:85.1063829787234%;}
+	.push9 {margin-right:78.72340425531914%;}
+	.push9:first-child {margin-right:76.59574468085106%;}
+	.push8 {margin-right:70.2127659574468%;}
+	.push8:first-child {margin-right:68.08510638297872%;}
+	.push7 {margin-right:61.70212765957446%;}
+	.push7:first-child {margin-right:59.574468085106375%;}
+	.push6 {margin-right:53.191489361702125%;}
+	.push6:first-child {margin-right:51.063829787234035%;}
+	.push5 {margin-right:44.68085106382979%;}
+	.push5:first-child {margin-right:42.5531914893617%;}
+	.push4 {margin-right:36.170212765957444%;}
+	.push4:first-child {margin-right:34.04255319148936%;}
+	.push3 {margin-right:27.659574468085104%;}
+	.push3:first-child {margin-right:25.53191489361702%;}
+	.push2 {margin-right:19.148936170212764%;}
+	.push2:first-child {margin-right:17.02127659574468%;}
+	.push1 {margin-right:10.638297872340425%;}
+	.push1:first-child {margin-right:8.51063829787234%;}
+	img[class*="push"] {margin-bottom:3%;}
+}

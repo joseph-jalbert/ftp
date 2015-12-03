@@ -1,0 +1,368 @@
+/* Enter Your Custom CSS Here */
+
+body {
+  font-weight: 400;
+}
+
+#verdictScroll, #testimonialScroll {
+  margin-top: 0px !important;
+  padding-top: 0;
+}
+
+.widgetWrap.section .title, h2, h3, h5 {
+  margin-top: 20px;
+}
+
+.widget ul li p.disclaimer a {
+  display: inline;
+  padding: 0;
+  color: #0066cc;
+  background-color: transparent;
+  font-size: 10px;
+}
+
+.jumbotron p.meso-subtitle {
+  margin-bottom: 20px;
+}
+
+#fullSlider {
+  height: 434px;
+}
+
+.thank-you .testimonials.section p {
+  color: #fff;
+}
+
+#interior-page, #interior-page h2, #interior-page h3, #interior-page h4, #interior-page h5 {
+  line-height: 1;
+}
+
+#interior-page li {
+  line-height: 20px;
+}
+
+.widget-area .gform_widget .gform_wrapper form {
+  margin-top:-1px;
+}
+
+
+
+
+@media screen and (max-width: 767px) {
+  #topNav {
+    overflow: scroll;
+  }
+}
+
+@media screen and (max-width: 767px) {
+.page-template-office-location-php  #fullSlider {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .ca-desc>.media-heading {
+    text-align: left;
+  }
+}
+
+#testimonial-slider .slidespagination a {
+  box-sizing: content-box;
+}
+
+strong {
+  font-weight: 600;
+}
+
+.mtop-405 {
+  margin-top: -405px;
+}
+
+#masthead a.logo {
+  width: 565px;
+  max-width: 100%;
+}
+
+.footer-layer1 {
+  background-color: #424242;
+}
+
+#ie .widget-area .gform_widget {
+    border: 10px solid #eaeaea ;
+    background: #fcfbf8 ; 
+}
+#ie .widget-area .gform_widget .widget-title,  .widget-area .gform_widget h1.widget-title {
+    background: #a03822 ;
+}
+#ie .widget-area .gform_widget .gform_wrapper form {
+    background: #fdfbf8 ;
+}
+#ie .widget-area .gform_widget .gform_wrapper {
+    background: #fcfbf8 ;
+}
+#ie .widget-area .gform_widget .gform_wrapper .gform_heading {
+   max-width: 100%;
+    width: 100%;
+}
+#ie .widget-area .gform_widget .gform_wrapper .gform_description {
+
+}
+#ie .widget-area .gform_widget .gform_wrapper .gform_body {
+
+}
+#ie .widget-area .gform_widget .gform_wrapper ul,  .widget-area .gform_widget .gform_wrapper form ul {
+
+}
+#ie .widget-area .gform_widget .gform_wrapper ul.left_label li,  .widget-area .gform_widget .gform_wrapper form ul.left_label li {
+
+}
+#ie .widget-area .gform_widget .gform_wrapper .right_label input.large,  
+#ie .widget-area .gform_widget .gform_wrapper .right_label select.large,  
+#ie .widget-area .gform_widget .gform_wrapper .left_label input.large,  
+#ie .widget-area .gform_widget .gform_wrapper .left_label select.large,  
+#ie .widget-area .gform_widget .gform_wrapper .right_label textarea.small,  
+#ie .widget-area .gform_widget .gform_wrapper .left_label textarea.small,  
+#ie .widget-area .gform_widget .gform_wrapper .right_label textarea.medium,  
+#ie .widget-area .gform_widget .gform_wrapper .left_label textarea.medium,  
+#ie .widget-area .gform_widget .gform_wrapper .right_label textarea.large,  
+#ie .widget-area .gform_widget .gform_wrapper .left_label textarea.large {
+    width: 100%;
+    font-size: 14px;
+   font-weight: 400;
+   line-height: 20px;
+}
+#ie .widget-area .gform_widget .gform_wrapper .left_label .gfield_label {
+    display: block;
+    max-width: 100%;
+    width: 100%;
+}
+#ie .widget-area .gform_widget .gform_wrapper .left_label li.field_sublabel_below .gfield_label {
+    display: block;
+    max-width: 100%;
+    width: 100%;
+}
+#ie .widget-area .gform_widget .gform_wrapper input[type="text"] {
+
+}
+#ie .widget-area .gform_widget .gform_wrapper .left_label ul.gfield_checkbox,  
+#ie .widget-area .gform_widget .gform_wrapper .right_label ul.gfield_checkbox,  
+#ie .widget-area .gform_widget .gform_wrapper .left_label ul.gfield_radio,  
+#ie .widget-area .gform_widget .gform_wrapper .right_label ul.gfield_radio {
+
+}
+#ie .widget-area .gform_widget .gform_wrapper .gfield_checkbox li label,  .widget-area .gform_widget .gform_wrapper .gfield_radio li label {
+
+}
+#ie .widget-area .gform_widget .gform_wrapper.gf_browser_chrome .gfield_checkbox li input[type=checkbox],  
+#ie .widget-area .gform_widget .gform_wrapper.gf_browser_chrome .gfield_radio li input[type=radio],  
+#ie .widget-area .gform_widget .gform_wrapper.gf_browser_chrome .gfield_checkbox li input {
+
+}
+#ie .widget-area .gform_widget .gform_wrapper .disclaimer {
+
+}
+#ie .widget-area .gform_widget .gform_wrapper .gform_footer {
+
+}
+#ie .widget-area .gform_widget .gform_wrapper .gform_footer.right_label,  
+#ie .widget-area .gform_widget .gform_wrapper .gform_footer.left_label {
+
+}
+#ie .widget-area .gform_widget .gform_wrapper .gform_footer input[type="submit"] {
+    background: #a03822 ;
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e8613d ', endColorstr='#d04a30 ',GradientType=0 ); 
+    color: #fff;    
+}
+#ie .widget-area .gform_widget .gform_wrapper .gform_footer input[type="submit"]:hover {
+
+}
+
+
+
+#scrollhdr {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    transform: translateY(-110%);
+    -ms-transform: translateY(-110%);
+    -webkit-transform: translateY(-110%);
+    -moz-transform: translateY(-110%);
+    -o-transform: translateY(-110%);
+    transition: 0.2s transform cubic-bezier(.3,.73,.3,.74);
+	z-index: 999;
+	background: #fff;
+	padding: 5px 0 0 0;
+}
+
+#scrollhdr .header-container {
+	height: auto;
+}
+
+#scrollhdr .header-container .phone {
+	top: 8px;
+	width: 200px;
+}
+
+#scrollhdr a.hdrcta {
+	position: relative;
+	left: 18%;
+	top: 2px;
+}	
+
+#scrollhdr a img {
+	height: 40px;
+	width: auto;
+}
+
+body.down #scrollhdr {
+    transform: translateY(0);
+    -ms-transform: translateY(0);
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -o-transform: translateY(0);
+}
+
+#scrollmenu {
+	background: #004b82;
+	margin-top: 6px;
+}
+#scrollmenu ul {
+	display: table;
+	margin: 5px auto;
+	margin-bottom: 0;
+}
+#scrollmenu ul li {
+	display: inline-block;
+	padding: 0 10px;
+	padding-bottom: 10px;
+	position: relative;
+}
+#scrollmenu ul li a {
+	color: #fff;
+	font-size: 13px;
+	text-align: center;
+	padding: 0 10px;
+}
+#scrollmenu ul#scrollnav > li > a {
+	padding-bottom: 16px;
+}
+
+#scrollmenu ul li ul {
+	display: none;
+	margin: 0;
+	top: 32px;
+}
+#scrollmenu ul li .nav-label + a + ul {
+	top: 42px;
+}
+
+#scrollmenu ul li:hover > ul {
+	display: block;
+}
+
+#scrollmenu ul > li > ul > li a {
+	color: #555;
+}
+
+#scrollmenu ul > li > ul > li a:hover {
+	color: #06C;
+}
+#scrollmenu:after {
+	content: ' ';
+	position: absolute;
+	right: 0;
+	height: 54px;
+	width: 65px;
+	background: url(/wp-content/themes/forthepeople/assets/images/structure/navglow-sprite.png)no-repeat;
+	background-position: 0 -64px
+}
+#scrollmenu>li {
+	position: relative;
+	float: left
+}
+#scrollmenu>li>.nav-label+a {
+	height: 30px;
+	line-height: 30px;
+	padding: 0 39px;
+	font-size: 12px;
+	overflow-y: hidden
+}
+#scrollmenu>li>.nav-label+a .dd {
+	position: absolute;
+	background: url(/wp-content/themes/forthepeople/assets/images/structure/arrow-sprite.png)no-repeat;
+	height: 8px;
+	width: 14px;
+	background-position: 0 -30px;
+	left: 90%;
+	top: 11px
+}
+#scrollmenu .dropdown:hover>a, #scrollmenu>li>a:hover {
+	color: #f5eea0;
+	text-decoration: none;
+}
+#scrollmenu>li>a:before {
+	content: ' ';
+	position: absolute;
+	left: 0;
+	height: 54px;
+	width: 65px;
+	background: url(/wp-content/themes/forthepeople/assets/images/structure/navglow-sprite.png)no-repeat;
+	background-position: 0 0
+}
+#scrollmenu>li>a:after {
+	content: ' ';
+	position: absolute;
+	right: 0;
+	height: 54px;
+	width: 65px;
+	background: url(/wp-content/themes/forthepeople/assets/images/structure/navglow-sprite.png)no-repeat;
+	background-position: 2px -64px
+}
+#scrollmenu>li:last-child>a:after {
+	background: 0 0;
+	z-index: 10
+}
+#scrollmenu .nav-label {
+	position: relative;
+	height: 10px;
+	line-height: 24px;
+	text-align: center;
+	color: #f5eea0;
+	font-family: minion-pro-display, "Times New Roman", Times, serif;
+	font-size: 14px;
+	letter-spacing: 1px;
+	top: -7px;
+}
+#scrollmenu .nav-label:before {
+	position: absolute;
+	content: ' ';
+	top: -19px;
+	left: 50%;
+	margin-left: -8px;
+	width: 15px;
+	height: 24px;
+	background: url(/wp-content/themes/forthepeople/assets/images/structure/navlabel-sprite.png)no-repeat center;
+	background-position: 0 -208px
+}
+#scrollmenu .nav-label.nav-label-home {
+	font-size: 12px;
+	padding-left: 8px;
+	padding-right: 8px
+}
+#scrollmenu .nav-label.nav-label-home:before {
+	width: 16px;
+	height: 23px;
+	background-position: -173px -208px
+}
+#scrollmenu .dd {
+	top: 6px;
+	right: 0px;
+	left: auto;
+}
+#scrollmenu .nav-label + a .dd {
+    top: 17px;
+}
+#scrollmenu ul > li {
+    top: -1px;
+}

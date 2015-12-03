@@ -1,0 +1,120 @@
+//section related stuff
+.section.types-of-cases {
+  background: #FFF url('../images/practice-meso/type-of-cases.jpg') no-repeat right;
+}
+.section.damages-meso-case {
+  background: #FFF url("../images/practice-meso/damages-meso-case.jpg") no-repeat right;
+}
+.section-promo {
+  background: #56475f url('../images/practice-meso/block-quote.jpg');
+  background-size: cover;
+  blockquote p {
+    font-size: 1.5em;
+  }
+}
+.section.what-to-expect {
+  .contact-us {
+    text-align: center;
+    margin: 6em 0 2em;
+  }
+}
+//misc
+.btn-outline.purple {
+  border: 2px solid #D1C3D8;
+  color: #D1C3D8;
+  &:hover {
+    border: 2px solid #64566F;
+    color: #64566F;
+  }
+}
+.alt-text-color,
+.alt-text-color li,
+.alt-text-color p {
+  color: #5f9276 !important;
+}
+//sidebar override
+.meso {
+  .form-homepage-offset {
+    margin-top: -420px;
+  }
+}
+.jumbotron {
+  background: #114888 url(../images/practice-meso/jumbotron.jpg) no-repeat;
+  background-size: cover;
+  h1 {
+    margin-top: 0;
+    span {
+      line-height: 24px;
+    }
+  }
+}
+.split-section {
+  .left-column {
+    background: #64566F;
+    height: 877px;
+  }
+}
+.three-col-thumb {
+  .one {
+    background: url('../images/practice-meso/meso-lawsuit-neg.jpg');
+  }
+  .two {
+    background: url('../images/practice-meso/meso-lawsuit-losses.jpg');
+  }
+  .three {
+    background: url('../images/practice-meso/meso-lawsuit-injury.jpg');
+  }
+}
+@media (max-width: 1024px) {
+  .section.damages-meso-case {
+    background-position: 450px;
+  }
+  .split-section {
+    .span6.left-column {
+      height: 600px;
+      img {
+        width: 200px;
+      }
+      .download {
+        margin-top: 0;
+      }
+    }
+  }
+  .section.types-of-cases {
+    background-position: 500px;
+  }
+}
+@media (max-width: 768px) {
+  .section.types-of-cases {
+    background-position: 367px;
+  }
+  .section.what-to-expect .contact-us {
+    margin: 6em 0 0;
+  }
+}
+
+@media (max-width: 425px) {
+  h3 {
+    margin-top: 0;
+  }
+  #col.span8 {
+    padding-top: 2em;
+  }
+  .section.damages-meso-case,
+  .section.types-of-cases {
+    background-image: none;
+  }
+  .section-promo blockquote p {
+    font-size: 1.3em;
+    padding: 2em 0;
+  }
+  .section-promo {
+    padding: 0;
+  }
+  .jumbotron.has-sidebar p {
+    padding-bottom: 1em;
+  }
+  .section.what-to-expect .contact-us {
+    margin: 1em 0 0;
+  }
+}

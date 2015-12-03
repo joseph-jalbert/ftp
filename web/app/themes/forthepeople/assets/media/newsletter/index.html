@@ -1,0 +1,1814 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width"/>
+
+    <style type="text/css">
+
+      /**********************************************
+* Ink v1.0.5 - Copyright 2013 ZURB Inc        *
+**********************************************/
+
+/* Client-specific Styles & Reset */
+a:link, a:active {
+  color: #2ba6cb !important;
+}
+#outlook a {
+  padding:0;
+}
+
+body{
+  width:100% !important;
+  min-width: 100%;
+  -webkit-text-size-adjust:100%;
+  -ms-text-size-adjust:100%;
+  margin:0;
+  padding:0;
+}
+
+.ExternalClass {
+  width:100%;
+}
+
+.ExternalClass,
+.ExternalClass p,
+.ExternalClass span,
+.ExternalClass font,
+.ExternalClass td,
+.ExternalClass div {
+  line-height: 100%;
+}
+
+#backgroundTable {
+  margin:0;
+  padding:0;
+  width:100% !important;
+  line-height: 100% !important;
+}
+
+img {
+  outline:none;
+  text-decoration:none;
+  -ms-interpolation-mode: bicubic;
+  width: auto;
+  max-width: 100%;
+  clear: both;
+  display: block;
+}
+
+center {
+  width: 100%;
+  min-width: 400px;
+}
+
+a img {
+  border: none;
+}
+
+p {
+  margin: 0 0 0 15px;
+}
+
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+td {
+  word-break: break-word;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  hyphens: auto;
+  border-collapse: collapse !important;
+}
+
+table, tr, td {
+  padding: 0;
+  vertical-align: top;
+  text-align: left;
+}
+
+
+/* Responsive Grid */
+
+table.body {
+  height: 100%;
+  width: 100%;
+}
+
+table.container {
+  width: 580px;
+  margin: 0 auto;
+  text-align: inherit;
+}
+
+table.row {
+  padding: 0px;
+  width: 100%;
+  position: relative;
+}
+
+table.container table.row {
+  display: block;
+}
+
+td.wrapper {
+  padding: 10px 20px 0px 0px;
+  position: relative;
+}
+
+table.columns,
+table.column {
+  margin: 0 auto;
+}
+
+table.columns td,
+table.column td {
+  padding: 0px 0px 5px;
+}
+
+table.columns td.sub-columns,
+table.column td.sub-columns,
+table.columns td.sub-column,
+table.column td.sub-column {
+  padding-right: 10px;
+}
+
+td.sub-column, td.sub-columns {
+  min-width: 0px;
+}
+
+table.row td.last,
+table.container td.last {
+  padding-right: 0px;
+}
+
+table.one { width: 30px; }
+table.two { width: 80px; }
+table.three { width: 130px; }
+table.four { width: 180px; }
+table.five { width: 230px; }
+table.six { width: 280px; }
+table.seven { width: 330px; }
+table.eight { width: 380px; }
+table.nine { width: 430px; }
+table.ten { width: 480px; }
+table.eleven { width: 530px; }
+table.twelve { width: 580px; }
+
+table.one center { min-width: 30px; }
+table.two center { min-width: 80px; }
+table.three center { min-width: 130px; }
+table.four center { min-width: 180px; }
+table.five center { min-width: 230px; }
+table.six center { min-width: 280px; }
+table.seven center { min-width: 330px; }
+table.eight center { min-width: 380px; }
+table.nine center { min-width: 430px; }
+table.ten center { min-width: 480px; }
+table.eleven center { min-width: 530px; }
+
+table.one .panel center { min-width: 10px; }
+table.two .panel center { min-width: 60px; }
+table.three .panel center { min-width: 110px; }
+table.four .panel center { min-width: 160px; }
+table.five .panel center { min-width: 210px; }
+table.six .panel center { min-width: 260px; }
+table.seven .panel center { min-width: 310px; }
+table.eight .panel center { min-width: 360px; }
+table.nine .panel center { min-width: 410px; }
+table.ten .panel center { min-width: 460px; }
+table.eleven .panel center { min-width: 510px; }
+table.twelve .panel center { min-width: 560px; }
+
+.body .columns td.one,
+.body .column td.one { width: 8.333333%; }
+.body .columns td.two,
+.body .column td.two { width: 16.666666%; }
+.body .columns td.three,
+.body .column td.three { width: 25%; }
+.body .columns td.four,
+.body .column td.four { width: 33.333333%; }
+.body .columns td.five,
+.body .column td.five { width: 41.666666%; }
+.body .columns td.six,
+.body .column td.six { width: 50%; }
+.body .columns td.seven,
+.body .column td.seven { width: 58.333333%; }
+.body .columns td.eight,
+.body .column td.eight { width: 66.666666%; }
+.body .columns td.nine,
+.body .column td.nine { width: 75%; }
+.body .columns td.ten,
+.body .column td.ten { width: 83.333333%; }
+.body .columns td.eleven,
+.body .column td.eleven { width: 91.666666%; }
+.body .columns td.twelve,
+.body .column td.twelve { width: 100%; }
+
+td.offset-by-one { padding-left: 50px; }
+td.offset-by-two { padding-left: 100px; }
+td.offset-by-three { padding-left: 150px; }
+td.offset-by-four { padding-left: 200px; }
+td.offset-by-five { padding-left: 250px; }
+td.offset-by-six { padding-left: 300px; }
+td.offset-by-seven { padding-left: 350px; }
+td.offset-by-eight { padding-left: 400px; }
+td.offset-by-nine { padding-left: 450px; }
+td.offset-by-ten { padding-left: 500px; }
+td.offset-by-eleven { padding-left: 550px; }
+
+td.expander {
+  visibility: hidden;
+  width: 0px;
+  padding: 0 !important;
+}
+
+table.columns .text-pad,
+table.column .text-pad {
+  padding-left: 45px;
+  padding-right: 45px;
+}
+
+table.columns .left-text-pad,
+table.columns .text-pad-left,
+table.column .left-text-pad,
+table.column .text-pad-left {
+  padding-left: 45px;
+}
+
+table.columns .right-text-pad,
+table.columns .text-pad-right,
+table.column .right-text-pad,
+table.column .text-pad-right {
+  padding-right: 45px;
+}
+
+/* Block Grid */
+
+.block-grid {
+  width: 100%;
+  max-width: 580px;
+}
+
+.block-grid td {
+  display: inline-block;
+  padding:10px;
+}
+
+.two-up td {
+  width:270px;
+}
+
+.three-up td {
+  width:173px;
+}
+
+.four-up td {
+  width:125px;
+}
+
+.five-up td {
+  width:96px;
+}
+
+.six-up td {
+  width:76px;
+}
+
+.seven-up td {
+  width:62px;
+}
+
+.eight-up td {
+  width:52px;
+}
+
+/* Alignment & Visibility Classes */
+
+table.center, td.center {
+  text-align: center;
+}
+
+h1.center,
+h2.center,
+h3.center,
+h4.center,
+h5.center,
+h6.center {
+  text-align: center;
+}
+
+span.center {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+img.center {
+  margin: 0 auto;
+  float: none;
+}
+
+.show-for-small,
+.hide-for-desktop {
+  display: none;
+}
+
+/* Typography */
+
+body, table.body, h1, h2, h3, h4, h5, h6, p, td {
+  color: #222222;
+  font-family: "Helvetica", "Arial", sans-serif;
+  font-weight: normal;
+  line-height: 1.3;
+  margin: 0;
+  padding:0;
+  text-align: left;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  word-break: normal;
+}
+
+h1 {font-size: 40px;}
+h2 {font-size: 36px;}
+h3 {font-size: 32px;}
+h4 {font-size: 28px;}
+h5 {font-size: 24px;}
+h6 {font-size: 20px;}
+body, table.body, p, td {font-size: 14px;line-height:19px;}
+
+p.lead, p.lede, p.leed {
+  font-size: 18px;
+  line-height:21px;
+}
+
+p {
+  margin-bottom: 15px;
+}
+
+small {
+  font-size: 10px;
+}
+
+a {
+  color: #2ba6cb;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #05ACDF !important;
+}
+
+a:active {
+  color: #2795b6 !important;
+}
+
+a:visited {
+  color: #2ba6cb !important;
+}
+
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+  color: #2ba6cb;
+}
+
+h1 a:active,
+h2 a:active,
+h3 a:active,
+h4 a:active,
+h5 a:active,
+h6 a:active {
+  color: #2ba6cb !important;
+}
+
+h1 a:visited,
+h2 a:visited,
+h3 a:visited,
+h4 a:visited,
+h5 a:visited,
+h6 a:visited {
+  color: #2ba6cb !important;
+}
+
+/* Panels */
+
+.panel {
+  background: #f2f2f2;
+  border: 1px solid #d9d9d9;
+  padding: 10px !important;
+}
+
+.sub-grid table {
+  width: 100%;
+}
+
+.sub-grid td.sub-columns {
+  padding-bottom: 0;
+}
+
+/* Buttons */
+
+table.button,
+table.tiny-button,
+table.small-button,
+table.medium-button,
+table.large-button {
+  overflow: hidden;
+  width: 100%;
+  clear: both;
+}
+
+table.button td,
+table.tiny-button td,
+table.small-button td,
+table.medium-button td,
+table.large-button td {
+  background: #2ba6cb;
+  border: 1px solid #2284a1;
+  color: #ffffff;
+  display: block;
+  padding: 5px 0;
+  text-align: center;
+  width: auto !important;
+}
+
+table.tiny-button td {
+  padding: 5px 0 4px;
+}
+
+table.small-button td {
+  padding: 8px 0 7px;
+}
+
+table.medium-button td {
+  padding: 12px 0 10px;
+}
+
+table.large-button td {
+  padding: 21px 0 18px;
+}
+
+table.button td a,
+table.tiny-button td a,
+table.small-button td a,
+table.medium-button td a,
+table.large-button td a {
+  color: #ffffff;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+table.tiny-button td a {
+  font-size: 12px;
+  font-weight: normal;
+}
+
+table.small-button td a {
+  font-size: 16px;
+}
+
+table.medium-button td a {
+  font-size: 20px;
+}
+
+table.large-button td a {
+  font-size: 24px;
+}
+
+table.button:hover td,
+table.button:visited td,
+table.button:active td {
+  border: 2px solid #e04d47;
+}
+
+table.button:hover td a,
+table.button:visited td a,
+table.button:active td a {
+  color: #ffffff !important;
+}
+
+
+
+table.button:hover td a,
+table.button:active td a,
+table.button td a:visited,
+table.tiny-button:hover td a,
+table.tiny-button:active td a,
+table.tiny-button td a:visited,
+table.small-button:hover td a,
+table.small-button:active td a,
+table.small-button td a:visited,
+table.medium-button:hover td a,
+table.medium-button:active td a,
+table.medium-button td a:visited,
+table.large-button:hover td a,
+table.large-button:active td a,
+table.large-button td a:visited {
+  color: #ffffff !important;
+}
+
+table.secondary td {
+  background: #e9e9e9;
+  border-color: #d0d0d0;
+  color: #555555;
+}
+
+table.secondary td a {
+  color: #555555;
+}
+
+table.secondary:hover td {
+  background: #d0d0d0 !important;
+  color: #555555;
+}
+
+table.secondary:hover td a,
+table.secondary td a:visited,
+table.secondary:active td a {
+  color: #555555 !important;
+}
+
+table.success td {
+  background: #5da423;
+  border-color: #457a1a;
+}
+
+table.success:hover td {
+  background: #457a1a !important;
+}
+
+table.alert td {
+  background: #c60f13;
+  border-color: #970b0e;
+}
+
+table.alert:hover td {
+  background: #970b0e !important;
+}
+
+table.radius td {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+table.round td {
+  -webkit-border-radius: 500px;
+  -moz-border-radius: 500px;
+  border-radius: 500px;
+}
+
+/* Outlook First */
+
+body.outlook p {
+  display: inline !important;
+}
+
+/*  Media Queries */
+
+@media only screen and (max-width: 600px) {
+
+  table[class="body"] center {
+    min-width: 0 !important;
+  }
+
+  table[class="body"] .container {
+    width: 95% !important;
+  }
+
+  table[class="body"] .row {
+    width: 100% !important;
+    display: block !important;
+  }
+
+  table[class="body"] .wrapper {
+    display: block !important;
+    padding-right: 0 !important;
+  }
+
+  table[class="body"] .columns,
+  table[class="body"] .column {
+    table-layout: fixed !important;
+    float: none !important;
+    width: 100% !important;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+    display: block !important;
+  }
+
+  table[class="body"] .wrapper.first .columns,
+  table[class="body"] .wrapper.first .column {
+    display: table !important;
+  }
+
+  table[class="body"] table.columns td,
+  table[class="body"] table.column td {
+    width: 100% !important;
+  }
+
+  table[class="body"] .columns td.one,
+  table[class="body"] .column td.one { width: 8.333333% !important; }
+  table[class="body"] .columns td.two,
+  table[class="body"] .column td.two { width: 16.666666% !important; }
+  table[class="body"] .columns td.three,
+  table[class="body"] .column td.three { width: 25% !important; }
+  table[class="body"] .columns td.four,
+  table[class="body"] .column td.four { width: 33.333333% !important; }
+  table[class="body"] .columns td.five,
+  table[class="body"] .column td.five { width: 41.666666% !important; }
+  table[class="body"] .columns td.six,
+  table[class="body"] .column td.six { width: 50% !important; }
+  table[class="body"] .columns td.seven,
+  table[class="body"] .column td.seven { width: 58.333333% !important; }
+  table[class="body"] .columns td.eight,
+  table[class="body"] .column td.eight { width: 66.666666% !important; }
+  table[class="body"] .columns td.nine,
+  table[class="body"] .column td.nine { width: 75% !important; }
+  table[class="body"] .columns td.ten,
+  table[class="body"] .column td.ten { width: 83.333333% !important; }
+  table[class="body"] .columns td.eleven,
+  table[class="body"] .column td.eleven { width: 91.666666% !important; }
+  table[class="body"] .columns td.twelve,
+  table[class="body"] .column td.twelve { width: 100% !important; }
+
+  table[class="body"] td.offset-by-one,
+  table[class="body"] td.offset-by-two,
+  table[class="body"] td.offset-by-three,
+  table[class="body"] td.offset-by-four,
+  table[class="body"] td.offset-by-five,
+  table[class="body"] td.offset-by-six,
+  table[class="body"] td.offset-by-seven,
+  table[class="body"] td.offset-by-eight,
+  table[class="body"] td.offset-by-nine,
+  table[class="body"] td.offset-by-ten,
+  table[class="body"] td.offset-by-eleven {
+    padding-left: 0 !important;
+  }
+
+  table[class="body"] table.columns td.expander {
+    width: 1px !important;
+  }
+
+  table[class="body"] .right-text-pad,
+  table[class="body"] .text-pad-right {
+    padding-left: 45px !important;
+  }
+
+  table[class="body"] .left-text-pad,
+  table[class="body"] .text-pad-left {
+    padding-right: 45px !important;
+  }
+
+  table[class="body"] .hide-for-small,
+  table[class="body"] .show-for-desktop {
+    display: none !important;
+  }
+
+  table[class="body"] .show-for-small,
+  table[class="body"] .hide-for-desktop {
+    display: inherit !important;
+  }
+}
+
+
+    </style>
+    <style type="text/css">
+
+      body, .body {
+        background: #f0f2f7;
+      }
+      a {
+        text-decoration: underline;
+        color: #367ab4;
+      }
+      a:hover {
+        color: #066A88;
+        text-decoration: underline;
+      }
+      body, table.body, h1, h2, h3, h4, h5, h6, p, td {
+        font-weight: 100;
+      }
+      body, table.body, p, td {
+        font-size: 14px;
+        line-height: 23px;
+      }
+      p {
+        text-align: justify;
+        color: #626262;
+      }
+      h2 {
+        text-align: center;
+        color: #323232;
+        font-size: 34px;
+        margin: 25px 0 20px;
+        font-family: Georgia, Times, 'Times New Roman', serif;
+        line-height: 32px;
+        padding-top: 25px;
+      }
+      h3 a {
+        color: #367ab4;
+        display: inline-block;
+        font-family: Georgia, Times, 'Times New Romain', serif;
+        font-size: 20px;
+        margin-bottom: 6px;
+        line-height: 125%;
+        text-decoration: none;
+        display: block;
+      }
+      .hero {
+        color: #ffffff;
+      }
+      .hero p {
+        color: #ffffff;
+        font-size: 16px;
+        line-height: 23px;
+        margin-bottom: 20px;
+        margin-top: 20px;
+      }
+      .hero a,
+      .hero a:visited {
+        color: #C5E5FF !important;
+      }
+      .hero .opt-out {
+        color: #C5E5FF;
+        font-size: 12px;
+        line-height: 16px;
+        margin-bottom: 20px !important;
+        text-align: center;
+      }
+      .hero td {
+        text-align: center;
+      }
+      .subtitle {
+        color: #c5e5ff;
+        display: block;
+        font-size: 20px;
+        margin-bottom: 20px;
+        margin-top: 8px;
+        text-align: center;
+      }
+      .title {
+        color: #ffed89;
+        display: block;
+        font-family: Georgia, Times, 'Times New Romain', serif;
+        font-size: 32px;
+        letter-spacing: 1px;
+        line-height: 36px;
+        margin-top: 20px;
+        text-align: center;
+      }
+      .title-bar {
+        height: 3px;
+        margin: 0 auto 20px;
+        width: 215px;
+        padding: 0 !important;
+        line-height: 0 !important;
+      }
+      hr {
+        background: #eff2f7;
+        height: 3px;
+        margin: 0 auto 20px;
+        width: 215px;
+      }
+      table.button {
+        overflow: visible;
+        width: 120px;
+      }
+      table.button a {
+        color: #367ab4 !important;
+        font-size: 15px !important;
+        font-weight: 100 !important;
+        text-transform: uppercase;
+      }
+      table.button td {
+        background: #ffffff;
+        border: 2px solid #367ab4;
+        line-height: 1.4;
+      }
+      .divider {
+        border-bottom: 3px solid #f0f2f7;
+      }
+      table.button:active td a, table.button td a:visited, table.tiny-button:hover td a, table.tiny-button:active td a, table.tiny-button td a:visited, table.small-button:hover td a, table.small-button:active td a, table.small-button td a:visited, table.medium-button:hover td a, table.medium-button:active td a, table.medium-button td a:visited, table.large-button:hover td a, table.large-button:active td a, table.large-button td a:visited {
+        color: #367ab4 !important;
+      }
+      table.button:hover td a {
+        color: #FFFFFF !important;
+      }
+      .news-feed h3 a {
+        color: #367ab4;
+        font-size: 20px;
+        line-height: 27px;
+        padding-bottom: 0;
+        display: inline-block;
+      }
+      .news-feed h3 {
+        margin-bottom: 6px;
+      }
+      .social-icons td {
+        text-align: right;
+      }
+      .social-icons a  {
+        display: inline;
+        text-align: center;
+      }
+      .social-icons img {
+        display: inline-block;
+      }
+      .caption-right {
+        display: inline;
+        line-height: 100%;
+        float: right;
+        margin: 4px 0 7px 25px;
+      }
+      .caption-left {
+        display: inline;
+        float: left;
+        margin: 4px 25px 7px 0;
+        line-height: 100%;
+      }
+      .two-by-two .caption-img {
+        display: inline;
+        float: none;
+        line-height: 100%;
+        margin: 0;
+        margin-bottom: 10px;
+      }
+      .two-by-two .caption {
+        margin-right: 9px;
+      }
+      .newest-attorneys a {
+        display: inline-block;
+        line-height: 18px;
+        text-align: center;
+        text-decoration: none;
+        width: 100%;
+      }
+      .newest-attorneys {
+        display: block;
+        padding-bottom: 60px;
+        text-align: center;
+      }
+      .newest-attorneys img {
+        display: inline-block;
+        float: none;
+      }
+      .newest-attorneys td {
+        text-align: center;
+      }
+      .logo,
+      .social-icons {
+        display: block;
+        /* margin: 20px 0 !important; */
+      }
+      @media only screen and (max-width: 600px) {
+        .subtitle {
+          font-size: 18px !important;
+        }
+        .title {
+          font-size: 30px !important;
+        }
+        h3 a {
+          font-size: 19px !important;
+          line-height: 25px !important;
+        }
+        table[class="body"] .newly-filed img {
+          width: 150px !important;
+          height: 150px !important;
+        }
+        .two-by-two td {
+          text-align: center !important;
+        }
+        .logo td {
+          text-align: center !important;
+          padding-bottom: 0 !important;
+        }
+        .logo img {
+          float: none;
+          display: inline-block !important;
+        }
+        .social-icons,
+        .social-icons a,
+        .logo {
+          padding: 0 !important;
+        }
+        .social-icons td {
+          text-align: center !important;
+        }
+        table.columns .text-pad, table.column .text-pad,
+        table.columns .text-pad-left, table.columns .text-pad-right {
+          padding-left: 20px !important;
+          padding-right: 20px !important;
+        }
+      }
+      @media only screen and (max-width: 450px) {
+        .title {
+          font-size: 22px !important;
+          line-height: 26px !important;
+        }
+        h2 {
+          font-size: 26px !important;
+        }
+        h2 span {
+          display: block !important;
+        }
+        .social-icons td{
+          padding-top: 0 !important;
+        }
+      }
+      @media only screen and (max-width: 375px) {
+        .title {
+          font-size: 20px !important;
+        }
+      }
+      @media only screen and (max-width: 320px) {
+        table[class="body"] .newly-filed img {
+          width: 100px !important;
+          height: 100px !important;
+        }
+        .title {
+          font-size: 17px !important;
+          line-height: 24px !important;
+        }
+      }
+
+    </style>
+  </head>
+  <body style="background: #f0f2f7">
+    <table class="body">
+      <tr>
+        <td class="center" align="center" valign="top">
+          <center>
+
+            <!-- Start of Newsletter -->
+            <table class="container">
+              <tr>
+                <td>
+                  <table class="row">
+                    <tr>
+                      <td class="wrapper" style="padding-left: 10px; padding-right: 10px">
+                        <table class="eight columns logo">
+                          <tr>
+                            <td style="padding-top: 15px; padding-bottom: 26px; width: 100%">
+                              <span><img src="/wp-content/themes/forthepeople/assets/media/images/newsletter/logo.png" alt="Morgan & Morgan, For the People" width="357" height="70" style="width: 357px; height: auto" /></span>
+                            </td>
+                            <td class="expander"></td>
+                          </tr>
+                        </table>
+                      </td>
+                      <td class="wrapper last">
+                       <table class="four columns social-icons">
+                          <tr>
+                            <td class="four sub-columns" style="padding-top: 34px"><a href="https://www.facebook.com/MMForthePeople" target="_blank"><img src="/wp-content/themes/forthepeople/assets/media/images/newsletter/fb-share-icon.jpg" alt="Share us on Facebook" hspace="10" /></a></td>
+                            <td class="four sub-columns" style="padding-top: 34px"><a href="https://twitter.com/mmforthepeople" target="_blank"><img src="/wp-content/themes/forthepeople/assets/media/images/newsletter/tw-share-icon.jpg" alt="Share us on Twitter" hspace="10" /></a></td>
+                            <td class="four sub-columns" style="padding-top: 34px"><a href="https://plus.google.com/u/0/116903498532716653438/about" target="_blank"><img src="/wp-content/themes/forthepeople/assets/media/images/newsletter/google-share-icon.jpg" alt="Share us on Google +" hspace="10" /></a></td>
+                            <td class="expander"></td>
+                          </tr>
+                        </table>
+                      </td>
+                      <td class="expander"></td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+            <table class="container" style="background: #2375b4; border-radius: 3px;">
+              <tr>
+                <td>
+                  <table class="row">
+                    <tr>
+                      <td class="wrapper last">
+                        <table class="twelve columns hero">
+                          <tr>
+                            <td class="text-pad">
+                              <h1 class="title">Morgan & Morgan’s Newsletter</h1>
+                              <p>Morgan & Morgan has grown substantially over the past few years. To keep you up to speed with everything going on at our firm, we’ve put together this newsletter, which will be sent out every few months. Here, you will find information on new investigations, updates on cases we’ve filed, our latest verdicts and settlements, news clips featuring our attorneys, and more.</p>
+                            </td>
+                            <td class="expander"></td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+            <br>
+           <!-- LATEST INVESTIGATIONS-->
+            <table class="container news-feed" style="background: #FFFFFF; border: 1px solid #e2e6f1; border-radius: 3px;">
+              <tr>
+                <td>
+
+                  <table class="row">
+                    <tr>
+                      <td class="wrapper last">
+                        <table class="twelve columns">
+                          <tr>
+                            <td>
+                              <h2>Latest Investigations</h2>
+
+                              <center>
+                                <img src="/wp-content/themes/forthepeople/assets/media/images/newsletter/divider.jpg" class="title-bar" width="214" height="3" vspace="20" />
+                              </center>
+
+                            </td>
+                            <td class="expander"></td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+
+                  <table class="row">
+                    <tr>
+                      <td class="wrapper last">
+
+                        <table class="twelve columns">
+                          <tr>
+                            <td class="text-pad">
+                              <h3><a href="/class-action-lawyers/xarelto-lawsuit" target="_blank"><span style="color:#367ab4"><font color="#367ab4">Xarelto Linked to Serious Internal Bleeding Risk</font></span></a></h3>
+                              <p>
+                                <span><img src="/wp-content/themes/forthepeople/assets/media/images/thumbs/pagethumbs/xarelto-thumb.jpg" height="104" width="104" class="caption-left" align="left"  hspace="20" vspace="10" alt="Xarelto Linked to Serious Internal Bleeding Risk" /></span>
+                                <span>Our attorneys have filed lawsuits against the makers of Xarelto alleging that the anticoagulant puts patients at risk for serious injuries because no antidote exists to reverse the drug’s blood-thinning effects. In addition to the absence of an antidote, patients also allege Xarelto’s makers marketed and sold the drug without properly notifying healthcare professionals and consumers of its risks.</span>
+                              </p>
+
+                              <table class="row">
+                                <tr>
+                                  <td>
+                                    <table class="button radius primary">
+                                      <tr>
+                                        <td>
+                                          <a href="/class-action-lawyers/xarelto-lawsuit" target="_blank" style="color: #367ab4 !important;"><span style="color:#367ab4 !important"><font color="#367ab4">Read More</font></span></a>
+                                        </td>
+                                      </tr>
+                                    </table>
+                                  </td>
+                                </tr>
+                              </table>
+
+                            </td>
+                            <td class="expander"></td>
+                          </tr>
+                        </table>
+
+                      </td>
+                    </tr>
+                  </table>
+
+                  <table class="row">
+                    <tr>
+                      <td class="wrapper last">
+
+                        <table class="twelve columns">
+                          <tr>
+                            <td class="text-pad">
+                              <h3><a href="/class-action-lawyers/apixaban-bleeding" target="_blank"><span style="color:#367ab4"><font color="#367ab4">Eliquis May Cause Irreversible Bleeding in Patients</font></span></a></h3>
+                              <p>
+                                <span><img src="/wp-content/themes/forthepeople/assets/media/images/thumbs/pagethumbs/eliquis.jpg" height="104" width="104" class="caption-left" hspace="20" vspace="10" align="left" alt="Eliquis May Cause Irreversible Bleeding in Patients" /></span>
+                                <sapn>Our attorneys are investigating allegations that Eliquis (apixaban), like Xarelto, has no reversal agent to stop the drug’s blood-thinning effects in the event of a bleeding emergency, such as a cerebral hemorrhage or kidney bleed.</span>
+                              </p>
+
+                              <table class="row">
+                                <tr>
+                                  <td>
+                                    <table class="button radius primary">
+                                      <tr>
+                                        <td>
+                                          <a href="/class-action-lawyers/apixaban-bleeding" target="_blank" style="color: #367ab4 !important;"><span style="color:#367ab4 !important;"><font color="#367ab4">Read More</font></span></a>
+                                        </td>
+                                      </tr>
+                                    </table>
+                                  </td>
+                                </tr>
+                              </table>
+
+                            </td>
+                            <td class="expander"></td>
+                          </tr>
+                        </table>
+
+                      </td>
+                    </tr>
+                  </table>
+
+                  <table class="row">
+                    <tr>
+                      <td class="wrapper last">
+
+                        <table class="twelve columns">
+                          <tr>
+                            <td class="text-pad">
+                              <h3><a href="/class-action-lawyers/zofran-birth-defects" target="_blank"><span style="color:#367ab4"><font color="#367ab4">Is Zofran to Blame for Birth Defects?</font></span></a></h3>
+                              <p>
+                                <span><img src="/wp-content/themes/forthepeople/assets/media/images/twitter-card/3893.jpg" height="104" width="104" class="caption-left" hspace="20" vspace="10" align="left" alt="Is Zofran to Blame for Birth Defects?" /></span>
+                                <span>Our firm is investigating allegations that Zofran may cause birth defects in children. Specifically, it has been alleged that women who took Zofran—an anti-nausea drug that was neither tested nor approved for use in pregnant women—during their first trimester had a higher risk of delivering children with birth defects, including heart defects, craniofacial defects, and kidney malformations.</span>
+                              </p>
+
+                              <table class="row">
+                                <tr>
+                                  <td>
+                                    <table class="button radius primary">
+                                      <tr>
+                                        <td>
+                                          <a href="/class-action-lawyers/zofran-birth-defects" target="_blank" style="color: #367ab4 !important;"><span style="color:#367ab4 !important;"><font color="#367ab4">Read More</font></span></a>
+                                        </td>
+                                      </tr>
+                                    </table>
+                                  </td>
+                                </tr>
+                              </table>
+
+                            </td>
+                            <td class="expander"></td>
+                          </tr>
+                        </table>
+
+                      </td>
+                    </tr>
+                  </table>
+
+                  <table class="row">
+                    <tr>
+                      <td class="wrapper last">
+
+                        <table class="twelve columns">
+                          <tr>
+                            <td class="text-pad">
+                              <h3><a href="/class-action-lawyers/otis-knee-lawsuit" target="_blank"><span style="color:#367ab4"><font color="#367ab4">Patients May Have Been Operated on with Unapproved OtisKnee Cutting Guide</font></span></a></h3>
+                              <p>
+                                <span><img src="/wp-content/themes/forthepeople/assets/media/images/twitter-card/3900.jpg" height="104" width="104" class="caption-left" hspace="20" vspace="10" align="left" alt="Patients May Have Been Operated on with Unapproved OtisKnee Cutting Guide" /></span>
+                                <span>Our attorneys are <a href="/free-case-evaluation" target="_blank"><span style="color:#367ab4"><font color="#367ab4">looking to hear from</font></span></a> patients who have experienced serious complications after undergoing a knee replacement procedure in which the OtisKnee cutting guide was used. It has been alleged the OtisKnee cutting guide was used on thousands of patients even though it was never approved by the FDA.</span>
+                                </p>
+
+                                <table class="row">
+                                  <tr>
+                                    <td>
+                                      <table class="button radius primary">
+                                        <tr>
+                                          <td>
+                                            <a href="/class-action-lawyers/otis-knee-lawsuit" target="_blank" style="color: #367ab4 !important;"><span style="color:#367ab4 !important"><font color="#367ab4">Read More</font></span></a>
+                                          </td>
+                                        </tr>
+                                      </table>
+                                    </td>
+                                  </tr>
+                                </table>
+                                <br>
+
+                            </td>
+                            <td class="expander"></td>
+                          </tr>
+                        </table>
+
+                      </td>
+                    </tr>
+                  </table>
+
+                </td>
+              </tr>
+            </table>
+            <!-- END LATEST INVESTIGATIONS -->
+            <br>
+           <!-- LATEST LAWSUITS-->
+            <table class="container news-feed" style="background: #FFFFFF; border: 1px solid #e2e6f1; border-radius: 3px;">
+              <tr>
+                <td>
+
+                  <table class="row">
+                    <tr>
+                      <td class="wrapper last">
+
+                        <table class="twelve columns">
+                          <tr>
+                            <td>
+                              <h2>Latest Lawsuits</h2>
+
+                              <center>
+                                <img src="/wp-content/themes/forthepeople/assets/media/images/newsletter/divider.jpg" class="title-bar" width="214" height="3" vspace="20" />
+                              </center>
+
+                            </td>
+                            <td class="expander"></td>
+                          </tr>
+                        </table>
+
+                      </td>
+                    </tr>
+                  </table>
+
+                  <table class="row">
+                    <tr>
+                      <td class="wrapper last">
+
+                        <table class="twelve columns">
+                          <tr>
+                            <td class="text-pad">
+                              <h3><a href="/class-action-lawyers/purina-beneful-dog-food-deaths" target="_blank"><span style="color:#367ab4"><font color="#367ab4">Morgan & Morgan Files Lawsuit Alleging Purina Beneful Dog Food Made Pets Seriously Ill</font></span></a></h3>
+                              <p>
+                                <span><img src="/wp-content/themes/forthepeople/assets/media/images/thumbs/pagethumbs/beneful.jpg" vspace="10" hspace="20" align="left" height="104" width="104" class="caption-left" style="height: 104px" align="left" alt="Morgan & Morgan Files Lawsuit Alleging Purina Beneful Dog Food Made Pets Seriously Ill" /></span>
+                                <span>Our attorneys have filed a class action lawsuit against dog food maker Purina alleging its Beneful dry kibble pet food contains ingredients that are toxic to dogs and has caused thousands of pets to fall seriously ill or die.</span></p>
+                                <br>
+                                <table class="row" style="clear: both;">
+                                  <tr>
+                                    <td>
+                                      <table class="button radius primary">
+                                        <tr>
+                                          <td>
+                                            <a href="/class-action-lawyers/purina-beneful-dog-food-deaths" target="_blank" style="color: #367ab4 !important;"><span style="color:#367ab4 !important;"><font color="#367ab4">Read More</font></span></a>
+                                          </td>
+                                        </tr>
+                                      </table>
+                                    </td>
+                                  </tr>
+                                </table>
+
+                            </td>
+                            <td class="expander"></td>
+                          </tr>
+                        </table>
+
+                      </td>
+                    </tr>
+                  </table>
+
+                  <table class="row">
+                    <tr>
+                      <td class="wrapper last">
+
+                        <table class="twelve columns">
+                          <tr>
+                            <td class="text-pad">
+                              <h3><a href="/blog/anthem-says-up-to-188m-noncustomers-also-affected-by-data-breach" target="_blank"><span style="color:#367ab4"><font color="#367ab4">Massive Anthem Inc. Data Breach Affects Nearly 100 Million Customers, Non-Customers</font></span></a></h3>
+                              <p>
+                                <span><img src="/wp-content/themes/forthepeople/assets/media/images/newsletter/anthem.jpg" height="104" width="104" class="caption-left" vspace="10" hspace="20" align="left" style="height: 104px" align="left" alt="Massive Anthem Inc. Data Breach"/></span>
+                                <span>Morgan & Morgan has filed a class action lawsuit against Anthem Inc. in the wake of the unprecedented data breach that compromised the personal and medical information of more than 80 million customers and up to an additional 18.8 million non-customers. If your personal and medical information was compromised in the Anthem Inc. data breach, our attorneys would like to <a href="/free-case-evaluation" target="_blank"><span style="color:#367ab4"><font color="#367ab4">hear from you.</font></span></a></span>
+                              </p>
+
+                                <table class="row">
+                                  <tr>
+                                    <td>
+                                      <table class="button radius primary">
+                                        <tr>
+                                          <td>
+                                            <a href="/blog/anthem-says-up-to-188m-noncustomers-also-affected-by-data-breach" target="_blank" style="color: #367ab4 !important;"><span style="color:#367ab4 !important;"><font color="#367ab4">Read More</font></span></a>
+                                          </td>
+                                        </tr>
+                                      </table>
+                                    </td>
+                                  </tr>
+                                </table>
+
+                            </td>
+                            <td class="expander"></td>
+                          </tr>
+                        </table>
+
+                      </td>
+                    </tr>
+                  </table>
+
+                  <table class="row">
+                    <tr>
+                      <td class="wrapper last">
+
+                        <table class="twelve columns">
+                          <tr>
+                            <td class="text-pad">
+                              <h3><a href="/blog/premera-blue-cross-11m-may-have-been-affected-by-data-breach" target="_blank"><span style="color:#367ab4"><font color="#367ab4">Health Insurer Premera Blue Cross Hit with  Data Breach</font></span></a></h3>
+                              <p>
+                                <span><img src="/wp-content/themes/forthepeople/assets/media/images/newsletter/premera.jpg" height="104" width="104" class="caption-left" vspace="10" hspace="20" align="left" style="height: 104px" align="left" alt="Health Insurer Premera Blue Cross Hit with Data Breach" /></span>
+                                 <span>Premera Blue Cross disclosed in mid-March that 11 million of the health insurance company’s customers may have had their personal and medical information stolen in a data breach. Though the hack reportedly took place in May 2014, the public and Premera’s customers were not notified until March 2015. Following the breach, Morgan & Morgan filed a class action lawsuit against Premera on behalf of those whose information was compromised. If you are a Premera member—or a member of Premera Blue Cross Blue Shield of Alaska, Vivacity Insurance or Connexion Insurance Solutions—we’d like to <a href="/free-case-evaluation" target="_blank"><span style="color:#367ab4"><font color="#367ab4">hear from you.</font></span></a>
+                                </p>
+
+                                <table class="row">
+                                  <tr>
+                                    <td>
+                                      <table class="button radius primary">
+                                        <tr>
+                                          <td>
+                                            <a href="/blog/premera-blue-cross-11m-may-have-been-affected-by-data-breach" target="_blank" style="color: #367ab4 !important;"><span style="color:#367ab4 !important"><font color="#367ab4">Read More</font></span></a>
+                                          </td>
+                                        </tr>
+                                      </table>
+                                    </td>
+                                  </tr>
+                                </table>
+                                <br>
+                            </td>
+                          </tr>
+                        </table>
+
+                      </td>
+                      <td class="expander"></td>
+                    </tr>
+                  </table>
+
+                </td>
+              </tr>
+            </table>
+            <!-- END LATEST LAWSUITS -->
+            <!-- NEWLY FILED CASES -->
+            <table class="container newly-filed" style="background: #FFFFFF; border: 1px solid #e2e6f1; border-radius: 3px;">
+              <tr>
+                <td>
+
+                  <table class="row">
+                    <tr>
+                      <td class="wrapper last divider">
+                        <table class="twelve columns">
+                          <tr>
+                            <td class="text-pad">
+                              <h3 style="margin-top: 40px"><a href="/class-action-lawyers/lumber-liquidators-formaldehyde" target="_blank"><span style="color:#367ab4"><font color="#367ab4">60 Minutes Investigation Leads to Litigation Against Lumber Liquidators</font></span></a></h3>
+                              <p>
+                                <span>
+                                  <img src="/wp-content/themes/forthepeople/assets/media/images/twitter-card/3908.jpg" height="150" width="150" class="caption-right" alt="60 Minutes Investigation Leads to Litigation Against Lumber Liquidators" vspace="10" hspace="20" align="right" style="height: 150px" />
+                                </span>
+                                <span>In March, our consumer protection attorneys <a href="/blog/morgan-morgan-files-class-action-lawsuits-against-lumber-liquidators" target="_blank"><span style="color:#367ab4"><font color="#367ab4">filed lawsuits</font></span></a> in Florida, Louisiana and California against Lumber Liquidators over its Chinese-made laminate flooring. Following a <em>60 Minutes</em> investigation that tested several Lumber Liquidators products, it was revealed that nearly all of the tested samples contained high levels of formaldehyde, a chemical that has been linked to serious health problems in those exposed to it for prolonged periods of time. Formaldehyde is commonly used in the flooring industry as a binding agent; however, there are strict regulations as to how much of the chemical can be used. Among other allegations, our class action lawsuits allege the Chinese factories that supply Lumber Liquidators with the affected products purposely mislabeled them before shipping to meet formaldehyde regulations.</span></p>
+
+                                <table class="row">
+                                  <tr>
+                                    <td>
+                                      <table class="button radius primary">
+                                        <tr>
+                                          <td>
+                                            <a href="/blog/morgan-morgan-files-class-action-lawsuits-against-lumber-liquidators" target="_blank" style="color: #367ab4 !important;"><span style="color:#367ab4 !important;"><font color="#367ab4">Read More</font></span></a>
+                                          </td>
+                                        </tr>
+                                      </table>
+                                    </td>
+                                  </tr>
+                                </table>
+
+                            </td>
+                            <td class="expander"></td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                  <table class="row">
+                    <tr>
+                      <td class="wrapper last divider">
+                        <table class="twelve columns">
+                          <tr>
+                            <td class="text-pad">
+                              <h3 style="margin-top: 40px"><a href="/class-action-lawyers/shorter-university-lawsuit" target="_blank"><span style="color:#367ab4"><font color="#367ab4">Shorter University Students’ Records Physically Stolen from Unlocked Room</font></span></a></h3>
+                              <p><span><img src="/wp-content/themes/forthepeople/assets/media/images/twitter-card/3907.jpg" height="150" width="150" class="caption-left" alt="Shorter University Students’ Records Physically Stolen from Unlocked Room" vspace="10" hspace="20" align="left" style="height: 150px" /></span>
+                                <span>Morgan & Morgan has filed a class action lawsuit against Rome, Georgia’s Shorter University on behalf of students whose personal and medical information was allegedly stolen from an unlocked filing cabinet in an unlocked room on campus in September 2014.</span></p>
+                              <p><span>To be allowed to participate in school sporting activities, all student athletes were required to undergo physical examinations. The records of these physicals were kept in hard-copy format in a filing cabinet on campus. As many as 900 students’ records were physically taken out of this filing cabinet in an unlocked room by “an unauthorized individual,” who easily accessed the files because “the door was misaligned, and it was difficult to lock,” according to a <a href="http://www.northwestgeorgianews.com/rome/news/local/shorter-university-student-id-theft-list-grows-rpd-more-than/article_cb77817c-b80c-11e4-b8f7-c3b44e7b2ae2.html" target="_blank"><span style="color:#367ab4"><font color="#367ab4">report</font></span></a> by the <em>Rome News-Tribune</em>.</span></p>
+                              <p><span>Although the suit’s main allegation is that the school failed to adequately safeguard its students’ information, the class action also claims Shorter University failed to properly notify students that their data may have been stolen. After news of the theft came to light, Shorter University told only some students of the breach, while others claim they received no notice from the school, the suit alleges. Furthermore, according to news reports, as many as 30 Shorter students had difficulty filing tax returns due to the theft of their Social Security numbers and other information.</span></p>
+
+                                <table class="row">
+                                  <tr>
+                                    <td>
+                                      <table class="button radius primary">
+                                        <tr>
+                                          <td>
+                                            <a href="/class-action-lawyers/shorter-university-lawsuit" target="_blank" style="color: #367ab4 !important;"><span style="color:#367ab4 !important;"><font color="#367ab4">Read More</font></span></a>
+                                          </td>
+                                        </tr>
+                                      </table>
+                                    </td>
+                                  </tr>
+                                </table>
+                                <br>
+                            </td>
+                            <td class="expander"></td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+
+                  <table class="row">
+                    <tr>
+                      <td class="wrapper last divider">
+                        <table class="twelve columns">
+                          <tr>
+                            <td class="text-pad">
+                              <h3 style="margin-top: 40px"><a href="/class-action-lawyers/home-depot-cyber-breach" target="_blank"><span style="color:#367ab4"><font color="#367ab4">Was Your Information Compromised in the Home Depot Data Breach?</font></span></a></h3>
+                              <p><span><img src="/wp-content/themes/forthepeople/assets/media/images/thumbs/pagethumbs/home-depot-lawsuit.jpg" height="150" width="150" class="caption-right" alt="Was Your Information Compromised In the Home Depot Data Breach"  vspace="10" hspace="20" align="right" style="height: 150px"/></span>
+                              <span>Our attorneys have filed a class action lawsuit against Home Depot over the retailer’s months-long 2014 data breach that exposed the credit and debit card information of millions of customers.  The lawsuit alleges Home Depot failed to properly secure and safeguard its customers’ payment information, e-mail addresses, and other personal data. Our attorneys are still looking to <a href="/free-case-evaluation" target="_blank"><span style="color:#367ab4"><font color="#367ab4">speak with anyone</font></span></a> whose credit and/or debit card information was compromised in the cyberattack.</span></p>
+
+                              <table class="row">
+                                <tr>
+                                  <td>
+                                    <table class="button radius primary">
+                                      <tr>
+                                        <td>
+                                          <a href="/class-action-lawyers/home-depot-cyber-breach" target="_blank" style="color: #367ab4 !important;"><span style="color:#367ab4 !important;"><font color="#367ab4">Read More</font></span></a>
+                                        </td>
+                                      </tr>
+                                    </table>
+                                  </td>
+                                </tr>
+                              </table><br>
+
+                            <td class="expander"></td>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+
+                </td>
+              </tr>
+            </table>
+            <!-- END FILED CASED -->
+            <br>
+            <!-- MORGAN & MORGAN IN THE NEWS -->
+            <table class="container two-by-two" style="background: #FFFFFF; border: 1px solid #e2e6f1; border-radius: 3px;">
+              <tr>
+                <td>
+
+                  <table class="row">
+                    <tr>
+                      <td class="wrapper last">
+
+                        <table class="twelve columns">
+                          <tr>
+                            <td class="text-pad">
+                              <h2>Morgan & Morgan <span>in the News<span></h2>
+
+                              <center>
+                                <img src="/wp-content/themes/forthepeople/assets/media/images/newsletter/divider.jpg" class="title-bar" width="214" height="3" vspace="20" />
+                              </center>
+
+                              <br>
+                              <p>It’s been a busy past few months for the firm. Here are some highlights:</p>
+                            </td>
+                            <td class="expander"></td>
+                          </tr>
+                        </table>
+
+                      </td>
+                    </tr>
+                  </table>
+
+                  <table class="row">
+                    <tr>
+                      <td class="wrapper">
+
+                        <table class="six columns">
+                          <tr>
+                            <td class="text-pad-left">
+                              <a href="/attorneys/john-a-yanchunis"  target="_blank"><img src="/wp-content/themes/forthepeople/assets/media/images/newsletter/attorney-john-yanchunis.jpg" height="225" width="225" class="caption-img" vspace="20" alt="John A Yanchunis" /></a>
+                              <p class="caption"><a href="/attorneys/john-a-yanchunis" target="_blank"><span style="color:#367ab4"><font color="#367ab4">Attorney John Yanchunis</font></span></a> appeared on Healthcare Info Security’s podcast to discuss the Premera Blue Cross data breach, as well as the class action litigation that often follows cyberattacks. Listen to the podcast <a href="http://www.healthcareinfosecurity.com/interviews/cyber-insurers-will-demand-better-infosec-i-2619" target="_blank"><span style="color:#367ab4"><font color="#367ab4">here</font></span></a>. Yanchunis will represent the plaintiffs in one of the class action lawsuits against Premera.</p>
+                            </td>
+                            <td class="expander"></td>
+                          </tr>
+                        </table>
+
+                      </td>
+                      <td class="wrapper last">
+
+                        <table class="six columns">
+                          <tr>
+                            <td class="text-pad-right" style="padding-left: 10px;">
+                              <a href="http://www.unitedforcare.org/petition" target="_blank"><img src="/wp-content/themes/forthepeople/assets/media/images/newsletter/united-for-care.jpg" height="225" width="225" class="caption-img" vspace="20" alt="United For Care" /></a>
+                              <p class="caption" style="margin-right: 0">John Morgan and United For Care are ramping up another medical marijuana petition campaign, this time to include the initiative on the 2016 election ballot. Click <a href="http://www.unitedforcare.org/petition" target="_blank"><span style="color:#367ab4"><font color="#367ab4">here</font></span></a> to sign United For Care’s petition and spread the word.</p>
+                            </td>
+                            <td class="expander"></td>
+                          </tr>
+                        </table>
+
+                      </td>
+                    </tr>
+                  </table>
+
+
+                  <table class="row">
+                    <tr>
+                      <td class="wrapper">
+
+                        <table class="six columns">
+                          <tr>
+                            <td class="text-pad-left">
+                              <a href="/attorneys/alex-ferrer" target="_blank"><img src="/wp-content/themes/forthepeople/assets/media/images/newsletter/attorney-alex-ferrer.jpg" height="225" width="225" class="caption-img" vspace="20" alt="Attorney Alex Ferrer" /></a>
+                              <p class="caption"><a href="/attorneys/alex-ferrer" target="_blank"><span style="color:#367ab4"><font color="#367ab4">Attorney Alex Ferrer</font></span></a>, formerly of the nationally syndicated television show “Judge Alex,” has <a href="http://www.prweb.com/releases/2015/03/prweb12549775.htm" target="_blank"><span style="color:#367ab4"><font color="#367ab4">joined</font></span></a> the firm’s Tampa office.</p>
+                            </td>
+                          </tr>
+                        </table>
+
+                      </td>
+                      <td class="wrapper last">
+
+                        <table class="six columns">
+                          <tr>
+                            <td class="text-pad-right" style="padding-left: 10px;">
+                              <a href="/blog/attorney-michael-goetz-given-lead-role-in-xarelto-litigation" target="_blank"><img src="/wp-content/themes/forthepeople/assets/media/images/newsletter/attorney-michael-gotz.jpg" height="225" width="225" vspace="20" class="caption-img" alt="Attorney Michael Gotz" /></a>
+                              <p class="caption" style="margin-right: 0">Morgan & Morgan Complex Litigation Group <a href="/attorneys/michael-goetz" target="_blank"><span style="color:#367ab4;"><font color="#367ab4">attorney Michael Goetz</font></span></a> was <a href="/blog/attorney-michael-goetz-given-lead-role-in-xarelto-litigation" target="_blank"><span style="color:#367ab4"><font color="#367ab4">named</font></span></a> to the plaintiffs’ steering committee in the multidistrict litigation over Xarelto. </p>
+                            </td>
+                          </tr>
+                        </table>
+
+                      </td>
+                      <td class="expander"></td>
+                    </tr>
+                  </table>
+
+
+                  <table class="row">
+                    <tr>
+                      <td class="wrapper">
+
+                        <table class="six columns">
+                          <tr>
+                            <td class="text-pad-left">
+                              <a href="/attorneys/william-hackett"  target="_blank"><img src="/wp-content/themes/forthepeople/assets/media/images/newsletter/attorney-william-hackett.jpg" height="225" width="225" class="caption-img" vspace="20" alt="Attorney William Hackett" /></a>
+                              <p class="caption"><a href="/attorneys/william-hackett" target="_blank"><span style="color:#367ab4"><font color="#367ab4">Memphis attorney William Hackett</font></span></a> spoke with WMC Action News 5 over the <a href="http://www.wmcactionnews5.com/story/28299082/re-who-pays-for-pothole-damages" target="_blank"><span style="color:#367ab4"><font color="#367ab4">vehicle damage</font></span></a> caused by potholes—and who should be responsible for the costs.</p>
+                            </td>
+                          </tr>
+                        </table>
+
+                      </td>
+                      <td class="wrapper last">
+
+                        <table class="six columns">
+                          <tr>
+                            <td class="text-pad-right" style="padding-left: 10px;">
+                              <a href="/attorneys/derrick-connell"  target="_blank"><img src="/wp-content/themes/forthepeople/assets/media/images/newsletter/attorney-derick-connell.jpg" height="225" width="225" class="caption-img" vspace="20" alt="Attorney Derick Connell" /></a>
+                              <p class="caption" style="margin-right: 0">Melbourne <a href="/attorneys/derrick-connell" target="_blank"><span style="color:#367ab4"><font color="#367ab4">attorney Derrick Connell</font></span></a> has been named to the Nation’s Top One Percent by the National Association of Distinguished Counsel. </p>
+                            </td>
+                          </tr>
+                        </table>
+
+                      </td>
+                      <td class="expander"></td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td>
+
+                  <table class="row">
+                    <tr>
+                      <td class="wrapper last">
+
+                        <table class="twelve columns">
+                          <tr>
+                            <td class="text-pad">
+                              <p>Want to stay up to date with all the latest Morgan & Morgan news? Check out our <a href="/featured-news" target="_blank"><span style="color:#367ab4"><font color="#367ab4">Featured News</font></span></a> section on ForThePeople.com.</p>
+                            </td>
+                            <td class="expander"></td>
+                          </tr>
+                        </table>
+
+                      </td>
+                    </tr>
+                  </table>
+
+                </td>
+              </tr>
+            </table>
+            <!-- END MORGAN & MORGAN IN THE NEWS -->
+            <br>
+            <!-- RECENT VERDICTS & SETTLEMENTS-->
+            <table class="container two-by-two" style="background: #FFFFFF; border: 1px solid #e2e6f1; border-radius: 3px;">
+              <tr>
+                <td>
+
+                  <table class="row">
+                    <tr>
+                      <td class="wrapper last">
+                        <table class="twelve columns">
+                          <tr>
+                            <td class="text-pad">
+                              <h2>Recent Verdicts <span>& Settlements</span></h2>
+
+                              <center>
+                                <img src="/wp-content/themes/forthepeople/assets/media/images/newsletter/divider.jpg" class="title-bar" width="214" height="3" vspace="20" />
+                              </center>
+
+                            </td>
+                            <td class="expander"></td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+
+                  <table class="row">
+                    <tr>
+                      <td class="wrapper">
+
+                        <table class="six columns">
+                          <tr>
+                            <td class="text-pad-left">
+                              <a href="http://www.orlandosentinel.com/health/os-adventist-florida-hospital-false-claims-fine-20150319-story.html"  target="_blank"><img src="/wp-content/themes/forthepeople/assets/media/images/newsletter/adventist-health.jpg" height="225" width="225" class="caption-img" vspace="20" alt="Adventist Health" /></a>
+                              <p class="caption">Morgan & Morgan helped obtain a <a href="http://www.orlandosentinel.com/health/os-adventist-florida-hospital-false-claims-fine-20150319-story.html" target="_blank"><span style="color:#367ab4"><font color="#367ab4">$5.4 million settlement</font></span></a> in a False Claims Act lawsuit against Florida Hospital’s parent company that alleged it provided radiation-oncology services to patients with Medicare or military health insurance at multiple locations without qualified healthcare professionals’ direct supervision. </p>
+                            </td>
+                          </tr>
+                        </table>
+
+                      </td>
+                      <td class="wrapper last">
+
+                        <table class="six columns">
+                          <tr>
+                            <td class="text-pad-right" style="padding-left: 10px;">
+                              <a href="http://www.myfoxtampabay.com/story/28406236/cheerleaders-could-score-thousands-of-dollars-in-back-pay"  target="_blank"><img src="/wp-content/themes/forthepeople/assets/media/images/newsletter/attorney-arcangelis.jpg" height="225" width="225" class="caption-img" vspace="20" alt="Attorney Arcangelis" /></a>
+                              <p class="caption" style="margin-right: 0"><a href="/attorneys/kim-woods" target="_blank"><span style="color:#367ab4"><font color="#367ab4">Attorney Kim De Arcangelis</font></span></a> helped obtain an <a href="http://www.myfoxtampabay.com/story/28406236/cheerleaders-could-score-thousands-of-dollars-in-back-pay" target="_blank"><span style="color:#367ab4"><font color="#367ab4">$825K settlement</font></span></a> in a lawsuit against the Tampa Bay Buccaneers that alleged the team failed to pay its cheerleaders the minimum wage.</p>
+                            </td>
+                          </tr>
+                        </table>
+
+                      </td>
+                      <td class="expander"></td>
+                    </tr>
+                  </table>
+
+                  <table class="row">
+                    <tr>
+                      <td class="wrapper">
+
+                        <table class="six columns">
+                          <tr>
+                            <td class="text-pad-left">
+                              <img src="/wp-content/themes/forthepeople/assets/media/images/newsletter/deceased-tobacco-smoker.jpg" height="225" width="225" class="caption-img" vspace="20" alt="Deceased Tobacco Smoker" />
+                              <p class="caption">Attorneys <a href="/attorneys/gregory-d-prysock" target="_blank"><span style="color:#367ab4"><font color="#367ab4">Greg Prysock</font></span></a>, <a href="/attorneys/keith-r-mitnik" target="_blank"><span style="color:#367ab4"><font color="#367ab4">Keith Mitnik</font></span></a>, <a href="/attorneys/katherine-michelle-massa" target="_blank"><span style="color:#367ab4"><font color="#367ab4">Katy Massa</font></span></a> and <a href="/attorneys/antonio-luciano-jr" target="_blank"><span style="color:#367ab4"><font color="#367ab4">Antonio Luciano</font></span></a> helped obtain an <strong>$18.5 million</strong> verdict on behalf of the surviving husband and daughter of a deceased tobacco smoker.</p>
+                            </td>
+                          </tr>
+                        </table>
+
+                      </td>
+                      <td class="wrapper last">
+
+                        <table class="six columns">
+                          <tr>
+                            <td class="text-pad-right" style="padding-left: 10px;">
+                              <img src="/wp-content/themes/forthepeople/assets/media/images/newsletter/settlement-case.jpg" height="225" width="225" class="caption-img" vspace="20" alt="Settlement Case"/>
+                              <p class="caption" style="margin-right: 0">Attorneys Keith Mitnik and <a href="/attorneys/alan-stagmeier" target="_blank"><span style="color:#367ab4"><font color="#367ab4">Alan Stagmeier</font></span></a> obtained a <strong>$2.9 million verdict</strong> on behalf of a client who was injured after being hit by a car while riding her Moped.</p>
+                            </td>
+                          </tr>
+                        </table>
+
+                      </td>
+                      <td class="expander"></td>
+                    </tr>
+                  </table>
+
+                  <table class="row">
+                    <tr>
+                      <td class="wrapper">
+
+                        <table class="six columns">
+                          <tr>
+                            <td class="text-pad-left">
+                              <img src="/wp-content/themes/forthepeople/assets/media/images/newsletter/drunk-driving-accident.jpg" height="225" width="225" class="caption-img" vspace="20" alt="Drunk Driving Accident" />
+                              <p class="caption">Attorneys <a href="/attorneys/alexander-murphree-clem" target="_blank"><span style="color:#367ab4"><font color="#367ab4">Alexander Clem</font></span></a> and <a href="/attorneys/andrew-parker-felix" target="_blank"><span style="color:#367ab4"><font color="#367ab4">Andrew Parker Felix</font></span></a> secured a <strong>$1.6 million verdict</strong> on behalf of a client who lost a loved one in a drunk driving accident.</p>
+                            </td>
+                          </tr>
+                        </table>
+
+                      </td>
+                      <td class="wrapper last">
+
+                        <table class="six columns">
+                          <tr>
+                            <td class="text-pad-right" style="padding-left: 10px;">
+                              <a href="/attorneys/michael-f-sutton"  target="_blank"><img src="/wp-content/themes/forthepeople/assets/media/images/newsletter/attorney-mike-sutton.jpg" height="225" width="225" class="caption-img" vspace="20" alt="Attorney Mike Sutton" /></a>
+                              <p class="caption" style="margin-right: 0"><a href="/attorneys/michael-f-sutton" target="_blank"><span style="color:#367ab4"><font color="#367ab4">Attorney Mike Sutton</font></span></a> helped obtain a pre-litigation mediation settlement of $5.8 million on behalf of a family who sustained serious, permanent injuries in a head-on car accident.</p>
+                            </td>
+                          </tr>
+                        </table>
+                        <br>
+                      </td>
+                      <td class="expander"></td>
+                    </tr>
+                  </table>
+
+                </td>
+              </tr>
+            </table>
+            <!-- END RECENT VERDICTS & SETTLEMENTS -->
+            <br>
+            <!-- MEET OUR NEWEST ATTORNEYS-->
+            <table class="container newest-attorneys" style="background: #FFFFFF; border: 1px solid #e2e6f1; border-radius: 3px;">
+              <tr>
+                <td>
+
+                  <table class="row">
+                    <tr>
+                      <td class="wrapper last">
+
+                        <table class="twelve columns">
+                          <tr>
+                            <td class="text-pad">
+                              <h2>Meet Our <span>Newest Attorneys</span></h2>
+
+                              <center>
+                                <img src="/wp-content/themes/forthepeople/assets/media/images/newsletter/divider.jpg" class="title-bar" width="214" height="3" vspace="20" />
+                              </center>
+
+                              <br>
+                              <p>Our team of attorneys is always growing. Some of the newest additions to the Morgan & Morgan family include:</p>
+                            </td>
+                            <td class="expander"></td>
+                          </tr>
+                        </table>
+
+                      </td>
+                    </tr>
+                  </table>
+
+                  <!-- row 1 -->
+                  <table class="row">
+                    <tr>
+                      <td class="wrapper">
+
+                        <table class="six columns">
+                          <tr>
+                            <td class="six sub-columns" style="text-align: center; padding-left: 12px;">
+                                <img src="/wp-content/themes/forthepeople/assets/media/images/newsletter/na-alex-ferrer.jpg" width="104" height="104" alt="Alex Ferrer" />
+                                <a href="/attorneys/alex-ferrer"><span style="color:#367ab4"><font color="#367ab4">Alex <br>Ferrer</font></span></a>
+                            </td>
+                            <td class="six sub-columns last" style="text-align: center; padding-left: 12px;">
+                              <img src="/wp-content/themes/forthepeople/assets/media/images/newsletter/na-danielle-blandford.jpg" width="104" height="104" alt="Danielle Blandford" />
+                              <a href="/attorneys/danielle-blandford"><span style="color:#367ab4"><font color="#367ab4">Danielle<br> Blandford</font></span></a>
+                             </td>
+                             <td class="expander"></td>
+                           </tr>
+                         </table>
+
+                        </td>
+                        <td class="wrapper last">
+
+                        <table class="six columns">
+                          <tr>
+                             <td class="six sub-columns" style="text-align: center;">
+                                <span><img src="/wp-content/themes/forthepeople/assets/media/images/newsletter/na-derick-connell.jpg" width="104" height="104" alt="Derrick Connell" /></span>
+                                <a href="/attorneys/derrick-connell"><span style="color:#367ab4"><font color="#367ab4">Derrick <br>Connell</font></span>
+                              </a>
+                             </td>
+                            <td class="six sub-columns last" style="text-align: center;">
+                              <span><img src="/wp-content/themes/forthepeople/assets/media/images/newsletter/na-lee-glover.jpg" width="104" height="104" alt="Lee Glover" /></span>
+                              <p style="text-align: center" align="center"><a href="/attorneys/lee-glover"><span style="color:#367ab4"><font color="#367ab4">Lee <br>Glover</font></span></a></p>
+                              </td>
+                             <td class="expander"></td>
+                          </tr>
+                        </table>
+
+                      </td>
+                  </table>
+
+                  <!-- row 2 -->
+                  <table class="row">
+                    <tr>
+                      <td class="wrapper">
+
+                        <table class="six columns">
+                          <tr>
+                            <td class="six sub-columns" style="text-align: center; padding-left: 12px">
+                                <span><img src="/wp-content/themes/forthepeople/assets/media/images/newsletter/jeff-humphries.jpg" width="104" height="104" alt="Jeffrey Humphries" /></span>
+                                <a href="/attorneys/jeffrey-humphries"><span style="color:#367ab4"><font color="#367ab4">Jeffrey <br>Humphries</font></span></a>
+                            </td>
+                            <td class="six sub-columns last" style="text-align: center; padding-left: 12px">
+                                <span><img src="/wp-content/themes/forthepeople/assets/media/images/newsletter/na-brock-hjalma-johnson.jpg" width="104" height="104" alt="Brock Hjalma Johnson" /></span>
+                                <p style="text-align: center" align="center"><a href="/attorneys/brock-hjalma-johnson"><span style="color:#367ab4"><font color="#367ab4">Brock <br>Hjalma Johnson</font></span></a></p>
+                            </td>
+                            <td class="expander"></td>
+                          </tr>
+                        </table>
+
+                      </td>
+                      <td class="wrapper last">
+
+                        <table class="six columns">
+                          <tr>
+                            <td class="six sub-columns" style="text-align: center">
+                                <span><img src="/wp-content/themes/forthepeople/assets/media/images/newsletter/na-david-deganian.jpg" width="104" height="104" alt="David Deganian" /></span>
+                                <a href="/attorneys/david-deganian"><span style="color:#367ab4"><font color="#367ab4">David <br>Deganian</font></span></a>
+                            </td>
+                            <td class="six sub-columns last" style="text-align: center">
+                                <span><img src="/wp-content/themes/forthepeople/assets/media/images/newsletter/na-octavio-gomez.jpg" width="104" height="104" alt="Octavio Gomez" /></span>
+                                <a href="/attorneys/octavio-gomez"><span style="color:#367ab4"><font color="#367ab4">Octavio <br>Gomez</font></span></a>
+                            </td>
+                            <td class="expander"></td>
+                          </tr>
+                        </table>
+
+                      </td>
+                    </tr>
+                  </table>
+
+
+                </td>
+              </tr>
+            </table><br>
+          </center>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

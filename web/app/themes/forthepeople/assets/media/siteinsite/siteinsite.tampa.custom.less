@@ -1,0 +1,44 @@
+//Custom CSS for Tampa Specific
+
+//background images
+.section.personal-injury {
+  background-image: url('/media/images/offices/tampa/personal-injury-bg.jpg');
+  background-repeat: no-repeat;
+  background-position: -65px;
+}
+.section.settlements-section {
+  background: transparent url('/media/images/offices/tampa/results-section_bg.jpg') no-repeat right;
+}
+.section.testimonials-section {
+  background: url('/media/images/offices/tampa/testimonials_bg.jpg') no-repeat;
+  background-size: cover;
+}
+.section.contact-us {
+  background: #2375b4 url('/media/images/offices/tampa/contact-us_bg.jpg') no-repeat;
+  background-size: cover;
+}
+
+
+@media (max-width: 1024px) {
+  .section.personal-injury {
+    background-position: -160px;
+  }
+  .section.settlements-section {
+    background-position: 626px;
+  }
+}
+@media (min-width: 768px) and (max-width: 950px){
+  .section.settlements-section {
+    background-position: 385px;
+    padding: 8px 0;
+  }
+}
+@media (max-width: 768px) {
+  .section.personal-injury {
+    padding-top: 0;
+    background: transparent;
+    h3 {
+      margin-top: 0;
+    }
+  }
+}

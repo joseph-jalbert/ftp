@@ -21,7 +21,7 @@ fi
 echo "DEPLOYING USING USERNAMEhol $USER"
 
 
-lftp -u $USER,$PASSWORD $HOST -p $PORT  << EOF
+lftp -u $USER,$PASSWORD sftp://$HOST -p $PORT  << EOF
 rm -r wp-content/plugins
 rm -r wp-content/themes
 quit

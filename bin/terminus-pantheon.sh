@@ -5,8 +5,9 @@ if hash terminus 2>/dev/null; then
     terminus auth login $PANTHEON_USER --password=$PANTHEON_PASSWORD
 
     if [ $1 = "master" ]; then
-        terminus site deploy --site=$PANTHEON_SITE_NAME --env=test --note="Updating"
         terminus site deploy --site=$PANTHEON_SITE_NAME --env=live --note="Updating"
+        terminus wp plugin install wp-redis --site=$PANTHEON_SITE_NAME --env=live
+        terminus wp plugin activate wp-redis --site=$PANTHEON_SITE_NAME --env=live
     else
         terminus site deploy --site=$PANTHEON_SITE_NAME --env=test --note="Updating"
     fi
@@ -15,9 +16,7 @@ else
     echo 'Please install terminus see https://github.com/pantheon-systems/cli'
 fi
 
-terminus wp plugin install wp-redis --site=$PANTHEON_SITE_NAME --env=live
 
-terminus wp plugin activate wp-redis --site=$PANTHEON_SITE_NAME --env=live
 
 
 

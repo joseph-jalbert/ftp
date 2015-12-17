@@ -13,23 +13,27 @@
 
 get_header(); ?>
 <div id="content" class="site-content container">
-<div id="interior-page">
-	<div class="row-fluid row-leading row-follow">
-        <div id="col1" class="span8">
-    <?php if ( have_posts() ) : ?>
-    <?php while ( have_posts() ) : the_post(); ?>
-    <?php get_template_part( 'template-parts/content', 'blog-loop' ); ?>    
-    <?php endwhile; ?>
-    <?php new_posts_navigation(); ?>
-    <?php else : ?>
-    <?php get_template_part( 'template-parts/content', 'none' ); ?>
-    <?php endif; ?>
+	<div id="interior-page">
+		<div class="row-fluid row-leading row-follow">
+			<div id="col1" class="span8">
+				<?php if ( have_posts() ) : ?>
+					<?php while ( have_posts() ) : the_post(); ?>
+						<?php get_template_part( 'template-parts/content', 'blog-loop' ); ?>
+					<?php endwhile; ?>
+					<?php new_posts_navigation(); ?>
+				<?php else : ?>
+					<?php get_template_part( 'template-parts/content', 'none' ); ?>
+				<?php endif; ?>
+			</div>
+			<div id="col2" class="span4">
+				<?php
+				if ( is_home() ) :
+					get_template_part( 'template-parts/blog', 'sidebar' );
+				endif;
+				get_sidebar();
+				?>
+			</div>
+		</div>
 	</div>
-<div id="col2" class="span4">
-<?php if(in_category('Blog')) { include('template-parts/blog-sidebar.php');  }  ?>
-<?php get_sidebar(); ?>
-</div>
-</div>
-</div>
 </div>
 <?php get_footer(); ?>

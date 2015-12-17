@@ -6,6 +6,7 @@
  */
 
 require __DIR__ . '/inc/actions.php';
+require __DIR__ . '/inc/news-taxonomy.php';
 
 if ( ! function_exists( 'forthepeople_setup' ) ) :
 /**

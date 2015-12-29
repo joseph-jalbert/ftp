@@ -533,6 +533,7 @@ module.exports = function (grunt) {
         'clean:cleanInterimPantheonKeepGitDirectory',
         'shell:moveFinalIntoInterimPantheon',
         'shell:cleanIndexInterimPantheon',
+        'shell:addObjectCacheToPantheon',
         'gitadd:addAllToInterimPantheon',
         'gitcommit:commitReleaseInterimPantheon',
         'gitreset:resetInterimPantheonRepo',
@@ -561,7 +562,6 @@ module.exports = function (grunt) {
     grunt.registerTask('deployCode', [
         'clean:cleanPantheonKeepGitDirectory',
         'shell:moveFinalIntoPantheon',
-        'shell:addObjectCacheToPantheon',
         'gittag:tagReleasePantheon', // this is here so we don't tag the release on a rollback
         'deployPantheon',
         //'clean:cleanWpEngineKeepGitDirectory',

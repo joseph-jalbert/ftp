@@ -387,7 +387,6 @@ module.exports = function (grunt) {
                     }
                 },
                 command: [
-                    'rsync -lrv ' + wordPressSourceTempDir + '/* ' + finalPantheonTempDir + '/',
                     'rsync -lrv ' + pantheonTempDir + '/* ' + finalPantheonTempDir + '/',
                     'rsync -lrv ' + sourceDir + sourceWpContentDirectory + '/* ' + finalPantheonTempDir + '/wp-content/'
                 ].join('&&')

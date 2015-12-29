@@ -471,7 +471,10 @@ module.exports = function (grunt) {
                 command: [
                     " > " + finalPantheonTempDir + "/wp-content/object-cache.php",
                     "touch " + finalPantheonTempDir + "/wp-content/object-cache.php",
-                    "echo \"<?php if ( file_exists( WP_CONTENT_DIR . '/plugins/wp-redis/object-cache.php')) { require_once WP_CONTENT_DIR . '/plugins/wp-redis/object-cache.php';}\" >> " + finalPantheonTempDir + "/wp-content/object-cache.php"
+                    "echo \"<?php if ( file_exists( WP_CONTENT_DIR . '/plugins/wp-redis/object-cache.php')) { require_once WP_CONTENT_DIR . '/plugins/wp-redis/object-cache.php';}\" >> " + finalPantheonTempDir + "/wp-content/object-cache.php",
+                    " > " + interimPantheonTempDir + "/wp-content/object-cache.php",
+                    "touch " + interimPantheonTempDir + "/wp-content/object-cache.php",
+                    "echo \"<?php if ( file_exists( WP_CONTENT_DIR . '/plugins/wp-redis/object-cache.php')) { require_once WP_CONTENT_DIR . '/plugins/wp-redis/object-cache.php';}\" >> " + interimPantheonTempDir + "/wp-content/object-cache.php"
 
                 ].join(' && ')
 

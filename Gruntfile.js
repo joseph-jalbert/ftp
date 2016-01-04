@@ -499,9 +499,9 @@ module.exports = function (grunt) {
     grunt.registerTask('consumeSources', [
         'gitclone:consumeSourceRepo',
         'gitclone:consumePantheonRepo',
-        //'gitclone:consumeWpEngineRepo',
+        'gitclone:consumeWpEngineRepo',
         'gitclone:consumeInterimPantheonRepo',
-        //'gitclone:consumeInterimWpEngineRepo',
+        'gitclone:consumeInterimWpEngineRepo',
         'curl:consumeWordPress'
 
     ]);
@@ -516,7 +516,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('processInterimRepos', [
         'clean:cleanPantheonContent',
-        //'clean:cleanWpEngineContent'
+        'clean:cleanWpEngineContent'
 
     ]);
 
@@ -541,20 +541,20 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('processInterimWpEngine', [
-        //'clean:cleanInterimWpEngineKeepGitDirectory',
-        //'shell:moveFinalIntoInterimWpEngine',
-        //'gitadd:addAllToInterimWpEngine',
-        //'gitcommit:commitReleaseInterimWpEngine',
-        //'gitreset:resetInterimWpEngineRepo',
-        //'gittag:tagReleaseInterimWpEngine',
-        //'gitpush:pushInterimWpEngine'
+        'clean:cleanInterimWpEngineKeepGitDirectory',
+        'shell:moveFinalIntoInterimWpEngine',
+        'gitadd:addAllToInterimWpEngine',
+        'gitcommit:commitReleaseInterimWpEngine',
+        'gitreset:resetInterimWpEngineRepo',
+        'gittag:tagReleaseInterimWpEngine',
+        'gitpush:pushInterimWpEngine'
     ]);
 
     grunt.registerTask('processSourceRepos', [
         'shell:processPantheonSourceRepo',
-        //'shell:processWpEngineSourceRepo',
+        'shell:processWpEngineSourceRepo',
         'processInterimPantheon',
-        //'processInterimWpEngine'
+        'processInterimWpEngine'
 
     ]);
 
@@ -564,10 +564,10 @@ module.exports = function (grunt) {
         'shell:addObjectCacheToPantheon',
         'gittag:tagReleasePantheon', // this is here so we don't tag the release on a rollback
         'deployPantheon',
-        //'clean:cleanWpEngineKeepGitDirectory',
-        //'shell:moveFinalIntoWpEngine',
-        //'killWpEngineContent',
-        //'deployWpEngine'
+        'clean:cleanWpEngineKeepGitDirectory',
+        'shell:moveFinalIntoWpEngine',
+        'killWpEngineContent',
+        'deployWpEngine'
 
 
     ]);
@@ -596,16 +596,16 @@ module.exports = function (grunt) {
         'cleanUp',
         'gitclone:consumeInterimPantheonRepo',
         'gitclone:consumePantheonRepo',
-        //'gitclone:consumeWpEngineRepo',
-        //'gitclone:consumeInterimWpEngineRepo',
+        'gitclone:consumeWpEngineRepo',
+        'gitclone:consumeInterimWpEngineRepo',
         'gitreset:resetInterimPantheonRepo',
-        //'gitreset:resetInterimWpEngineRepo',
+        'gitreset:resetInterimWpEngineRepo',
         'clean:cleanPantheonKeepGitDirectory',
-        //'clean:cleanWpEngineKeepGitDirectory',
+        'clean:cleanWpEngineKeepGitDirectory',
         'shell:rsyncRollback',
         'deployPantheon',
-        //'killWpEngineContent',
-        //'deployWpEngine'
+        'killWpEngineContent',
+        'deployWpEngine'
 
     ]);
 
@@ -618,9 +618,9 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('deployWpEngine', [
-        //'gitadd:addAllToWpEngine',
-        //'gitcommit:commitReleaseWpEngine',
-        //'gitpush:forcePushWpEngine'
+        'gitadd:addAllToWpEngine',
+        'gitcommit:commitReleaseWpEngine',
+        'gitpush:forcePushWpEngine'
 
     ]);
 

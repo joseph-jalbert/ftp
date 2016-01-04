@@ -387,7 +387,6 @@ module.exports = function (grunt) {
                     }
                 },
                 command: [
-                    'rsync -lrv ' + wordPressSourceTempDir + '/* ' + finalPantheonTempDir + '/',
                     'rsync -lrv ' + pantheonTempDir + '/* ' + finalPantheonTempDir + '/',
                     'rsync -lrv ' + sourceDir + sourceWpContentDirectory + '/* ' + finalPantheonTempDir + '/wp-content/'
                 ].join('&&')
@@ -471,7 +470,10 @@ module.exports = function (grunt) {
                 command: [
                     " > " + finalPantheonTempDir + "/wp-content/object-cache.php",
                     "touch " + finalPantheonTempDir + "/wp-content/object-cache.php",
-                    "echo \"<?php if ( file_exists( WP_CONTENT_DIR . '/plugins/wp-redis/object-cache.php')) { require_once WP_CONTENT_DIR . '/plugins/wp-redis/object-cache.php';}\" >> " + finalPantheonTempDir + "/wp-content/object-cache.php"
+                    "echo \"<?php if ( file_exists( WP_CONTENT_DIR . '/plugins/wp-redis/object-cache.php')) { require_once WP_CONTENT_DIR . '/plugins/wp-redis/object-cache.php';}\" >> " + finalPantheonTempDir + "/wp-content/object-cache.php",
+                    " > " + interimPantheonTempDir + "/wp-content/object-cache.php",
+                    "touch " + interimPantheonTempDir + "/wp-content/object-cache.php",
+                    "echo \"<?php if ( file_exists( WP_CONTENT_DIR . '/plugins/wp-redis/object-cache.php')) { require_once WP_CONTENT_DIR . '/plugins/wp-redis/object-cache.php';}\" >> " + interimPantheonTempDir + "/wp-content/object-cache.php"
 
                 ].join(' && ')
 
@@ -530,6 +532,7 @@ module.exports = function (grunt) {
         'clean:cleanInterimPantheonKeepGitDirectory',
         'shell:moveFinalIntoInterimPantheon',
         'shell:cleanIndexInterimPantheon',
+        'shell:addObjectCacheToPantheon',
         'gitadd:addAllToInterimPantheon',
         'gitcommit:commitReleaseInterimPantheon',
         'gitreset:resetInterimPantheonRepo',
@@ -558,7 +561,6 @@ module.exports = function (grunt) {
     grunt.registerTask('deployCode', [
         'clean:cleanPantheonKeepGitDirectory',
         'shell:moveFinalIntoPantheon',
-        'shell:addObjectCacheToPantheon',
         'gittag:tagReleasePantheon', // this is here so we don't tag the release on a rollback
         'deployPantheon',
         'clean:cleanWpEngineKeepGitDirectory',

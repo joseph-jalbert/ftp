@@ -21,7 +21,7 @@ module.exports = function (grunt) {
         interimWpEngineRepo = grunt.option('interimWpEngineRepo') || 'git@github.com:Morgan-and-Morgan/forthepeople-interim-wpengine.git',
         interimWpEngineRepoBranch = sourceRepoBranch,
         interimWpEngineTempDir = './deployments/interimWpEngineRepo',
-        wordPressSourceTempDir = './deployments/wordpressSource',
+
         finalPantheonTempDir = './deployments/final-pantheon',
         finalWpEngineTempDir = './deployments/final-wpengine';
 
@@ -255,36 +255,21 @@ module.exports = function (grunt) {
 
             }
         },
-        curl: {
-            consumeWordPress: {
-                dest: wordPressSourceTempDir + '/latest.tar.gz',
-                src: 'https://wordpress.org/latest.tar.gz'
-            }
 
-
-        },
         clean: {
             everything: ['deployments'],
-            wordPressTar: [wordPressSourceTempDir + '/latest.tar.gz'],
             cleanPantheonContent: [pantheonTempDir + '/wp-content/plugins', pantheonTempDir + '/wp-content/themes'],
             cleanWpEngineContent: [wpEngineTempDir + '/wp-content/plugins', wpEngineTempDir + '/wp-content/themes'],
             cleanInterimPantheonKeepGitDirectory: [interimPantheonTempDir + '/*', interimPantheonTempDir + '/.gitignore', '!' + interimPantheonTempDir + '/.git/'],
             cleanInterimWpEngineKeepGitDirectory: [interimWpEngineTempDir + '/*', interimWpEngineTempDir + '/.gitignore', '!' + interimWpEngineTempDir + '/.git/'],
             cleanPantheonKeepGitDirectory: [pantheonTempDir + '/*', pantheonTempDir + '/.gitignore', '!' + pantheonTempDir + '/.git/'],
             cleanWpEngineKeepGitDirectory: [wpEngineTempDir + '/*', wpEngineTempDir + '/.gitignore', '!' + wpEngineTempDir + '/.git/'],
-            killWpCoreContent: [wordPressSourceTempDir + '/wp-content', wordPressSourceTempDir + '/wp-config-sample.php', wordPressSourceTempDir + '/wp-content/plugins/hello.php']
+            pantheonWpContent: [pantheonTempDir + '/wp-content/plugins']
+
+
 
         },
-        untar: {
-            wordPress: {
-                options: {
-                    mode: 'tgz'
-                },
-                files: {
-                    './deployments/wordpressSource': wordPressSourceTempDir + '/latest.tar.gz'
-                }
-            }
-        },
+
         shell: {
             updatePantheonEnvironments: {
                 command: 'cd bin && chmod +x terminus-pantheon.sh && ./terminus-pantheon.sh ' + sourceRepoBranch,
@@ -370,15 +355,7 @@ module.exports = function (grunt) {
 
                 }
             },
-            moveWordPressCoreUpOneLevel: {
-                command: 'cp -Rf ' + wordPressSourceTempDir + '/wordpress/* ./' + wordPressSourceTempDir + ' && rm -rf ' + wordPressSourceTempDir + '/wordpress/',
-                options: {
-                    stderr: false,
-                    execOptions: {
-                        cwd: '.'
-                    }
-                }
-            },
+
             processPantheonSourceRepo: {
                 options: {
                     stdout: false,
@@ -400,7 +377,7 @@ module.exports = function (grunt) {
                     }
                 },
                 command: [
-                    'rsync -lrv ' + wordPressSourceTempDir + '/* ' + finalWpEngineTempDir + '/',
+                    'mkdir ' + finalWpEngineTempDir + '/',
                     'rsync -lrv ' + sourceDir + sourceWpContentDirectory + '/* ' + finalWpEngineTempDir + '/wp-content/'
                 ].join('&&')
 
@@ -487,9 +464,8 @@ module.exports = function (grunt) {
     });
     grunt.loadNpmTasks('grunt-git');
     grunt.loadNpmTasks('grunt-merge-copy');
-    grunt.loadNpmTasks('grunt-curl');
     grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-untar');
+
     grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-composer');
     grunt.registerTask('cleanUp', [
@@ -500,13 +476,13 @@ module.exports = function (grunt) {
         'gitclone:consumePantheonRepo',
         'gitclone:consumeWpEngineRepo',
         'gitclone:consumeInterimPantheonRepo',
-        'gitclone:consumeInterimWpEngineRepo',
-        'curl:consumeWordPress'
+        'gitclone:consumeInterimWpEngineRepo'
+
 
     ]);
 
     grunt.registerTask('processConsumed', [
-        'processWordPressCore',
+
         'processSourceRepos',
         'processInterimRepos'
 
@@ -520,13 +496,7 @@ module.exports = function (grunt) {
     ]);
 
 
-    grunt.registerTask('processWordPressCore', [
-        'untar:wordPress',
-        'shell:moveWordPressCoreUpOneLevel',
-        'clean:killWpCoreContent',
-        'clean:wordPressTar'
 
-    ]);
 
     grunt.registerTask('processInterimPantheon', [
         'clean:cleanInterimPantheonKeepGitDirectory',
@@ -551,6 +521,7 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('processSourceRepos', [
+        'clean:pantheonWpContent',
         'shell:processPantheonSourceRepo',
         'shell:processWpEngineSourceRepo',
         'processInterimPantheon',

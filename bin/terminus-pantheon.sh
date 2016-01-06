@@ -6,13 +6,17 @@ if hash terminus 2>/dev/null; then
 
     if [ $1 = "master" ]; then
 
-        #only install it do not activate it it https://pantheon.io/docs/articles/wordpress/installing-redis-on-wordpress/#install-drop-in-plugin
+        #only install wp-redis do not activate it it https://pantheon.io/docs/articles/wordpress/installing-redis-on-wordpress/#install-drop-in-plugin
+
         terminus site set-connection-mode --mode=sftp --site=$PANTHEON_SITE_NAME
         terminus wp plugin install wp-redis --site=$PANTHEON_SITE_NAME --env=dev
-        terminus wp rewrite flush  --site=$PANTHEON_SITE_NAME --env=live
-        terminus site deploy --site=$PANTHEON_SITE_NAME --env=live --note="Updating"
+        terminus site code commit --site=$PANTHEON_SITE_NAME --env=dev --message='add wp-redis to codebase'
+        terminus site deploy --site=$PANTHEON_SITE_NAME --env=test --note="Updating"
+        terminus site deploy --site=$PANTHEON_SITE_NAME --env=live --note="Updating from test"
         terminus wp plugin deactivate wp-redis --site=$PANTHEON_SITE_NAME --env=live
+        terminus wp rewrite flush  --site=$PANTHEON_SITE_NAME --env=live
         terminus site set-connection-mode --mode=git --site=$PANTHEON_SITE_NAME
+
     else
         terminus site deploy --site=$PANTHEON_SITE_NAME --env=test --note="Updating"
     fi

@@ -1,63 +1,68 @@
 <?php
 
-// Remove category base
-add_filter( 'category_link', 'no_category_parents', 1000, 2 );
-function no_category_parents( $catlink, $category_id ) {
-	$category = &get_category( $category_id );
-	if ( is_wp_error( $category ) ) {
-		return $category;
-	}
-	$category_nicename = $category->slug;
-	( 'blog' === $category_nicename ) ? $category_preamble = 'category/' : $category_preamble = 'category/blog/';
+class BlogCategoryRedirect {
 
-	$catlink = trailingslashit( get_option( 'home' ) ) . $category_preamble . user_trailingslashit( $category_nicename, 'category' );
-
-	return $catlink;
-}
-
-// Add our custom category rewrite rules
-add_filter( 'category_rewrite_rules', 'no_category_parents_rewrite_rules' );
-function no_category_parents_rewrite_rules( $category_rewrite ) {
-	//print_r($category_rewrite); // For Debugging
-
-	$category_rewrite = array();
-	$categories       = get_categories( array( 'hide_empty' => false ) );
-	foreach ( $categories as $category ) {
-		$category_nicename                                                                        = $category->slug;
-		( 'blog' === $category_nicename ) ? $category_preamble = 'category/' : $category_preamble = 'category/blog/';
-
-		$category_rewrite[ $category_preamble . '(' . $category_nicename . ')/(?:feed/)?(feed|rdf|rss|rss2|atom)/?$' ] = 'index.php?category_name=$matches[1]&feed=$matches[2]';
-		$category_rewrite[ $category_preamble . '(' . $category_nicename . ')/page/?([0-9]{1,})/?$' ]                  = 'index.php?category_name=$matches[1]&paged=$matches[2]';
-		$category_rewrite[ $category_preamble . '(' . $category_nicename . ')/?$' ]                                    = 'index.php?category_name=$matches[1]';
-	}
-	// Redirect support from Old Category Base
-	global $wp_rewrite;
-	$old_base                            = $wp_rewrite->get_category_permastruct();
-	$old_base                            = str_replace( '%category%', '(.+)', $old_base );
-	$old_base                            = trim( $old_base, '/' );
-	$category_rewrite[ '(category)/' . $old_base . '$' ] = 'index.php?category_redirect=$matches[1]';
-
-	return $category_rewrite;
-}
-
-// Add 'category_redirect' query variable
-add_filter( 'query_vars', 'no_category_parents_query_vars' );
-function no_category_parents_query_vars( $public_query_vars ) {
-	$public_query_vars[] = 'category_redirect';
-
-	return $public_query_vars;
-}
-
-// Redirect if 'category_redirect' is set
-add_filter( 'request', 'no_category_parents_request' );
-function no_category_parents_request( $query_vars ) {
-	//print_r($query_vars); // For Debugging
-	if ( isset( $query_vars['category_redirect'] ) ) {
-		$catlink = trailingslashit( get_option( 'home' ) ) . user_trailingslashit( $query_vars['category_redirect'], 'category' );
-		status_header( 301 );
-		header( "Location: $catlink" );
-		exit();
+	public static function init() {
+		self::attach_hooks();
 	}
 
-	return $query_vars;
+	public static function attach_hooks () {
+		add_filter( 'category_link', 'no_category_parents', 1000, 2 );
+		add_filter( 'category_rewrite_rules', 'no_category_parents_rewrite_rules' );
+		add_filter( 'query_vars', 'no_category_parents_query_vars' );
+		add_filter( 'request', 'no_category_parents_request' );
+	}
+
+	// Remove category base
+	public function no_category_parents( $_, $category_id ) {
+		$category = &get_category( $category_id );
+		if ( is_wp_error( $category ) ) :
+			return $category;
+		endif;
+
+		$category_nicename = $category->slug;
+		                                                     e
+		$catlink = trailingslashit( get_option( 'home' ) ) . 'blog/category/' . user_trailingslashit( $category_nicename, 'category' );
+
+		return $catlink;
+	}
+
+	// Add our custom category rewrite rules
+	public function no_category_parents_rewrite_rules() {
+		$category_rewrite = array();
+		$categories       = get_categories( array( 'hide_empty' => false ) );
+		foreach ( $categories as $category ) {
+			$category_nicename                                                                        = $category->slug;
+
+			$category_rewrite[ 'blog\/category(\/' . $category_nicename . ')\/(?:feed/)?(feed|rdf|rss|rss2|atom)\/?$' ] = 'index.php?category_name=$matches[1]&feed=$matches[2]';
+			$category_rewrite[ 'blog\/category(\/' . $category_nicename . ')\/page\/?([0-9]{1,})\/?$' ]                  = 'index.php?category_name=$matches[1]&paged=$matches[2]';
+			$category_rewrite[ 'blog\/category(\/' . $category_nicename . ')\/?$' ]                                    = 'index.php?category_name=$matches[1]';
+		}
+		// Redirect support from Old Category Base
+		$category_rewrite[ 'category\/blog\/(.+)$' ] = 'index.php?category_redirect=blog/category/$matches[1]';
+
+		return $category_rewrite;
+	}
+
+	// Add 'category_redirect' query variable
+	public function no_category_parents_query_vars( $public_query_vars ) {
+		$public_query_vars[] = 'category_redirect';
+
+		return $public_query_vars;
+	}
+
+	// Redirect if 'category_redirect' is set
+	public function no_category_parents_request( $query_vars ) {
+
+		if ( isset( $query_vars['category_redirect'] ) ) {
+			$catlink = trailingslashit( get_option( 'home' ) ) . user_trailingslashit( $query_vars['category_redirect'], 'category');
+			status_header( 301 );
+			header( "Location: $catlink" );
+			exit();
+		}
+
+		return $query_vars;
+	}
 }
+
+BlogCategoryRedirect::init();

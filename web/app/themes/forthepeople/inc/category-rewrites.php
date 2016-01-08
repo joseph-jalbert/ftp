@@ -7,13 +7,13 @@ class BlogCategoryRedirect {
 	}
 
 	public static function attach_hooks () {
-		add_filter( 'category_link', array( __CLASS__, 'no_category_parents' ), 1000, 2 );
-		add_filter( 'category_rewrite_rules', array( __CLASS__, 'update_category_links') );
+		add_filter( 'category_link', array( __CLASS__, 'update_category_links' ), 1000, 2 );
+		add_filter( 'category_rewrite_rules', array( __CLASS__, 'no_category_parents_rewrite_rules') );
 		add_filter( 'query_vars', array( __CLASS__, 'no_category_parents_query_vars' ) );
 		add_filter( 'request', array( __CLASS__, 'no_category_parents_request' ) );
 	}
 
-	// Set the desired URL
+	// Remove category base
 	public function update_category_links( $catlink, $category_id ) {
 		$category = &get_category( $category_id );
 		if ( is_wp_error( $category ) ) :

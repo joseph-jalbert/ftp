@@ -187,7 +187,7 @@ function forthepeople_styles() {
     wp_enqueue_style( 'circliful', get_template_directory_uri() . '/assets/media/interactive/diabetes/css/jquery.circliful.css');
   }
 }
-add_action( 'wp_head', 'forthepeople_styles' );
+	add_action( 'wp_enqueue_scripts', 'forthepeople_styles' );
 /**
  * Enqueue scripts
  */

@@ -36,7 +36,7 @@ class Blog_Category_Redirect {
 		$category_rewrite = array();
 		$categories       = get_categories( array( 'hide_empty' => false ) );
 		foreach ( $categories as $category ) {
-			$category_nicename                                                                        = $category->slug;
+			$category_nicename                                                                        = preg_quote( $category->slug );
 
 			$category_rewrite[ 'blog\/category(\/' . $category_nicename . ')\/(?:feed/)?(feed|rdf|rss|rss2|atom)\/?$' ] = 'index.php?category_name=$matches[1]&feed=$matches[2]';
 			$category_rewrite[ 'blog\/category(\/' . $category_nicename . ')\/page\/?([0-9]{1,})\/?$' ]                  = 'index.php?category_name=$matches[1]&paged=$matches[2]';

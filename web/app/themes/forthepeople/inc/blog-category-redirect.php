@@ -1,6 +1,6 @@
 <?php
 
-class BlogCategoryRedirect {
+class Blog_Category_Redirect {
 
 	public static function init() {
 		self::attach_hooks();
@@ -69,4 +69,4 @@ class BlogCategoryRedirect {
 	}
 }
 
-BlogCategoryRedirect::init();
+Blog_Category_Redirect::init();

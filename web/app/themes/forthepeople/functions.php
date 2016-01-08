@@ -1507,4 +1507,4 @@ function insert_cta_after_paragraph( $insertion,$paragraph_id, $content ) {
 /**
  * Include filters for category rewrites.
  */
-require get_template_directory() . '/inc/category-rewrites.php';
+require get_template_directory() . '/inc/blog-category-redirect.php';

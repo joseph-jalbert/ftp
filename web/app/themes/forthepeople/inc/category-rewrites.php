@@ -8,13 +8,13 @@ class BlogCategoryRedirect {
 
 	public static function attach_hooks () {
 		add_filter( 'category_link', array( __CLASS__, 'no_category_parents' ), 1000, 2 );
-		add_filter( 'category_rewrite_rules', array( __CLASS__, 'no_category_parents_rewrite_rules') );
+		add_filter( 'category_rewrite_rules', array( __CLASS__, 'update_category_links') );
 		add_filter( 'query_vars', array( __CLASS__, 'no_category_parents_query_vars' ) );
 		add_filter( 'request', array( __CLASS__, 'no_category_parents_request' ) );
 	}
 
-	// Remove category base
-	public function no_category_parents( $catlink, $category_id ) {
+	// Set the desired URL
+	public function update_category_links( $catlink, $category_id ) {
 		$category = &get_category( $category_id );
 		if ( is_wp_error( $category ) ) :
 			return $category;
@@ -22,7 +22,11 @@ class BlogCategoryRedirect {
 
 		$category_nicename = $category->slug;
 
-		$catlink = trailingslashit( get_option( 'home' ) ) . 'blog/category/' . user_trailingslashit( $category_nicename, 'category' );
+		if ( 0 === $category->parent ) {
+			$catlink = trailingslashit( get_option( 'home' ) ) . user_trailingslashit( $category_nicename, 'category' );
+		} else {
+			$catlink = trailingslashit( get_option( 'home' ) ) . 'blog/category/' . user_trailingslashit( $category_nicename, 'category' );
+		}
 
 		return $catlink;
 	}

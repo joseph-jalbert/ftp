@@ -11,7 +11,6 @@ class Location_Taxonomy {
 	const POST_TYPE = Local_News::POST_TYPE;
 
 
-
 	public static function init() {
 
 		self::attach_hooks();
@@ -21,14 +20,14 @@ class Location_Taxonomy {
 	public static function attach_hooks() {
 
 		add_action( 'init', array( __CLASS__, 'register_taxonomies' ) );
-		add_action( 'init', array( __CLASS__, 'taxonomy_rewrite_rule' ) );
+//		add_action( 'init', array( __CLASS__, 'taxonomy_rewrite_rule' ) );
+		add_action( 'init', array( __CLASS__, 'add_rewrite_rules' ) );
 
 		add_action( 'create_term', array( __CLASS__, 'flush_location_option' ), 10, 3 );
 		add_action( 'edit_term', array( __CLASS__, 'flush_location_option' ), 10, 3 );
 		add_action( 'delete_term', array( __CLASS__, 'flush_location_option' ), 10, 3 );
 
 		add_action( 'save_post', array( __CLASS__, 'flush_location_post_id_option' ), 10, 3 );
-
 
 	}
 
@@ -234,6 +233,13 @@ class Location_Taxonomy {
 
 		return $term_link;
 
+	}
+
+	public static function add_rewrite_rules() {
+
+		add_rewrite_rule( '^([^\/]*)\/(blog)\/(?:feed\/)?(feed|rdf|rss|rss2|atom)\/?$', 'index.php?' . preg_quote( self::LOCATION_TAXONOMY ) . '=$matches[1]&feed=$matches[3]', 'top' );
+		add_rewrite_rule( '^([^\/]*)\/(blog)\/page\/?([0-9]{1,})\/?$', 'index.php?' . preg_quote( self::LOCATION_TAXONOMY ) . '=$matches[1]&paged=$matches[3]', 'top' );
+		add_rewrite_rule( '^([^\/]*)\/blog\/?$', 'index.php?' . preg_quote( self::LOCATION_TAXONOMY ) . '=$matches[1]', 'top' );
 	}
 
 

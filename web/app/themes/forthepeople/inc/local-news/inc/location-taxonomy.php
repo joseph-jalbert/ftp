@@ -20,17 +20,22 @@ class Location_Taxonomy {
 	public static function attach_hooks() {
 
 		add_action( 'init', array( __CLASS__, 'register_taxonomies' ) );
-//		add_action( 'init', array( __CLASS__, 'taxonomy_rewrite_rule' ) );
 		add_action( 'init', array( __CLASS__, 'add_rewrite_rules' ) );
-
-		add_action( 'create_term', array( __CLASS__, 'flush_location_option' ), 10, 3 );
-		add_action( 'edit_term', array( __CLASS__, 'flush_location_option' ), 10, 3 );
-		add_action( 'delete_term', array( __CLASS__, 'flush_location_option' ), 10, 3 );
-
-		add_action( 'save_post', array( __CLASS__, 'flush_location_post_id_option' ), 10, 3 );
+		add_filter( 'term_link', array( __CLASS__, 'filter_term_link' ), 10, 3 );
 
 	}
 
+	public static function filter_term_link( $url, $term, $taxonomy ) {
+
+		if ( self::LOCATION_TAXONOMY === $taxonomy ) {
+
+			$url = esc_url( home_url( $term->slug . '/blog/' ) );
+
+		}
+
+		return $url;
+
+	}
 
 	public static function register_taxonomies() {
 		self::register_location_taxonomy();
@@ -97,143 +102,6 @@ class Location_Taxonomy {
 		register_taxonomy( self::CATEGORY_TAXONOMY, array( self::POST_TYPE ), $args );
 	}
 
-
-	public static function taxonomy_rewrite_rule() {
-
-		$terms = self::get_location_terms();
-		if ( ! is_array( $terms ) ) {
-			return;
-		}
-		foreach ( $terms as $term ) {
-			add_rewrite_rule( '^' . preg_quote( $term->slug ) . '/blog/?', 'index.php?office_location=' . preg_quote( $term->slug ), 'top' );
-		}
-
-	}
-
-	public static function get_location_terms() {
-
-		$location_term_option_names = get_option( self::LOCATION_TERM_OPTION_NAME );
-		if ( ! $location_term_option_names ) {
-			$location_term_option_names = self::build_location_term_option();
-		}
-
-		return $location_term_option_names;
-
-	}
-
-	public static function build_location_term_option() {
-
-		self::kill_location_term_option();
-		$terms = get_terms( self::LOCATION_TAXONOMY, array( 'hide_empty' => false ) );
-		$slugs = array();
-		foreach ( $terms as $term ) {
-			$slugs[] = $term->slug;
-		}
-
-		$location_term_option_names = update_option( self::LOCATION_TERM_OPTION_NAME, $slugs );
-
-		return $location_term_option_names;
-	}
-
-	public static function kill_location_term_option() {
-
-		delete_option( self::LOCATION_TERM_OPTION_NAME );
-
-	}
-
-	public static function flush_location_option( $_, $_, $taxonomy ) {
-		if ( self::LOCATION_TAXONOMY === $taxonomy ) {
-			self::build_location_term_option();
-			flush_rewrite_rules();
-		}
-
-	}
-
-	public static function get_location_post_ids() {
-
-		$location_post_ids_option_names = get_option( self::LOCATION_POST_ID_OPTION_NAME );
-		if ( ! $location_post_ids_option_names ) {
-			$location_post_ids_option_names = self::build_location_post_id_option();
-		}
-
-		return $location_post_ids_option_names;
-
-	}
-
-	public static function build_location_post_id_option() {
-
-		self::kill_location_post_id_option();
-		$post_ids = array();
-		$term_ids = get_terms(
-			self::LOCATION_TAXONOMY,
-			array(
-				'fields' => 'ids'
-			)
-		);
-		if ( $term_ids
-		     && ! is_wp_error( $term_ids )
-		) {
-			$args  = array(
-				'tax_query' => array(
-					array(
-						'taxonomy' => self::LOCATION_TAXONOMY,
-						'terms'    => $term_ids,
-					)
-				),
-			);
-			$posts = new WP_Query( $args );
-			if ( $posts->have_posts() ) {
-				while ( $posts->have_posts() ) {
-					$posts->the_post();
-					$post_ids[] = get_the_ID();
-
-
-				}
-				wp_reset_postdata();
-
-			}
-
-		}
-		$location_post_ids_option_names = update_option( self::LOCATION_POST_ID_OPTION_NAME, $post_ids );
-
-		return $location_post_ids_option_names;
-
-
-	}
-
-	public static function kill_location_post_id_option() {
-
-		delete_option( self::LOCATION_POST_ID_OPTION_NAME );
-
-	}
-
-	public static function flush_location_post_id_option( $post_id, $post, $update ) {
-
-		if ( $post->post_type === self::POST_TYPE && ( $update === true || wp_get_post_terms( $post_id, self::LOCATION_TAXONOMY ) ) ) {
-			self::build_location_post_id_option();
-		}
-
-	}
-
-
-	public static function filter_location_term_link( $term_link, $term, $taxonomy ) {
-
-		if ( self::LOCATION_TAXONOMY === $taxonomy ) {
-
-			$term_link = str_replace( array( '/' . self::LOCATION_TAXONOMY_SLUG . '/', '/' . $term->slug . '/' ), array(
-				'/%SLUG%/',
-				'/%TERM%/'
-			), $term_link );
-			$term_link = str_replace( array( '%SLUG%', '%TERM%' ), array(
-				$term->slug,
-				self::LOCATION_TAXONOMY_SLUG
-			), $term_link );
-
-		}
-
-		return $term_link;
-
-	}
 
 	public static function add_rewrite_rules() {
 

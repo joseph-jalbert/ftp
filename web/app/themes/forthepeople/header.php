@@ -162,8 +162,24 @@ $menuslug = 'main-navigation';
 	jQuery("#topNav > li.marker").prepend("<div class='nav-label'>National</div>");
 	</script>
 <?php } ?>
-
-
-<?php if(!is_front_page() && !is_page_template('all-class-actions.php') && !is_page_template('class-action-cats.php') && !is_page_template('business-litigation.php') && !is_page_template('securities-litigation.php') && !is_page_template('all-office-locations.php') && !is_page_template('contact-page.php') && !is_page('featured-news') && !is_singular('attorney') && !is_page_template('diabetes-page.php') && !is_page_template('office-location.php') && !is_page_template('mesothelioma.php') && !is_page_template('empty-page.php') && !is_page_template('securities-contact-page.php') && !is_page_template('tampa-alternate.php') && !is_page_template('empty-page-title.php')) {
-get_template_part( 'template-parts/breadcrumbs' );
+ 
+<?php if(!is_front_page() &&
+         !is_page_template(array(
+                        'all-class-actions.php',
+                        'class-action-cats.php', 
+                        'business-litigation.php',
+                        'securities-litigation.php',
+                        'all-office-locations.php',
+                        'contact-page.php',
+                        'diabetes-page.php',
+                        'office-location.php',
+                        'mesothelioma.php',
+                        'empty-page.php',
+                        'securities-contact-page.php',
+                        'tampa-alternate.php',
+                        'empty-page-title.php')) && 
+          !is_singular('attorney') &&
+          !in_category( 'featured-news', $_post ) &&
+          !is_page('featured-news')) {     
+    get_template_part( 'template-parts/breadcrumbs' );
 } ?>

@@ -15,13 +15,13 @@ module.exports = function (grunt) {
         interimPantheonRepoBranch = sourceRepoBranch,
         interimPantheonTempDir = './deployments/interimPantheonRepo',
         wpEngineEnvironment = 'staging',
-        wpEngineRepo = grunt.option('wpEngineRepo') || 'git@git.wpengine.com:production/forthepeopledr.git',
+        wpEngineRepo = grunt.option('wpEngineRepo') || 'git@git.wpengine.com:production/forthepeople.git',
         wpEngineRepoBranch = 'master',
         wpEngineTempDir = './deployments/wpEngineRepo',
         interimWpEngineRepo = grunt.option('interimWpEngineRepo') || 'git@github.com:Morgan-and-Morgan/forthepeople-interim-wpengine.git',
         interimWpEngineRepoBranch = sourceRepoBranch,
         interimWpEngineTempDir = './deployments/interimWpEngineRepo',
-        wordPressSourceTempDir = './deployments/wordpressSource',
+
         finalPantheonTempDir = './deployments/final-pantheon',
         finalWpEngineTempDir = './deployments/final-wpengine';
 
@@ -255,36 +255,21 @@ module.exports = function (grunt) {
 
             }
         },
-        curl: {
-            consumeWordPress: {
-                dest: wordPressSourceTempDir + '/latest.tar.gz',
-                src: 'https://wordpress.org/latest.tar.gz'
-            }
 
-
-        },
         clean: {
             everything: ['deployments'],
-            wordPressTar: [wordPressSourceTempDir + '/latest.tar.gz'],
             cleanPantheonContent: [pantheonTempDir + '/wp-content/plugins', pantheonTempDir + '/wp-content/themes'],
             cleanWpEngineContent: [wpEngineTempDir + '/wp-content/plugins', wpEngineTempDir + '/wp-content/themes'],
             cleanInterimPantheonKeepGitDirectory: [interimPantheonTempDir + '/*', interimPantheonTempDir + '/.gitignore', '!' + interimPantheonTempDir + '/.git/'],
             cleanInterimWpEngineKeepGitDirectory: [interimWpEngineTempDir + '/*', interimWpEngineTempDir + '/.gitignore', '!' + interimWpEngineTempDir + '/.git/'],
             cleanPantheonKeepGitDirectory: [pantheonTempDir + '/*', pantheonTempDir + '/.gitignore', '!' + pantheonTempDir + '/.git/'],
             cleanWpEngineKeepGitDirectory: [wpEngineTempDir + '/*', wpEngineTempDir + '/.gitignore', '!' + wpEngineTempDir + '/.git/'],
-            killWpCoreContent: [wordPressSourceTempDir + '/wp-content', wordPressSourceTempDir + '/wp-config-sample.php', wordPressSourceTempDir + '/wp-content/plugins/hello.php']
+            pantheonWpContent: [pantheonTempDir + '/wp-content/plugins']
+
+
 
         },
-        untar: {
-            wordPress: {
-                options: {
-                    mode: 'tgz'
-                },
-                files: {
-                    './deployments/wordpressSource': wordPressSourceTempDir + '/latest.tar.gz'
-                }
-            }
-        },
+
         shell: {
             updatePantheonEnvironments: {
                 command: 'cd bin && chmod +x terminus-pantheon.sh && ./terminus-pantheon.sh ' + sourceRepoBranch,
@@ -370,15 +355,7 @@ module.exports = function (grunt) {
 
                 }
             },
-            moveWordPressCoreUpOneLevel: {
-                command: 'cp -Rf ' + wordPressSourceTempDir + '/wordpress/* ./' + wordPressSourceTempDir + ' && rm -rf ' + wordPressSourceTempDir + '/wordpress/',
-                options: {
-                    stderr: false,
-                    execOptions: {
-                        cwd: '.'
-                    }
-                }
-            },
+
             processPantheonSourceRepo: {
                 options: {
                     stdout: false,
@@ -387,7 +364,6 @@ module.exports = function (grunt) {
                     }
                 },
                 command: [
-                    'rsync -lrv ' + wordPressSourceTempDir + '/* ' + finalPantheonTempDir + '/',
                     'rsync -lrv ' + pantheonTempDir + '/* ' + finalPantheonTempDir + '/',
                     'rsync -lrv ' + sourceDir + sourceWpContentDirectory + '/* ' + finalPantheonTempDir + '/wp-content/'
                 ].join('&&')
@@ -401,7 +377,7 @@ module.exports = function (grunt) {
                     }
                 },
                 command: [
-                    'rsync -lrv ' + wordPressSourceTempDir + '/* ' + finalWpEngineTempDir + '/',
+                    'mkdir ' + finalWpEngineTempDir + '/',
                     'rsync -lrv ' + sourceDir + sourceWpContentDirectory + '/* ' + finalWpEngineTempDir + '/wp-content/'
                 ].join('&&')
 
@@ -471,7 +447,10 @@ module.exports = function (grunt) {
                 command: [
                     " > " + finalPantheonTempDir + "/wp-content/object-cache.php",
                     "touch " + finalPantheonTempDir + "/wp-content/object-cache.php",
-                    "echo \"<?php if ( file_exists( WP_CONTENT_DIR . '/plugins/wp-redis/object-cache.php')) { require_once WP_CONTENT_DIR . '/plugins/wp-redis/object-cache.php';}\" >> " + finalPantheonTempDir + "/wp-content/object-cache.php"
+                    "echo \"<?php if ( file_exists( WP_CONTENT_DIR . '/plugins/wp-redis/object-cache.php')) { require_once WP_CONTENT_DIR . '/plugins/wp-redis/object-cache.php';}\" >> " + finalPantheonTempDir + "/wp-content/object-cache.php",
+                    " > " + interimPantheonTempDir + "/wp-content/object-cache.php",
+                    "touch " + interimPantheonTempDir + "/wp-content/object-cache.php",
+                    "echo \"<?php if ( file_exists( WP_CONTENT_DIR . '/plugins/wp-redis/object-cache.php')) { require_once WP_CONTENT_DIR . '/plugins/wp-redis/object-cache.php';}\" >> " + interimPantheonTempDir + "/wp-content/object-cache.php"
 
                 ].join(' && ')
 
@@ -485,9 +464,8 @@ module.exports = function (grunt) {
     });
     grunt.loadNpmTasks('grunt-git');
     grunt.loadNpmTasks('grunt-merge-copy');
-    grunt.loadNpmTasks('grunt-curl');
     grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-untar');
+
     grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-composer');
     grunt.registerTask('cleanUp', [
@@ -496,15 +474,15 @@ module.exports = function (grunt) {
     grunt.registerTask('consumeSources', [
         'gitclone:consumeSourceRepo',
         'gitclone:consumePantheonRepo',
-        //'gitclone:consumeWpEngineRepo',
+        'gitclone:consumeWpEngineRepo',
         'gitclone:consumeInterimPantheonRepo',
-        //'gitclone:consumeInterimWpEngineRepo',
-        'curl:consumeWordPress'
+        'gitclone:consumeInterimWpEngineRepo'
+
 
     ]);
 
     grunt.registerTask('processConsumed', [
-        'processWordPressCore',
+
         'processSourceRepos',
         'processInterimRepos'
 
@@ -513,23 +491,18 @@ module.exports = function (grunt) {
 
     grunt.registerTask('processInterimRepos', [
         'clean:cleanPantheonContent',
-        //'clean:cleanWpEngineContent'
+        'clean:cleanWpEngineContent'
 
     ]);
 
 
-    grunt.registerTask('processWordPressCore', [
-        'untar:wordPress',
-        'shell:moveWordPressCoreUpOneLevel',
-        'clean:killWpCoreContent',
-        'clean:wordPressTar'
 
-    ]);
 
     grunt.registerTask('processInterimPantheon', [
         'clean:cleanInterimPantheonKeepGitDirectory',
         'shell:moveFinalIntoInterimPantheon',
         'shell:cleanIndexInterimPantheon',
+        'shell:addObjectCacheToPantheon',
         'gitadd:addAllToInterimPantheon',
         'gitcommit:commitReleaseInterimPantheon',
         'gitreset:resetInterimPantheonRepo',
@@ -538,33 +511,33 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('processInterimWpEngine', [
-        //'clean:cleanInterimWpEngineKeepGitDirectory',
-        //'shell:moveFinalIntoInterimWpEngine',
-        //'gitadd:addAllToInterimWpEngine',
-        //'gitcommit:commitReleaseInterimWpEngine',
-        //'gitreset:resetInterimWpEngineRepo',
-        //'gittag:tagReleaseInterimWpEngine',
-        //'gitpush:pushInterimWpEngine'
+        'clean:cleanInterimWpEngineKeepGitDirectory',
+        'shell:moveFinalIntoInterimWpEngine',
+        'gitadd:addAllToInterimWpEngine',
+        'gitcommit:commitReleaseInterimWpEngine',
+        'gitreset:resetInterimWpEngineRepo',
+        'gittag:tagReleaseInterimWpEngine',
+        'gitpush:pushInterimWpEngine'
     ]);
 
     grunt.registerTask('processSourceRepos', [
+        'clean:pantheonWpContent',
         'shell:processPantheonSourceRepo',
-        //'shell:processWpEngineSourceRepo',
+        'shell:processWpEngineSourceRepo',
         'processInterimPantheon',
-        //'processInterimWpEngine'
+        'processInterimWpEngine'
 
     ]);
 
     grunt.registerTask('deployCode', [
         'clean:cleanPantheonKeepGitDirectory',
         'shell:moveFinalIntoPantheon',
-        'shell:addObjectCacheToPantheon',
         'gittag:tagReleasePantheon', // this is here so we don't tag the release on a rollback
         'deployPantheon',
-        //'clean:cleanWpEngineKeepGitDirectory',
-        //'shell:moveFinalIntoWpEngine',
-        //'killWpEngineContent',
-        //'deployWpEngine'
+        'clean:cleanWpEngineKeepGitDirectory',
+        'shell:moveFinalIntoWpEngine',
+        'killWpEngineContent',
+        'deployWpEngine'
 
 
     ]);
@@ -593,16 +566,16 @@ module.exports = function (grunt) {
         'cleanUp',
         'gitclone:consumeInterimPantheonRepo',
         'gitclone:consumePantheonRepo',
-        //'gitclone:consumeWpEngineRepo',
-        //'gitclone:consumeInterimWpEngineRepo',
+        'gitclone:consumeWpEngineRepo',
+        'gitclone:consumeInterimWpEngineRepo',
         'gitreset:resetInterimPantheonRepo',
-        //'gitreset:resetInterimWpEngineRepo',
+        'gitreset:resetInterimWpEngineRepo',
         'clean:cleanPantheonKeepGitDirectory',
-        //'clean:cleanWpEngineKeepGitDirectory',
+        'clean:cleanWpEngineKeepGitDirectory',
         'shell:rsyncRollback',
         'deployPantheon',
-        //'killWpEngineContent',
-        //'deployWpEngine'
+        'killWpEngineContent',
+        'deployWpEngine'
 
     ]);
 
@@ -615,9 +588,9 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('deployWpEngine', [
-        //'gitadd:addAllToWpEngine',
-        //'gitcommit:commitReleaseWpEngine',
-        //'gitpush:forcePushWpEngine'
+        'gitadd:addAllToWpEngine',
+        'gitcommit:commitReleaseWpEngine',
+        'gitpush:forcePushWpEngine'
 
     ]);
 

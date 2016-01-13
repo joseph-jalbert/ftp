@@ -17,6 +17,8 @@ web/app/advanced-cache.php
 web/app/wp-cache-config.php
 web/app/cache/*
 web/app/cache/supercache/*
+web/app/plugins/debug-bar/*
+web/app/plugins/fg-debug-bar-rewrite-rules/*
 
 # wpengine specific
 web/.smushit-status

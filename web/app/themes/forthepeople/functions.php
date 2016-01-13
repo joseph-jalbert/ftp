@@ -188,7 +188,7 @@ function forthepeople_styles() {
     wp_enqueue_style( 'circliful', get_template_directory_uri() . '/assets/media/interactive/diabetes/css/jquery.circliful.css');
   }
 }
-add_action( 'wp_head', 'forthepeople_styles' );
+	add_action( 'wp_enqueue_scripts', 'forthepeople_styles' );
 /**
  * Enqueue scripts
  */
@@ -1337,11 +1337,12 @@ function show_contact_name() {
 add_shortcode('contact_attorney', 'show_contact_name');
 
 function exclude_category( $query ) {
-    if ( $query->is_main_query() ) {
+    if ( !is_admin() && $query->is_main_query() ) {
         $query->set( 'cat', '-120' );
 		$query->set( 'ignore_sticky_posts', '1' );
     }
 }
+
 add_action( 'pre_get_posts', 'exclude_category' );
 
 /**
@@ -1503,3 +1504,8 @@ function insert_cta_after_paragraph( $insertion,$paragraph_id, $content ) {
 	}
 
 }
+
+/**
+ * Include filters for category rewrites.
+ */
+require get_template_directory() . '/inc/blog-category-redirect.php';

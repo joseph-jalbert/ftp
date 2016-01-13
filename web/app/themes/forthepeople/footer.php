@@ -171,8 +171,10 @@ jQuery(document).ready(function($) {
 </script>
 <?php } ?>
 
-<script type="text/javascript">var switchTo5x=true;</script> 
-<script type="text/javascript">stLight.options({publisher: "b8866a21-e797-44ce-a731-27ba7a59e669", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script> 
+<script type="text/javascript">var switchTo5x=true;</script>
+<?php if ( is_singular( array( 'post', 'classactionlawyers' ) ) ) { ?>
+    <script type="text/javascript">stLight.options({publisher: "b8866a21-e797-44ce-a731-27ba7a59e669", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+<?php } ?>
 <script type="text/javascript">jQuery('.tt').tooltip();</script>
 <!--[if lte IE 8]> </div> <![endif]-->
 </body></html>

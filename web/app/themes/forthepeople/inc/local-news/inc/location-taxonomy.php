@@ -105,9 +105,9 @@ class Location_Taxonomy {
 
 	public static function add_rewrite_rules() {
 
-		add_rewrite_rule( '^([^\/]*)\/(blog)\/(?:feed\/)?(feed|rdf|rss|rss2|atom)\/?$', 'index.php?' . preg_quote( self::LOCATION_TAXONOMY ) . '=$matches[1]&feed=$matches[3]', 'top' );
-		add_rewrite_rule( '^([^\/]*)\/(blog)\/page\/?([0-9]{1,})\/?$', 'index.php?' . preg_quote( self::LOCATION_TAXONOMY ) . '=$matches[1]&paged=$matches[3]', 'top' );
-		add_rewrite_rule( '^([^\/]*)\/blog\/?$', 'index.php?' . preg_quote( self::LOCATION_TAXONOMY ) . '=$matches[1]', 'top' );
+//		add_rewrite_rule( '^([^\/]*)\/(blog)\/(?:feed\/)?(feed|rdf|rss|rss2|atom)\/?$', 'index.php?' . preg_quote( self::LOCATION_TAXONOMY ) . '=$matches[1]&feed=$matches[3]', 'top' );
+//		add_rewrite_rule( '^([^\/]*)\/(blog)\/page\/?([0-9]{1,})\/?$', 'index.php?' . preg_quote( self::LOCATION_TAXONOMY ) . '=$matches[1]&paged=$matches[3]', 'top' );
+//		add_rewrite_rule( '^([^\/]*)\/blog\/?$', 'index.php?' . preg_quote( self::LOCATION_TAXONOMY ) . '=$matches[1]', 'top' );
 	}
 
 

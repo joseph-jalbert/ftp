@@ -54,7 +54,7 @@ class Local_News {
 	}
 
 	public static function add_rewrite_rule() {
-		add_rewrite_rule( '^([^/]*)/blog/([^/]*)?$', 'index.php?post_type=' . preg_quote( Local_News::POST_TYPE ) . '&location_taxonomy=$matches[1]&name=$matches[2]', 'top' );
+//		add_rewrite_rule( '^([^/]*)/blog/([^/]*)?$', 'index.php?post_type=' . preg_quote( Local_News::POST_TYPE ) . '&location_taxonomy=$matches[1]&name=$matches[2]', 'top' );
 	}
 
 	public static function post_type_permalink( $permalink, $post ) {

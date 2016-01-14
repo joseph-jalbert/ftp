@@ -27,7 +27,7 @@
         	<?php the_field('jump_box'); ?>
         </div>
         <?php } ?>
-    <?php if(is_singular('post')) { ?>
+    <?php if( is_singular('post') || is_singular(Local_News::POST_TYPE)) { ?>
 	<div class="blog-post post-page">	
     <?php if (has_post_thumbnail()) { ?>
     <div class="title img">
@@ -43,11 +43,27 @@
 						<ul class="unstyled">
 							<li><i class="icon-calendar"></i> <?php the_time(' M j, Y') ?></li>
 		  					<li><i class="icon-user"></i> <?php the_author(); ?> </li>
-          					<?php foreach((get_the_category()) as $cat) { ?>
-		  					<?php if (!($cat->cat_name=='Blog')) echo '<li><i class="icon-folder-open"></i> ' . $cat->cat_name . ' '; } ?></li>
-          					<?php if(get_the_tags()) { ?>
-          					<li><i class="icon-tags pull-left"></i><p class="pull-left"><?php the_tags('', ', ', ''); ?></p></li>
-          					<?php } ?>
+							<?php
+
+							if ( Local_News::POST_TYPE === get_post_type() ) :
+								$terms = wp_get_post_terms( get_the_ID(), Location_Taxonomy::CATEGORY_TAXONOMY );
+							else :
+								$terms = wp_get_post_terms( get_the_ID(), 'category' );
+							endif;
+
+							if ( ! is_wp_error( $terms ) && is_array( $terms ) && $terms ) :
+								foreach ( $terms as $term ) :
+									if ( 'post' === get_post_type() && 'blog' === $term->slug ) :
+										continue;
+									endif;
+									?>
+									<li><i class="icon-folder-open"></i> <?php esc_html_e( $term->name ); ?>
+									</li><?php
+
+								endforeach;
+							endif;
+
+							?>
 						</ul>
 		</div>
         </div>

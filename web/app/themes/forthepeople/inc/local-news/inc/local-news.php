@@ -4,7 +4,6 @@
 class Local_News {
 
 	const POST_TYPE = 'local_news';
-	const PERMALINK_OPTION = 'local_news_permalinks';
 	const LOCATION_OPTION = 'local_news_location';
 
 	/**
@@ -21,7 +20,7 @@ class Local_News {
 		add_action( 'init', array( __CLASS__, 'register_post_type' ) );
 		add_action( 'init', array( __CLASS__, 'add_rewrite_rule' ) );
 		add_filter( 'post_type_link', array( __CLASS__, 'post_type_permalink' ), 10, 2 );
-		add_action( 'save_post', array( __CLASS__, 'set_permalink' ), 10, 2 );
+		add_action( 'save_post', array( __CLASS__, 'save_meta_action' ), 10, 2 );
 		add_filter( 'wpseo_breadcrumb_links', array( __CLASS__, 'update_breadcrumbs' ) );
 
 	}
@@ -65,19 +64,19 @@ class Local_News {
 
 		if ( $post->post_type == Local_News::POST_TYPE ) {
 
-			$permalinks = self::get_option( 'permalink' );
-			if ( ! isset( $permalinks [ $post->ID ] ) ) {
-				return self::update_permalink( $post->ID, $permalink );
-			}
+			$terms     = get_the_terms( $post->ID, Location_Taxonomy::LOCATION_TAXONOMY );
+			$term      = $terms[0]->slug;
+			$permalink = str_replace( 'local_news/', $term . '/blog/', $permalink );
 
-			return $permalinks[ $post->ID ];
 
 		}
+
+		return $permalink;
 
 
 	}
 
-	public static function set_permalink( $post_id, $post ) {
+	public static function save_meta_action( $post_id, $post ) {
 
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 			return;
@@ -98,7 +97,6 @@ class Local_News {
 
 		if ( $post->post_type === self::POST_TYPE ) {
 
-			self::update_permalink( $post_id );
 			self::update_locations( $post_id );
 
 		}
@@ -106,24 +104,6 @@ class Local_News {
 
 	}
 
-	public static function update_permalink( $post_id, $permalink = null ) {
-
-		if ( ! $permalink ) {
-			$permalink = get_permalink( $post_id );
-		}
-		$terms                        = get_the_terms( $post_id, Location_Taxonomy::LOCATION_TAXONOMY );
-		$term                         = $terms[0]->slug;
-		$permalink                    = str_replace( 'local_news/', $term . '/blog/', $permalink );
-		$permalink_option             = self::get_option( 'permalink' );
-		$permalink_option[ $post_id ] = $permalink;
-		$permalink_update             = self::update_option( 'permalink', $permalink_option );
-		if ( ! $permalink_update ) {
-			return false;
-		}
-
-		return $permalink;
-
-	}
 
 	public static function update_locations( $post_id ) {
 
@@ -144,9 +124,6 @@ class Local_News {
 	public static function get_option_name( $which ) {
 		$option_name = false;
 		switch ( $which ):
-			case 'permalink':
-				$option_name = self::PERMALINK_OPTION;
-				break;
 			case 'location':
 				$option_name = self::LOCATION_OPTION;
 				break;
@@ -212,3 +189,5 @@ class Local_News {
 }
 
 Local_News::init();
+
+

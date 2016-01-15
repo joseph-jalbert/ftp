@@ -212,5 +212,3 @@ class Local_News {
 }
 
 Local_News::init();
-
-

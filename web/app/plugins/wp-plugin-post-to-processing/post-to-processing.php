@@ -1,4 +1,4 @@
-<?php 
+<?php
 /* 
 * Plugin Name: Post to Processing
 * Description: Posts leads into processing.forthepeople.com
@@ -23,24 +23,24 @@ class MM_Post_To_Processing {
     add_filter( 'gform_field_validation', array($this, 'five_digit_zipcode'), 10, 4);
   }
 
-  // Admin Page 
+  // Admin Page
   function wp_mm_post_to_processing_page() {
-    
-    //must check that the user has the required capability 
+
+    //must check that the user has the required capability
     if (!current_user_can('manage_options')) {
       wp_die( __('You do not have sufficient permissions to access this page.') );
     }
-    
+
     ob_start(); ?>
-    
+
     <div class="wrap">
-      
+
       <h2>Morgan & Morgan Post to Processing Settings</h2>
-      
+
       <form action="options.php" method="POST">
-        
+
         <?php settings_fields('post_to_processing_group'); ?>
-        
+
         <table class="form-table">
 
           <tbody>
@@ -69,33 +69,33 @@ class MM_Post_To_Processing {
           </tbody>
 
         </table>
-        
+
         <p class="submit">
-          
+
           <input class="button button-primary" type="submit" value="Save Changes">
-          
+
         </p>
-        
+
       </form>
-      
+
     </div>
-    
-    <?php 
-    
+
+    <?php
+
     echo ob_get_clean();
   }
 
-  // Admin Tab 
+  // Admin Tab
   function wp_mm_post_to_processing_tab() {
     add_options_page( 'Post to Processing Settings', 'Post to Processing Settings', 'manage_options', 'wp_mm_post_to_processing', array($this, 'wp_mm_post_to_processing_page') );
   }
 
-  // Register Settings 
+  // Register Settings
   function wp_post_to_processing_setting() {
     register_setting( 'post_to_processing_group', 'post_to_processing_settings' );
   }
 
-  function post_form_to_processing($entry, $form) {   
+  function post_form_to_processing($entry, $form) {
     $data = array();
     foreach($form["fields"] as &$field) {
 
@@ -119,11 +119,11 @@ class MM_Post_To_Processing {
 
   function do_post($data, $entry) {
     // this is what processing.forthepeople.com/processinquiry.cfm wants:
-    do_action('post_to_processing', $data, $this->settings['inquiry_website_id'], $this->settings['post_url'], $entry);
+	  do_action( 'post_to_processing', $data, $this->settings['inquiry_website_id'], $this->settings['post_url'], $entry, $_SERVER['HTTP_REFERER'] );
   }
 
   function five_digit_zipcode( $result, $value, $form, $field ) {
-    
+
     if( $field["adminLabel"] == 'zip' ) {
         //allow only 5 digits
         $is_5_digits = preg_match("/^[0-9]{5}$/", $value);

@@ -18,12 +18,15 @@ class PTP extends WP_Async_Task {
 		$inquiry_website_id = $data_sent[1];
 		$post_url           = $data_sent[2];
 		$entry              = $data_sent[3];
+		$referer            = $data_sent[4];
+
 
 		return array(
 			'data'               => $data,
 			'inquiry_website_id' => $inquiry_website_id,
 			'post_url'           => $post_url,
-			'entry'              => $entry
+			'entry'              => $entry,
+			'referer'            => $referer
 		);
 
 
@@ -38,6 +41,7 @@ class PTP extends WP_Async_Task {
 		$inquiry_website_id = $_POST['inquiry_website_id'];
 		$post_url           = $_POST['post_url'];
 		$entry              = $_POST['entry'];
+		$referer            = $_POST['referer'];
 
 		do_action( 'wp_async_' . $this->action, $data, $inquiry_website_id, $post_url, $entry );
 
@@ -68,7 +72,7 @@ class PTP extends WP_Async_Task {
 		curl_setopt( $ch, CURLOPT_POST, 1 );
 		curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 0 );
 		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );
-		curl_setopt( $ch, CURLOPT_REFERER, $_SERVER['HTTP_REFERER'] );
+		curl_setopt( $ch, CURLOPT_REFERER, $referer );
 		curl_setopt( $ch, CURLOPT_POSTFIELDS, $d );
 
 		$cookie_string = '';
@@ -107,7 +111,10 @@ class PTP extends WP_Async_Task {
 			'post_url'           => $post_url,
 			'entry'              => $entry,
 			'response_code'      => $response_code,
-			'response'           => $response
+			'response'           => $response,
+			'result'             => $result ? 'success' : 'failure',
+			'result_body'        => $result,
+			'referer'            => $referer
 		) );
 
 	}

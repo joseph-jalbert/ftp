@@ -41,13 +41,6 @@ class PTP extends WP_Async_Task {
 
 		do_action( 'wp_async_' . $this->action, $data, $inquiry_website_id, $post_url, $entry );
 
-		update_option('ptp_submission_' . time(), array(
-			'data'               => $data,
-			'inquiry_website_id' => $inquiry_website_id,
-			'post_url'           => $post_url,
-			'entry'              => $entry
-		));
-
 
 		$d = array(
 			'FirstName'        => $data['first_name'],
@@ -107,8 +100,18 @@ class PTP extends WP_Async_Task {
 			GFAPI::update_entry( $entry );
 
 		}
+		update_option( 'ptp_submission_' . time(), array(
+			'data'               => $data,
+			'posted_fields'      => $d,
+			'inquiry_website_id' => $inquiry_website_id,
+			'post_url'           => $post_url,
+			'entry'              => $entry,
+			'response_code'      => $response_code,
+			'response'           => $response
+		) );
 
 	}
+
 
 }
 

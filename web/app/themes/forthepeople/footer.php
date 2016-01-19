@@ -35,13 +35,13 @@
           <div class="offices hidden-phone"> <span><a href="/office-locations/">Offices Throughout</a></span>
             <div class="row-fluid">
               <div class="span4"> Florida
-                
+
                 Mississippi </div>
               <div class="span4"> Georgia
-                
+
                 Tennessee </div>
               <div class="span4"> New York
-                
+
                 Kentucky </div>
             </div>
           </div>
@@ -50,10 +50,17 @@
           <div class="socialmedia"> <a href="http://www.facebook.com/MMForthePeople" class="sm-facebook" target="_blank"><span>Facebook</span></a> <a href="http://twitter.com/forthepeople" class="sm-twitter" target="_blank"><span>Twitter</span></a> <a href="https://plus.google.com/u/0/112857588310329487027/about" class="sm-googleplus" target="_blank"><span>Google Plus</span></a> <a href="http://www.youtube.com/user/mmforthepeople" class="sm-youtube" target="_blank"><span>YouTube</span></a> </div>
           <span>Consumer Alerts Newsletter</span>
           <div class="row-fluid">
-			<div class="consumer-alerts-form">
-				<?php gravity_form( 'Consumer Alerts Subscription Form', false, false ); ?>
+			<div class="consumer-alerts-form" id="consumer-alerts-form">
+
+				<script>
+					hbspt.forms.create({
+						portalId: '1841598',
+						formId: '5d03efdc-1d30-4ed2-a0b6-1139a765daac',
+						target: '#consumer-alerts-form'
+					});
+				</script>
 			</div>
-            
+
           </div>
         </div>
       </div>

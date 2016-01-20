@@ -67,35 +67,36 @@ class PTP extends WP_Async_Task {
 			$d['isLanding'] = $data['is_landing'];
 		}
 
+		$cookies = array();
 
-		$ch = curl_init( $post_url );
-		curl_setopt( $ch, CURLOPT_POST, 1 );
-		curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 0 );
-		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );
-		curl_setopt( $ch, CURLOPT_REFERER, $referer );
-		curl_setopt( $ch, CURLOPT_POSTFIELDS, $d );
-
-		$cookie_string = '';
 		foreach ( $_COOKIE as $name => $value ) {
-			if ( $cookie_string != '' ) {
-				$cookie_string .= '; ';
-			}
-			$value = urlencode( $value );
-			$cookie_string .= "{$name}={$value}";
+
+			$cookie        = new WP_Http_Cookie( $name );
+			$cookie->name  = $name;
+			$cookie->value = $value;
+			$cookies[]     = $cookie;
+
 		}
-		curl_setopt( $ch, CURLOPT_COOKIE, $cookie_string );
 
-		$result = curl_exec( $ch );
+		$post_args = array(
+			'method' => 'POST',
+			'body'   => $d,
+		);
 
-		$response = curl_getinfo( $ch );
+		if ( $cookies ) {
+			$post_args = array_merge( $post_args, array( 'cookies' => $cookies ) );
+		}
+		add_action( 'http_api_curl', array( __CLASS__, 'set_referer' ), 10, 3 );
+		$post = wp_remote_post( $post_url, $post_args );
+		remove_action( 'http_api_curl', array( __CLASS__, 'set_referer' ), 10 );
 
-		curl_close( $ch );
 
-		$response_code = $response['http_code'];
+		$response_code = $post['response']->code;
+
 
 		if ( $response_code != '302' ) {
 			// something's wrong since we should be redirected to thank-you page
-			error_log( "Error submitting lead to processing. \nResponse Code: $response_code \nBody: $result" );
+			error_log( "Error submitting lead to processing. \nResponse Code: $response_code \nBody: " . serialize( $post ) );
 
 			// Gravity Forms doesn't give us a lot of options for metadata
 			// for now we'll just start the entry if submission fails
@@ -111,11 +112,17 @@ class PTP extends WP_Async_Task {
 			'post_url'           => $post_url,
 			'entry'              => $entry,
 			'response_code'      => $response_code,
-			'response'           => $response,
-			'result'             => $result ? 'success' : 'failure',
-			'result_body'        => $result,
+			'result'             => $post ? 'success' : 'failure',
+			'result_body'        => serialize( $post ),
 			'referer'            => $referer
 		) );
+
+	}
+
+	public static function set_referer(&$handle, $r, $url){
+
+		$referer = 'http://www.forthepeople.dev/';
+		curl_setopt( $handle, CURLOPT_REFERER, $referer );
 
 	}
 
@@ -123,3 +130,6 @@ class PTP extends WP_Async_Task {
 }
 
 new PTP;
+
+
+

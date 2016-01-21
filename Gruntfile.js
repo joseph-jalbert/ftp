@@ -271,6 +271,18 @@ module.exports = function (grunt) {
         },
 
         shell: {
+            setPantheonToGit: {
+                command: 'cd bin && chmod +x terminus-pantheon.sh && ./terminus-pantheon.sh git',
+                options: {
+                    failOnError: false,
+                    execOptions: {
+                        cwd: './'
+
+                    }
+
+                }
+            },
+
             updatePantheonEnvironments: {
                 command: 'cd bin && chmod +x terminus-pantheon.sh && ./terminus-pantheon.sh ' + sourceRepoBranch,
                 options: {
@@ -582,6 +594,7 @@ module.exports = function (grunt) {
     grunt.registerTask('deployPantheon', [
         'gitadd:addAllToPantheon',
         'gitcommit:commitReleasePantheon',
+        'shell:setPantheonToGit',
         'gitpush:forcePushPantheon',
         'updatePantheonEnvironments'
 

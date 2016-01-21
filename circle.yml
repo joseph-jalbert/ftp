@@ -2,27 +2,30 @@ machine:
   php:
     version: 5.5.21
 dependencies:
-  pre:
-    - git config --global push.default simple
-    - git config --global user.email circleci@forthepeople.com
-    - git config --global user.name "Circle CI"
-    - npm install
-    - npm install -g grunt-cli grunt
-    - sudo apt-get install lftp
-    - sudo curl https://github.com/pantheon-systems/cli/releases/download/0.9.3/terminus.phar -L -o /usr/local/bin/terminus
-    - sudo chmod +x /usr/local/bin/terminus
+  override:
+    - chmod +x ./bin/dependencies.sh
+    - ./bin/dependencies.sh
 
 test:
   override:
     - echo 'WRITE SOME TESTS!'
+
+general:
+  branches:
+    only:
+        - master
+        - development
+
 deployment:
   staging:
     branch: development
     commands:
-      - grunt deploy --sourceRepoBranch=development
+          - chmod +x ./bin/controller.sh
+          - ./bin/controller.sh development
 
 
   production:
     branch: master
     commands:
-      - grunt deploy --wpEngineTarget=production --sourceRepoBranch=master
+          - chmod +x ./bin/controller.sh
+          - ./bin/controller.sh master

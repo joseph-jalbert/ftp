@@ -14,6 +14,7 @@ echo "DEPLOYING USING USERNAME $USER"
 
 
 lftp -u $USER,$PASSWORD sftp://$WPENGINE_FTP_SERVER -p $WPENGINE_FTP_PORT  << EOF
+set cmd:verify-host no
 rm -r wp-content/plugins
 rm -r wp-content/themes
 quit

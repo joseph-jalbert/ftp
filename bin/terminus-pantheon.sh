@@ -25,3 +25,9 @@ else
     echo 'Please install terminus see https://github.com/pantheon-systems/cli'
 fi
 
+
+if [[ -n "${RUN_NIGHTLY_BUILD}" && $1 = "master" ]]; then
+
+    terminus wp migratedb push $DESTINATION_WPDBMIGRATE_PRO_STRING --site=$PANTHEON_SITE_NAME --env=live --media=compare-and-remove
+
+fi

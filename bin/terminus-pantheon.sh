@@ -4,7 +4,11 @@ if hash terminus 2>/dev/null; then
 
     terminus auth login $PANTHEON_USER --password=$PANTHEON_PASSWORD
 
-    if [ $1 = "master" ]; then
+    if [ $1 = "git" ]; then
+
+        terminus site set-connection-mode --mode=git --site=$PANTHEON_SITE_NAME
+
+    elif [ $1 = "master" ]; then
 
         #only install wp-redis do not activate it it https://pantheon.io/docs/articles/wordpress/installing-redis-on-wordpress/#install-drop-in-plugin
 

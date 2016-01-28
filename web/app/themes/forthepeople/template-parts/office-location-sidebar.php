@@ -31,7 +31,11 @@ while ( $officeinfo->have_posts() ) {
 	}
 	echo '<br /></span>';
 	echo '<span itemprop="addressLocality">';
-	echo the_title();
+	if ( $locality = get_field( 'state_override' ) ) :
+		echo esc_html($locality);
+	else:
+		the_title();
+	endif;
 	echo '</span>';
 	echo ', ';
 	echo '<span itemprop="addressRegion">';

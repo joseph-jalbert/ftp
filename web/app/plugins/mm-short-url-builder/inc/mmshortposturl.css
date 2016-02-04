@@ -1,0 +1,32 @@
+#mm_shorturl_form {
+    padding-left: 20px;
+    padding-top: 20px;
+}
+
+#mm_shorturl_form li {
+    width: 100%;
+}
+
+#mm_shorturl_form li label {
+    width: 17%;
+}
+
+#mm_shorturl_form li input,
+#mm_shorturl_form li select,
+#mm_shorturl_form li textarea {
+    width: 73%;
+    float: right;
+}
+
+#mm_shorturl_form li em {
+    width: 10%;
+}
+
+#mm_shorturl_form li textarea {
+    resize: none;
+    min-height: 80px;
+}
+
+#mm_shorturl_form li:nth-of-type(2) {
+    min-height: 80px;
+}

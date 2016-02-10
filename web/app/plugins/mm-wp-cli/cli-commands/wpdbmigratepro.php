@@ -4,7 +4,7 @@ if ( ! class_exists( 'WP_CLI_Command' ) ):
 	return;
 endif;
 
-class Example_Command extends WP_CLI_Command {
+class MM_WP_CLI extends WP_CLI_Command {
 
 	/**
 	 * Sets blacklists
@@ -70,4 +70,4 @@ class Example_Command extends WP_CLI_Command {
 
 }
 
-WP_CLI::add_command( 'example', 'Example_Command' );
+WP_CLI::add_command( 'mm', 'MM_WP_CLI' );

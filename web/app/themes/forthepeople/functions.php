@@ -1510,3 +1510,9 @@ function insert_cta_after_paragraph( $insertion,$paragraph_id, $content ) {
  * Include filters for category rewrites.
  */
 require get_template_directory() . '/inc/blog-category-redirect.php';
+
+
+//fix for issue with wpmdbpro
+add_filter('wpmdb_after_response', function($response){
+	return trim($response);
+});

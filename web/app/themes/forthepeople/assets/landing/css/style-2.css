@@ -945,3 +945,107 @@ body.landing .advert-txt a {
 body.landing .advert-txt a:hover {
   color: #fff;
 }
+/* HubSpot Form for Landing Pages      
+--------------------------------------------*/
+#formLandingPage .hbspt-form form {
+	
+}
+#formLandingPage .hbspt-form form ul {
+	list-style: none;
+}
+#formLandingPage .hbspt-form form label{
+	display: none;
+}
+#formLandingPage .hbspt-form form .hs-error-msgs label {
+	display: inline-block;
+	color: #b94a48;
+	font-size: 12px;
+	padding-left: 10px;
+	margin-bottom: 5px;
+}
+#formLandingPage .hbspt-form form input[type="text"], 
+#formLandingPage .hbspt-form form input[type="password"], 
+#formLandingPage .hbspt-form form input[type="datetime"], 
+#formLandingPage .hbspt-form form input[type="datetime-local"], 
+#formLandingPage .hbspt-form form input[type="date"], 
+#formLandingPage .hbspt-form form input[type="month"], 
+#formLandingPage .hbspt-form form input[type="time"], 
+#formLandingPage .hbspt-form form input[type="week"], 
+#formLandingPage .hbspt-form form input[type="number"], 
+#formLandingPage .hbspt-form form input[type="email"], 
+#formLandingPage .hbspt-form form input[type="url"], 
+#formLandingPage .hbspt-form form input[type="search"], 
+#formLandingPage .hbspt-form form input[type="tel"], 
+#formLandingPage .hbspt-form form input[type="color"]{
+	padding: 5px 0;
+    line-height: 1.5em;
+	margin-bottom: 8px;
+	max-width: 700px;
+	width: 100%;
+	text-indent: 10px;
+	font-size: 13px;
+	border: 1px solid #dcdcdc;
+	color: #a1a1a1;
+	border-radius: 3px;	
+}
+#formLandingPage .hbspt-form form input[type="text"].invalid.error, 
+#formLandingPage .hbspt-form form input[type="password"].invalid.error, 
+#formLandingPage .hbspt-form form input[type="datetime"].invalid.error, 
+#formLandingPage .hbspt-form form input[type="datetime-local"].invalid.error, 
+#formLandingPage .hbspt-form form input[type="date"].invalid.error, 
+#formLandingPage .hbspt-form form input[type="month"].invalid.error, 
+#formLandingPage .hbspt-form form input[type="time"].invalid.error, 
+#formLandingPage .hbspt-form form input[type="week"].invalid.error, 
+#formLandingPage .hbspt-form form input[type="number"].invalid.error, 
+#formLandingPage .hbspt-form form input[type="email"].invalid.error, 
+#formLandingPage .hbspt-form form input[type="url"].invalid.error, 
+#formLandingPage .hbspt-form form input[type="search"].invalid.error, 
+#formLandingPage .hbspt-form form input[type="tel"].invalid.error, 
+#formLandingPage .hbspt-form form input[type="color"].invalid.error{
+	border: 1px solid #c87872;
+	margin-bottom: 8px;
+}
+#formLandingPage .hbspt-form form textarea{
+	padding: 5px 0;
+    line-height: 1.5em;
+	margin-bottom: 15px;
+	max-width: 700px;
+	width: 100%;
+	text-indent: 10px;
+	font-size: 13px;
+	border: 1px solid #dcdcdc;
+	color: #a1a1a1;
+	border-radius: 3px;
+}
+#formLandingPage .hbspt-form form textarea.invalid.error{
+	border: 1px solid #c87872;
+	margin-bottom: 8px;
+}
+#formLandingPage .hbspt-form .hs_submit{
+	margin-top: 0;
+	text-align: center;
+}
+#formLandingPage .hbspt-form .hs_submit .actions{
+	padding-top: 0;
+}
+#formLandingPage .hbspt-form .hs_submit input[type="submit"]{
+    color: #fff;
+    background: #FF6600;
+	padding: 10px 30px;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+	border: 0;
+	border-radius: 3px;
+	float: none;
+    max-width: 335px;
+    text-align: center;
+    width: 100%;
+    text-transform: uppercase;
+	cursor: pointer;
+	font-size: 16px;
+	line-height: 1.5em;
+}
+#formLandingPage .hbspt-form form .custom-para-blog{
+	font-size: 12px;
+	line-height: 1.5em;
+	text-align: center;
+}

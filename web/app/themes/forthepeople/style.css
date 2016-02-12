@@ -1939,6 +1939,10 @@ footer#footer .offices {
 	max-width: 230px;
 	width: 100%;
 }
+.hbspt-form form textarea.hs-input{
+	max-width: 240px;
+	width: 100%;
+}
 .hs_submit {
 	text-align: center;
 	padding-top: 20px;
@@ -2006,7 +2010,8 @@ footer#footer .offices {
 	padding: 0 0 20px 0; 
 }
 .cp-hs-form-body .hbspt-form .hs_submit {
-	padding-top: 30px;
+	padding-top: 0;
+	margin-bottom: -25px;
 }
 .cp-hs-form-body .hbspt-form .hs-error-msgs.inputs-list label {
 	color: #b94a48 !important;
@@ -2052,6 +2057,9 @@ footer#footer .offices {
 	padding: 15px 35px; 
 	background: #f9f9f9;
 	margin-bottom: 15px;
+}
+.modal-hs-form .hs-form .inputs-list {
+	padding-left: 0;
 }
 .modal-hs-form .hbspt-form form textarea {
 	margin-bottom: 15px !important;

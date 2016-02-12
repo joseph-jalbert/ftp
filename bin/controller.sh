@@ -6,7 +6,6 @@ if [ -n "${RUN_NIGHTLY_BUILD}" ]; then
 
         terminus site set-connection-mode --mode=sftp --site=$PANTHEON_SITE_NAME
         terminus site clone-content --site=$PANTHEON_SITE_NAME --from-env=live --to-env=dev --yes
-        terminus site clone-content --site=$PANTHEON_SITE_NAME --from-env=live --to-env=test --yes
         terminus wp --site=$PANTHEON_SITE_NAME --env=dev plugin activate mm-wp-cli
         terminus wp --site=$PANTHEON_SITE_NAME --env=dev mm add_compatibility_plugin
         terminus wp --site=$PANTHEON_SITE_NAME --env=dev mm set_blacklists

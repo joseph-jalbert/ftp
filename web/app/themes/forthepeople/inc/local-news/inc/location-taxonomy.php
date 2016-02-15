@@ -123,9 +123,13 @@ class Location_Taxonomy {
 		if ( isset( $query_vars['local_blog_archive'] ) ) {
 			add_action( 'wp_head', function () {
 
-				if ( ! have_posts() ) :
-					?><meta name="robots" content="noindex"><?php
+				$template = '<meta name="robots" content="%s">';
+				if ( have_posts() ) :
+					$content = 'follow';
+				else:
+					$content = 'noindex, follow';
 				endif;
+				echo sprintf( $template, esc_attr( $content ) );
 
 
 			} );

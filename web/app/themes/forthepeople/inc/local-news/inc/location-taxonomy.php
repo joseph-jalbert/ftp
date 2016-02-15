@@ -22,6 +22,9 @@ class Location_Taxonomy {
 		add_action( 'init', array( __CLASS__, 'register_taxonomies' ) );
 		add_action( 'init', array( __CLASS__, 'add_rewrite_rules' ) );
 		add_filter( 'term_link', array( __CLASS__, 'filter_term_link' ), 10, 3 );
+		add_filter( 'query_vars', array( __CLASS__, 'local_blog_archive_query_var' ) );
+		add_filter( 'request', array( __CLASS__, 'local_blog_archive_request' ), PHP_INT_MAX );
+
 
 	}
 
@@ -105,9 +108,30 @@ class Location_Taxonomy {
 
 	public static function add_rewrite_rules() {
 
-		add_rewrite_rule( '^([^\/]*)\/(blog)\/(?:feed\/)?(feed|rdf|rss|rss2|atom)\/?$', 'index.php?' . preg_quote( self::LOCATION_TAXONOMY ) . '=$matches[1]&feed=$matches[3]', 'top' );
-		add_rewrite_rule( '^([^\/]*)\/(blog)\/page\/?([0-9]{1,})\/?$', 'index.php?' . preg_quote( self::LOCATION_TAXONOMY ) . '=$matches[1]&paged=$matches[3]', 'top' );
-		add_rewrite_rule( '^([^\/]*)\/blog\/?$', 'index.php?' . preg_quote( self::LOCATION_TAXONOMY ) . '=$matches[1]', 'top' );
+		add_rewrite_rule( '^([^\/]*)\/(blog)\/(?:feed\/)?(feed|rdf|rss|rss2|atom)\/?$', 'index.php?local_blog_archive=true&' . preg_quote( self::LOCATION_TAXONOMY ) . '=$matches[1]&feed=$matches[3]', 'top' );
+		add_rewrite_rule( '^([^\/]*)\/(blog)\/page\/?([0-9]{1,})\/?$', 'index.php?local_blog_archive=true&' . preg_quote( self::LOCATION_TAXONOMY ) . '=$matches[1]&paged=$matches[3]', 'top' );
+		add_rewrite_rule( '^([^\/]*)\/blog\/?$', 'index.php?local_blog_archive=true&' . preg_quote( self::LOCATION_TAXONOMY ) . '=$matches[1]', 'top' );
+	}
+
+	public function local_blog_archive_query_var( $public_query_vars ) {
+		$public_query_vars[] = 'local_blog_archive';
+
+		return $public_query_vars;
+	}
+
+	public function local_blog_archive_request( $query_vars ) {
+		if ( isset( $query_vars['local_blog_archive'] ) ) {
+			add_action( 'wp_head', function () {
+
+				if ( ! have_posts() ) :
+					?><meta name="robots" content="noindex"><?php
+				endif;
+
+
+			} );
+		}
+
+		return $query_vars;
 	}
 
 

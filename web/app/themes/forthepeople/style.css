@@ -1181,6 +1181,9 @@ div.entry-content h2 {
 	clear:none;
 }
 
+.consumer-alerts-form input[type=submit] {
+	margin-top:-40px;
+}
 .consumer-alerts-form input[type=text] {
     width: 200px;
     height: 25px;
@@ -2088,3 +2091,4 @@ footer#footer .offices {
     border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
     filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
 }
+

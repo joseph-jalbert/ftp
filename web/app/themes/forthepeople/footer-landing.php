@@ -17,5 +17,6 @@
 </div>
 <script src="/wp-content/themes/forthepeople/assets/landing/js/slides.min.jquery.js"></script> 
 <script src="/wp-content/themes/forthepeople/assets/landing/js/landing.js"></script>
+<?php wp_footer(); ?>
 </body>
 </html>

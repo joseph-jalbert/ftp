@@ -5,7 +5,6 @@
  * @package ForThePeople
  */
 
-require __DIR__ . '/inc/actions.php';
 require __DIR__ . '/inc/local-news/local-news.php';
 require __DIR__ . '/inc/robots.txt.php';
 

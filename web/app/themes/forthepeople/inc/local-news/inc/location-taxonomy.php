@@ -24,8 +24,8 @@ class Location_Taxonomy {
 		add_filter( 'term_link', array( __CLASS__, 'filter_term_link' ), 10, 3 );
 		add_filter( 'query_vars', array( __CLASS__, 'local_blog_archive_query_var' ) );
 		add_filter( 'request', array( __CLASS__, 'local_blog_archive_request' ), PHP_INT_MAX );
-		add_action( 'office_location_edit_form', array( __CLASS__, 'render_headline_fields' ), 10, 2 );
-		add_action( 'edited_office_location', array( __CLASS__, 'save_headline_fields' ), 10, 2 );
+		add_action( self::LOCATION_TAXONOMY . "_edit_form", array( __CLASS__, 'render_headline_fields' ), 10, 2 );
+		add_action( "edited_" . self::LOCATION_TAXONOMY, array( __CLASS__, 'save_headline_fields' ), 10, 2 );
 
 	}
 

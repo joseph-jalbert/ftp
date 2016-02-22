@@ -27,7 +27,7 @@ get_header(); ?>
 				endif;
 
 				?><h1 class="pagetitle">
-                <?php echo wp_kses_post( $headline ); ?>
+				<?php echo wp_kses_post( $headline ); ?>
 				<span class="badge badge-info pull-right"><?php echo $count; ?> Posts</span>
 				</h1>
 				<div class="subtitle"><?php echo wp_kses_post( $subheadline );  ?></div>

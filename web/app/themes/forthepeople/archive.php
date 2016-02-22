@@ -14,12 +14,23 @@ get_header(); ?>
 	<div class="row-fluid row-leading row-follow">
         <div id="col1" class="span8">
 		<?php if ( have_posts() ) : ?>
-			<div class="content-pane-border"></div>
-				<h1 class="pagetitle">
-                <?php the_archive_title(); ?>
+			<div class="content-pane-border"></div><?php
+				$headline = get_term_meta( get_term_by('name', $term, $taxonomy)->term_id, 'headline', true );
+				$subheadline = get_term_meta( get_term_by('name', $term, $taxonomy)->term_id, 'subheadline', true );
+
+			    if ( empty( $headline ) ) :
+					$headline = get_the_archive_title();
+				endif;
+
+				if ( empty( $subheadline ) ) :
+					$subheadline = 'Morgan & Morgan Legal Blog';
+				endif;
+
+				?><h1 class="pagetitle">
+                <?php echo wp_kses_post( $headline ); ?>
 				<span class="badge badge-info pull-right"><?php echo $count; ?> Posts</span>
 				</h1>
-				<div class="subtitle">Morgan & Morgan Legal Blog</div>
+				<div class="subtitle"><?php echo wp_kses_post( $subheadline );  ?></div>
 				<div class="heading-hr"></div>
 
 			<?php /* Start the Loop */ ?>

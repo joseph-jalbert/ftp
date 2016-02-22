@@ -24,7 +24,8 @@ class Location_Taxonomy {
 		add_filter( 'term_link', array( __CLASS__, 'filter_term_link' ), 10, 3 );
 		add_filter( 'query_vars', array( __CLASS__, 'local_blog_archive_query_var' ) );
 		add_filter( 'request', array( __CLASS__, 'local_blog_archive_request' ), PHP_INT_MAX );
-
+		add_action( 'office_location_edit_form', array( __CLASS__, 'render_headline_fields' ), 10, 2 );
+		add_action( 'edited_office_location', array( __CLASS__, 'save_headline_fields' ), 10, 2 );
 
 	}
 
@@ -138,7 +139,36 @@ class Location_Taxonomy {
 		return $query_vars;
 	}
 
+	public static function render_headline_fields( $tag, $taxonomy ) {
+		$headline = get_term_meta( $tag->term_id, 'headline', true );
+		$subheadline = get_term_meta( $tag->term_id, 'subheadline', true );
 
+		?><table class="form-table">
+			<tbody>
+				<tr class="form-field term-headline-wrap">
+			        <th scope="row">
+					    <label for="headline">Headline</label>
+				    </th>
+					<td>
+						<input name="headline" id="headline" type="text" value="<?php echo esc_html( $headline ); ?>" size="40">
+					</td>
+				</tr>
+				<tr class="form-field term-subheadline-wrap">
+					<th scope="row">
+						<label for="subheadline">Subheadline</label>
+					</th>
+					<td>
+						<input name="subheadline" id="subheadline" type="text" value="<?php echo esc_html( $subheadline ); ?>" size="40">
+					</td>
+				</tr>
+			</tbody>
+		</table><?php
+	}
+
+	public static function save_headline_fields( $term_id, $tt_id ) {
+		update_term_meta( $term_id, 'headline', $_REQUEST['headline'] );
+		update_term_meta( $term_id, 'subheadline', $_REQUEST['subheadline'] );
+	}
 }
 
 Location_Taxonomy::init();

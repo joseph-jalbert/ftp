@@ -26,6 +26,7 @@ class Location_Taxonomy {
 		add_filter( 'request', array( __CLASS__, 'local_blog_archive_request' ), PHP_INT_MAX );
 		add_action( self::LOCATION_TAXONOMY . "_edit_form", array( __CLASS__, 'render_headline_fields' ), 10, 2 );
 		add_action( "edited_" . self::LOCATION_TAXONOMY, array( __CLASS__, 'save_headline_fields' ), 10, 2 );
+		add_action( 'admin_notices', array( __CLASS__, 'location_error_check' ) );
 
 	}
 
@@ -140,28 +141,38 @@ class Location_Taxonomy {
 	}
 
 	public static function render_headline_fields( $tag, $taxonomy ) {
+
+		if ( ! self::term_meta_available() ) {
+			?>
+			<h1><strong>Notice: Term Metadata Unavailbale in this version of WordPress</strong></h1>
+			<?php
+			return;
+
+		}
+
+
 		$headline = get_term_meta( $tag->term_id, 'headline', true );
 		$subheadline = get_term_meta( $tag->term_id, 'subheadline', true );
 
 		?><table class="form-table">
-			<tbody>
-				<tr class="form-field term-headline-wrap">
-			        <th scope="row">
-					    <label for="headline">Headline</label>
-				    </th>
-					<td>
-						<input name="headline" id="headline" type="text" value="<?php echo esc_html( $headline ); ?>" size="40">
-					</td>
-				</tr>
-				<tr class="form-field term-subheadline-wrap">
-					<th scope="row">
-						<label for="subheadline">Subheadline</label>
-					</th>
-					<td>
-						<input name="subheadline" id="subheadline" type="text" value="<?php echo esc_html( $subheadline ); ?>" size="40">
-					</td>
-				</tr>
-			</tbody>
+		<tbody>
+		<tr class="form-field term-headline-wrap">
+			<th scope="row">
+				<label for="headline">Headline</label>
+			</th>
+			<td>
+				<input name="headline" id="headline" type="text" value="<?php echo esc_html( $headline ); ?>" size="40">
+			</td>
+		</tr>
+		<tr class="form-field term-subheadline-wrap">
+			<th scope="row">
+				<label for="subheadline">Subheadline</label>
+			</th>
+			<td>
+				<input name="subheadline" id="subheadline" type="text" value="<?php echo esc_html( $subheadline ); ?>" size="40">
+			</td>
+		</tr>
+		</tbody>
 		</table><?php
 	}
 
@@ -169,6 +180,24 @@ class Location_Taxonomy {
 		update_term_meta( $term_id, 'headline', wp_kses_post( $_REQUEST['headline'] ) );
 		update_term_meta( $term_id, 'subheadline', wp_kses_post( $_REQUEST['subheadline'] ) );
 	}
+
+	public static function location_error_check() {
+		$screen = get_current_screen();
+		if ( 'edit-' . self::LOCATION_TAXONOMY === $screen->id && ! self::term_meta_available() ) {
+			?>
+			<div class="error notice">
+				<p><?php _e( 'You must be using a version of WordPress after 4.4 to use location taxonomy meta.', 'my_plugin_textdomain' ); ?></p>
+			</div>
+
+			<?php
+		}
+	}
+
+	private static function term_meta_available(){
+
+		return function_exists( 'get_term_meta' );
+	}
+
 }
 
 Location_Taxonomy::init();

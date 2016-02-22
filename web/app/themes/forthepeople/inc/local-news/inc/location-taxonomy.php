@@ -161,7 +161,7 @@ class Location_Taxonomy {
 				<label for="headline">Headline</label>
 			</th>
 			<td>
-				<input name="headline" id="headline" type="text" value="<?php echo esc_html( $headline ); ?>" size="40">
+				<input name="headline" id="headline" type="text" value="<?php echo esc_attr( $headline ); ?>" size="40">
 			</td>
 		</tr>
 		<tr class="form-field term-subheadline-wrap">
@@ -169,7 +169,7 @@ class Location_Taxonomy {
 				<label for="subheadline">Subheadline</label>
 			</th>
 			<td>
-				<input name="subheadline" id="subheadline" type="text" value="<?php echo esc_html( $subheadline ); ?>" size="40">
+				<input name="subheadline" id="subheadline" type="text" value="<?php echo esc_attr( $subheadline ); ?>" size="40">
 			</td>
 		</tr>
 		</tbody>

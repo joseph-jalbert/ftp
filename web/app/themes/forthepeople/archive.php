@@ -15,8 +15,8 @@ get_header(); ?>
         <div id="col1" class="span8">
 		<?php if ( have_posts() ) : ?>
 			<div class="content-pane-border"></div><?php
-				$headline = get_term_meta( get_term_by('name', $term, $taxonomy)->term_id, 'headline', true );
-				$subheadline = get_term_meta( get_term_by('name', $term, $taxonomy)->term_id, 'subheadline', true );
+				$headline = get_term_meta( get_term_by('slug', $term, $taxonomy)->term_id, 'headline', true );
+				$subheadline = get_term_meta( get_term_by('slug', $term, $taxonomy)->term_id, 'subheadline', true );
 
 			    if ( empty( $headline ) ) :
 					$headline = get_the_archive_title();

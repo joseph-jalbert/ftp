@@ -166,8 +166,8 @@ class Location_Taxonomy {
 	}
 
 	public static function save_headline_fields( $term_id, $tt_id ) {
-		update_term_meta( $term_id, 'headline', $_REQUEST['headline'] );
-		update_term_meta( $term_id, 'subheadline', $_REQUEST['subheadline'] );
+		update_term_meta( $term_id, 'headline', wp_kses_post( $_REQUEST['headline'] ) );
+		update_term_meta( $term_id, 'subheadline', wp_kses_post( $_REQUEST['subheadline'] ) );
 	}
 }
 

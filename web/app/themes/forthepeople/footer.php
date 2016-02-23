@@ -55,11 +55,14 @@
           <div class="row-fluid">
 			<div class="consumer-alerts-form" id="consumer-alerts-form">
 
+				<!--[if lte IE 8]>
+				<script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2-legacy.js"></script>
+				<![endif]-->
+				<script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2.js"></script>
 				<script>
 					hbspt.forms.create({
 						portalId: '1841598',
-						formId: '5d03efdc-1d30-4ed2-a0b6-1139a765daac',
-						target: '#consumer-alerts-form'
+						formId: '5d03efdc-1d30-4ed2-a0b6-1139a765daac'
 					});
 				</script>
 			</div>

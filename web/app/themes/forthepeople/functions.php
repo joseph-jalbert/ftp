@@ -93,6 +93,19 @@ add_action( 'after_setup_theme', 'forthepeople_content_width', 0 );
  */
 function forthepeople_widgets_init() {
 
+	register_sidebar(
+
+		array(
+			'name' => esc_html__('Footer Contact Widget', 'forthepeople'),
+			'id'   => 'footer_contact_widget',
+			'description'   => '',
+			'before_widget' => '<aside id="%1$s" class="cf widget %2$s">',
+			'after_widget'  => '</aside>',
+			'before_title'  => '<div class="widget-title">',
+			'after_title'   => '</div>',
+		)
+	);
+
 	register_sidebar( array(
 		'name'          => esc_html__( 'Sidebar Contact Form', 'forthepeople' ),
 		'id'            => 'sidebar_contact_form',

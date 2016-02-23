@@ -11,8 +11,8 @@
         <div class="subtitle"><?php the_field('sub_title'); ?></div>
         <div class="heading-hr"></div>
                 
-    <?php if(!in_category('Blog')) { ?>
-        <div class="socialmediawidget vertical offpage">
+    <?php if ( ! in_category('Blog') && 'local_news' !== $post->post_type ) {
+		?><div class="socialmediawidget vertical offpage">
 			<span class='st_plusone_hcount' displayText='Google +1'></span>
 			<span class='st_facebook_hcount' displayText='Facebook'></span>
 			<span class='st_twitter_hcount' displayText='Tweet'></span>

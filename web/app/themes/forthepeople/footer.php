@@ -55,13 +55,12 @@
           <div class="row-fluid">
 			<div class="consumer-alerts-form" id="consumer-alerts-form">
 
-				<?php
-				if ( is_active_sidebar( 'footer_contact_widget' ) ) {
-
-					dynamic_sidebar( 'footer_contact_widget' );
-
-				}
-				?>
+				<script>
+					hbspt.forms.create({
+						portalId: '1841598',
+						formId: '5d03efdc-1d30-4ed2-a0b6-1139a765daac'
+					});
+				</script>
 			</div>
 
           </div>

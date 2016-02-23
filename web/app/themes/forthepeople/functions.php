@@ -7,6 +7,7 @@
 
 require __DIR__ . '/inc/local-news/local-news.php';
 require __DIR__ . '/inc/robots.txt.php';
+require __DIR__ . '/inc/actions.php';
 
 if ( ! function_exists( 'forthepeople_setup' ) ) :
 /**

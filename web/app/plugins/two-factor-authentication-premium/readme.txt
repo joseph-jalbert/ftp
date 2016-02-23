@@ -1,19 +1,19 @@
 === Two Factor Authentication ===
 Tags: auth, two factor auth, login, security, authenticate, password, security, woocommerce, google authenticator, authy, two factor, 2fa
 Requires at least: 3.2
-Tested up to: 4.3
-Stable tag: 1.1.21
+Tested up to: 4.4
+Stable tag: 1.2.8
 Author: DavidAnderson
 Contributors: DavidAnderson, DNutbourne
 Donate link: http://david.dw-perspective.org.uk/donate
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Secure WordPress login with Two Factor Authentication - supports WooCommerce, front-end configuration, HOTP + TOTP (Google Authenticator, Authy, etc.)
+Secure WordPress login with Two Factor Authentication - supports WP, Woo + other login forms, HOTP, TOTP (Google Authenticator, Authy, etc.)
 
 == Description ==
 
-Secure WordPress login with this two factor authentication (TFA) plugin. Users for whom it is enabled will require a one-time code in order to log in. From the authors of <a href="https://updraftplus.com/">UpdraftPlus - WP's #1 backup/restore plugin</a>, with over 500,000 active installs.
+Secure WordPress login with this two factor authentication (TFA) plugin. Users for whom it is enabled will require a one-time code in order to log in. From the authors of <a href="https://updraftplus.com/">UpdraftPlus - WP's #1 backup/restore plugin</a>, with over 600,000 active installs.
 
 Are you completely new to TFA? <a href="https://wordpress.org/plugins/two-factor-authentication/faq/">If so, please see our FAQ</a>.
 
@@ -23,9 +23,10 @@ Features (please see the "Screenshots" for more information):
 * Displays graphical QR codes for easy scanning into apps on your phone/tablet
 * TFA can be made available on a per-role basis (e.g. available for admins, but not for subscribers)
 * TFA can be turned on or off by each user
+* TFA can be required for specified user levels, after a defined time period (e.g. require all admins to have TFA, once their accounts are a week old) (<a href="https://www.simbahosting.co.uk/s3/product/two-factor-authentication/">Premium version</a>)
 * Supports front-end editing of settings, via [twofactor_user_settings] shortcode (i.e. users don't need access to the WP dashboard). (The <a href="https://www.simbahosting.co.uk/s3/product/two-factor-authentication/">Premium version</a> allows custom designing of any layout you wish).
 * Works together with "Theme My Login" (https://wordpress.org/plugins/theme-my-login/)
-* Includes support for the WooCommerce login form
+* Includes support for the WooCommerce and Affiliates-WP login forms
 * Does not mention or request second factor until the user has been identified as one with TFA enabled (i.e. nothing is shown to users who do not have it enabled)
 * WP Multisite compatible (plugin should be network activated)
 * Simplified user interface and code base for ease of use and performance
@@ -39,7 +40,7 @@ Read this! http://www.wired.com/2012/08/apple-amazon-mat-honan-hacking/
 
 = How Does It Work? =
 
-This plugin uses the industry standard algorithm [TOTP](http://en.wikipedia.org/wiki/Time-based_One-time_Password_Algorithm) or [HOTP](http://en.wikipedia.org/wiki/HMAC-based_One-time_Password_Algorithm) for creating One Time Passwords. These are used by Google Authenticator, Authy, and many other OTP applications that you can deploy on your phone etc.
+This plugin uses the industry standard algorithm [TOTP](https://en.wikipedia.org/wiki/Time-based_One-time_Password_Algorithm) or [HOTP](https://en.wikipedia.org/wiki/HMAC-based_One-time_Password_Algorithm) for creating One Time Passwords. These are used by Google Authenticator, Authy, and many other OTP applications that you can deploy on your phone etc.
 
 A TOTP code is valid for a certain time. Whatever program you use (i.e. Google Authenticator, etc.) will show a different code every so often.
 
@@ -133,6 +134,34 @@ These are the names of the two mathematical algorithms that are used to create t
 12. Building your own design for the page with custom short-codes (Premium version)
 
 == Changelog ==
+
+= 1.2.8 - 12/Dec/2015 =
+
+* FEATURE: Add support for the Affiliates-WP login form
+* TWEAK: Defeat WooCommerce loading an old version of the select2 script onto the TFA settings page, and breaking the user selector (should work this time)
+
+= 1.2.6 - 11/Nov/2015 =
+
+* TWEAK: Defeat WooCommerce loading an old version of the select2 script onto the TFA settings page, and breaking the user selector
+* TWEAK: Tested on WordPress 4.4
+* TWEAK: Use h1 for heading style on admin page, not h2
+* FIX: The "You'll need to use TFA to login in future" link for users for whom TFA is compulsory (Premium) was to the wrong page
+
+= 1.2.4 - 09/Nov/2015 =
+
+* TWEAK: Make window settings filterable
+
+= 1.2.3 - 19/Oct/2015 =
+
+* FIX: Fix bug in 1.2.2 that could lock out users without TFA settings
+
+= 1.2.2 - 16/Oct/2015 =
+
+* TWEAK: Display dashboard notice if TWO_FACTOR_DISABLE is defined in wp-config.php, to prevent time wasted wondering why nothing is happening
+
+= 1.2.1 - 08/Oct/2015 =
+
+* FEATURE: (Premium version) - Require users (of configured roles) to use TFA (optionally after a configurable amount of time)
 
 = 1.1.21 - 25/Aug/2015 =
 
@@ -243,4 +272,4 @@ These are the names of the two mathematical algorithms that are used to create t
 
 
 == Upgrade Notice ==
-* 1.1.21 : Swedish translation
+* 1.2.8 : Added support for the Affiliate-WP login form

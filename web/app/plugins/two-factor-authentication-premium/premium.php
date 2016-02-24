@@ -18,6 +18,9 @@ class Simba_Two_Factor_Authentication_Premium {
 		add_action('wp_ajax_simbatfa_choose_user', array($this, 'wp_ajax_simbatfa_choose_user'));
 		add_action('wp_ajax_simbatfa_user_get_codes', array($this, 'wp_ajax_simbatfa_user_get_codes'));
 		add_action('wp_ajax_simbatfa_user_activation', array($this, 'wp_ajax_simbatfa_user_activation'));
+		add_filter('simba_tfa_after_user_roles', array($this, 'simba_tfa_after_user_roles'));
+		add_action('all_admin_notices', array($this, 'all_admin_notices'));
+		add_action('admin_scripts', array($this, 'admin_scripts'), 11);
 
 		add_shortcode('twofactor_user_settings_enabled', array($this, 'shortcode_twofactor_user_settings_enabled'));
 		add_shortcode('twofactor_user_qrcode', array($this, 'shortcode_twofactor_user_qrcode'));
@@ -32,6 +35,58 @@ class Simba_Two_Factor_Authentication_Premium {
 
 	public function simba_tfa_support_url($url) {
 		return 'https://www.simbahosting.co.uk/s3/support/tickets/';
+	}
+
+	public function simba_tfa_after_user_roles($default) {
+
+		global $simba_two_factor_authentication;
+
+		$ret = '';
+		$ret .= '<form method="post" action="options.php" style="margin-top: 12px">';
+			
+// 			settings_fields('tfa_user_roles_required_group');
+		$ret .= "<input type='hidden' name='option_page' value='tfa_user_roles_required_group' />";
+		$ret .= '<input type="hidden" name="action" value="update" />';
+		$ret .= wp_nonce_field("tfa_user_roles_required_group-options", '_wpnonce', true, false);
+
+
+		$ret .= __('Choose which user roles are required to have two-factor authentication active (remember to also make it available for any chosen roles).', SIMBA_TFA_TEXT_DOMAIN);
+		$ret .= '<p>';
+
+		if (is_multisite()) {
+			// Not a real WP role; needs separate handling
+			$id = '_super_admin';
+			$name = __('Multisite Super Admin', SIMBA_TFA_TEXT_DOMAIN);
+			$setting = (bool)$simba_two_factor_authentication->get_option('tfa_required_'.$id);
+			
+			$ret .= '<input type="checkbox" id="tfa_required_'.$id.'" name="tfa_required_'.$id.'" value="1" '.($setting ? 'checked="checked"' :'').'> <label for="tfa_required_'.$id.'">'.htmlspecialchars($name)."</label><br>\n";
+		}
+
+		global $wp_roles;
+		if (!isset($wp_roles)) $wp_roles = new WP_Roles();
+		
+		foreach($wp_roles->role_names as $id => $name)
+		{	
+			$setting = (bool)$simba_two_factor_authentication->get_option('tfa_required_'.$id);
+			
+			$ret .= '<input type="checkbox" id="tfa_required_'.$id.'" name="tfa_required_'.$id.'" value="1" '.($setting ? 'checked="checked"' :'').'> <label for="tfa_required_'.$id.'">'.htmlspecialchars($name)."</label><br>\n";
+		}
+
+		$ret .= '</p><p>';
+
+		$requireafter = $simba_two_factor_authentication->get_option('tfa_requireafter');
+		if (false === $requireafter) {
+			$requireafter = "10";
+		} else {
+			$requireafter = (string)absint($requireafter);
+		}
+
+		$ret .= sprintf(__('Enforce this requirement only for accounts at least %s days old', SIMBA_TFA_TEXT_DOMAIN), '<input type="number" style="width:60px;" step="1" min="0" name="tfa_requireafter" id="tfa_requireafter" value="'.$requireafter.'">');
+
+		$ret .= '</p>'.get_submit_button().'</form>';
+
+		return $ret;
+
 	}
 
 	public function wp_ajax_simbatfa_user_get_codes() {
@@ -123,7 +178,6 @@ class Simba_Two_Factor_Authentication_Premium {
 
 	public function simba_tfa_users_settings() {
 		$suffix = (defined('SCRIPT_DEBUG') && SCRIPT_DEBUG) ? '' : '.min';
-		// De-register WooCommerce's version (3.5 - not compatible)
 		wp_deregister_script('select2');
 		wp_register_script('select2', SIMBA_TFA_PLUGIN_URL . '/includes/select2'.$suffix.'.js', array('jquery'), '4.0.0');
 		wp_enqueue_script('select2');
@@ -235,6 +289,18 @@ class Simba_Two_Factor_Authentication_Premium {
 		</script>
 		<?php
 	}
+
+
+	public function all_admin_notices() {
+		// Test for whether they're require to have TFA active and haven't yet done so.
+		
+		global $current_user, $simba_two_factor_authentication;
+		if (empty($this->tfa)) $this->tfa = $simba_two_factor_authentication->getTFA();
+		if ($this->tfa->isActivatedForUser($current_user->ID) && $this->tfa->isRequiredForUser($current_user->ID) && !$this->tfa->isActivatedByUser($current_user->ID)) {
+			$simba_two_factor_authentication->show_admin_warning('<strong>'.__('Please set up two-factor authentication', SIMBA_TFA_TEXT_DOMAIN).'</strong><br> <a href="'.admin_url('admin.php').'?page=two-factor-auth-user">'.__('You will need to set up and use two-factor authentication to login in future.</a>', SIMBA_TFA_TEXT_DOMAIN), 'error');
+		}
+	}
+
 
 	// This function is intended for use by third party developers
 	public function tfa_is_available_and_active() {

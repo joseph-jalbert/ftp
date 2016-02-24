@@ -11,9 +11,9 @@ class Simba_TFA  {
 	{
 		$this->base32_encoder = $base32_encoder;
 		$this->otp_helper = $otp_helper;
-		$this->time_window_size = 30;
-		$this->check_back_time_windows = 2;
-		$this->check_forward_counter_window = 20;
+		$this->time_window_size = apply_filters('simbatfa_time_window_size', 30);
+		$this->check_back_time_windows = apply_filters('simbatfa_check_back_time_windows', 2);
+		$this->check_forward_counter_window = apply_filters('simbatfa_check_forward_counter_window', 20);
 		$this->otp_length = 6;
 		$this->emergency_codes_length = 8;
 		$this->salt_prefix = AUTH_SALT;
@@ -150,14 +150,18 @@ class Simba_TFA  {
 	public function authUserFromLogin($params)
 	{
 		
-		global $wpdb;
+		global $simba_two_factor_authentication, $wpdb;
 		
 		if(!$this->isCallerActive($params))
 			return true;
 		
 		$field = filter_var($params['log'], FILTER_VALIDATE_EMAIL) ? 'user_email' : 'user_login';
-		$query = $wpdb->prepare("SELECT ID from ".$wpdb->users." WHERE ".$field."=%s", $params['log']);
-		$user_ID = $wpdb->get_var($query);
+		$query = $wpdb->prepare("SELECT ID, user_registered from ".$wpdb->users." WHERE ".$field."=%s", $params['log']);
+		$response = $wpdb->get_row($query);
+
+		$user_ID = is_object($response) ? $response->ID : false;
+		$user_registered = is_object($response) ? $response->user_registered : false;
+
 		$user_code = trim(@$params['two_factor_code']);
 		
 		if(!$user_ID)
@@ -166,9 +170,23 @@ class Simba_TFA  {
 		if(!$this->isActivatedForUser($user_ID))
 			return true;
 			
-		if(!$this->isActivatedByUser($user_ID))
+		if(!$this->isActivatedByUser($user_ID)) {
+
+			if (!$this->isRequiredForUser($user_ID)) {
+				return true;
+			}
+
+			$requireafter = absint($simba_two_factor_authentication->get_option('tfa_requireafter')) * 86400;
+
+			$account_age = time() - strtotime($user_registered);
+
+			if ($account_age > $requireafter) {
+				return new WP_Error('tfa_required', apply_filters('simbatfa_notfa_forbidden_login', '<strong>'.__('Error:', SIMBA_TFA_TEXT_DOMAIN).'</strong> '.__('The site owner has forbidden you to login without two-factor authentication. Please contact the site owner to re-gain access.', SIMBA_TFA_TEXT_DOMAIN)));
+			}
+
 			return true;
-			
+		}
+
 		$tfa_priv_key = get_user_meta($user_ID, 'tfa_priv_key_64', true);
 		$tfa_last_login = get_user_meta($user_ID, 'tfa_last_login', true);
 		$tfa_last_pws_arr = get_user_meta($user_ID, 'tfa_last_pws', true);
@@ -321,6 +339,37 @@ class Simba_TFA  {
 		{
 			$db_val = $simba_two_factor_authentication->get_option('tfa_'.$role);
 			$db_val = $db_val === false || $db_val ? 1 : 0; //Nothing saved or > 0 returns 1;
+			
+			if($db_val)
+				return true;
+		}
+		
+		return false;
+		
+	}
+	
+	// N.B. - This doesn't check isActivatedForUser() - the caller would normally want to do that first
+	public function isRequiredForUser($user_id)
+	{
+
+		if (empty($user_id)) return false;
+
+		global $simba_two_factor_authentication;
+
+		// Super admin is not a role (they are admins with an extra attribute); needs separate handling
+		if (is_multisite() && is_super_admin($user_id)) {
+			// This is always a final decision - we don't want it to drop through to the 'admin' role's setting
+			$role = '_super_admin';
+			$db_val = $simba_two_factor_authentication->get_option('tfa_required_'.$role);
+			
+			return ($db_val) ? true : false;
+		}
+
+		$user = new WP_User($user_id);
+
+		foreach($user->roles as $role)
+		{
+			$db_val = $simba_two_factor_authentication->get_option('tfa_required_'.$role);
 			
 			if($db_val)
 				return true;

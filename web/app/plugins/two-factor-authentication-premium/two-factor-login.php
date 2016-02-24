@@ -5,7 +5,7 @@ Plugin URI: https://www.simbahosting.co.uk/s3/product/two-factor-authentication/
 Description: Secure your WordPress login forms with two factor authentication - including WooCommerce login forms
 Author: David Nutbourne + David Anderson, original plugin by Oskar Hane
 Author URI: https://www.simbahosting.co.uk
-Version: 1.1.21
+Version: 1.2.8
 License: GPLv2 or later
 */
 
@@ -15,7 +15,7 @@ define('SIMBA_TFA_PLUGIN_URL', plugins_url('', __FILE__));
 
 class Simba_Two_Factor_Authentication {
 
-	public $version = '1.1.21';
+	public $version = '1.2.8';
 	private $php_required = '5.3';
 
 	private $frontend;
@@ -44,6 +44,11 @@ class Simba_Two_Factor_Authentication {
 		// The login form on the checkout doesn't call the woocommerce_before_customer_login_form action
 		add_action('woocommerce_before_checkout_form', array($this, 'woocommerce_before_customer_login_form'));
 
+		add_action('affwp_login_fields_before', array($this, 'affwp_login_fields_before'));
+		if (!defined('TWO_FACTOR_DISABLE') || !TWO_FACTOR_DISABLE) {
+			add_action('affwp_process_login_form', array($this, 'affwp_process_login_form'));
+		}
+		
 		if (is_admin()) {
 			//Save settings
 			add_action('admin_init', array($this, 'check_possible_reset'));
@@ -140,8 +145,8 @@ class Simba_Two_Factor_Authentication {
 		$this->show_admin_warning('<strong>'.__('PHP Mcrypt module required', 'updraftplus').'</strong><br> '.__('The Two Factor Authentication plugin requires the PHP mcrypt module to be installed. Please ask your web hosting company to install it.', SIMBA_TFA_TEXT_DOMAIN), 'error');
 	}
 
-	private function show_admin_warning($message, $class = "updated") {
-		echo '<div class="updraftmessage '.$class.'">'."<p>$message</p></div>";
+	public function show_admin_warning($message, $class = "updated") {
+		echo '<div class="tfamessage '.$class.'">'."<p>$message</p></div>";
 	}
 
 	public function getTFA() {
@@ -202,18 +207,18 @@ class Simba_Two_Factor_Authentication {
 	}
 	
 
-	// Here's where the login action happens
+	// Here's where the login action happens. Called on the 'authenticate' action.
 	public function tfaVerifyCodeAndUser($user, $username, $password) {
 
-		$tfa = $this->getTFA();
-		
 		if (is_wp_error($user)) return $user;
 
+		$tfa = $this->getTFA();
 		$params = $_POST;
 		$params['log'] = $username;
 		$params['caller'] = $_SERVER['PHP_SELF'] ? $_SERVER['PHP_SELF'] : $_SERVER['REQUEST_URI'];
 		
 		$code_ok = $tfa->authUserFromLogin($params);
+		if (is_wp_error($code_ok)) return $code_ok;
 
 		if (!$code_ok) return new WP_Error('authentication_failed', '<strong>'.__('Error:', SIMBA_TFA_TEXT_DOMAIN).'</strong> '.__('The one-time password (TFA code) you entered was incorrect.', SIMBA_TFA_TEXT_DOMAIN));
 		
@@ -221,9 +226,8 @@ class Simba_Two_Factor_Authentication {
 			
 		return wp_authenticate_username_password(null, $username, $password);
 	}
-
-	public function tfaRegisterTwoFactorAuthSettings()
-	{
+	
+	public function tfaRegisterTwoFactorAuthSettings() {
 		global $wp_roles;
 		if (!isset($wp_roles))
 			$wp_roles = new WP_Roles();
@@ -231,8 +235,10 @@ class Simba_Two_Factor_Authentication {
 		foreach($wp_roles->role_names as $id => $name)
 		{
 			register_setting('tfa_user_roles_group', 'tfa_'.$id);
+			register_setting('tfa_user_roles_required_group', 'tfa_required_'.$id);
 		}
 		
+		register_setting('tfa_user_roles_required_group', 'tfa_requireafter');
 		register_setting('simba_tfa_default_hmac_group', 'tfa_default_hmac');
 		register_setting('tfa_xmlrpc_status_group', 'tfa_xmlrpc_on');
 	}
@@ -245,10 +251,19 @@ class Simba_Two_Factor_Authentication {
 		$setting = get_user_meta($user_id, 'tfa_enable_tfa', true);
 		$setting = !$setting ? false : $setting;
 		
+		$tfa = $this->getTFA();
+
+		if ($tfa->isRequiredForUser($user_id)) {
+			$requireafter = absint($this->get_option('tfa_requireafter'));
+
+			echo '<p class="tfa_required_warning" style="font-weight:bold; font-style:italics;">'.sprintf(__('N.B. This site is configured to forbid you to log in if you disable two-factor authentication after your account is %d days old', SIMBA_TFA_TEXT_DOMAIN), $requireafter).'</p>';
+		}
+
 		$tfa_enabled_label = ($long_label) ? __('Enable two-factor authentication', SIMBA_TFA_TEXT_DOMAIN) : __('Enabled', SIMBA_TFA_TEXT_DOMAIN);
 		$tfa_disabled_label = ($long_label) ? __('Disable two-factor authentication', SIMBA_TFA_TEXT_DOMAIN) : __('Disabled', SIMBA_TFA_TEXT_DOMAIN);
 
 		print '<input type="radio" class="tfa_enable_radio" id="tfa_enable_tfa_true" name="tfa_enable_tfa" value="true" '.($setting == true ? 'checked="checked"' :'').'> <label class="tfa_enable_radio_label" for="tfa_enable_tfa_true">'.apply_filters('simbatfa_radiolabel_enabled', $tfa_enabled_label, $long_label).'</label> <br>';
+
 		print '<input type="radio" class="tfa_enable_radio" id="tfa_enable_tfa_false" name="tfa_enable_tfa" value="false" '.($setting == false ? 'checked="checked"' :'').'> <label class="tfa_enable_radio_label" for="tfa_enable_tfa_false">'.apply_filters('simbatfa_radiolabel_disabled', $tfa_disabled_label, $long_label).'</label> <br>';
 	}
 		
@@ -728,16 +743,15 @@ class Simba_Two_Factor_Authentication {
 		
 		?>
 		<div class="error">
-		<h3><?php _e('Two Factor Authentication re-sync needed', SIMBA_TFA_TEXT_DOMAIN);?></h3>
-		<p>
-			<?php _e('You need to resync your device for Two Factor Authentication since the OTP you last used is many steps ahead 
-			of the server.', SIMBA_TFA_TEXT_DOMAIN); ?>
-			<br>
-			<?php _e('Please re-sync or you might not be able to log in if you generate more OTPs without logging in.', SIMBA_TFA_TEXT_DOMAIN);?>
-			<br><br>
-			<a href="admin.php?page=two-factor-auth-user&warning_button_clicked=1" class="button"><?php _e('Click here and re-scan the QR-Code', SIMBA_TFA_TEXT_DOMAIN);?></a>
-		</p>
-	</div>
+			<h3><?php _e('Two Factor Authentication re-sync needed', SIMBA_TFA_TEXT_DOMAIN);?></h3>
+			<p>
+				<?php _e('You need to resync your device for Two Factor Authentication since the OTP you last used is many steps ahead of the server.', SIMBA_TFA_TEXT_DOMAIN); ?>
+				<br>
+				<?php _e('Please re-sync or you might not be able to log in if you generate more OTPs without logging in.', SIMBA_TFA_TEXT_DOMAIN);?>
+				<br><br>
+				<a href="admin.php?page=two-factor-auth-user&warning_button_clicked=1" class="button"><?php _e('Click here and re-scan the QR-Code', SIMBA_TFA_TEXT_DOMAIN);?></a>
+			</p>
+		</div>
 		
 		<?php
 		
@@ -797,10 +811,38 @@ class Simba_Two_Factor_Authentication {
 		return '';
 	}
 
-	// WooCommerce login form
-	public function woocommerce_before_customer_login_form() {
+	// Affiliate-WP login form
+	public function affwp_login_fields_before() {
+		$this->before_login_form_generic();
+	}
+	
+	public function affwp_process_login_form() {
+		if (!function_exists('affiliate_wp')) return;
+		$affiliate_wp = affiliate_wp();
+		$login = $affiliate_wp->login;
+		
+		$tfa = $this->getTFA();
+		$params = array(
+			'log' => (string)$_POST['affwp_user_login'],
+			'caller'=> $_SERVER['PHP_SELF'] ? $_SERVER['PHP_SELF'] : $_SERVER['REQUEST_URI'],
+			'two_factor_code' => (string)$_POST['two_factor_code']
+		);
+		$code_ok = $tfa->authUserFromLogin($params);
+		if (is_wp_error($code_ok)) {
+			$login->add_error($code_ok->get_error_code, $code_ok->get_error_message());
+		} elseif (!$code_ok) {
+			$login->add_error('authentication_failed', __('Error:', SIMBA_TFA_TEXT_DOMAIN).' '.__('The one-time password (TFA code) you entered was incorrect.', SIMBA_TFA_TEXT_DOMAIN));
+		}
+		
+	}
+	
+	// Shared by some 3rd-party login forms
+	// For historical reasons there are references to WooCommerce in this code - left for the sake of not fixing what was not broken
+	private function before_login_form_generic() {
+	
 		$script_ver = (defined('WP_DEBUG') && WP_DEBUG) ? time() : $this->version;
 		wp_enqueue_script( 'tfa-wc-ajax-request', SIMBA_TFA_PLUGIN_URL.'/includes/wooextend.js', array('jquery'), $script_ver);
+
 		$localize = array(
 			'ajaxurl' => admin_url('admin-ajax.php'),
 			'click_to_enter_otp' => __("Enter One Time Password (if you have one)", SIMBA_TFA_TEXT_DOMAIN),
@@ -817,6 +859,11 @@ class Simba_Two_Factor_Authentication {
 		}
 
 		wp_localize_script( 'tfa-wc-ajax-request', 'simbatfa_wc_settings', $localize);
+	}
+	
+	// WooCommerce login form
+	public function woocommerce_before_customer_login_form() {
+		$this->before_login_form_generic();
 	}
 
 }

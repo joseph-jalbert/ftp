@@ -35,7 +35,8 @@ jQuery(document).ready(function($) {
 							resp = resp.substring(json_begins);
 						}
 					} else {
-						console.log("Expected JSON marker not found");
+							console.log("Expected JSON marker not found");
+							console.log(resp);
 					}
 					response = $.parseJSON(resp);
 					if (response.hasOwnProperty('php_output')) {

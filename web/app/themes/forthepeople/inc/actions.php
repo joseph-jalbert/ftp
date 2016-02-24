@@ -10,7 +10,6 @@ class Actions {
 
 	public static function attach_hooks() {
 
-		add_action( 'wp_footer', array( __CLASS__, 'hubspot_tracking_code' ) );
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'enqueue' ) );
 		// only adding a filter here because it pertains to an action
 		add_action( 'script_loader_tag', array( __CLASS__, 'enqueue_additions' ), 10, 2 );

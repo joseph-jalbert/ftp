@@ -24,8 +24,10 @@ class Location_Taxonomy {
 		add_filter( 'term_link', array( __CLASS__, 'filter_term_link' ), 10, 3 );
 		add_filter( 'query_vars', array( __CLASS__, 'local_blog_archive_query_var' ) );
 		add_filter( 'request', array( __CLASS__, 'local_blog_archive_request' ), PHP_INT_MAX );
-		add_action( self::LOCATION_TAXONOMY . "_edit_form", array( __CLASS__, 'render_headline_fields' ), 10, 2 );
+		add_action( self::LOCATION_TAXONOMY . "_edit_form", array( __CLASS__, 'render_headline_fields_edit' ), 10, 2 );
+		add_action( self::LOCATION_TAXONOMY . "_add_form_fields", array( __CLASS__, 'render_headline_fields_new' ) );
 		add_action( "edited_" . self::LOCATION_TAXONOMY, array( __CLASS__, 'save_headline_fields' ), 10, 2 );
+		add_action( "created_" . self::LOCATION_TAXONOMY, array( __CLASS__, 'save_headline_fields' ), 10, 2 );
 		add_action( 'admin_notices', array( __CLASS__, 'location_error_check' ) );
 
 	}
@@ -140,16 +142,11 @@ class Location_Taxonomy {
 		return $query_vars;
 	}
 
-	public static function render_headline_fields( $tag, $taxonomy ) {
-
-		if ( ! self::term_meta_available() ) {
-			?>
-			<h1><strong>Notice: Term Metadata Unavailbale in this version of WordPress</strong></h1>
-			<?php
+	public static function render_headline_fields_edit( $tag, $taxonomy ) {
+		if ( ! self::term_meta_available() ) :
+			self::render_term_meta_unavailable_notice();
 			return;
-
-		}
-
+		endif;
 
 		$headline = get_term_meta( $tag->term_id, 'headline', true );
 		$subheadline = get_term_meta( $tag->term_id, 'subheadline', true );
@@ -174,6 +171,27 @@ class Location_Taxonomy {
 		</tr>
 		</tbody>
 		</table><?php
+	}
+
+	public static function render_headline_fields_new() {
+		if ( ! self::term_meta_available() ) :
+			self::render_term_meta_unavailable_notice();
+			return;
+		endif;
+
+		?>
+		<div class="form-field term-headline-wrap">
+			<label for="headline">Headline</label>
+			<input name="headline" id="headline" type="text" size="40">
+		</div>
+		<div class="form-field term-subheadline-wrap">
+			<label for="subheadline">Subheadline</label>
+			<input name="subheadline" id="subheadline" type="text" size="40">
+		</div><?php
+	}
+
+	private static function render_term_meta_unavailable_notice() {
+		echo '<h1><strong>Notice: Term Metadata Unavailbale in this version of WordPress</strong></h1>';
 	}
 
 	public static function save_headline_fields( $term_id, $tt_id ) {

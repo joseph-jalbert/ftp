@@ -1854,6 +1854,7 @@ footer#footer .offices {
 	border: 10px solid rgba(0,0,0,.08);
 	border-radius: 10px;
 	text-align:center;
+	background: #fff;
 }
 .hs-form-body {
 	position: relative;
@@ -1863,6 +1864,7 @@ footer#footer .offices {
     padding: 20px 20px 0 20px;
     background-size: 100% 100%;
     margin-bottom: 0;
+	margin-top: -2px;
 }
 .hs-form-title {
 	position: relative;
@@ -1887,14 +1889,18 @@ footer#footer .offices {
 	font-size: 17px;
 	font-weight: 700;
 }
-.hbspt-form form {
+.hp-hs-form {
+	padding-top: 20px;
+    border-bottom: none;	
+}
+.hp-hs-form form {
+	margin-top: 0;
+	padding-top: 20px;
 	text-align: left;
-    border-bottom: none;
-	margin-top: 20px;
-	padding-top: 25px;
+	background: green;
 	background: url(/wp-content/themes/forthepeople/assets/images/structure/form-hr1.png)no-repeat 0 0;
 }
-.hbspt-form form label {
+.hp-hs-form form label {
 	display: block;
     color: #00233F;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -1902,7 +1908,7 @@ footer#footer .offices {
     font-weight: 700;
     text-shadow: 0px 1px 0px #FFF;
 }
-.hbspt-form form label.hs-form-booleancheckbox-display {
+.hp-hs-form form label.hs-form-booleancheckbox-display {
 	display: block;
     color: #00233F;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -1912,46 +1918,48 @@ footer#footer .offices {
 	vertical-align: top;
 	padding-bottom: 10px;
 }
-.hbspt-form form label.hs-form-booleancheckbox-display input[type="radio"], 
-.hbspt-form form label.hs-form-booleancheckbox-display input[type="checkbox"] {
+.hp-hs-form form label.hs-form-booleancheckbox-display input[type="radio"], 
+.hp-hs-form form label.hs-form-booleancheckbox-display input[type="checkbox"] {
 	margin: 0 5px 0 0;
 }
-.hs-richtext p.custom-para-blog{
+.hp-hs-form form .hs-richtext p.custom-para-blog{
 	margin: 0;
     padding: 10px 5px;
     line-height: 16px;
     font-size: 10px;
 	background: none;
 }
-.hbspt-form form textarea, 
-.hbspt-form form input[type="text"], 
-.hbspt-form form input[type="password"], 
-.hbspt-form form input[type="datetime"], 
-.hbspt-form form input[type="datetime-local"], 
-.hbspt-form form input[type="date"], 
-.hbspt-form form input[type="month"], 
-.hbspt-form form input[type="time"], 
-.hbspt-form form input[type="week"], 
-.hbspt-form form input[type="number"], 
-.hbspt-form form input[type="email"], 
-.hbspt-form form input[type="url"], 
-.hbspt-form form input[type="search"], 
-.hbspt-form form input[type="tel"], 
-.hbspt-form form input[type="color"], 
-.hbspt-form form .uneditable-input {
-	max-width: 230px;
+.hp-hs-form form textarea, 
+.hp-hs-form form input[type="text"], 
+.hp-hs-form form input[type="password"], 
+.hp-hs-form form input[type="datetime"], 
+.hp-hs-form form input[type="datetime-local"], 
+.hp-hs-form form input[type="date"], 
+.hp-hs-form form input[type="month"], 
+.hp-hs-form form input[type="time"], 
+.hp-hs-form form input[type="week"], 
+.hp-hs-form form input[type="number"], 
+.hp-hs-form form input[type="email"], 
+.hp-hs-form form input[type="url"], 
+.hp-hs-form form input[type="search"], 
+.hp-hs-form form input[type="tel"], 
+.hp-hs-form form input[type="color"], 
+.hp-hs-form form .uneditable-input {
+	max-width: 236px;
 	width: 100%;
 }
-.hbspt-form form textarea.hs-input{
-	max-width: 240px;
+.hp-hs-form form textarea.hs-input{
+	max-width: 260px !important;
 	width: 100%;
+	min-height: 70px;
 }
-.hs_submit {
+.hp-hs-form form .hs_submit {
 	text-align: center;
-	padding-top: 20px;
+	padding: 0;
+	margin: 0;
 }
-.hs_submit input[type="submit"] {
-	background: #a03822 url(http://forthepeople.com/wp-content/themes/forthepeople/assets/images/structure/form-cta-1.png)repeat-x;
+.hp-hs-form form .hs_submit input[type="submit"] {
+	background: #a03822 url(/wp-content/themes/forthepeople/assets/images/structure/form-cta-1.png)repeat-x;
 	border: 1px solid #a03822;
 	box-shadow: inset 0 0 3px rgba(255,255,190,.59);
 	font-weight: 400;
@@ -1961,64 +1969,109 @@ footer#footer .offices {
 	padding: 12px 25px;
 	border-radius: 5px;
 }
-.hs_yes_sign_me_up_for_the_newsletter_ {
+.hp-hs-form form .hs_yes_sign_me_up_for_the_newsletter_ {
 	border-bottom: 1px solid transparent;
 }
-.hs-error-msgs.inputs-list {
+.hp-hs-form form .hs-error-msgs.inputs-list {
 	margin-bottom: 15px;
 }
-.hs-error-msgs.inputs-list label {
+.hp-hs-form form .hs-error-msgs.inputs-list label {
 	color: #b94a48;
+}
+.hp-hs-form form .field {
+	margin-bottom: 10px !important;
+}
+.hp-hs-form form .hs-error-msgs.inputs-list {
+	margin-bottom: 5px;
+	max-width: 98%;
+	width: 100%;
+}
+.hp-hs-form .inputs-list {
+	padding-left: 2px;
+}
+.hp-hs-form form .actions {
+	margin: 0;
+	padding: 10px 0 0 0;
 }
 
 /* HubSpot Form for the Contact Page 
 ----------------------------------------*/
-.cp-hs-form-body {
+.cp-hs-form {
 	position: relative;
 	text-align:center;
 	background:none;
 }
-.cp-hs-form-body .hbspt-form form {
+.cp-hs-form form {
 	margin: 0;
 	padding: 5px 0 20px 0;
 	background: none;
 }
-.cp-hs-form-body .hbspt-form form input[type="text"], 
-.cp-hs-form-body .hbspt-form form input[type="password"], 
-.cp-hs-form-body .hbspt-form form input[type="datetime"], 
-.cp-hs-form-body .hbspt-form form input[type="datetime-local"], 
-.cp-hs-form-body .hbspt-form form input[type="date"], 
-.cp-hs-form-body .hbspt-form form input[type="month"], 
-.cp-hs-form-body .hbspt-form form input[type="time"], 
-.cp-hs-form-body .hbspt-form form input[type="week"], 
-.cp-hs-form-body .hbspt-form form input[type="number"], 
-.cp-hs-form-body .hbspt-form form input[type="email"], 
-.cp-hs-form-body .hbspt-form form input[type="url"], 
-.cp-hs-form-body .hbspt-form form input[type="search"], 
-.cp-hs-form-body .hbspt-form form input[type="tel"], 
-.cp-hs-form-body .hbspt-form form input[type="color"], 
-.cp-hs-form-body .hbspt-form form textarea {
+.cp-hs-form form input[type="text"], 
+.cp-hs-form form input[type="password"], 
+.cp-hs-form form input[type="datetime"], 
+.cp-hs-form form input[type="datetime-local"], 
+.cp-hs-form form input[type="date"], 
+.cp-hs-form form input[type="month"], 
+.cp-hs-form form input[type="time"], 
+.cp-hs-form form input[type="week"], 
+.cp-hs-form form input[type="number"], 
+.cp-hs-form form input[type="email"], 
+.cp-hs-form form input[type="url"], 
+.cp-hs-form form input[type="search"], 
+.cp-hs-form form input[type="tel"], 
+.cp-hs-form form input[type="color"], 
+.cp-hs-form form textarea {
 	padding: 8px 0;
     line-height: 1.5em;
-	margin-bottom: 15px;
+	margin-bottom: 5px;
 	max-width: 700px;
 	width: 100%;
 }
-.cp-hs-form-body .hbspt-form form textarea {
-	margin-bottom: 15px !important;
+.cp-hs-form .hs-form textarea.hs-input {
+	max-width: 700px;
+	width: 100%;	
 }
-.cp-hs-form-body .hbspt-form .hs-richtext p.custom-para-blog {
+.cp-hs-form form textarea {
+	margin-bottom: 15px !important;
+	min-height: 200px;
+	padding: 5px 0;
+}
+.cp-hs-form form .hs-form .inputs-list {
+	padding-left: 0;
+	max-width: 98%;
+	width: 100%;
+}
+.cp-hs-form form .hs-richtext p.custom-para-blog {
 	text-align: center;
 	font-size: 11px;
-	padding: 0 0 20px 0; 
+	padding: 0; 
+	background: none;
+	margin-top: -10px;
 }
-.cp-hs-form-body .hbspt-form .hs_submit {
-	padding-top: 0;
-	margin-bottom: -25px;
+.cp-hs-form .hs-form.stacked .actions {
+	margin: 0;
+	padding: 0;
 }
-.cp-hs-form-body .hbspt-form .hs-error-msgs.inputs-list label {
+.cp-hs-form .hs_submit {
+	padding-top: 15px;
+	margin-bottom: 5px;
+}
+.cp-hs-form .hs_submit input[type="submit"] {
+	background: #a03822 url(/wp-content/themes/forthepeople/assets/images/structure/form-cta-1.png)repeat-x;
+	border: 1px solid #a03822;
+    box-shadow: inset 0 0 3px rgba(255,255,190,.59);
+    font-weight: 700;
+    color: #FFF;
+    font-size: 14px;
+    text-shadow: 0 1px 0 rgba(122,38,18,.81);
+    padding: 12px 30px;
+    border-radius: 5px;
+}
+.cp-hs-form .hs-error-msgs.inputs-list label {
 	color: #b94a48 !important;
 	font-weight: bold !important;
+}
+.cp-hs-form form .hs_yes_sign_me_up_for_the_newsletter_ {
 }
 
 /* HubSpot Modal Form for Attorney Pages 
@@ -2026,66 +2079,98 @@ footer#footer .offices {
 .modal-hs-form {
 	position: relative;
 }
-.modal-hs-form .hbspt-form form {
+.modal-hs-form form {
 	background: none;
 	text-align: center;
 	margin-top: 0;
 	padding-top: 15px;
 }
-.modal-hs-form .hbspt-form form label {
+.modal-hs-form .hs-form.stacked label {
 	float: left;
 	width: 29%;
     font-weight: normal;
 	text-align: right;
+	margin-right: 10px;
 }
-.modal-hs-form .hbspt-form form .hs-error-msgs.inputs-list label {
+.modal-hs-form .hs-form .input {
+	width: 62.5%;
+	float: left;
+}
+.modal-hs-form form .hs-error-msgs.inputs-list li {
+	border: 0;
+}
+.modal-hs-form form .hs-error-msgs.inputs-list label {
 	text-align: center;
-	float: none;
+	float: left;
 	color: #b94a48;
-	width: 100%;
+	width: 62.5%;
+	margin-left: 30%;
+	font-size: 12px;
+	text-align: left;
 }
-.modal-hs-form .hbspt-form form .hs-error-msgs.inputs-list label.hs-form-booleancheckbox-display, 
-.modal-hs-form .hbspt-form form .hs-error-msgs.inputs-list label.hs-form-booleancheckbox-displal {
+.modal-hs-form form .hs-error-msgs.inputs-list label.hs-form-booleancheckbox-display, 
+.modal-hs-form form .hs-error-msgs.inputs-list label.hs-form-booleancheckbox-displal {
 	width: 100%;
-	float: none;
+	float: left;
 }
-.modal-hs-form .hbspt-form form .hs_yes_sign_me_up_for_the_newsletter_ label {
+.modal-hs-form form .hs_yes_sign_me_up_for_the_newsletter_ {
 	width: 100%;
-	float: none;
+	float: left;	
+}
+.modal-hs-form form .hs_yes_sign_me_up_for_the_newsletter_ label {
+	width: 98% !important;
+	float: left;
 	text-align: center;
 }
-.modal-hs-form .hbspt-form .hs-richtext p.custom-para-blog {
+.modal-hs-form .hs-form .hs_yes_sign_me_up_for_the_newsletter_ .input {
+	width: 100%;
+}
+.modal-hs-form form .hs_yes_sign_me_up_for_the_newsletter_ ul li {
+	border: 0;
+}
+.modal-hs-form .hs-form.stacked .hs_yes_sign_me_up_for_the_newsletter_ label {
+	text-align: center;	
+}
+.modal-hs-form .hs-richtext p.custom-para-blog {
 	text-align: center;
 	font-size: 10px;
 	padding: 15px 35px; 
 	background: #f9f9f9;
 	margin-bottom: 15px;
 }
-.modal-hs-form .hs-form .inputs-list {
+.modal-hs-form .inputs-list {
 	padding-left: 0;
 }
-.modal-hs-form .hbspt-form form textarea {
+.modal-hs-form form textarea {
 	margin-bottom: 15px !important;
 }
-.modal-hs-form .hbspt-form form input[type="text"], 
-.modal-hs-form .hbspt-form form input[type="password"], 
-.modal-hs-form .hbspt-form form input[type="datetime"], 
-.modal-hs-form .hbspt-form form input[type="datetime-local"], 
-.modal-hs-form .hbspt-form form input[type="date"], 
-.modal-hs-form .hbspt-form form input[type="month"], 
-.modal-hs-form .hbspt-form form input[type="time"], 
-.modal-hs-form .hbspt-form form input[type="week"], 
-.modal-hs-form .hbspt-form form input[type="number"], 
-.modal-hs-form .hbspt-form form input[type="email"], 
-.modal-hs-form .hbspt-form form input[type="url"], 
-.modal-hs-form .hbspt-form form input[type="search"], 
-.modal-hs-form .hbspt-form form input[type="tel"], 
-.modal-hs-form .hbspt-form form input[type="color"], 
-.modal-hs-form .hbspt-form form textarea {
-	width: 70%;
+.modal-hs-form form input[type="text"], 
+.modal-hs-form form input[type="password"], 
+.modal-hs-form form input[type="datetime"], 
+.modal-hs-form form input[type="datetime-local"], 
+.modal-hs-form form input[type="date"], 
+.modal-hs-form form input[type="month"], 
+.modal-hs-form form input[type="time"], 
+.modal-hs-form form input[type="week"], 
+.modal-hs-form form input[type="number"], 
+.modal-hs-form form input[type="email"], 
+.modal-hs-form form input[type="url"], 
+.modal-hs-form form input[type="search"], 
+.modal-hs-form form input[type="tel"], 
+.modal-hs-form form input[type="color"], 
+.modal-hs-form form textarea {
+	max-width: 700px;
+	width: 100%;
+	margin-bottom: 5px;
 }
-.modal-hs-form .hbspt-form .hs_submit input[type="submit"]{
+.modal-hs-form .hs-form textarea.hs-input {
+    max-width: 800px;
+	width: 100%;
+}
+.modal-hs-form form .hs_submit input[type="submit"]{
     color: #fff;
+	font-size: 14px;
+	font-weight: normal;
     text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
     background-color: #5bb75b;
     background-image: -moz-linear-gradient(top, #62c462, #51a351 );
@@ -2100,3 +2185,44 @@ footer#footer .offices {
     filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
 }
 
+/* HubSpot Consumet Alerts Form 
+--------------------------------------------*/
+#consumer-alerts-form {
+	position: relative;
+}
+#consumer-alerts-form {
+	background-image: none;
+}
+#consumer-alerts-form form input[type="text"], 
+#consumer-alerts-form form input[type="password"], 
+#consumer-alerts-form form input[type="datetime"], 
+#consumer-alerts-form form input[type="datetime-local"], 
+#consumer-alerts-form form input[type="date"], 
+#consumer-alerts-form form input[type="month"], 
+#consumer-alerts-form form input[type="time"], 
+#consumer-alerts-form form input[type="week"], 
+#consumer-alerts-form form input[type="number"], 
+#consumer-alerts-form form input[type="email"], 
+#consumer-alerts-form form input[type="url"], 
+#consumer-alerts-form form input[type="search"], 
+#consumer-alerts-form form input[type="tel"], 
+#consumer-alerts-form form input[type="color"], 
+#consumer-alerts-form form textarea {
+	padding: 8px 0;
+    line-height: 1.5em;
+	margin-bottom: 5px;
+	max-width: 700px;
+	width: 97%;
+	text-indent: 10px;
+}
+#consumer-alerts-form .hs_submit input[type="submit"] {
+	background: #a03822 url(/wp-content/themes/forthepeople/assets/images/structure/form-cta-1.png)repeat-x;
+	border: 1px solid #a03822;
+    box-shadow: inset 0 0 3px rgba(255,255,190,.59);
+    font-weight: 700;
+    color: #FFF;
+    font-size: 14px;
+    text-shadow: 0 1px 0 rgba(122,38,18,.81);
+    padding: 12px 30px;
+    border-radius: 5px;
+}

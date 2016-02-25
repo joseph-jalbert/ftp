@@ -947,36 +947,39 @@ body.landing .advert-txt a:hover {
 }
 /* HubSpot Form for Landing Pages      
 --------------------------------------------*/
-#formLandingPage .hbspt-form form {
+#formLandingPage .lp-hs-form form {
 	
 }
-#formLandingPage .hbspt-form form ul {
+#formLandingPage .lp-hs-form .hs-form.stacked .field {
+	margin-bottom: 5px;
+}
+#formLandingPage .lp-hs-form form ul {
 	list-style: none;
 }
-#formLandingPage .hbspt-form form label{
+#formLandingPage .lp-hs-form form label{
 	display: none;
 }
-#formLandingPage .hbspt-form form .hs-error-msgs label {
+#formLandingPage .lp-hs-form form .hs-error-msgs label {
 	display: inline-block;
 	color: #b94a48;
 	font-size: 12px;
 	padding-left: 10px;
 	margin-bottom: 5px;
 }
-#formLandingPage .hbspt-form form input[type="text"], 
-#formLandingPage .hbspt-form form input[type="password"], 
-#formLandingPage .hbspt-form form input[type="datetime"], 
-#formLandingPage .hbspt-form form input[type="datetime-local"], 
-#formLandingPage .hbspt-form form input[type="date"], 
-#formLandingPage .hbspt-form form input[type="month"], 
-#formLandingPage .hbspt-form form input[type="time"], 
-#formLandingPage .hbspt-form form input[type="week"], 
-#formLandingPage .hbspt-form form input[type="number"], 
-#formLandingPage .hbspt-form form input[type="email"], 
-#formLandingPage .hbspt-form form input[type="url"], 
-#formLandingPage .hbspt-form form input[type="search"], 
-#formLandingPage .hbspt-form form input[type="tel"], 
-#formLandingPage .hbspt-form form input[type="color"]{
+#formLandingPage .lp-hs-form form input[type="text"], 
+#formLandingPage .lp-hs-form form input[type="password"], 
+#formLandingPage .lp-hs-form form input[type="datetime"], 
+#formLandingPage .lp-hs-form form input[type="datetime-local"], 
+#formLandingPage .lp-hs-form form input[type="date"], 
+#formLandingPage .lp-hs-form form input[type="month"], 
+#formLandingPage .lp-hs-form form input[type="time"], 
+#formLandingPage .lp-hs-form form input[type="week"], 
+#formLandingPage .lp-hs-form form input[type="number"], 
+#formLandingPage .lp-hs-form form input[type="email"], 
+#formLandingPage .lp-hs-form form input[type="url"], 
+#formLandingPage .lp-hs-form form input[type="search"], 
+#formLandingPage .lp-hs-form form input[type="tel"], 
+#formLandingPage .lp-hs-form form input[type="color"]{
 	padding: 5px 0;
     line-height: 1.5em;
 	margin-bottom: 8px;
@@ -988,24 +991,24 @@ body.landing .advert-txt a:hover {
 	color: #a1a1a1;
 	border-radius: 3px;	
 }
-#formLandingPage .hbspt-form form input[type="text"].invalid.error, 
-#formLandingPage .hbspt-form form input[type="password"].invalid.error, 
-#formLandingPage .hbspt-form form input[type="datetime"].invalid.error, 
-#formLandingPage .hbspt-form form input[type="datetime-local"].invalid.error, 
-#formLandingPage .hbspt-form form input[type="date"].invalid.error, 
-#formLandingPage .hbspt-form form input[type="month"].invalid.error, 
-#formLandingPage .hbspt-form form input[type="time"].invalid.error, 
-#formLandingPage .hbspt-form form input[type="week"].invalid.error, 
-#formLandingPage .hbspt-form form input[type="number"].invalid.error, 
-#formLandingPage .hbspt-form form input[type="email"].invalid.error, 
-#formLandingPage .hbspt-form form input[type="url"].invalid.error, 
-#formLandingPage .hbspt-form form input[type="search"].invalid.error, 
-#formLandingPage .hbspt-form form input[type="tel"].invalid.error, 
-#formLandingPage .hbspt-form form input[type="color"].invalid.error{
+#formLandingPage .lp-hs-form form input[type="text"].invalid.error, 
+#formLandingPage .lp-hs-form form input[type="password"].invalid.error, 
+#formLandingPage .lp-hs-form form input[type="datetime"].invalid.error, 
+#formLandingPage .lp-hs-form form input[type="datetime-local"].invalid.error, 
+#formLandingPage .lp-hs-form form input[type="date"].invalid.error, 
+#formLandingPage .lp-hs-form form input[type="month"].invalid.error, 
+#formLandingPage .lp-hs-form form input[type="time"].invalid.error, 
+#formLandingPage .lp-hs-form form input[type="week"].invalid.error, 
+#formLandingPage .lp-hs-form form input[type="number"].invalid.error, 
+#formLandingPage .lp-hs-form form input[type="email"].invalid.error, 
+#formLandingPage .lp-hs-form form input[type="url"].invalid.error, 
+#formLandingPage .lp-hs-form form input[type="search"].invalid.error, 
+#formLandingPage .lp-hs-form form input[type="tel"].invalid.error, 
+#formLandingPage .lp-hs-form form input[type="color"].invalid.error{
 	border: 1px solid #c87872;
 	margin-bottom: 8px;
 }
-#formLandingPage .hbspt-form form textarea{
+#formLandingPage .lp-hs-form form textarea{
 	padding: 5px 0;
     line-height: 1.5em;
 	margin-bottom: 15px;
@@ -1017,25 +1020,31 @@ body.landing .advert-txt a:hover {
 	color: #a1a1a1;
 	border-radius: 3px;
 }
-#formLandingPage .hbspt-form form textarea.invalid.error{
+#formLandingPage .lp-hs-form form textarea.invalid.error{
 	border: 1px solid #c87872;
 	margin-bottom: 8px;
 }
-#formLandingPage .hbspt-form .hs_submit{
+#formLandingPage .lp-hs-form .hs_submit{
 	margin-top: 0;
 	text-align: center;
 }
-#formLandingPage .hbspt-form .hs_submit .actions{
-	padding-top: 0;
+#formLandingPage .lp-hs-form .hs_submit .actions{
+	padding: 0;
+	margin: 0;
+	text-align: center;
 }
-#formLandingPage .hbspt-form .hs_submit input[type="submit"]{
+#formLandingPage .lp-hs-form .hs_submit {
+	margin: 0;
+	padding: 0;
+}
+#formLandingPage .lp-hs-form .hs_submit input[type="submit"]{
     color: #fff;
+	font-weight: normal;
     background: #FF6600;
-	padding: 10px 30px;
+	padding: 10px 15px;
     text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
 	border: 0;
 	border-radius: 3px;
-	float: none;
     max-width: 335px;
     text-align: center;
     width: 100%;
@@ -1043,8 +1052,9 @@ body.landing .advert-txt a:hover {
 	cursor: pointer;
 	font-size: 16px;
 	line-height: 1.5em;
+	display: inline-block;
 }
-#formLandingPage .hbspt-form form .custom-para-blog{
+#formLandingPage .lp-hs-form form .custom-para-blog{
 	font-size: 12px;
 	line-height: 1.5em;
 	text-align: center;

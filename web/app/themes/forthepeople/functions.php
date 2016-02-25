@@ -231,7 +231,7 @@ function forthepeople_scripts() {
 
   wp_enqueue_script( 'global', get_template_directory_uri() . '/assets/js/scripts/global.js', false, '', true);
 
-	if (is_singular(array('post', 'classactionlawyers'))) {
+	if (is_singular(array('post', 'classactionlawyers', 'local_news'))) {
     		wp_enqueue_script( 'sharethis', '//w.sharethis.com/button/buttons.js', false, '', true);
 	}	
 	

@@ -14,7 +14,7 @@ $tfa->setUserHMACTypes();
 	<div>
 
 	<?php screen_icon(); ?>
-	<h2><?php echo sprintf(__('Two Factor Authentication (Version: %s) - Admin Settings', SIMBA_TFA_TEXT_DOMAIN), $simba_two_factor_authentication->version); ?> </h2>
+	<h1><?php echo sprintf(__('Two Factor Authentication (Version: %s) - Admin Settings', SIMBA_TFA_TEXT_DOMAIN), $simba_two_factor_authentication->version); ?> </h1>
 
 	<?php
 		if (!class_exists('Simba_Two_Factor_Authentication_Premium')) {
@@ -33,6 +33,16 @@ $tfa->setUserHMACTypes();
 		<br>
 
 	</div>
+
+	<?php if (defined('TWO_FACTOR_DISABLE') && TWO_FACTOR_DISABLE) { ?>
+	<div class="error">
+		<h3><?php _e('Two Factor Authentication currently disabled', SIMBA_TFA_TEXT_DOMAIN);?></h3>
+		<p>
+			<?php _e('Two factor authentication is currently disabled via the TWO_FACTOR_DISABLE constant (which is mostly likely to be defined in your wp-config.php)', SIMBA_TFA_TEXT_DOMAIN); ?>
+		</p>
+	</div>
+	<?php } ?>
+
 	<div style="max-width:800px;">
 
 	<?php
@@ -56,7 +66,7 @@ $tfa->setUserHMACTypes();
 		settings_fields('tfa_user_roles_group');
 	?>
 		<h2><?php _e('User roles', SIMBA_TFA_TEXT_DOMAIN); ?></h2>
-		<?php _e('Choose which user roles will have two factor authentication enabled.', SIMBA_TFA_TEXT_DOMAIN); ?>
+		<?php _e('Choose which user roles will have two factor authentication available.', SIMBA_TFA_TEXT_DOMAIN); ?>
 		<p>
 	<?php
 		$simba_two_factor_authentication->tfaListUserRolesCheckboxes();
@@ -64,6 +74,17 @@ $tfa->setUserHMACTypes();
 	<?php submit_button(); ?>
 	</form>
 	
+	<hr>
+
+	<h2><?php _e('Make two factor authentication compulsory', SIMBA_TFA_TEXT_DOMAIN); ?></h2>
+
+	<?php
+
+		$output = '<p><a href="https://www.simbahosting.co.uk/s3/product/two-factor-authentication/">'.__('Requiring users to use two-factor authentication is a feature of the Premium version of this plugin.', SIMBA_TFA_TEXT_DOMAIN).'</a><p>';
+		echo apply_filters('simba_tfa_after_user_roles', $output);
+
+	?>
+
 	<div>
 		<hr>
 		<form method="post" action="options.php" style="margin-top: 40px">

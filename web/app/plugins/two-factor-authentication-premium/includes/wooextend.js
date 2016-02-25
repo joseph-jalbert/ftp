@@ -2,30 +2,26 @@ jQuery(document).ready(function($) {
 
 	var submit_can_proceed = false;
 	
-	// See if WooCommerce login form is present
-	if($('.woocommerce form.login').size() > 0) {
+	// See if WooCommerce or Affiliate WP login form is present
+	if($('.woocommerce form.login').length > 0) {
 		var tfa_wc_form = $('.woocommerce form.login').first();
 		var tfa_wc_user_field = $('.woocommerce [name=username]').first();
 		var tfa_wc_pass_field = $('.woocommerce [name=password]').first();
 		var tfa_wc_submit_btn = $('.woocommerce [name=login]').first();
-		
-// 		var tfa_wc_otp_btn = document.createElement('button');
-// 		tfa_wc_otp_btn.id = 'tfa_wc_otp-button';
-// 		tfa_wc_otp_btn.className = 'button button-large button-primary';
-// 		tfa_wc_otp_btn.onclick = function(){ return tfaChangeToInput(); };
-// 		tfa_wc_otp_btn.style.styleFloat = 'none';
-// 		tfa_wc_otp_btn.style.cssFloat = 'none';
-// 		
-// 		var tfa_wc_btn_text = document.createTextNode(simbatfa_wc_settings.click_to_enter_otp);
-// 		tfa_wc_otp_btn.appendChild(tfa_wc_btn_text);
-// 		tfa_wc_otp_btn.style.width = '100%';
-		
+	} else if ($('#affwp-login-form').length > 0) {
+		var tfa_wc_form = $('#affwp-login-form').first();
+		var tfa_wc_user_field = $('#affwp-login-user-login, #affwp-user-login').first();
+		var tfa_wc_pass_field = $('#affwp-login-user-pass, #affwp-user-pass').first();
+		var tfa_wc_submit_btn = $('#affwp-login-form input[type=submit]').first();
+	}
+	
+	if ('undefined' != typeof tfa_wc_form) {
+	
 		var tfa_wc_p = document.createElement('p');
 		tfa_wc_p.id = 'tfa_wc_holder';
 		tfa_wc_p.style.display = 'none';
 		tfa_wc_p.style.marginBottom = '15px';
 		
-// 		tfa_wc_p.appendChild(tfa_wc_otp_btn);
 		$(tfa_wc_p).insertBefore(tfa_wc_submit_btn);
 
 		var p = document.getElementById('tfa_wc_holder');
@@ -64,9 +60,8 @@ jQuery(document).ready(function($) {
 			return false;
 		}
 		
-		
 		if (simbatfa_wc_settings.hasOwnProperty('spinnerimg')) {
-			$('label[for="rememberme"]').after('<img class="simbaotp_spinner" src="'+simbatfa_wc_settings.spinnerimg+'" style="margin-left: 4px;height: 20px; position: relative; top: 4px; border:0px; box-shadow:none;">');
+			$('label[for="rememberme"], #affwp-login-form input[type=submit]').after('<img class="simbaotp_spinner" src="'+simbatfa_wc_settings.spinnerimg+'" style="margin-left: 4px;height: 20px; position: relative; top: 4px; border:0px; box-shadow:none;">');
 		}
 		
 		$.ajax({

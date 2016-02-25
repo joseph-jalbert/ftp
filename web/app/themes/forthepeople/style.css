@@ -805,7 +805,7 @@ body, h1, h2, h3, h4, h5, p {
 	text-decoration: none;
 }
 #topNav > li:last-child > a:after {
-	background: url(/wp-content/themes/forthepeople/assets/images/navglow-sprite.png) no-repeat 0px -64px;
+	background: url(/assets/images/navglow-sprite.png) no-repeat 0px -64px;
 }
 #topNav > li a:after {
 	top: 0;
@@ -867,7 +867,7 @@ blockquote small {
 	font-weight: 300;
 }
 #fullSlider .rsUni .rsTab.rsNavSelected .rsTmb, #fullSlider .rsUni .rsTab:hover .rsTmb {
-	background: rgba(0, 0, 0, 0) url("/wp-content/themes/forthepeople/assets/images/shade-60.png") repeat-x scroll 0 0;
+	background: rgba(0, 0, 0, 0) url(/assets/images/shade-60.png) repeat-x scroll 0 0;
 	border-left: 1px solid #d7d7d7;
 	border-right: 1px solid #d7d7d7;
 	padding: 0 29px;
@@ -1009,7 +1009,7 @@ div.entry-content h2 {
 	position: relative;
 	display: block;
 	height: 56px;
-	background: #a03822 url(/wp-content/themes/forthepeople/assets/images/structure/form-cta-1.png)repeat-x;
+	background: #a03822 url(/assets/images/structure/form-cta-1.png)repeat-x;
 	border: 1px solid #a03822;
 	box-shadow: inset 0 0 3px rgba(255,255,190,.59);
 	text-align: center;
@@ -1026,7 +1026,7 @@ div.entry-content h2 {
 	display: block;
 	border: 1px solid #e4e0dc;
 	border-bottom: none;
-	background: #fdfbf8 url(/wp-content/themes/forthepeople/assets/images/structure/form-body-span4.png)no-repeat 0 0;
+	background: #fdfbf8 url(/assets/images/structure/form-body-span4.png)no-repeat 0 0;
 	background-size: 100% 100%;
 	min-height: 300px;
 	padding: 20px 20px 10px 20px;
@@ -1053,7 +1053,7 @@ div.entry-content h2 {
 .widget-area .gform_widget .gform_wrapper .gform_body {
 	margin-top: 20px;
 	padding-top: 25px;
-	background: url(/wp-content/themes/forthepeople/assets/images/structure/form-hr1.png)no-repeat 0 0;
+	background: url(/assets/images/structure/form-hr1.png)no-repeat 0 0;
 }
 .widget-area .gform_widget .gform_wrapper ul,  .widget-area .gform_widget .gform_wrapper form ul {
 	border: 0;
@@ -1120,7 +1120,7 @@ div.entry-content h2 {
 	width: 100%;
 }
 .widget-area .gform_widget .gform_wrapper .gform_footer input[type="submit"] {
-	background: #a03822 url(/wp-content/themes/forthepeople/assets/images/structure/form-cta-1.png)repeat-x;
+	background: #a03822 url(/assets/images/structure/form-cta-1.png)repeat-x;
 	border: 1px solid #a03822;
 	box-shadow: inset 0 0 3px rgba(255,255,190,.59);
 	font-weight: 400;
@@ -1269,7 +1269,7 @@ div.entry-content h2 {
 	font-size: 20px;
 	letter-spacing: -1px;
 	border-bottom: solid 1px #f8f8f8;
-	background: url(/wp-content/themes/forthepeople/assets/images/noise-bg.png) repeat;
+	background: url(/assets/images/noise-bg.png) repeat;
 	border-top: solid 5px #28618c;
 	margin: 40px 0 0 0;
 	font-weight: 200;
@@ -1565,7 +1565,7 @@ ul.office-locations li {
 	text-align: center;
 }
 .contactus .gform_wrapper .gform_footer input.button,  .contactus .gform_wrapper .gform_footer input[type=submit],  .contactus .gform_wrapper .gform_footer input[type=image] {
-	background: #a03822 url(assets/images/structure/form-cta-1.png) repeat-x;
+	background: #a03822 url(/assets/images/structure/form-cta-1.png) repeat-x;
 	border: 1px solid #a03822;
 	box-shadow: inset 0 0 3px rgba(255,255,190,.59);
 	font-weight: 700;
@@ -1785,7 +1785,7 @@ ul.dropdown-menu {
 	margin: 30px auto;
 }
 .cta-btn-for-mobile a {
-	background: #a03822 url(/wp-content/themes/forthepeople/assets/images/structure/form-cta-1.png) repeat-x;
+	background: #a03822 url(/assets/images/structure/form-cta-1.png) repeat-x;
     border: 1px solid #a03822;
     box-shadow: inset 0 0 3px rgba(255,255,190,.59);
     font-weight: 400;
@@ -1859,7 +1859,7 @@ footer#footer .offices {
 .hs-form-body {
 	position: relative;
     display: block;
-	background: #fdfbf8 url(/wp-content/themes/forthepeople/assets/images/structure/form-body-span4.png)no-repeat 0 0;
+	background: #fdfbf8 url(/assets/images/structure/form-body-span4.png)no-repeat 0 0;
     border: 1px solid #e4e0dc;
     padding: 20px 20px 0 20px;
     background-size: 100% 100%;
@@ -1870,7 +1870,7 @@ footer#footer .offices {
 	position: relative;
     display: block;
     height: 56px;
-    background: #a03822 url(/wp-content/themes/forthepeople/assets/images/structure/form-cta-1.png)repeat-x;
+    background: #a03822 url(/assets/images/structure/form-cta-1.png)repeat-x;
     border: 1px solid #a03822;
     box-shadow: inset 0 0 3px rgba(255,255,190,.59);
     text-align: center;
@@ -1898,7 +1898,7 @@ footer#footer .offices {
 	padding-top: 20px;
 	text-align: left;
 	background: green;
-	background: url(/wp-content/themes/forthepeople/assets/images/structure/form-hr1.png)no-repeat 0 0;
+	background: url(/assets/images/structure/form-hr1.png)no-repeat 0 0;
 }
 .hp-hs-form form label {
 	display: block;
@@ -1959,7 +1959,7 @@ footer#footer .offices {
 	margin: 0;
 }
 .hp-hs-form form .hs_submit input[type="submit"] {
-	background: #a03822 url(/wp-content/themes/forthepeople/assets/images/structure/form-cta-1.png)repeat-x;
+	background: #a03822 url(/assets/images/structure/form-cta-1.png)repeat-x;
 	border: 1px solid #a03822;
 	box-shadow: inset 0 0 3px rgba(255,255,190,.59);
 	font-weight: 400;
@@ -2057,7 +2057,7 @@ footer#footer .offices {
 	margin-bottom: 5px;
 }
 .cp-hs-form .hs_submit input[type="submit"] {
-	background: #a03822 url(/wp-content/themes/forthepeople/assets/images/structure/form-cta-1.png)repeat-x;
+	background: #a03822 url(/assets/images/structure/form-cta-1.png)repeat-x;
 	border: 1px solid #a03822;
     box-shadow: inset 0 0 3px rgba(255,255,190,.59);
     font-weight: 700;
@@ -2216,7 +2216,7 @@ footer#footer .offices {
 	text-indent: 10px;
 }
 #consumer-alerts-form .hs_submit input[type="submit"] {
-	background: #a03822 url(/wp-content/themes/forthepeople/assets/images/structure/form-cta-1.png)repeat-x;
+	background: #a03822 url(/assets/images/structure/form-cta-1.png)repeat-x;
 	border: 1px solid #a03822;
     box-shadow: inset 0 0 3px rgba(255,255,190,.59);
     font-weight: 700;

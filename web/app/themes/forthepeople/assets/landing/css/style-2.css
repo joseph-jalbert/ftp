@@ -208,7 +208,7 @@ p {
 	right: -155px;
 	width: 635px;
 	height: 509px;
-	background: url(/wp-content/themes/forthepeople/assets/landing/images/john-morgan.jpg) no-repeat;
+	background: url(../images/john-morgan.jpg) no-repeat;
 	z-index: 1;
 }
 .half-content {
@@ -534,7 +534,7 @@ img.frame {
 	width: 12px;
 	height: 0;
 	padding-top: 12px;
-	background-image: url(/wp-content/themes/forthepeople/assets/landing/images/pagination.png);
+	background-image: url(../images/pagination.png);
 	background-position: 0 0;
 	float: left;
 	overflow: hidden
@@ -551,7 +551,7 @@ img.frame {
 .ft-logo {
 	width: 72px;
 	height: 63px;
-	background: url(/wp-content/themes/forthepeople/assets/landing/images/mm-logo-footer.png) no-repeat;
+	background: url(../images/mm-logo-footer.png) no-repeat;
 	margin-top: 0;
 	float: left;
 }
@@ -684,7 +684,7 @@ img.frame {
 }
 .header .num:before {
 	display: inline-block;
-	content: url('/wp-content/themes/forthepeople/assets/landing/images/icon-phone.png');
+	content: url(../images/icon-phone.png);
 	padding-right: 5px;
 	vertical-align: middle;
 }

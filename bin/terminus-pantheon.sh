@@ -18,7 +18,6 @@ if hash terminus 2>/dev/null; then
         terminus site deploy --site=$PANTHEON_SITE_NAME --env=test --note="Updating"
         terminus site deploy --site=$PANTHEON_SITE_NAME --env=live --note="Updating from test"
         terminus wp plugin deactivate wp-redis --site=$PANTHEON_SITE_NAME --env=live
-        terminus wp plugin activate wp-redis --site=$PANTHEON_SITE_NAME --env=live
         terminus wp rewrite flush  --site=$PANTHEON_SITE_NAME --env=live
         terminus site set-connection-mode --mode=git --site=$PANTHEON_SITE_NAME
 

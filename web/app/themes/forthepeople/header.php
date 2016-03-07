@@ -18,7 +18,7 @@
 <link rel="apple-touch-icon" sizes="72x72" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/apple-touch-icon-72x72.png">
 <link rel="apple-touch-icon" sizes="114x114" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/apple-touch-icon-114x114.png">
 <link rel="apple-touch-icon" sizes="144x144" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/apple-touch-icon-144x144.png">
-
+	<title><?php wp_title('-'); ?></title>
 <link rel="profile" href="http://gmpg.org/xfn/11">
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 <script type="text/javascript" src="//use.typekit.net/zig7enb.js"></script>
@@ -29,12 +29,25 @@
 
 <?php
 $post_type = get_post_type($post);
-if ($post_type)
-{
-    $post_type_data = get_post_type_object( $post_type );
-    $post_type_slug = $post_type_data->rewrite['slug'];
-	$post_type_name = $post_type_data->labels->singular_name;
-	$menuslug = $post_type_slug;
+if ($post_type)  {
+
+	if ( Local_News::POST_TYPE === $post_type ) {
+
+		$terms = wp_get_post_terms( get_the_ID(), Location_Taxonomy::LOCATION_TAXONOMY );
+		if ( is_array($terms) && isset( $terms[0]->slug )) {
+
+				$menuslug = $terms[0]->slug;
+
+
+		}
+
+
+	} else {
+		$post_type_data = get_post_type_object( $post_type );
+		$post_type_slug = $post_type_data->rewrite['slug'];
+		$post_type_name = $post_type_data->labels->singular_name;
+		$menuslug       = $post_type_slug;
+	}
 }
 
 

@@ -38,15 +38,38 @@ get_header(); ?>
 <div class="row-fluid row-leading row-follow">
 <div id="col1" class="span6">
   <main id="main" class="site-main" role="main">
-    <?php if ( is_active_sidebar( 'contact_form' ) ) : ?>
+
     <div id="form1" class="contactus">
-      <?php dynamic_sidebar( 'contact_form' ); ?>
+      <div class="cp-hs-form form-wrapper">
+
+	        <?php
+	        $portal_id = '1841598';
+	        $form_id = 'bcb2969c-c74f-4849-876a-fc98624fc965';
+
+	        if ( get_field('hubspot_portal_id')) {
+	          $portal_id = get_field('hubspot_portal_id');
+	        }
+	        if ( get_field('hubspot_form_id')) {
+	          $form_id = get_field('hubspot_form_id');
+	        }
+
+
+	        ?>
+	        <script>
+	          hbspt.forms.create({
+	            portalId: '<?php echo esc_js( $portal_id );?>',
+	            formId: '<?php echo esc_js( $form_id );?>',
+	            target: '.cp-hs-form'
+	          });
+	        </script>
+
+      </div>
     </div>
     <div style="text-align:center;"> <img src="<?php echo get_template_directory_uri(); ?>/assets/images/media/peer-av-rated-bw.png" alt="" height="44" border="0" width="306"> </div>
-    <?php endif; ?>
+
   </main>
   <!-- #main -->
-  
+
   <?php get_template_part( 'template-parts/verdicts' ); ?>
 </div>
 <!-- #col1 -->

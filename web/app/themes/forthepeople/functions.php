@@ -6,6 +6,7 @@
  */
 
 require __DIR__ . '/inc/local-news/local-news.php';
+require __DIR__ . '/inc/hubspot-settings/hubspot-settings.php';
 require __DIR__ . '/inc/robots.txt.php';
 require __DIR__ . '/inc/actions.php';
 

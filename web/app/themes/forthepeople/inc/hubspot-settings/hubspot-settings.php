@@ -52,9 +52,9 @@ if(function_exists("register_field_group"))
 			),
 			array (
 				array (
-					'param' => 'post_type',
+					'param' => 'page_template',
 					'operator' => '==',
-					'value' => 'open-class-actions.php',
+					'value' => 'contact-page.php',
 					'order_no' => 0,
 					'group_no' => 1,
 				),
@@ -63,7 +63,7 @@ if(function_exists("register_field_group"))
 				array (
 					'param' => 'post_type',
 					'operator' => '==',
-					'value' => 'post',
+					'value' => 'open-class-actions.php',
 					'order_no' => 0,
 					'group_no' => 1,
 				),

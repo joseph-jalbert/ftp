@@ -4,7 +4,7 @@ if(function_exists("register_field_group"))
 {
 	register_field_group(array (
 		'id' => 'acf_override-hubspot-form-code',
-		'title' => 'Override Hubspot Form Fields',
+		'title' => 'Override Hubspot Form Fields (if you do not set these, they will fall back to their defaults)',
 		'fields' => array (
 			array (
 				'key' => 'field_56dfgaa92c58b',
@@ -28,6 +28,17 @@ if(function_exists("register_field_group"))
 				'rows' => '',
 				'formatting' => 'none',
 			),
+			array (
+				'key' => 'field_iididiiiadb',
+				'label' => 'Hubspot Target',
+				'name' => 'hubspot_target',
+				'type' => 'text',
+				'default_value' => '',
+				'placeholder' => '',
+				'maxlength' => '',
+				'rows' => '',
+				'formatting' => 'none',
+			),
 		),
 		'location' => array (
 			array (
@@ -44,6 +55,15 @@ if(function_exists("register_field_group"))
 					'param' => 'post_type',
 					'operator' => '==',
 					'value' => 'open-class-actions.php',
+					'order_no' => 0,
+					'group_no' => 1,
+				),
+			),
+			array (
+				array (
+					'param' => 'post_type',
+					'operator' => '==',
+					'value' => 'post',
 					'order_no' => 0,
 					'group_no' => 1,
 				),

@@ -9,7 +9,7 @@ class Hubspot_Form extends WP_Widget {
 	 * Initialization method
 	 */
 	public static function init() {
-		add_action( 'widgets_init', create_function( '', 'register_widget( "Super_recent_posts_widget" );' ) );
+		add_action( 'widgets_init', create_function( '', 'register_widget( "Hubspot_Form" );' ) );
 	}
 
 	/**
@@ -17,9 +17,9 @@ class Hubspot_Form extends WP_Widget {
 	 */
 	public function __construct() {
 		parent::__construct(
-			'super_recent_posts_widget', // Base ID
-			'Super Recent Posts Widget', // Name
-			array( 'description' => __( 'A prettier and more functional recent posts widget', self::$text_domain ), ) // Args
+			'Hubspot_Form', // Base ID
+			'Hubspot Form', // Name
+			array( 'description' => __( 'Hubspot Form', self::$text_domain ), ) // Args
 		);
 	}
 
@@ -27,7 +27,6 @@ class Hubspot_Form extends WP_Widget {
 	/**
 	 * Front-end display of widget.
 	 *
-	 * Filter 'srpw_template' - template allowing a theme to use its own template file
 	 *
 	 * @see WP_Widget::widget()
 	 *
@@ -37,6 +36,7 @@ class Hubspot_Form extends WP_Widget {
 	public function widget( $args, $instance ) {
 		$hubspot_form_id   = esc_attr( $instance['hubspot-form-id'] );
 		$hubspot_portal_id = esc_attr( $instance['hubspot-portal-id'] );
+		$hubspot_target = esc_attr( $instance['hubspot-target'] );
 		$current_post      = get_queried_object();
 		$post_id           = $current_post ? $current_post->ID : null;
 
@@ -46,6 +46,11 @@ class Hubspot_Form extends WP_Widget {
 		if ( $post_id && get_field( 'hubspot_portal_id', $post_id ) ) {
 			$hubspot_portal_id = get_field( 'hubspot_portal_id', $post_id );
 		}
+		if ( $post_id && get_field( 'hubspot_target', $post_id ) ) {
+			$hubspot_target = get_field( 'hubspot_target', $post_id );
+		}
+
+
 
 		?>
 
@@ -60,7 +65,7 @@ class Hubspot_Form extends WP_Widget {
 						hbspt.forms.create({
 							portalId: '<?php echo esc_js( $hubspot_portal_id );?>',
 							formId: '<?php echo esc_js( $hubspot_form_id );?>',
-							target: '.cp-hs-form'
+							target: '<?php echo esc_js( $hubspot_target );?>',
 						});
 					</script>
 				</div>
@@ -85,6 +90,7 @@ class Hubspot_Form extends WP_Widget {
 		$instance                      = array();
 		$instance['hubspot-form-id']   = sanitize_text_field( $new_instance['hubspot-form-id'] );
 		$instance['hubspot-portal-id'] = absint( $new_instance['hubspot-portal-id'] );
+		$instance['hubspot-target'] = sanitize_text_field( $new_instance['hubspot-target'] );
 
 
 		return $instance;
@@ -101,14 +107,15 @@ class Hubspot_Form extends WP_Widget {
 		$defaults = array(
 			'hubspot-form-id'   => null,
 			'hubspot-portal-id' => null,
+			'hubspot-target' => null,
 
 		);
 		$instance = wp_parse_args( (array) $instance, $defaults );
 		?>
-		<div class="srpw-form">
+		<div class="hubspot-form">
 			<p>
 				<label
-					for="<?php echo $this->get_field_id( 'hubspot-form-id' ); ?>"><?php _e( 'Hubspot Form ID:', self::$text_domain ); ?></label>
+					for="<?php echo $this->get_field_id( 'hubspot-form-id' ); ?>"><?php _e( 'Default Hubspot Form ID:', self::$text_domain ); ?></label>
 				<input class="widefat" id="<?php echo $this->get_field_id( 'hubspot-form-id' ); ?>"
 				       name="<?php echo $this->get_field_name( 'hubspot-form-id' ); ?>" type="text"
 				       value="<?php echo $instance['hubspot-form-id']; ?>"/>
@@ -116,10 +123,17 @@ class Hubspot_Form extends WP_Widget {
 
 			<p>
 				<label
-					for="<?php echo $this->get_field_id( 'hubspot-portal-id' ); ?>"><?php _e( 'Hubspot Portal ID:', self::$text_domain ); ?></label>
+					for="<?php echo $this->get_field_id( 'hubspot-portal-id' ); ?>"><?php _e( 'Default Hubspot Portal ID:', self::$text_domain ); ?></label>
 				<input class="widefat" id="<?php echo $this->get_field_id( 'hubspot-portal-id' ); ?>"
 				       name="<?php echo $this->get_field_name( 'hubspot-portal-id' ); ?>" type="text"
 				       value="<?php echo $instance['hubspot-portal-id']; ?>"/>
+			</p>
+			<p>
+				<label
+					for="<?php echo $this->get_field_id( 'hubspot-target' ); ?>"><?php _e( 'Default Hubspot Target:', self::$text_domain ); ?></label>
+				<input class="widefat" id="<?php echo $this->get_field_id( 'hubspot-target' ); ?>"
+				       name="<?php echo $this->get_field_name( 'hubspot-target' ); ?>" type="text"
+				       value="<?php echo $instance['hubspot-target']; ?>"/>
 			</p>
 
 		</div>
@@ -129,3 +143,5 @@ class Hubspot_Form extends WP_Widget {
 
 
 }
+
+Hubspot_Form::init();

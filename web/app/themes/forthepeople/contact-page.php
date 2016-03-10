@@ -43,23 +43,28 @@ get_header(); ?>
       <div class="cp-hs-form form-wrapper">
 
 	        <?php
-	        $portal_id = '1841598';
-	        $form_id = 'bcb2969c-c74f-4849-876a-fc98624fc965';
+	        $hubspot_portal_id = '1841598';
+	        $hubspot_form_id = 'bcb2969c-c74f-4849-876a-fc98624fc965';
+	        $hubspot_target = '.cp-hs-form';
 
 	        if ( get_field('hubspot_portal_id')) {
-	          $portal_id = get_field('hubspot_portal_id');
+		        $hubspot_portal_id = get_field('hubspot_portal_id');
 	        }
 	        if ( get_field('hubspot_form_id')) {
-	          $form_id = get_field('hubspot_form_id');
+		        $hubspot_form_id = get_field('hubspot_form_id');
+	        }
+
+	        if ( get_field('hubspot_target')) {
+		        $hubspot_target = get_field('hubspot_target');
 	        }
 
 
 	        ?>
 	        <script>
 	          hbspt.forms.create({
-	            portalId: '<?php echo esc_js( $portal_id );?>',
-	            formId: '<?php echo esc_js( $form_id );?>',
-	            target: '.cp-hs-form'
+	            portalId: '<?php echo esc_js( $hubspot_portal_id );?>',
+	            formId: '<?php echo esc_js( $hubspot_form_id );?>',
+	            target: '<?php echo esc_js( $hubspot_target );?>',
 	          });
 	        </script>
 

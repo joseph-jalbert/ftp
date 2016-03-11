@@ -100,14 +100,6 @@ header a.hdr-btn span {
 #formv2 label {
 	display: none;
 }
-#formv2 div.gform_footer {
-	margin-left: 0;
-}
-#formv2 .gform_wrapper li.gfield.gfield_error, #formv2 .gform_wrapper li.gfield.gfield_error.gfield_contains_required.gfield_creditcard_warning {
-	background: none;
-	border: none;
-	margin-bottom: 0 !important;
-}
 #formv2 div.validation_message {
 	width: 80%;
 	margin: auto;
@@ -294,16 +286,8 @@ span.twstack {
 	margin-left: 0;
 	margin-bottom: 0px;
 }
-#splitsec #formv2 div.gform_footer {
-    	padding: 0;
-    	width: 100%;
-}
 #splitsec #formv2 form {
     	margin-bottom: 0;
-}
-#splitsec #formv2 div.gform_wrapper {
-    	margin: 0;
-    	max-width: 100%;
 }
 #splitsec #bulletsv2 .inner {
 	padding-right: 20px;

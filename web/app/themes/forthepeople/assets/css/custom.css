@@ -41,9 +41,6 @@ body {
   line-height: 20px;
 }
 
-.widget-area .gform_widget .gform_wrapper form {
-  margin-top:-1px;
-}
 
 
 
@@ -85,96 +82,6 @@ strong {
 
 .footer-layer1 {
   background-color: #424242;
-}
-
-#ie .widget-area .gform_widget {
-    border: 10px solid #eaeaea ;
-    background: #fcfbf8 ; 
-}
-#ie .widget-area .gform_widget .widget-title,  .widget-area .gform_widget h1.widget-title {
-    background: #a03822 ;
-}
-#ie .widget-area .gform_widget .gform_wrapper form {
-    background: #fdfbf8 ;
-}
-#ie .widget-area .gform_widget .gform_wrapper {
-    background: #fcfbf8 ;
-}
-#ie .widget-area .gform_widget .gform_wrapper .gform_heading {
-   max-width: 100%;
-    width: 100%;
-}
-#ie .widget-area .gform_widget .gform_wrapper .gform_description {
-
-}
-#ie .widget-area .gform_widget .gform_wrapper .gform_body {
-
-}
-#ie .widget-area .gform_widget .gform_wrapper ul,  .widget-area .gform_widget .gform_wrapper form ul {
-
-}
-#ie .widget-area .gform_widget .gform_wrapper ul.left_label li,  .widget-area .gform_widget .gform_wrapper form ul.left_label li {
-
-}
-#ie .widget-area .gform_widget .gform_wrapper .right_label input.large,  
-#ie .widget-area .gform_widget .gform_wrapper .right_label select.large,  
-#ie .widget-area .gform_widget .gform_wrapper .left_label input.large,  
-#ie .widget-area .gform_widget .gform_wrapper .left_label select.large,  
-#ie .widget-area .gform_widget .gform_wrapper .right_label textarea.small,  
-#ie .widget-area .gform_widget .gform_wrapper .left_label textarea.small,  
-#ie .widget-area .gform_widget .gform_wrapper .right_label textarea.medium,  
-#ie .widget-area .gform_widget .gform_wrapper .left_label textarea.medium,  
-#ie .widget-area .gform_widget .gform_wrapper .right_label textarea.large,  
-#ie .widget-area .gform_widget .gform_wrapper .left_label textarea.large {
-    width: 100%;
-    font-size: 14px;
-   font-weight: 400;
-   line-height: 20px;
-}
-#ie .widget-area .gform_widget .gform_wrapper .left_label .gfield_label {
-    display: block;
-    max-width: 100%;
-    width: 100%;
-}
-#ie .widget-area .gform_widget .gform_wrapper .left_label li.field_sublabel_below .gfield_label {
-    display: block;
-    max-width: 100%;
-    width: 100%;
-}
-#ie .widget-area .gform_widget .gform_wrapper input[type="text"] {
-
-}
-#ie .widget-area .gform_widget .gform_wrapper .left_label ul.gfield_checkbox,  
-#ie .widget-area .gform_widget .gform_wrapper .right_label ul.gfield_checkbox,  
-#ie .widget-area .gform_widget .gform_wrapper .left_label ul.gfield_radio,  
-#ie .widget-area .gform_widget .gform_wrapper .right_label ul.gfield_radio {
-
-}
-#ie .widget-area .gform_widget .gform_wrapper .gfield_checkbox li label,  .widget-area .gform_widget .gform_wrapper .gfield_radio li label {
-
-}
-#ie .widget-area .gform_widget .gform_wrapper.gf_browser_chrome .gfield_checkbox li input[type=checkbox],  
-#ie .widget-area .gform_widget .gform_wrapper.gf_browser_chrome .gfield_radio li input[type=radio],  
-#ie .widget-area .gform_widget .gform_wrapper.gf_browser_chrome .gfield_checkbox li input {
-
-}
-#ie .widget-area .gform_widget .gform_wrapper .disclaimer {
-
-}
-#ie .widget-area .gform_widget .gform_wrapper .gform_footer {
-
-}
-#ie .widget-area .gform_widget .gform_wrapper .gform_footer.right_label,  
-#ie .widget-area .gform_widget .gform_wrapper .gform_footer.left_label {
-
-}
-#ie .widget-area .gform_widget .gform_wrapper .gform_footer input[type="submit"] {
-    background: #a03822 ;
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e8613d ', endColorstr='#d04a30 ',GradientType=0 ); 
-    color: #fff;    
-}
-#ie .widget-area .gform_widget .gform_wrapper .gform_footer input[type="submit"]:hover {
-
 }
 
 

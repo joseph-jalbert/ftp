@@ -1433,29 +1433,6 @@ function getfivestars() {
 }
 add_shortcode( 'getfivestars_widget', 'getfivestars' );
 
-
-/**
- * Redirect a visitor to a custom confirmation page if an alternative url is provided
- */
-function custom_confirmation_page( $confirmation, $form , $entry, $ajax ) {
-	
-	global $wpdb;
-	
-	$site_url = esc_url( home_url() );
-	$page_id = get_the_ID();
-	$redirect_to_url = get_post_meta( $page_id, 'redirect_to_url', true );
-		
-	// redirect to a custom confirmation page if redirect_to_url is set. otherwise, use the default one. 
-	if( !empty( $redirect_to_url) ) {
-		
-		$confirmation = array( 'redirect' => $site_url . $redirect_to_url );
-	
-	} 
-    return $confirmation;
-}
-
-add_filter( 'gform_confirmation', 'custom_confirmation_page', 10, 4 );
-
 function rewritearchives_init(){
     global $wp_rewrite;
     $wp_rewrite->date_structure = 'blog/archive/%year%/%monthnum%';

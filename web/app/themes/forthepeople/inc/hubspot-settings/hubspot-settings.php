@@ -4,7 +4,7 @@ if(function_exists("register_field_group"))
 {
 	register_field_group(array (
 		'id' => 'acf_override-hubspot-form-code',
-		'title' => 'Override Hubspot Form Fields (if you do not set these, they will fall back to their defaults)',
+		'title' => 'Override Hubspot Form Fields, this will only work if this page is outputting a hubspot form (if you do not set these, they will fall back to their defaults)',
 		'fields' => array (
 			array (
 				'key' => 'field_56dfgaa92c58b',
@@ -64,6 +64,15 @@ if(function_exists("register_field_group"))
 					'param' => 'post_type',
 					'operator' => '==',
 					'value' => 'classactionlawyers',
+					'order_no' => 0,
+					'group_no' => 1,
+				),
+			),
+			array (
+				array (
+					'param' => 'post_type',
+					'operator' => '==',
+					'value' => 'post',
 					'order_no' => 0,
 					'group_no' => 1,
 				),

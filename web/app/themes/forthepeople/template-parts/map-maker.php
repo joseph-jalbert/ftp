@@ -22,7 +22,7 @@
                                     </span>
 									<span itemprop="addressLocality"><?php the_title(); ?></span>, <span itemprop="addressRegion"><?php the_field('state'); ?></span> <span itemprop="postalCode"><?php the_field('zip_code'); ?></span>
 								</span>
-								<br><span itemprop="telephone"><?php the_field('telephone'); ?></span>
+								<br><span itemprop="telephone"><?php $phone = get_field('telephone'); echo "(".substr($phone, 0, 3).") ".substr($phone, 3, 3)."-".substr($phone,6); ?></span>
 							</p>
 									<button onclick="mapOffice(<?php echo $n; ?>);" class="btn btn-small"><i class="icon-map-marker"></i> Map Office</button>
 							</address>
@@ -33,7 +33,7 @@
                 
     			<script>
 				jQuery(document).ready(function () {
-        			<?php $i = 0; foreach( $office_locations as $post ) : $i++; ?>
+        			<?php $i = -1; $mapid = 0; foreach( $office_locations as $post ) : $i++; $mapid++; ?>
 					
 					<?php $shortdesc = get_field('short_description');
 						  $shortdescnew = str_replace("'","&#39;",$shortdesc);
@@ -41,8 +41,8 @@
 					 ?>
             
                 	map.addMarker({
-                		index: 0,
-                		id: <?php echo $i; ?>,
+                            	index: <?php echo $i; ?>,
+                		id: <?php echo $mapid; ?>,
                 		lat: <?php the_field('latitude'); ?>,
                 		lng: <?php the_field('longitude'); ?>,
                 		title: '<?php the_title(); ?>',

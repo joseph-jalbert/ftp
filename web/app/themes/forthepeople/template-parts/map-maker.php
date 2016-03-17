@@ -30,19 +30,25 @@
                 <?php if  ($n === $break) echo '</div><div class="span6">';  ?>
     			<?php endforeach; ?>
                 </div></div>
-                
-    			<script>
+				<script>
 				jQuery(document).ready(function () {
         			<?php $i = -1; $mapid = 0; foreach( $office_locations as $post ) : $i++; $mapid++; ?>
-					
-                	map.addMarker({
+					<?php
+					$shortdesc = str_replace( "'", "&#39;", get_field( 'short_description' ) );
+					if ( ! $shortdesc ) :
+						$shortdesc = 'Click for more information on Morgan & Morgan&apos;s <a href="/' . esc_js( $post->post_name ) . '/" title="' . esc_js( the_title_attribute( 'echo=0' ) ) . '">' . esc_js( get_the_title() ) . ' Office</a>.';
+					endif;
+
+					?>
+
+					map.addMarker({
                             	index: <?php echo esc_js($i); ?>,
                 		id: <?php echo esc_js($mapid); ?>,
                 		lat: <?php echo esc_js(get_field('latitude')); ?>,
                 		lng: <?php echo esc_js(get_field('longitude')); ?>,
                 		title: '<?php echo esc_js(get_the_title()); ?>',
                 		infoWindow: {
-                  		  content: 'Click for more information on Morgan & Morgan&apos;s <a href="/<?php echo esc_js($post->post_name); ?>/" title="<?php esc_js(the_title_attribute()); ?>"><?php echo esc_js(get_the_title()); ?> Office</a>.'
+                  		  content: '<?php echo $shortdesc; ?>'
                 		},
                		 click: function (e) {
                		     setMarkerWindowPOS(e);

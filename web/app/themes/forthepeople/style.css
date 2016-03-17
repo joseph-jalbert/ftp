@@ -1851,6 +1851,14 @@ footer#footer .offices {
 	margin-top: 0;
 }
 
-.location {
-	margin-bottom:0;
+
+.locations .location {
+	margin-bottom: 0;
+	margin-left:10px;
+
+
+}
+
+.locations .location:first-child {
+	margin-left:0;
 }

@@ -26,17 +26,19 @@ get_header(); ?>
         <div class="profile-head">
           <button data-toggle="modal" id="btnContactAttorney" data-target="#modalContactAttorney" class="btnrnd"><span>Contact Attorney</span></button>
           <h1><?php the_title(); ?></h1>
-          <?php
+          <div class="locations">
+            <?php
 
-          $locations         = wp_get_post_terms( $post->ID, 'location' );
-          $location_template = '<p class="location"><i class="icon-map-marker"></i> %s</p>';
-          if ( is_array( $locations ) ) :
-            foreach ( $locations as $location ) :
-              echo sprintf( $location_template, esc_html( $location->name ) );
-            endforeach;
-          endif;
+            $locations         = wp_get_post_terms( $post->ID, 'location' );
+            $location_template = '<span class="location"><i class="icon-map-marker"></i> %s</span>';
+            if ( is_array( $locations ) ) :
+              foreach ( $locations as $location ) :
+                echo sprintf( $location_template, esc_html( $location->name ) );
+              endforeach;
+            endif;
 
-          ?>
+            ?>
+          </div>
 
 
 

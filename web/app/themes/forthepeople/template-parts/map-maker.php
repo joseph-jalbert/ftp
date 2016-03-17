@@ -14,17 +14,17 @@
         <div class="row-fluid"><div class="span6">
     			<?php $break = (int) ceil(count($office_locations) / 2); $n = 0; foreach( $office_locations as $post ) : $n++; ?>
                 	<address itemtype="http://schema.org/Attorney" itemscope="">
-						<strong><?php the_title(); ?>, <?php the_field('state'); ?></strong>
+						<strong><?php echo esc_html(get_the_title()); ?>, <?php echo esc_html(get_field('state')); ?></strong>
 							<p>
 								<span itemtype="http://schema.org/PostalAddress" itemscope="" itemprop="address">
-									<span itemprop="streetAddress"><?php the_field('street_address'); ?><br>
-                                    <?php if(get_field('suite_information')) { ?><?php the_field('suite_information'); ?><br> <?php } ?>
+									<span itemprop="streetAddress"><?php echo esc_html(get_field('street_address')); ?><br>
+                                    <?php if(get_field('suite_information')) { ?><?php echo esc_html(get_field('suite_information')); ?><br> <?php } ?>
                                     </span>
-									<span itemprop="addressLocality"><?php the_title(); ?></span>, <span itemprop="addressRegion"><?php the_field('state'); ?></span> <span itemprop="postalCode"><?php the_field('zip_code'); ?></span>
+									<span itemprop="addressLocality"><?php echo esc_html(get_the_title()); ?></span>, <span itemprop="addressRegion"><?php echo esc_html(get_field('state')); ?></span> <span itemprop="postalCode"><?php echo esc_html(get_field('zip_code')); ?></span>
 								</span>
-								<br><span itemprop="telephone"><?php the_field('telephone'); ?></span>
+								<br><span itemprop="telephone"><?php $phone = get_field('telephone'); echo esc_html("(".substr($phone, 0, 3).") ".substr($phone, 3, 3)."-".substr($phone,6)); ?></span>
 							</p>
-									<button onclick="mapOffice(<?php echo $n; ?>);" class="btn btn-small"><i class="icon-map-marker"></i> Map Office</button>
+									<button onclick="mapOffice(<?php echo esc_js($n); ?>);" class="btn btn-small"><i class="icon-map-marker"></i> Map Office</button>
 							</address>
                             
                 <?php if  ($n === $break) echo '</div><div class="span6">';  ?>
@@ -33,21 +33,16 @@
                 
     			<script>
 				jQuery(document).ready(function () {
-        			<?php $i = 0; foreach( $office_locations as $post ) : $i++; ?>
+        			<?php $i = -1; $mapid = 0; foreach( $office_locations as $post ) : $i++; $mapid++; ?>
 					
-					<?php $shortdesc = get_field('short_description');
-						  $shortdescnew = str_replace("'","&#39;",$shortdesc);
-					
-					 ?>
-            
                 	map.addMarker({
-                		index: 0,
-                		id: <?php echo $i; ?>,
-                		lat: <?php the_field('latitude'); ?>,
-                		lng: <?php the_field('longitude'); ?>,
-                		title: '<?php the_title(); ?>',
+                            	index: <?php echo esc_js($i); ?>,
+                		id: <?php echo esc_js($mapid); ?>,
+                		lat: <?php echo esc_js(get_field('latitude')); ?>,
+                		lng: <?php echo esc_js(get_field('longitude')); ?>,
+                		title: '<?php echo esc_js(get_the_title()); ?>',
                 		infoWindow: {
-                  		  content: '<?php echo $shortdescnew; ?>'
+                  		  content: 'Click for more information on Morgan & Morgan&apos;s <a href="/<?php echo esc_js($post->post_name); ?>/" title="<?php esc_js(the_title_attribute()); ?>"><?php echo esc_js(get_the_title()); ?> Office</a>.'
                 		},
                		 click: function (e) {
                		     setMarkerWindowPOS(e);

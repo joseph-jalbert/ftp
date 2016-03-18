@@ -575,7 +575,7 @@ function mm_ftp_widgets_init() {
 	    	'slug' => 'testimonials',
 			'with_front' => false
 	    ),
-	    'has_archive' => false, 
+	    'has_archive' => false,
 	    'supports' => array(
 			'title',
 			'editor',

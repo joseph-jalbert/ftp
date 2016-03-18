@@ -63,18 +63,18 @@ class BTG_News {
 
 		register_post_type( self::POST_TYPE, array(
 			'labels'             => array(
-				'name'               => __( 'BTG', 'forthepeople' ),
-				'singular_name'      => __( 'BTG', 'forthepeople' ),
+				'name'               => __( 'BTG Blog', 'forthepeople' ),
+				'singular_name'      => __( 'BTG Blog', 'forthepeople' ),
 				'add_new'            => __( 'Add New', 'forthepeople' ),
-				'add_new_item'       => __( 'Add New BTG', 'forthepeople' ),
-				'edit_item'          => __( 'Edit BTG', 'forthepeople' ),
-				'new_item'           => __( 'New BTG', 'forthepeople' ),
-				'all_items'          => __( 'All BTG', 'forthepeople' ),
-				'view_item'          => __( 'View BTG', 'forthepeople' ),
-				'search_items'       => __( 'Search BTG', 'forthepeople' ),
+				'add_new_item'       => __( 'Add New BTG Blog', 'forthepeople' ),
+				'edit_item'          => __( 'Edit BTG Blog', 'forthepeople' ),
+				'new_item'           => __( 'New BTG Blog', 'forthepeople' ),
+				'all_items'          => __( 'All BTG Blog', 'forthepeople' ),
+				'view_item'          => __( 'View BTG Blog', 'forthepeople' ),
+				'search_items'       => __( 'Search BTG Blog', 'forthepeople' ),
 				'not_found'          => __( 'No BTG Found', 'forthepeople' ),
 				'not_found_in_trash' => __( 'No BTG found in Trash', 'forthepeople' ),
-				'menu_name'          => __( 'BTG', 'forthepeople' )
+				'menu_name'          => __( 'BTG Blog', 'forthepeople' )
 			),
 			'menu_icon'          => 'dashicons-welcome-learn-more',
 			'publicly_queryable' => true,
@@ -87,7 +87,7 @@ class BTG_News {
 	}
 
 	public static function add_rewrite_rule() {
-		add_rewrite_rule( '^business-trial-group/blog\/?([0-9]{1,})\/?$', 'index.php?' . preg_quote( self::$archive_query_var ) . '=true&post_type=' . preg_quote( self::POST_TYPE ) . '&paged=$matches[3]', 'top' );
+		add_rewrite_rule( '^business-trial-group/blog\/page\/?([0-9]{1,})\/?$', 'index.php?' . preg_quote( self::$archive_query_var ) . '=true&post_type=' . preg_quote( self::POST_TYPE ) . '&paged=$matches[1]', 'top' );
 		add_rewrite_rule( '^business-trial-group/blog\/(?:feed\/)?(feed|rdf|rss|rss2|atom)\/?$', 'index.php?' . preg_quote( self::$archive_query_var ) . '=true&post_type=' . preg_quote( self::POST_TYPE ) . '&feed=$matches[2]', 'top' );
 		add_rewrite_rule( '^business-trial-group/blog/([^/]*)?$', 'index.php?' . preg_quote( self::$post_query_var ) . '=true&post_type=' . preg_quote( self::POST_TYPE ) . '&name=$matches[1]', 'top' );
 		add_rewrite_rule( '^business-trial-group/blog?$', 'index.php?' . preg_quote( self::$archive_query_var ) . '=true&post_type=' . preg_quote( self::POST_TYPE ), 'top' );

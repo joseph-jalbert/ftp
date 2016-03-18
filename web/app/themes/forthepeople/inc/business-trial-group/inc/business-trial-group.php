@@ -5,6 +5,8 @@ class BTG_News {
 
 	const POST_TYPE = 'btg_news';
 	private static $root_plugin_directory;
+	private static $archive_query_var = 'btg_archive';
+	private static $post_query_var = 'btg_post';
 
 	/**
 	 *
@@ -18,17 +20,26 @@ class BTG_News {
 	public static function attach_hooks() {
 		self::$root_plugin_directory = dirname( __DIR__ );
 		add_action( 'init', array( __CLASS__, 'register_post_type' ) );
-		add_action( 'init', array( __CLASS__, 'add_rewrite_rule' ) );
+		add_action( 'init', array( __CLASS__, 'add_rewrite_rule' ), 1 );
 		add_filter( 'post_type_link', array( __CLASS__, 'post_type_permalink' ), 10, 2 );
 		add_filter( 'wpseo_breadcrumb_links', array( __CLASS__, 'update_breadcrumbs' ) );
 		add_filter( 'template_include', array( __CLASS__, 'template_include' ) );
 		add_filter( 'query_vars', array( __CLASS__, 'query_vars' ) );
 		add_action( 'init', array( __CLASS__, 'register_sidebar' ) );
+		add_filter( 'wp_title', array( __CLASS__, 'wp_title' ) );
+
+	}
+
+	public static function wp_title( $parts ) {
+		return 'foo';
+
+		return $parts;
 
 	}
 
 	public static function query_vars( $query_vars ) {
-		$query_vars[] = 'btg_archive';
+		$query_vars[] = self::$archive_query_var;
+		$query_vars[] = self::$post_query_var;
 
 		return $query_vars;
 	}
@@ -36,7 +47,7 @@ class BTG_News {
 
 	public static function template_include( $template ) {
 
-		if ( get_query_var( 'btg_archive', false ) ) {
+		if ( self::get_query_var_value() ) {
 			$template = self::$root_plugin_directory . '/views/index.php';
 		}
 
@@ -76,11 +87,11 @@ class BTG_News {
 	}
 
 	public static function add_rewrite_rule() {
-		add_rewrite_rule( '^business-trial-group/blog\/?([0-9]{1,})\/?$', 'index.php?btg_archive=true&post_type=' . preg_quote( self::POST_TYPE ) . '&paged=$matches[3]', 'top' );
-		add_rewrite_rule( '^business-trial-group/blog\/(?:feed\/)?(feed|rdf|rss|rss2|atom)\/?$', 'index.php?btg_archive=true&post_type=' . preg_quote( self::POST_TYPE ) . '&feed=$matches[2]', 'top' );
-		add_rewrite_rule( '^business-trial-group/blog/([^/]*)?$', 'index.php?btg_archive=true&post_type=' . preg_quote( self::POST_TYPE ) . '&name=$matches[1]', 'top' );
-		add_rewrite_rule( '^business-trial-group/blog?$', 'index.php?btg_archive=true&post_type=' . preg_quote( self::POST_TYPE ), 'top' );
-		add_rewrite_rule( '^business-trial-group/blog\/?$', 'index.php?btg_archive=true&post_type=' . preg_quote( self::POST_TYPE ), 'top' );
+		add_rewrite_rule( '^business-trial-group/blog\/?([0-9]{1,})\/?$', 'index.php?' . preg_quote( self::$archive_query_var ) . '=true&post_type=' . preg_quote( self::POST_TYPE ) . '&paged=$matches[3]', 'top' );
+		add_rewrite_rule( '^business-trial-group/blog\/(?:feed\/)?(feed|rdf|rss|rss2|atom)\/?$', 'index.php?' . preg_quote( self::$archive_query_var ) . '=true&post_type=' . preg_quote( self::POST_TYPE ) . '&feed=$matches[2]', 'top' );
+		add_rewrite_rule( '^business-trial-group/blog/([^/]*)?$', 'index.php?' . preg_quote( self::$post_query_var ) . '=true&post_type=' . preg_quote( self::POST_TYPE ) . '&name=$matches[1]', 'top' );
+		add_rewrite_rule( '^business-trial-group/blog?$', 'index.php?' . preg_quote( self::$archive_query_var ) . '=true&post_type=' . preg_quote( self::POST_TYPE ), 'top' );
+		add_rewrite_rule( '^business-trial-group/blog\/?$', 'index.php?' . preg_quote( self::$archive_query_var ) . '=true&post_type=' . preg_quote( self::POST_TYPE ), 'top' );
 
 
 	}
@@ -102,6 +113,10 @@ class BTG_News {
 	public static function update_breadcrumbs( $links ) {
 		global $post;
 		$post_type = isset( $post->post_type ) ? $post->post_type : null;
+		if ( self::get_query_var_value() ) {
+			$post_type = self::POST_TYPE;
+		}
+
 		if ( $post_type && self::POST_TYPE === $post_type ) {
 
 
@@ -121,7 +136,7 @@ class BTG_News {
 
 	}
 
-	public static function register_sidebar(){
+	public static function register_sidebar() {
 		register_sidebar( array(
 			'name'          => esc_html__( 'BTG Sidebar', 'forthepeople' ),
 			'id'            => 'sidebar-btg',
@@ -132,6 +147,10 @@ class BTG_News {
 			'after_title'   => '</div>',
 		) );
 
+	}
+
+	private static function get_query_var_value() {
+		return get_query_var( self::$archive_query_var, false );
 	}
 
 

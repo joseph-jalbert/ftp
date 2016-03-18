@@ -26,8 +26,22 @@ get_header(); ?>
         <div class="profile-head">
           <button data-toggle="modal" id="btnContactAttorney" data-target="#modalContactAttorney" class="btnrnd"><span>Contact Attorney</span></button>
           <h1><?php the_title(); ?></h1>
-          <?php $location = get_the_term_list( $post->ID, 'location', '', '', '' ); ?>
-          <p class="location"><i class="icon-map-marker"></i> <?php echo strip_tags($location); ?></p>
+          <div class="locations">
+            <?php
+
+            $locations         = wp_get_post_terms( $post->ID, 'location' );
+            $location_template = '<span class="location"><i class="icon-map-marker"></i> %s</span>';
+            if ( is_array( $locations ) ) :
+              foreach ( $locations as $location ) :
+                echo sprintf( $location_template, esc_html( $location->name ) );
+              endforeach;
+            endif;
+
+            ?>
+          </div>
+
+
+
           <div class="profile-tab-hr"></div>
           <ul class="nav nav-tabs" id="profileTabs">
             <li class="active"><a data-toggle="tab" rel="nofollow" data-target="#tab-biography" href="javascript:void(0);">Biography</a></li>

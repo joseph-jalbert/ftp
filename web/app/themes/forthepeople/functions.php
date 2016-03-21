@@ -11,6 +11,7 @@ require __DIR__ . '/inc/hubspot-settings/hubspot-settings.php';
 require __DIR__ . '/inc/robots.txt.php';
 require __DIR__ . '/inc/actions.php';
 require __DIR__ . '/inc/widgets/widgets.php';
+require __DIR__ . '/inc/videos-page/videos-page.php';
 
 if ( ! function_exists( 'forthepeople_setup' ) ) :
 /**

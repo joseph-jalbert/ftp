@@ -98,11 +98,11 @@ class BTG_News {
 
 	public static function add_rewrite_rule() {
 
-		add_rewrite_rule( '^business-trial-group\/blog\/page\/?([0-9]{1,})\/?$', 'index.php?' . preg_quote( self::$archive_query_var ) . '=true&post_type=' . preg_quote( self::POST_TYPE ) . '&paged=$matches[1]', 'top' );
-		add_rewrite_rule( '^business-trial-group\/blog\/(?:feed\/)?(feed|rdf|rss|rss2|atom)\/?$', 'index.php?' . preg_quote( self::$archive_query_var ) . '=true&post_type=' . preg_quote( self::POST_TYPE ) . '&feed=$matches[2]', 'top' );
-		add_rewrite_rule( '^business-trial-group\/blog\/([^/]*)?$', 'index.php?' . preg_quote( self::$post_query_var ) . '=true&post_type=' . preg_quote( self::POST_TYPE ) . '&name=$matches[1]', 'top' );
-		add_rewrite_rule( '^business-trial-group\/blog?$', 'index.php?' . preg_quote( self::$archive_query_var ) . '=true&post_type=' . preg_quote( self::POST_TYPE ), 'top' );
-		add_rewrite_rule( '^business-trial-group\/blog\/?$', 'index.php?' . preg_quote( self::$archive_query_var ) . '=true&post_type=' . preg_quote( self::POST_TYPE ), 'top' );
+		add_rewrite_rule( '^business-litigation-lawyers\/blog\/page\/?([0-9]{1,})\/?$', 'index.php?' . preg_quote( self::$archive_query_var ) . '=true&post_type=' . preg_quote( self::POST_TYPE ) . '&paged=$matches[1]', 'top' );
+		add_rewrite_rule( '^business-litigation-lawyers\/blog\/(?:feed\/)?(feed|rdf|rss|rss2|atom)\/?$', 'index.php?' . preg_quote( self::$archive_query_var ) . '=true&post_type=' . preg_quote( self::POST_TYPE ) . '&feed=$matches[2]', 'top' );
+		add_rewrite_rule( '^business-litigation-lawyers\/blog\/([^/]*)?$', 'index.php?' . preg_quote( self::$post_query_var ) . '=true&post_type=' . preg_quote( self::POST_TYPE ) . '&name=$matches[1]', 'top' );
+		add_rewrite_rule( '^business-litigation-lawyers\/blog?$', 'index.php?' . preg_quote( self::$archive_query_var ) . '=true&post_type=' . preg_quote( self::POST_TYPE ), 'top' );
+		add_rewrite_rule( '^business-litigation-lawyers\/blog\/?$', 'index.php?' . preg_quote( self::$archive_query_var ) . '=true&post_type=' . preg_quote( self::POST_TYPE ), 'top' );
 
 
 	}
@@ -111,7 +111,7 @@ class BTG_News {
 
 		if ( $post->post_type == self::POST_TYPE ) {
 
-			$permalink = str_replace( 'btg_news/', 'business-trial-group/blog/', $permalink );
+			$permalink = str_replace( 'btg_news/', 'business-litigation-lawyers/blog/', $permalink );
 
 
 		}
@@ -131,7 +131,7 @@ class BTG_News {
 		if ( $post_type && self::POST_TYPE === $post_type ) {
 
 
-			$link_element = sprintf( '<a href="%s">%s</a>', esc_html( home_url( '/business-trial-group/blog' ) ), esc_html( 'Business Trial Group Blog' ) );
+			$link_element = sprintf( '<a href="%s">%s</a>', esc_html( home_url( '/business-litigation-lawyers/blog' ) ), esc_html( 'Business Trial Group Blog' ) );
 			$link_to_add  = array(
 				array(
 					'text'       => $link_element,

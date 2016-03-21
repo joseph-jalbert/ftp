@@ -5,8 +5,8 @@
  * @package ForThePeople
  */
 
-$transient_name = 'videos-page';
-$output         = get_transient( $transient_name );
+
+$output = Videos_Page::get_cache();
 if ( ! $output ) {
 	ob_start();
 
@@ -161,7 +161,7 @@ if ( ! $output ) {
 
 	<?php
 	$output = ob_get_clean();
-	set_transient( $transient_name, $output, 10 * MINUTE_IN_SECONDS );
+	Videos_Page::set_cache( $output );
 }
 
 echo $output;

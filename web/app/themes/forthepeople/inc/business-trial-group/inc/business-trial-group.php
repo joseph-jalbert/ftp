@@ -7,6 +7,7 @@ class BTG_News {
 	private static $root_plugin_directory;
 	private static $archive_query_var = 'btg_archive';
 	private static $post_query_var = 'btg_post';
+	const OPTION_NAME = 'btg_news_settings';
 
 	/**
 	 *
@@ -26,14 +27,23 @@ class BTG_News {
 		add_filter( 'template_include', array( __CLASS__, 'template_include' ) );
 		add_filter( 'query_vars', array( __CLASS__, 'query_vars' ) );
 		add_action( 'init', array( __CLASS__, 'register_sidebar' ) );
-		add_filter( 'wp_title', array( __CLASS__, 'wp_title' ) );
+		add_filter( 'wpseo_title', array( __CLASS__, 'wp_title' ), PHP_INT_MAX );
+
 
 	}
 
-	public static function wp_title( $parts ) {
-		return 'foo';
 
-		return $parts;
+	public static function wp_title( $title ) {
+
+		if ( self::get_query_var_value() ) {
+			$custom_title_option = get_option( 'btg_options' );
+			$custom_title        = $custom_title_option['title'];
+			if ( $custom_title ) {
+				return $custom_title;
+			}
+		}
+
+		return $title;
 
 	}
 
@@ -87,11 +97,12 @@ class BTG_News {
 	}
 
 	public static function add_rewrite_rule() {
-		add_rewrite_rule( '^business-trial-group/blog\/page\/?([0-9]{1,})\/?$', 'index.php?' . preg_quote( self::$archive_query_var ) . '=true&post_type=' . preg_quote( self::POST_TYPE ) . '&paged=$matches[1]', 'top' );
-		add_rewrite_rule( '^business-trial-group/blog\/(?:feed\/)?(feed|rdf|rss|rss2|atom)\/?$', 'index.php?' . preg_quote( self::$archive_query_var ) . '=true&post_type=' . preg_quote( self::POST_TYPE ) . '&feed=$matches[2]', 'top' );
-		add_rewrite_rule( '^business-trial-group/blog/([^/]*)?$', 'index.php?' . preg_quote( self::$post_query_var ) . '=true&post_type=' . preg_quote( self::POST_TYPE ) . '&name=$matches[1]', 'top' );
-		add_rewrite_rule( '^business-trial-group/blog?$', 'index.php?' . preg_quote( self::$archive_query_var ) . '=true&post_type=' . preg_quote( self::POST_TYPE ), 'top' );
-		add_rewrite_rule( '^business-trial-group/blog\/?$', 'index.php?' . preg_quote( self::$archive_query_var ) . '=true&post_type=' . preg_quote( self::POST_TYPE ), 'top' );
+
+		add_rewrite_rule( '^business-trial-group\/blog\/page\/?([0-9]{1,})\/?$', 'index.php?' . preg_quote( self::$archive_query_var ) . '=true&post_type=' . preg_quote( self::POST_TYPE ) . '&paged=$matches[1]', 'top' );
+		add_rewrite_rule( '^business-trial-group\/blog\/(?:feed\/)?(feed|rdf|rss|rss2|atom)\/?$', 'index.php?' . preg_quote( self::$archive_query_var ) . '=true&post_type=' . preg_quote( self::POST_TYPE ) . '&feed=$matches[2]', 'top' );
+		add_rewrite_rule( '^business-trial-group\/blog\/([^/]*)?$', 'index.php?' . preg_quote( self::$post_query_var ) . '=true&post_type=' . preg_quote( self::POST_TYPE ) . '&name=$matches[1]', 'top' );
+		add_rewrite_rule( '^business-trial-group\/blog?$', 'index.php?' . preg_quote( self::$archive_query_var ) . '=true&post_type=' . preg_quote( self::POST_TYPE ), 'top' );
+		add_rewrite_rule( '^business-trial-group\/blog\/?$', 'index.php?' . preg_quote( self::$archive_query_var ) . '=true&post_type=' . preg_quote( self::POST_TYPE ), 'top' );
 
 
 	}

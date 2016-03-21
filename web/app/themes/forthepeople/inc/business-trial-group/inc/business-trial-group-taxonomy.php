@@ -3,7 +3,7 @@
 class BTG_Taxonomy {
 
 	const CATEGORY_TAXONOMY = 'btg_category';
-	const CATEGORY_TAXONOMY_SLUG = 'category';
+	const CATEGORY_TAXONOMY_SLUG = 'btg_category';
 	const POST_TYPE = BTG_News::POST_TYPE;
 
 
@@ -87,4 +87,5 @@ class BTG_Taxonomy {
 
 }
 
-BTG_Taxonomy::init();
+// turned off for now
+//BTG_Taxonomy::init();

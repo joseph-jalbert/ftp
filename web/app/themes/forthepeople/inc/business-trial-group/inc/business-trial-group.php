@@ -149,7 +149,7 @@ class BTG_News {
 
 	public static function register_sidebar() {
 		register_sidebar( array(
-			'name'          => esc_html__( 'BTG Sidebar', 'forthepeople' ),
+			'name'          => esc_html__( 'BTG Archive Sidebar', 'forthepeople' ),
 			'id'            => 'sidebar-btg',
 			'description'   => '',
 			'before_widget' => '<aside id="%1$s" class="cf widget %2$s">',

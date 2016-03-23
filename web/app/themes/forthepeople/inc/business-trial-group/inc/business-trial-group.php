@@ -160,7 +160,7 @@ class BTG_News {
 
 	}
 
-	private static function get_query_var_value() {
+	public static function get_query_var_value() {
 		return get_query_var( self::$archive_query_var, false );
 	}
 

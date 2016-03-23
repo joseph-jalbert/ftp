@@ -70,7 +70,7 @@ if(is_page_template('all-class-actions.php') || is_singular('classactionlawyers'
 $menuslug = 'main-navigation';
 }
 
-if ( is_page_template( 'business-litigation.php' ) || is_child( '6110' ) || BTG_News::get_query_var_value() ) {
+if ( is_page_template( 'business-litigation.php' ) || is_child( '6110' ) || $post_type === BTG_News::POST_TYPE || BTG_News::get_query_var_value() ) {
 $menuslug = 'business-litigation';
 }
 

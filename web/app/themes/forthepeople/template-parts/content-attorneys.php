@@ -11,9 +11,7 @@ $parent   = get_post( $id );
 $location = $parent->post_name;
 
 
-$transient_name = md5('attorneys-' . $id . $location);
-
-$output = get_transient( $transient_name );
+$output = Attorneys_Caching::get_cache();
 
 if ( ! $output ) :
 	ob_start();
@@ -123,7 +121,7 @@ if ( ! $output ) :
 	</article>
 	<?php
 	$output = ob_get_clean();
-	set_transient( $transient_name, $output, MINUTE_IN_SECONDS * 10 );
+	Attorneys_Caching::set_cache( $output );
 
 endif;
 

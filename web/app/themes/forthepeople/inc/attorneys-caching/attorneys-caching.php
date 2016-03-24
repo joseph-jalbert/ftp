@@ -54,7 +54,7 @@ class Attorneys_Caching {
 
 	}
 
-	public function get_cache() {
+	public static function get_cache() {
 		return get_transient( self::TRANSIENT_NAME );
 	}
 

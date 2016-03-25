@@ -27,7 +27,7 @@
         	<?php the_field('jump_box'); ?>
         </div>
         <?php } ?>
-    <?php if( is_singular('post') || is_singular(Local_News::POST_TYPE)) { ?>
+    <?php if( is_singular('post') || is_singular(Local_News::POST_TYPE) || is_singular(BTG_News::POST_TYPE)) { ?>
 	<div class="blog-post post-page">	
     <?php if (has_post_thumbnail()) { ?>
     <div class="title img">

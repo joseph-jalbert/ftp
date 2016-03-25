@@ -13,7 +13,7 @@ class Attorneys_Caching {
 	}
 
 	public static function attach_hooks() {
-		add_action( 'save_post', array( __CLASS__, 'save_post' ) );
+		add_action( 'save_post', array( __CLASS__, 'save_post' ), 10, 2 );
 	}
 
 	/**

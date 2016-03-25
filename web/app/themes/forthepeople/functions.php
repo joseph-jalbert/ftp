@@ -13,6 +13,7 @@ require __DIR__ . '/inc/actions.php';
 require __DIR__ . '/inc/widgets/widgets.php';
 require __DIR__ . '/inc/videos-page/videos-page.php';
 require __DIR__ . '/inc/attorneys-caching/attorneys-caching.php';
+require __DIR__ . '/inc/filters.php';
 
 if ( ! function_exists( 'forthepeople_setup' ) ) :
 /**

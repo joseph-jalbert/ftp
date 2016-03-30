@@ -101,7 +101,17 @@ get_header(); ?>
 </div>
 <div id="modalContactAttorney" class="modal hide fade" style="display: none;" aria-hidden="true"><?php dynamic_sidebar( 'attorney_profile_form' ); ?></div>
 <div id="modalContactTheAttorney" class="modal hide fade" style="display: none;" aria-hidden="true">
+  <div class="modal-header">
+
+    <button class="btn btn-mini pull-right" data-dismiss="modal"><i class="icon-remove-sign"></i></button>
+
+    <?php echo show_contact_name(); ?>
+
+  </div>
+
+
   <div class="inner-modal-contact-the-attorney modal-hs-form"></div>
+
   <script>
     jQuery(document).ready(function($){
       $('#modalContactTheAttorney').on('shown.bs.modal', function(){

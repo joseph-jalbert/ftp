@@ -1349,16 +1349,18 @@ add_action('wp_ajax_nopriv_more_testimonials_ajax', 'more_testimonials_ajax');
 add_action('wp_ajax_more_testimonials_ajax', 'more_testimonials_ajax');
 
 
+
 /**
-* Creates the [contact_attorney] shortcode 
-* 
-* @return 	string	Contact [First & Last Name]
-*/
+ * Creates the [contact_attorney] shortcode
+ *
+ * @return 	string	Contact [First & Last Name]
+ */
 function show_contact_name() {
+
+	return sprintf( '<h5 class="text-center">Contact %s</h5>', get_the_title() );
 	
-	$title = the_title('','',false);
-	return '<h5>Contact Us</h5>';
 }
+
 add_shortcode('contact_attorney', 'show_contact_name');
 
 function exclude_category( $query ) {

@@ -12,7 +12,13 @@ get_header(); ?>
         <div class="photoFrame">
           <?php $defaultphoto = '/wp-content/themes/forthepeople/assets/media/images/attorneys-orig/nophoto.jpg'; ?>
           <img width="196" height="248" alt="Attorney <?php the_title(); ?>" src="<?php if(get_field('photo')) { the_field('photo'); } else { echo $defaultphoto; } ?>" />
+
         </div>
+
+        <button data-toggle="modal" id="btnmodalContactTheAttorney" data-target="#modalContactTheAttorney" class="btnrnd contact-attorney"><span>Contact Attorney</span></button>
+
+
+
         <?php if(get_field('quote')) { the_field('quote'); } ?>
         <div class="profile-module"> <span class="heading">Practice Areas</span>
           <ul>
@@ -24,7 +30,7 @@ get_header(); ?>
       </div>
       <div id="col2" class="span9">
         <div class="profile-head">
-          <button data-toggle="modal" id="btnContactAttorney" data-target="#modalContactAttorney" class="btnrnd"><span>Contact Attorney</span></button>
+          <button data-toggle="modal" id="btnContactAttorney" data-target="#modalContactAttorney" class="btnrnd"><span>Contact Us</span></button>
           <h1><?php the_title(); ?></h1>
           <div class="locations">
             <?php
@@ -92,4 +98,28 @@ get_header(); ?>
 </div>
 </div>
 <div id="modalContactAttorney" class="modal hide fade" style="display: none;" aria-hidden="true"><?php dynamic_sidebar( 'attorney_profile_form' ); ?></div>
+<div id="modalContactTheAttorney" class="modal hide fade" style="display: none;" aria-hidden="true">
+  <div class="inner-modal-contact-the-attorney"></div>
+  <script>
+    jQuery(document).ready(function($){
+      $('#modalContactTheAttorney').on('shown.bs.modal', function(){
+        hbspt.forms.create({
+          css: '',
+          portalId: '1841598',
+          formId: '7bcdf58f-fa90-4d82-a371-f932efbd3220',
+          target: '.inner-modal-contact-the-attorney',
+          onFormReady: function($form) {
+            setTimeout(function () {
+              var $emailAttorney = $form.find("[name='email_to_attorney']");
+              console.log($emailAttorney.prop('nodeName'));
+              $emailAttorney.attr('value', attorneyData.attorneyEmail);
+            }, 1);
+
+          }
+        });
+      });
+    });
+  </script>
+
+</div>
 <?php get_footer(); ?>

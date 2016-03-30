@@ -263,7 +263,12 @@ function forthepeople_scripts() {
 	
 	if (is_singular('attorney')) {
     	wp_enqueue_script( 'badges', '//www.avvo.com/assets/badges-v2.js', false, '', true);
+
 	}
+	wp_localize_script( 'global', 'attorneyData', array(
+		'attorneyEmail' => get_field( 'email' )
+	) );
+
 }
 add_action( 'wp_enqueue_scripts', 'forthepeople_scripts' );
 
@@ -1352,7 +1357,7 @@ add_action('wp_ajax_more_testimonials_ajax', 'more_testimonials_ajax');
 function show_contact_name() {
 	
 	$title = the_title('','',false);
-	return '<h5>Contact ' . $title . '</h5>';
+	return '<h5>Contact Us</h5>';
 }
 add_shortcode('contact_attorney', 'show_contact_name');
 

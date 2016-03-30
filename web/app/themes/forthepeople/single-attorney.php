@@ -15,7 +15,7 @@ get_header(); ?>
 
         </div>
 
-        <button data-toggle="modal" id="btnmodalContactTheAttorney" data-target="#modalContactTheAttorney" class="btnrnd contact-attorney"><span>Contact Attorney</span></button>
+        <button data-toggle="modal" id="btnmodalContactTheAttorney" data-target="#modalContactTheAttorney" class="hidden-xs btnrnd contact-attorney"><span>Contact Attorney</span></button>
 
 
 
@@ -33,6 +33,7 @@ get_header(); ?>
           <button data-toggle="modal" id="btnContactAttorney" data-target="#modalContactAttorney" class="btnrnd"><span>Contact Us</span></button>
           <h1><?php the_title(); ?></h1>
           <div class="locations">
+
             <?php
 
             $locations         = wp_get_post_terms( $post->ID, 'location' );
@@ -68,6 +69,7 @@ get_header(); ?>
         <div id="profileTabContent" class="tab-content">
 	 	  <div id="tab-biography" class="tab-pane fade active in">
             <?php while ( have_posts() ) : the_post(); ?>
+              <button data-toggle="modal" id="btnmodalContactTheAttorney" data-target="#modalContactTheAttorney" class="visible-xs btnrnd contact-attorney"><span>Contact Attorney</span></button>
         	<?php the_content(); ?>
         	<?php endwhile; ?>
           </div>

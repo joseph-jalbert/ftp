@@ -16,8 +16,8 @@ get_header(); ?>
         </div>
 
 	      <?php if ( get_field( 'email' ) ) : ?>
-		      <button data-toggle="modal" id="btnmodalContactTheAttorney" data-target="#modalContactTheAttorney"
-		              class="hidden-xs btnrnd contact-attorney"><span>Contact Attorney</span></button>
+		      <a href="#" data-toggle="modal" id="btnmodalContactTheAttorney" data-target="#modalContactTheAttorney"
+		              class=" text-center contact-attorney"><span>Contact Attorney</span></a>
 	      <?php endif; ?>
 
 
@@ -73,10 +73,7 @@ get_header(); ?>
         <div id="profileTabContent" class="tab-content">
 	 	  <div id="tab-biography" class="tab-pane fade active in">
             <?php while ( have_posts() ) : the_post(); ?>
-	            <?php if ( get_field( 'email' ) ) : ?>
-		            <button data-toggle="modal" id="btnmodalContactTheAttorney" data-target="#modalContactTheAttorney"
-		                    class="visible-xs btnrnd contact-attorney"><span>Contact Attorney</span></button>
-	            <?php endif; ?>
+	            
         	<?php the_content(); ?>
         	<?php endwhile; ?>
           </div>

@@ -765,9 +765,10 @@ body {
 
 
 .contact-attorney {
-  margin:15px auto;
+  margin:8px auto;
   text-shadow:none;
   float:none;
+  display:block;
 
 }
 .visible-xs {

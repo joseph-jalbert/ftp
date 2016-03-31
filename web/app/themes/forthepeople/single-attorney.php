@@ -15,7 +15,11 @@ get_header(); ?>
 
         </div>
 
-        <button data-toggle="modal" id="btnmodalContactTheAttorney" data-target="#modalContactTheAttorney" class="hidden-xs btnrnd contact-attorney"><span>Contact Attorney</span></button>
+	      <?php if ( get_field( 'email' ) ) : ?>
+		      <button data-toggle="modal" id="btnmodalContactTheAttorney" data-target="#modalContactTheAttorney"
+		              class="hidden-xs btnrnd contact-attorney"><span>Contact Attorney</span></button>
+	      <?php endif; ?>
+
 
 
 
@@ -69,7 +73,10 @@ get_header(); ?>
         <div id="profileTabContent" class="tab-content">
 	 	  <div id="tab-biography" class="tab-pane fade active in">
             <?php while ( have_posts() ) : the_post(); ?>
-              <button data-toggle="modal" id="btnmodalContactTheAttorney" data-target="#modalContactTheAttorney" class="visible-xs btnrnd contact-attorney"><span>Contact Attorney</span></button>
+	            <?php if ( get_field( 'email' ) ) : ?>
+		            <button data-toggle="modal" id="btnmodalContactTheAttorney" data-target="#modalContactTheAttorney"
+		                    class="visible-xs btnrnd contact-attorney"><span>Contact Attorney</span></button>
+	            <?php endif; ?>
         	<?php the_content(); ?>
         	<?php endwhile; ?>
           </div>
@@ -121,11 +128,11 @@ get_header(); ?>
           formId: '7bcdf58f-fa90-4d82-a371-f932efbd3220',
           target: '.inner-modal-contact-the-attorney',
           onFormReady: function($form) {
-            setTimeout(function () {
+
               var $emailAttorney = $form.find("[name='email_to_attorney']");
-              console.log($emailAttorney.prop('nodeName'));
-              $emailAttorney.attr('value', attorneyData.attorneyEmail);
-            }, 1);
+
+              $emailAttorney.val(attorneyData.attorneyEmail).change();
+
 
           }
         });

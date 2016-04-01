@@ -774,7 +774,8 @@ body {
 
 @media only screen and (max-width: 768px) {
   .contact-attorney {
-    margin-top: 20px;
+    margin-top: 50px;
+    line-height: 110%;
   }
 }
 

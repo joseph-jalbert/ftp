@@ -770,8 +770,14 @@ body {
   float:none;
   display:block;
   font-size:12px;
-
 }
+
+@media only screen and (max-width: 768px) {
+  .contact-attorney {
+    margin-top: 20px;
+  }
+}
+
 .visible-xs {
   display:none;
 }

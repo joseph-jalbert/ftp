@@ -114,3 +114,6 @@ phpdotenv
 web/wp
 #we may need to revisit this
 web/app/mu-plugins/
+
+
+web/foo/

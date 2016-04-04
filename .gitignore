@@ -106,6 +106,7 @@ node_modules/
 web/.htaccess
 deployments
 .htaccess
+web/foo/
 web/app/themes/twenty*
 terminus
 phpdotenv
@@ -116,4 +117,3 @@ web/wp
 web/app/mu-plugins/
 
 
-web/foo/

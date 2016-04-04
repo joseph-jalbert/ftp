@@ -16,8 +16,8 @@ get_header(); ?>
         </div>
 
 	      <?php if ( get_field( 'email' ) ) : ?>
-		      <a href="#" data-toggle="modal" id="btnmodalContactTheAttorney" data-target="#modalContactTheAttorney"
-		              class=" text-center contact-attorney"><span>Contact Attorney</span></a>
+		      <p class="contact-attorney-wrap text-center"><a href="#" data-toggle="modal" id="btnmodalContactTheAttorney" data-target="#modalContactTheAttorney"
+		              class=" text-center contact-attorney"><span>Contact Attorney</span></a></p>
 	      <?php endif; ?>
 
 

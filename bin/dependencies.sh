@@ -6,7 +6,8 @@ if [ "true" != "${RUN_NIGHTLY_BUILD}" ]; then
     git config --global user.name "Circle CI"
     rm -rf node_modules
     npm install
-    npm install -g grunt-cli grunt
+    npm install -g grunt
+    npm install -g grunt-cli
     sudo apt-get install lftp
 
 fi

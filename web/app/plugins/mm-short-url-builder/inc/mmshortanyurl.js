@@ -58,6 +58,8 @@ jQuery(document).ready(function($) {
                 displayShortURL('Check the Short URL Domain in Settings. Invalid Domain.');
             } else if (messageBodyCode == 'INVALID_TARGET_URL') {
                 displayShortURL('There is a problem with the text used in the fields or the Permalink. Invalid URL.');
+            } else {
+                displayShortURL('Error received: ' + messageBodyCode);
             }
         } else if (messageCode == 401) {
             displayShortURL('Check the Short URL API Key in Settings. Invalid API Key.');

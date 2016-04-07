@@ -60,7 +60,8 @@
                   <script>
                       hbspt.forms.create({
                           portalId: '1841598',
-                          formId: '5d03efdc-1d30-4ed2-a0b6-1139a765daac'
+                          formId: '5d03efdc-1d30-4ed2-a0b6-1139a765daac',
+                          onFormSubmit: '<?php echo esc_js( forthepeople_render_hubspot_text_filter_callback() ); ?>'
                       });
                   </script>
               </div>

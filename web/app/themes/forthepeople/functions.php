@@ -1519,3 +1519,20 @@ require get_template_directory() . '/inc/blog-category-redirect.php';
 add_filter('wpmdb_after_response', function($response){
 	return trim($response);
 });
+
+function forthepeople_render_hubspot_text_filter_callback() {
+	return <<<'SCRIPT'
+function ($form) {
+			jQuery.each( $form.context, function (index, val) {
+				var type = jQuery(val).prop('nodeName');
+				if ( type === 'INPUT' || type === 'TEXTAREA' ) {
+					var value = $form.context[index].value,
+					defaultValue = $form.context[index].defaultValue;
+					console.log(value, defaultValue);
+					$form.context[index].value = value.replace(/\n|\r/g, ' ');
+					$form.context[index].defaultValue = defaultValue.replace(/\n|\r/g, ' ');
+				}
+			});
+		}
+SCRIPT;
+}

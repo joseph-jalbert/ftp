@@ -28,6 +28,7 @@
             <li><a href="http://employment.forthepeople.com">Employment</a></li>
             <li><a href="/sitemap/">Site Map</a></li>
             <li><a href="/disclaimer-and-terms-of-use/">Terms & Conditions</a></li>
+            <li><a href="/site-accessibility/">Site Accessibility</a></li>
           </ul>
         </div>
         <div class="span4">

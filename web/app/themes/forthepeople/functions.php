@@ -159,7 +159,7 @@ function forthepeople_styles() {
 
   wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/bootstrap/css/bootstrap.min.css');
 
-  wp_enqueue_style( 'borrowed', get_template_directory_uri() . '/assets/css/borrowed.css');
+  wp_enqueue_style( 'borrowed', get_template_directory_uri() . '/assets/css/borrowed.css', array(), '20150413');
   
   wp_enqueue_style( 'custom', get_template_directory_uri() . '/assets/css/custom.css');
 

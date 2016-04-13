@@ -1519,3 +1519,24 @@ require get_template_directory() . '/inc/blog-category-redirect.php';
 add_filter('wpmdb_after_response', function($response){
 	return trim($response);
 });
+
+function is_page_or_is_child_of( $slug ) {
+	global $post;
+	if ( ! $post ) {
+		return false;
+	}
+	if ( is_page( $slug ) ) {
+		return true;
+	}
+	if ( (int) $post->post_parent > 0 ) {
+		$parent = get_post( $post->post_parent );
+		if ( $parent->post_name === $slug ) {
+			return true;
+		}
+
+	}
+
+	return false;
+
+
+}

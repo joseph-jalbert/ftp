@@ -28,6 +28,7 @@
 </head>
 
 <?php
+global $post;
 $post_type = get_post_type($post);
 if ($post_type)  {
 
@@ -64,6 +65,16 @@ $id = ($parents) ? $parents[count($parents)-1]: $post->ID;
 $parent = get_post( $id );
 $parentslug = $parent->post_name;
 $menuslug = $parentslug;
+}
+
+if ( $post->post_parent > 0 ) {
+
+	$parent = $post->post_parent;
+	if ( get_page_template_slug($parent) === 'office-location.php') {
+		$parent = get_post($parent);
+		$menuslug = $parent->post_name;
+	}
+
 }
 
 if(is_page_template('all-class-actions.php') || is_singular('classactionlawyers') || is_singular('attorney') || is_page('poisoning-symptoms')) {

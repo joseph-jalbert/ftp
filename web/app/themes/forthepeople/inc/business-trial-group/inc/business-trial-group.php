@@ -131,7 +131,7 @@ class BTG_News {
 		if ( $post_type && self::POST_TYPE === $post_type ) {
 
 
-			$link_element = sprintf( '<a href="%s">%s</a>', esc_html( home_url( '/business-litigation-lawyers/blog' ) ), esc_html( 'Business Trial Group Blog' ) );
+			$link_element = sprintf( '<a href="%s">%s</a>', esc_html( home_url( '/business-litigation-lawyers/blog/' ) ), esc_html( 'Business Trial Group Blog' ) );
 			$link_to_add  = array(
 				array(
 					'text'       => $link_element,

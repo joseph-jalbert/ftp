@@ -14,7 +14,6 @@ require __DIR__ . '/inc/widgets/widgets.php';
 require __DIR__ . '/inc/videos-page/videos-page.php';
 require __DIR__ . '/inc/attorneys-caching/attorneys-caching.php';
 require __DIR__ . '/inc/filters.php';
-require __DIR__ . '/inc/roles/roles.php';
 
 if ( ! function_exists( 'forthepeople_setup' ) ) :
 /**
@@ -160,7 +159,7 @@ function forthepeople_styles() {
 
   wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/bootstrap/css/bootstrap.min.css');
 
-  wp_enqueue_style( 'borrowed', get_template_directory_uri() . '/assets/css/borrowed.css', array(), '20150413');
+  wp_enqueue_style( 'borrowed', get_template_directory_uri() . '/assets/css/borrowed.css');
   
   wp_enqueue_style( 'custom', get_template_directory_uri() . '/assets/css/custom.css');
 
@@ -1521,6 +1520,23 @@ add_filter('wpmdb_after_response', function($response){
 	return trim($response);
 });
 
+function forthepeople_render_hubspot_text_filter_callback() {
+	return <<<'SCRIPT'
+function ($form) {
+			jQuery.each( $form.context, function (index, val) {
+				var type = jQuery(val).prop('nodeName');
+				if ( type === 'INPUT' || type === 'TEXTAREA' ) {
+					var value = $form.context[index].value,
+					defaultValue = $form.context[index].defaultValue;
+					console.log(value, defaultValue);
+					$form.context[index].value = value.replace(/\n|\r/g, ' ');
+					$form.context[index].defaultValue = defaultValue.replace(/\n|\r/g, ' ');
+				}
+			});
+		}
+SCRIPT;
+}
+
 function is_page_or_is_child_of( $slug ) {
 	global $post;
 	if ( ! $post ) {
@@ -1538,6 +1554,7 @@ function is_page_or_is_child_of( $slug ) {
 	}
 
 	return false;
+
 
 
 }

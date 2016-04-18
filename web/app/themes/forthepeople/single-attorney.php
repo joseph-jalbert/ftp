@@ -131,7 +131,8 @@ get_header(); ?>
               $emailAttorney.val(attorneyData.attorneyEmail).change();
 
 
-          }
+          },
+          onFormSubmit: '<?php echo esc_js( forthepeople_render_hubspot_text_filter_callback() ); ?>'
         });
       });
     });

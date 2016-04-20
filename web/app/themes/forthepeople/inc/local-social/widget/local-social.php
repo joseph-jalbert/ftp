@@ -65,11 +65,11 @@ class Local_Social_Widget extends WP_Widget {
 				<div class="wrapper">
 					<ul class="social-icons icon-zoom icon-circle list-unstyled list-inline">
 						<?php if ( $facebook_default ) : ?>
-							<li><a href="<?php echo esc_url( $facebook_default ); ?>"><i class="fa fa-facebook"></i></a>
+							<li><a target="_BLANK" href="<?php echo esc_url( $facebook_default ); ?>"><i class="fa fa-facebook"></i></a>
 							</li>
 						<?php endif; ?>
 						<?php if ( $google_plus_default ) : ?>
-							<li><a href="<?php echo esc_url( $google_plus_default ); ?>"><i
+							<li><a target="_BLANK" href="<?php echo esc_url( $google_plus_default ); ?>"><i
 										class="fa fa-google-plus"></i></a></li>
 						<?php endif; ?>
 

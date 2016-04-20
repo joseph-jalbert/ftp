@@ -325,8 +325,8 @@ body.down #scrollhdr {
 	-o-transform: scale(1.1);
 	transform: scale(1.1);
 }
-
-.social-icons .fa-facebook,
+.social-icons .fa-facebook
+,
 .social-icons .fa-facebook-square {
 	background-color: #3C599F;
 }
@@ -334,6 +334,10 @@ body.down #scrollhdr {
 .social-icons .fa-google-plus,
 .social-icons .fa-google-plus-square {
 	background-color: #CF3D2E;
+}
+
+.social-icons .fa-twitter, .social-icons .fa-twitter-square {
+	background-color: #32CCFE;
 }
 
 .local-social-widget .icon-circle:before {

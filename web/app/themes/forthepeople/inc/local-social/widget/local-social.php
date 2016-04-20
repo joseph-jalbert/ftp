@@ -42,15 +42,19 @@ class Local_Social_Widget extends WP_Widget {
 
 		$facebook_default    = esc_attr( $instance['facebook-default'] );
 		$google_plus_default = esc_attr( $instance['google-plus-default'] );
+		$twitter_default    = esc_attr( $instance['twitter-default'] );
 
 		if ( $post_id && get_field( 'facebook_local_url', $post_id ) ) {
 			$facebook_default = get_field( 'facebook_local_url', $post_id );
+		}
+		if ( $post_id && get_field( 'twitter_local_url', $post_id ) ) {
+			$twitter_default = get_field( 'twitter_local_url', $post_id );
 		}
 		if ( $post_id && get_field( 'google_plus_local_url', $post_id ) ) {
 			$google_plus_default = get_field( 'google_plus_local_url', $post_id );
 		}
 
-		if ( ! $google_plus_default && ! $facebook_default ) {
+		if ( ! $google_plus_default && ! $facebook_default && ! $twitter_default ) {
 			return;
 		}
 
@@ -66,6 +70,10 @@ class Local_Social_Widget extends WP_Widget {
 					<ul class="social-icons icon-zoom icon-circle list-unstyled list-inline">
 						<?php if ( $facebook_default ) : ?>
 							<li><a target="_BLANK" href="<?php echo esc_url( $facebook_default ); ?>"><i class="fa fa-facebook"></i></a>
+							</li>
+						<?php endif; ?>
+						<?php if ( $twitter_default ) : ?>
+							<li><a target="_BLANK" href="<?php echo esc_url( $twitter_default ); ?>"><i class="fa fa-twitter"></i></a>
 							</li>
 						<?php endif; ?>
 						<?php if ( $google_plus_default ) : ?>
@@ -101,6 +109,7 @@ class Local_Social_Widget extends WP_Widget {
 		$instance                        = array();
 		$instance['facebook-default']    = esc_url_raw( $new_instance['facebook-default'] );
 		$instance['google-plus-default'] = esc_url_raw( $new_instance['google-plus-default'] );
+		$instance['twitter-default']    = esc_url_raw( $new_instance['twitter-default'] );
 
 
 		return $instance;
@@ -116,6 +125,7 @@ class Local_Social_Widget extends WP_Widget {
 	public function form( $instance ) {
 		$defaults = array(
 			'facebook-default'    => null,
+			'twitter-default'    => null,
 			'google-plus-default' => null,
 
 
@@ -131,6 +141,13 @@ class Local_Social_Widget extends WP_Widget {
 				       value="<?php echo $instance['facebook-default']; ?>"/>
 			</p>
 
+			<p>
+				<label
+					for="<?php echo $this->get_field_id( 'twitter-default' ); ?>"><?php _e( 'Default Twitter URL:', self::$text_domain ); ?></label>
+				<input class="widefat" id="<?php echo $this->get_field_id( 'twitter-default' ); ?>"
+				       name="<?php echo $this->get_field_name( 'twitter-default' ); ?>" type="text"
+				       value="<?php echo $instance['twitter-default']; ?>"/>
+			</p>
 			<p>
 				<label
 					for="<?php echo $this->get_field_id( 'google-plus-default' ); ?>"><?php _e( 'Default Google Plus URL:', self::$text_domain ); ?></label>

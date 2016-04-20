@@ -19,6 +19,18 @@ if(function_exists("register_field_group"))
 				'maxlength' => '',
 			),
 			array (
+				'key' => 'field_5odao799fcc571d',
+				'label' => 'Twitter Local URL',
+				'name' => 'twitter_local_url',
+				'type' => 'text',
+				'default_value' => '',
+				'placeholder' => '',
+				'prepend' => '',
+				'append' => '',
+				'formatting' => 'html',
+				'maxlength' => '',
+			),
+			array (
 				'key' => 'field_57179a2ec571e',
 				'label' => 'Google Plus Local URL',
 				'name' => 'google_plus_local_url',

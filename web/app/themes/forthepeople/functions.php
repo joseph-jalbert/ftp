@@ -14,6 +14,7 @@ require __DIR__ . '/inc/widgets/widgets.php';
 require __DIR__ . '/inc/videos-page/videos-page.php';
 require __DIR__ . '/inc/attorneys-caching/attorneys-caching.php';
 require __DIR__ . '/inc/filters.php';
+require __DIR__ . '/inc/local-social/local-social.php';
 
 if ( ! function_exists( 'forthepeople_setup' ) ) :
 /**
@@ -122,7 +123,7 @@ function forthepeople_widgets_init() {
 		'before_title'  => '<div class="widget-title">',
 		'after_title'   => '</div>',
 	) );
-	
+
 	register_sidebar( array(
 		'name'          => esc_html__( 'Contact Form', 'forthepeople' ),
 		'id'            => 'contact_form',
@@ -132,7 +133,7 @@ function forthepeople_widgets_init() {
 		'before_title'  => '<div class="widget-title">',
 		'after_title'   => '</div>',
 	) );
-	
+
 	register_sidebar( array(
 		'name'          => esc_html__( 'Attorney Profile Form', 'forthepeople' ),
 		'id'            => 'attorney_profile_form',
@@ -154,13 +155,13 @@ function forthepeople_styles() {
   if (is_page_template('landing-page.php')) {
     return;
   }
-  
+
   wp_enqueue_style( 'forthepeople-style', get_stylesheet_uri() );
 
   wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/bootstrap/css/bootstrap.min.css');
 
   wp_enqueue_style( 'borrowed', get_template_directory_uri() . '/assets/css/borrowed.css');
-  
+
   wp_enqueue_style( 'custom', get_template_directory_uri() . '/assets/css/custom.css');
 
   wp_enqueue_style( 'fontawesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
@@ -169,7 +170,7 @@ function forthepeople_styles() {
       wp_enqueue_style( 'siteinsite', get_template_directory_uri() . '/assets/media/siteinsite/css/siteinsite.css');
       wp_enqueue_style( 'siteinsitebtg', get_template_directory_uri() . '/assets/media/siteinsite/css/siteinsite.btg.css');
   }
-  
+
   if (is_page_template('securities-litigation.php')) {
       wp_enqueue_style( 'siteinsite', get_template_directory_uri() . '/assets/media/siteinsite/css/siteinsite.css');
       wp_enqueue_style( 'siteinsitesecurities', get_template_directory_uri() . '/assets/media/siteinsite/css/siteinsite.securities.css');
@@ -179,25 +180,25 @@ function forthepeople_styles() {
       wp_enqueue_style( 'siteinsite', get_template_directory_uri() . '/assets/media/siteinsite/css/siteinsite.css');
       wp_enqueue_style( 'whistleblower', get_template_directory_uri() . '/assets/media/siteinsite/css/practice.whistleblower.css');
   }
-  
+
   if (is_page_template('mesothelioma.php')) {
       wp_enqueue_style( 'siteinsite', get_template_directory_uri() . '/assets/media/siteinsite/css/siteinsite.css');
       wp_enqueue_style( 'meso', get_template_directory_uri() . '/assets/media/siteinsite/css/practice.meso.css');
   }
-  
+
   if (is_page_template('tampa-alternate.php')) {
       wp_enqueue_style( 'siteinsite', get_template_directory_uri() . '/assets/media/siteinsite/css/siteinsite.css');
       wp_enqueue_style( 'siteinsitetampa', get_template_directory_uri() . '/assets/media/siteinsite/css/siteinsite.tampa.css');
   }
-  
+
   if (is_page_template('empty-page.php')) {
       wp_enqueue_style( 'siteinsite', get_template_directory_uri() . '/assets/media/siteinsite/css/siteinsite.css');
   }
-  
+
   if (is_singular('attorney')) {
     wp_enqueue_style( 'journalfont', get_template_directory_uri() . '/assets/fonts/journal/font.css');
   }
-  
+
   if (is_page_template('videos-page.php') || is_page_template('contact-page.php') || is_page_template('homepage.php') || is_page('casey-anthony-case')) {
     wp_enqueue_style( 'videojscss', get_template_directory_uri() . '/assets/plugins/videos/assets/css/video-js.css');
   }
@@ -220,7 +221,7 @@ function forthepeople_scripts() {
 	wp_enqueue_script( 'forthepeople-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20120206', true );
 
 	wp_enqueue_script( 'forthepeople-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20130115', true );
-		
+
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
@@ -239,28 +240,28 @@ function forthepeople_scripts() {
 
 	if (is_singular(array('post', 'classactionlawyers', 'local_news', BTG_News::POST_TYPE))) {
     		wp_enqueue_script( 'sharethis', '//w.sharethis.com/button/buttons.js', false, '', true);
-	}	
-	
+	}
+
 	if (is_page_template('business-litigation.php') || is_page_template('securities-litigation.php')) {
     	wp_enqueue_script( 'stellar', get_template_directory_uri() . '/assets/js/plugins/jquery.stellar.min.js', false, '', true);
     	wp_enqueue_script( 'scrollreveal', get_template_directory_uri() . '/assets/js/plugins/scrollReveal.min.js', false, '', true);
 	}
-	
+
 	if (is_page_template('videos-page.php') || is_page_template('contact-page.php') || is_page_template('homepage.php') || is_page('casey-anthony-case')) {
     	wp_enqueue_script( 'videojs', get_template_directory_uri() . '/assets/plugins/videos/assets/js/video.js', false, '', true);
     	wp_enqueue_script( 'videoplaylist', get_template_directory_uri() . '/assets/plugins/videos/assets/js/videoplaylist.js', false, '', true);
 	}
-	
+
 	if (is_page_template('diabetes-page.php')) {
     	wp_enqueue_script( 'bxslider', get_template_directory_uri() . '/assets/media/interactive/diabetes/js/jquery.bxslider.min.js', false, '', true);
     	wp_enqueue_script( 'circliful', get_template_directory_uri() . '/assets/media/interactive/diabetes/js/jquery.circliful.min.js', false, '', true);
     	wp_enqueue_script( 'main', get_template_directory_uri() . '/assets/media/interactive/diabetes/js/main.js', false, '', true);
 	}
-	
+
 	if (is_single('matt-morgan')) {
     	wp_enqueue_script( 'twittertimeline', get_template_directory_uri() . '/assets/js/plugins/twitter.timeline.js', false, '', true);
 	}
-	
+
 	if (is_singular('attorney')) {
     	wp_enqueue_script( 'badges', '//www.avvo.com/assets/badges-v2.js', false, '', true);
 
@@ -273,14 +274,14 @@ function forthepeople_scripts() {
 add_action( 'wp_enqueue_scripts', 'forthepeople_scripts' );
 
 function wpmice_scripts() {
-  if (!is_page_template('landing-page.php')) { 
-    
+  if (!is_page_template('landing-page.php')) {
+
 //    wp_enqueue_style( 'wpmice-style', get_stylesheet_uri() );
- 
+
     wp_enqueue_script( 'wpmice-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20120206', true );
 
     wp_enqueue_script( 'wpmice-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20130115', true );
- 
+
     if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
         wp_enqueue_script( 'comment-reply' );
     }
@@ -316,7 +317,7 @@ require get_template_directory() . '/inc/jetpack.php';
 
 class My_Sub_Menu extends Walker_Nav_Menu {
 
-	
+
   function start_lvl(&$output, $depth = 0, $args = Array()) {
 
       $indent = str_repeat("\t", $depth);
@@ -325,7 +326,7 @@ class My_Sub_Menu extends Walker_Nav_Menu {
 
   }
 
-  
+
   function start_el ( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
 
     global $wp_query, $wpdb;
@@ -339,7 +340,7 @@ class My_Sub_Menu extends Walker_Nav_Menu {
 
     $class_names_comp = ' class="' . esc_attr( $class_names ) . '"';
 
-	
+
 
     $id = apply_filters( 'nav_menu_item_id', 'menu-item-'. $item->ID, $item, $args );
 
@@ -352,7 +353,7 @@ class My_Sub_Menu extends Walker_Nav_Menu {
 
                             AND meta_value='".$item->ID."'");
 
-							
+
 
     if ( $depth == 0 && $has_children > 0  ) {
 
@@ -384,13 +385,13 @@ class My_Sub_Menu extends Walker_Nav_Menu {
 
     }
 
-	
+
 
     $item_output .= '</a>';
 
     $item_output .= $args->after;
 
-	
+
 
     $output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
 
@@ -400,16 +401,16 @@ class My_Sub_Menu extends Walker_Nav_Menu {
 
 function mm_ftp_setup() {
 	// Enable support for Post Thumbnails.
-	add_theme_support( 'post-thumbnails' );	
+	add_theme_support( 'post-thumbnails' );
 	//set_post_thumbnail_size( $width, $height, $crop ); //false - Soft proportional crop mode; true - Hard crop mode.
-	
+
 	//Enable support for Post Formats.
 	add_theme_support( 'post-formats', array(
 		'aside', 'gallery', 'link', 'image', 'quote', 'status', 'video', 'audio', 'chat'
 	) );
 	//Enable the use of HTML5 markup for the comment forms, search forms, comment lists, galleries, and captions.
-	add_theme_support( 'html5', array( 
-		'comment-list', 'comment-form', 'search-form', 'gallery', 'caption' 
+	add_theme_support( 'html5', array(
+		'comment-list', 'comment-form', 'search-form', 'gallery', 'caption'
 	) );
 	// Enable excerpts for pages, posts, and custom post types.
 	add_post_type_support( 'page', 'excerpt' );
@@ -429,9 +430,9 @@ add_action( 'after_setup_theme', 'mm_ftp_setup' );
  */
 
 function mm_ftp_widgets_init() {
-	
-	
-	
+
+
+
 	/** Custom Post Types **/
 
 	function my_labels_for_custom_post_type($singular, $plural) {
@@ -442,7 +443,7 @@ function mm_ftp_widgets_init() {
 	    	'all_items' => 'All '.$plural,
 	    	'parent_item' => 'Parent '.$singular.' Page',
 	    	'parent_item_colon' => 'Parent '.$singular.' Page:',
-	    	'edit_item' => 'Edit '.$singular, 
+	    	'edit_item' => 'Edit '.$singular,
 	    	'update_item' => 'Update '.$singular,
 	    	'add_new_item' => 'Add New '.$singular,
 	    	'new_item_name' => 'New '.$singular.' Page',
@@ -451,13 +452,13 @@ function mm_ftp_widgets_init() {
 
 		return $labels;
 	}
-	
+
 	register_post_type('featured_news', array(
 		'labels' => my_labels_for_custom_post_type('Featured News', 'Featured News'),
 		'public' => true,
 		'publicly_queryable' => true,
-	    'show_ui' => true, 
-	    'show_in_menu' => true, 
+	    'show_ui' => true,
+	    'show_in_menu' => true,
 	    'menu_position' => 20,
 	    'capability_type' => 'page',
 	    'hierarchical' => true,
@@ -466,7 +467,7 @@ function mm_ftp_widgets_init() {
 	    	'slug' => 'featured',
 			'with_front' => false
 	    ),
-	    'has_archive' => false, 
+	    'has_archive' => false,
 	    'supports' => array(
 			'title',
 			'editor',
@@ -476,13 +477,13 @@ function mm_ftp_widgets_init() {
 		)
 	));
 
-	
+
 	register_post_type('attorney', array(
 		'labels' => my_labels_for_custom_post_type('Attorney', 'Attorneys'),
 		'public' => true,
 		'publicly_queryable' => true,
-	    'show_ui' => true, 
-	    'show_in_menu' => true, 
+	    'show_ui' => true,
+	    'show_in_menu' => true,
 	    'menu_position' => 20,
 	    'capability_type' => 'page',
 	    'hierarchical' => true,
@@ -491,7 +492,7 @@ function mm_ftp_widgets_init() {
 	    	'slug' => 'attorneys',
 			'with_front' => false
 	    ),
-	    'has_archive' => false, 
+	    'has_archive' => false,
 	    'supports' => array(
 			'title',
 			'editor',
@@ -505,8 +506,8 @@ function mm_ftp_widgets_init() {
 		'labels' => my_labels_for_custom_post_type('Office', 'Offices'),
 		'public' => true,
 		'publicly_queryable' => true,
-	    'show_ui' => true, 
-	    'show_in_menu' => true, 
+	    'show_ui' => true,
+	    'show_in_menu' => true,
 	    'menu_position' => 20,
 	    'capability_type' => 'page',
 	    'hierarchical' => false,
@@ -515,20 +516,20 @@ function mm_ftp_widgets_init() {
 	    	'slug' => 'office',
 			'with_front' => false
 	    ),
-	    'has_archive' => 'office_locations', 
+	    'has_archive' => 'office_locations',
 	    'supports' => array(
 			'title',
 			'editor',
 			'author',
 		)
 	));
-	
+
 		register_post_type('verdict', array(
 		'labels' => my_labels_for_custom_post_type('Verdict', 'Verdicts'),
 		'public' => true,
 		'publicly_queryable' => true,
-	    'show_ui' => true, 
-	    'show_in_menu' => true, 
+	    'show_ui' => true,
+	    'show_in_menu' => true,
 	    'menu_position' => 20,
 	    'capability_type' => 'page',
 	    'hierarchical' => true,
@@ -546,13 +547,13 @@ function mm_ftp_widgets_init() {
 	));
 
 
-	
+
 	register_post_type('multimedia', array(
 		'labels' => my_labels_for_custom_post_type('File', 'Multimedia'),
 		'public' => true,
 		'publicly_queryable' => true,
-	    'show_ui' => true, 
-	    'show_in_menu' => true, 
+	    'show_ui' => true,
+	    'show_in_menu' => true,
 	    'menu_position' => 20,
 	    'capability_type' => 'page',
 	    'hierarchical' => false,
@@ -561,20 +562,20 @@ function mm_ftp_widgets_init() {
 	    	'slug' => 'media-library',
 			'with_front' => false
 	    ),
-	    'has_archive' => false, 
+	    'has_archive' => false,
 	    'supports' => array(
 			'title',
 			'editor',
 			'author',
 		)
 	));
-	
+
 	register_post_type('testimonial', array(
 		'labels' => my_labels_for_custom_post_type('Testimonial', 'Testimonials'),
 		'public' => true,
 		'publicly_queryable' => true,
-	    'show_ui' => true, 
-	    'show_in_menu' => true, 
+	    'show_ui' => true,
+	    'show_in_menu' => true,
 	    'menu_position' => 20,
 	    'capability_type' => 'page',
 	    'hierarchical' => false,
@@ -595,7 +596,7 @@ function mm_ftp_widgets_init() {
 	/** Taxonomies **/
 
 	//Generate an array of standardized labels used when registering a custom taxonomy.
-	
+
 	function my_labels_for_custom_taxonomy($singular, $plural) {
 		$labels = array(
 	    'name' => $plural,
@@ -605,7 +606,7 @@ function mm_ftp_widgets_init() {
 	    'all_items' => 'All '.$plural,
 	    'parent_item' => null,
 	    'parent_item_colon' => null,
-	    'edit_item' => 'Edit '.$singular, 
+	    'edit_item' => 'Edit '.$singular,
 	    'update_item' => 'Update '.$singular,
 	    'add_new_item' => 'Add New '.$singular,
 	    'new_item_name' => 'New '.$singular.' Name',
@@ -631,7 +632,7 @@ function mm_ftp_widgets_init() {
 			'hierarchical' => false
 		)
 	) );
-	
+
 	register_taxonomy('related_attorney', array('verdict','multimedia','testimonial'), array(
 		'labels' => my_labels_for_custom_taxonomy('Related Attorney', 'Related Attorneys'),
 		'hierarchical' => true,
@@ -643,7 +644,7 @@ function mm_ftp_widgets_init() {
 			'hierarchical' => false
 		)
 	) );
-	
+
 	register_taxonomy('location', array('attorney', 'office','verdict','testimonial'), array(
 		'labels' => my_labels_for_custom_taxonomy('Location', 'Related Office Locations'),
 		'hierarchical' => true,
@@ -655,7 +656,7 @@ function mm_ftp_widgets_init() {
 			'hierarchical' => false
 		)
 	) );
-	
+
 	register_taxonomy('media_type', array('multimedia'), array(
 		'labels' => my_labels_for_custom_taxonomy('Media Type', 'Media Types'),
 		'hierarchical' => true,
@@ -667,7 +668,7 @@ function mm_ftp_widgets_init() {
 			'hierarchical' => false
 		)
 	) );
-	
+
 	register_taxonomy('video_playlist', array('multimedia'), array(
 		'labels' => my_labels_for_custom_taxonomy('Video Playlist', 'Video Playlists'),
 		'hierarchical' => true,
@@ -679,7 +680,7 @@ function mm_ftp_widgets_init() {
 			'hierarchical' => false
 		)
 	) );
-	
+
 	register_taxonomy('page_type', array('page'), array(
 		'labels' => my_labels_for_custom_taxonomy('Page Type', 'Page Types'),
 		'hierarchical' => true,
@@ -707,7 +708,7 @@ add_action( 'admin_head', 'custom_back_end_css' );
 */
 function custom_meta_boxes() {
 	// post_types where you want specific custom meta boxes to appear
-	$personal_info_screens = array( 'attorney' ); 
+	$personal_info_screens = array( 'attorney' );
 	$verdict_screens = array( 'verdict' );
 	$media_screens = array( 'multimedia' );
 	$preview_screens = array( 'multimedia' );
@@ -717,72 +718,72 @@ function custom_meta_boxes() {
 
 
 	foreach ( $personal_info_screens as $screen ) {
-		add_meta_box( 
-			'profile_info', 
-			'Additional Information', 
-			'show_profile_custom_meta_box', 
-			$screen, 
-			'normal', 
-			'high', 
+		add_meta_box(
+			'profile_info',
+			'Additional Information',
+			'show_profile_custom_meta_box',
+			$screen,
+			'normal',
+			'high',
 			$args
 		);
 	}
-	
+
 	foreach ( $verdict_screens as $screen ) {
-		add_meta_box( 
-			'verdict_details', 
-			'Verdict Details', 
-			'show_verdict_custom_meta_box', 
-			$screen, 
-			'normal', 
-			'high', 
+		add_meta_box(
+			'verdict_details',
+			'Verdict Details',
+			'show_verdict_custom_meta_box',
+			$screen,
+			'normal',
+			'high',
 			$args
 		);
 	}
-	
+
 	foreach ( $media_screens as $screen ) {
-		add_meta_box( 
-			'media_file_details', 
-			'Media File Details', 
-			'show_media_custom_meta_box', 
-			$screen, 
-			'normal', 
-			'high', 
+		add_meta_box(
+			'media_file_details',
+			'Media File Details',
+			'show_media_custom_meta_box',
+			$screen,
+			'normal',
+			'high',
 			$args
 		);
 	}
-	
+
 	foreach ( $preview_screens as $screen ) {
-		add_meta_box( 
-			'preview_and_file_info', 
-			'Preview and File Information', 
-			'show_preview_and_file_info_custom_meta_box', 
-			'normal', 
-			'high', 
+		add_meta_box(
+			'preview_and_file_info',
+			'Preview and File Information',
+			'show_preview_and_file_info_custom_meta_box',
+			'normal',
+			'high',
 			$args
 		);
 	}
-	
+
 	foreach ( $office_screens as $screen ) {
-		add_meta_box( 
-			'office_location_details', 
-			'Office Location Details', 
-			'show_office_location_custom_meta_box', 
-			$screen, 
-			'normal', 
-			'high', 
+		add_meta_box(
+			'office_location_details',
+			'Office Location Details',
+			'show_office_location_custom_meta_box',
+			$screen,
+			'normal',
+			'high',
 			$args
 		);
 	}
-	
+
 	foreach ( $testimonial_screens as $screen ) {
-		add_meta_box( 
-			'testimonial_details', 
-			'Testimonial Details', 
-			'show_testimonial_custom_meta_box', 
-			$screen, 
-			'normal', 
-			'high', 
+		add_meta_box(
+			'testimonial_details',
+			'Testimonial Details',
+			'show_testimonial_custom_meta_box',
+			$screen,
+			'normal',
+			'high',
 			$args
 		);
 	}
@@ -818,13 +819,13 @@ function show_profile_custom_meta_box( $post ) {
 	echo '<input class="be-input" type="text" id="gplus_account" name="gplus_account" value="' . esc_attr( $gplus_account ) . '" />';
 	echo '<label class="be-label" for="linkedin_account"><strong>LinkedIn Account</strong></label>';
 	echo '<input class="be-input" type="text" id="linkedin_account" name="linkedin_account" value="' . esc_attr( $linkedin_account ) . '" />';
-	
+
 }
 
 
 function show_verdict_custom_meta_box( $post ) {
 	wp_nonce_field( 'verdict_details','verdict_details_nonce' );
-	
+
 	$ruling_type = get_post_meta( $post->ID, '_ruling_type', true );
 	$presuit_offer = get_post_meta( $post->ID, '_presuit_offer', true );
 	$practice_area_text = get_post_meta( $post->ID, '_practice_area_text', true );
@@ -833,7 +834,7 @@ function show_verdict_custom_meta_box( $post ) {
 	$venue = get_post_meta( $post->ID, '_venue', true );
 	$case_style = get_post_meta( $post->ID, '_case_style', true );
 	$date = get_post_meta( $post->ID, '_date', true );
-	
+
 	echo '<label class="be-label" for="ruling_type"><strong>Ruling Type</strong> (Verdict or Settlement)</label>';
 	echo '<select class="be-select" name="ruling_type">
 				<option value="verdict">Verdict</option>
@@ -857,18 +858,18 @@ function show_verdict_custom_meta_box( $post ) {
 
 function show_media_custom_meta_box( $post ) {
 	wp_nonce_field( 'media_file_details','media_file_details_nonce' );
-	
+
 	$transcript = get_post_meta( $post->ID, '_file_url_path', true );
-	
+
 	echo '<label class="be-label" for="transcript"><strong>Transcript</strong></label>';
 	echo '<textarea class="be-textarea" rows="5" type="text" id="transcript" name="transcript">' . esc_attr( $transcript ) . '</textarea>';
 }
 
 function show_preview_and_file_info_custom_meta_box( $post ) {
 	wp_nonce_field( 'preview_and_file_info','preview_and_file_info_nonce' );
-	
+
 	$file_url_path = get_post_meta( $post->ID, '_file_url_path', true );
-	
+
 	echo '<label class="be-label" for="file_url_path"><strong>File URL Path</strong></label>';
 	echo '<input class="be-input" type="text" id="file_url_path" name="file_url_path" value="' . esc_attr( $file_url_path ) . '" />';
 	echo '<div class="media-placeholder"></div>';
@@ -886,9 +887,9 @@ function show_office_location_custom_meta_box( $post ) {
 	$map_link = get_post_meta( $post->ID, '_map_link', true );
 	$latitude = get_post_meta( $post->ID, '_latitude', true );
 	$longitude = get_post_meta( $post->ID, '_longitude', true );
-	
+
 	echo '<p class="alert-msg">All fields are required except for the Suite Information and Short Description. <a href="http://itouchmap.com/latlong.html" target="_blank">Click here</a> for a website that can be used to get the latitude and longitude.</p>';
-	
+
 	echo '<label class="be-label" for="short_description"><strong>Short Description</strong></label>';
 	echo '<textarea class="be-textarea" type="text" id="short_description" name="short_description">' . esc_attr( $short_description ) . '</textarea>';
 	echo '<label class="be-label" for="street_address"><strong>Street Address</strong></label>';
@@ -911,18 +912,18 @@ function show_office_location_custom_meta_box( $post ) {
 
 function show_testimonial_custom_meta_box( $post ) {
 	wp_nonce_field( 'testimonial_details','testimonial_details_nonce' );
-	
+
 	$city = get_post_meta( $post->ID, '_city', true );
 	$state = get_post_meta( $post->ID, '_state', true );
 	$date = get_post_meta( $post->ID, '_date', true );
 
 	echo '<label class="be-label" for="city"><strong>City</strong></label>';
-	echo '<input class="be-input" type="text" id="city" name="city" value="' . esc_attr( $city ) . '" />';	
+	echo '<input class="be-input" type="text" id="city" name="city" value="' . esc_attr( $city ) . '" />';
 	echo '<label class="be-label" for="state"><strong>State</strong></label>';
 	echo '<input class="be-input" type="text" id="state" name="state" value="' . esc_attr( $state ) . '" />';
 	echo '<label class="be-label" for="date"><strong>Date</strong></label>';
 	echo '<input class="be-input" type="date" id="date" name="date" value="' . esc_attr( $date ) . '" />';
-	
+
 }
 
 
@@ -941,7 +942,7 @@ function save_profile_custom_meta_box_data( $post_id ) {
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 		return;
 	}
-	
+
 	// Check the user's permissions.
 	if ( isset( $_POST['post_type'] ) && 'page' == $_POST['post_type'] ) {
 		if ( ! current_user_can( 'edit_page', $post_id ) ) {
@@ -973,7 +974,7 @@ function save_profile_custom_meta_box_data( $post_id ) {
 	}
 	if ( ! isset( $_POST['linkedin_account'] ) ) {
 		return;
-	}	
+	}
 
 	// Sanitize user input.
 	$job_title_data = sanitize_text_field( $_POST['job_title'] );
@@ -997,7 +998,7 @@ function save_profile_custom_meta_box_data( $post_id ) {
 add_action( 'save_post', 'save_profile_custom_meta_box_data' );
 
 function save_testimonial_custom_meta_box_data( $post_id ) {
-	
+
 	//Verify this came from our screen and with proper authorization
 
 	if ( ! isset( $_POST['testimonial_details_nonce'] ) ) {
@@ -1009,7 +1010,7 @@ function save_testimonial_custom_meta_box_data( $post_id ) {
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 		return;
 	}
-	
+
 	// Check the user's permissions.
 	if ( isset( $_POST['post_type'] ) && 'page' == $_POST['post_type'] ) {
 		if ( ! current_user_can( 'edit_page', $post_id ) ) {
@@ -1045,7 +1046,7 @@ add_action( 'save_post', 'save_testimonial_custom_meta_box_data' );
 
 //Remove top level admin menus
 
-function remove_menus() {     
+function remove_menus() {
    	//remove_menu_page( 'index.php' );                  //Dashboard
 	//remove_menu_page( 'edit.php' );                   //Posts
 	//remove_menu_page( 'upload.php' );                 //Media
@@ -1063,16 +1064,16 @@ add_action('admin_menu', 'remove_menus');
 
 //Remove non-essential metadata from the Wordpress <head>
 
-function head_optimization() {  
+function head_optimization() {
 	remove_action('wp_head', 'wp_generator');
-	remove_action('wp_head', 'rsd_link'); 
-	remove_action('wp_head', 'feed_links', 2);  
-	remove_action('wp_head', 'feed_links_extra', 3);  
+	remove_action('wp_head', 'rsd_link');
+	remove_action('wp_head', 'feed_links', 2);
+	remove_action('wp_head', 'feed_links_extra', 3);
 	remove_action('wp_head', 'wlwmanifest_link');
 	remove_action('wp_head', 'wp_shortlink_wp_head', 10, 0);
 	remove_action('wp_head', 'rel_canonical');
-	remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);   
-}  
+	remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
+}
 add_action('init', 'head_optimization');
 
 add_filter('widget_text', 'do_shortcode');
@@ -1104,7 +1105,7 @@ function classactions() {
 		'taxonomies' 		  => array('post_tag'),
 		'hierarchical'		  => true
 	);
-	
+
 	register_post_type( 'Class Action Lawyers', $classaction );
 }
 
@@ -1227,12 +1228,12 @@ function add_verbose_portfolio_defective_construction_products($rewrite_rules)
   return forthepeople_add_rewrite_rule($rewrite_rules, 'class-action-lawyers/defective-construction-products');
 }
 
-function is_child($pageID) { 
-	global $post; 
+function is_child($pageID) {
+	global $post;
 	if( is_page() && ($post->post_parent==$pageID) ) {
                return true;
-	} else { 
-               return false; 
+	} else {
+               return false;
 	}
 }
 
@@ -1301,15 +1302,15 @@ function more_verdicts_ajax(){
 		'orderby' => 'meta_value_num',
         'offset' => $postoffset,
     );
-	
+
     $loop = new WP_Query($args);
-    while ($loop->have_posts()) { $loop->the_post(); 
+    while ($loop->have_posts()) { $loop->the_post();
 		echo '<li>';
 		  echo '<div class="type">';
 		    echo '<span>' . get_field('ruling_type') . '</span>';
 		    echo get_field('practice_area_tag');
 		  echo '</div>';
-							
+
 		  echo '<div class="result">';
 		  $price = get_field('amount');
 		    echo  is_numeric($price) ? '$' . number_format($price) : $price;
@@ -1320,7 +1321,7 @@ function more_verdicts_ajax(){
     exit; wp_reset_postdata();
 }
 
-add_action('wp_ajax_nopriv_more_verdicts_ajax', 'more_verdicts_ajax'); 
+add_action('wp_ajax_nopriv_more_verdicts_ajax', 'more_verdicts_ajax');
 add_action('wp_ajax_more_verdicts_ajax', 'more_verdicts_ajax');
 
 
@@ -1334,9 +1335,9 @@ function more_testimonials_ajax(){
 		'order' => 'asc',
         'offset' => $postoffset,
     );
-	
+
     $loop = new WP_Query($args);
-    while ($loop->have_posts()) { $loop->the_post(); 
+    while ($loop->have_posts()) { $loop->the_post();
 		echo '<div class="testimonial">';
 			echo '<p>' . get_field('testimonial_text') . '</p>';
 			echo '<small>' . get_the_title() . ' from ' . get_field('city') . ', ' . get_field('state') . '</small>';
@@ -1345,7 +1346,7 @@ function more_testimonials_ajax(){
     exit; wp_reset_postdata();
 }
 
-add_action('wp_ajax_nopriv_more_testimonials_ajax', 'more_testimonials_ajax'); 
+add_action('wp_ajax_nopriv_more_testimonials_ajax', 'more_testimonials_ajax');
 add_action('wp_ajax_more_testimonials_ajax', 'more_testimonials_ajax');
 
 
@@ -1358,7 +1359,7 @@ add_action('wp_ajax_more_testimonials_ajax', 'more_testimonials_ajax');
 function show_contact_name() {
 
 	return sprintf( '<h5 class="text-center">Contact %s</h5>', get_the_title() );
-	
+
 }
 
 add_shortcode('contact_attorney', 'show_contact_name');
@@ -1419,27 +1420,27 @@ add_filter('pre_site_transient_update_themes','remove_core_updates');
 
 /**
 * Creates a [getfivestars_widget] shortcode for Morgan & Morgan
-* 
+*
 * @return 		string	An embed widget <div id="e2wget5widget">
 */
 
 function getfivestars() {
-	
+
 	$output = '';
-	$e2wget5 = 0; 
+	$e2wget5 = 0;
 	$url = 'https://getfivestars.com/reviews/19596.82AeudCgFchM';
 
-	if(function_exists('curl_exec')){ 
-		$c=curl_init($url); 
-		curl_setopt($c,CURLOPT_CONNECTTIMEOUT,5); 
-		curl_setopt($c,CURLOPT_TIMEOUT,10); 
-		curl_setopt($c,CURLOPT_RETURNTRANSFER,1); 
-		curl_setopt($c,CURLOPT_SSL_VERIFYHOST,0); 
-		$output .= @curl_exec($c);$e2wget5 = 1; 
-	} elseif( ini_get('allow_url_fopen')){ 
-		$output .= @file_get_contents($url);$e2wget5 = 2; 
+	if(function_exists('curl_exec')){
+		$c=curl_init($url);
+		curl_setopt($c,CURLOPT_CONNECTTIMEOUT,5);
+		curl_setopt($c,CURLOPT_TIMEOUT,10);
+		curl_setopt($c,CURLOPT_RETURNTRANSFER,1);
+		curl_setopt($c,CURLOPT_SSL_VERIFYHOST,0);
+		$output .= @curl_exec($c);$e2wget5 = 1;
+	} elseif( ini_get('allow_url_fopen')){
+		$output .= @file_get_contents($url);$e2wget5 = 2;
 	}
-	
+
 	return '<div id="e2wget5widget" class="mmftp">' . $output . '<script src="https://getfivestars.com/reviews.js/19596.82AeudCgFchM"></script></div>';
 }
 add_shortcode( 'getfivestars_widget', 'getfivestars' );
@@ -1473,7 +1474,7 @@ add_filter( 'the_content','insert_cta_btn_on_mobile' );
 function insert_cta_btn_on_mobile( $content ) {
 
 	$cta_btn = '<div class="cta-btn-for-mobile"><a href="#free-immediate-consultation">Free Immediate Consultation</a></div>';
-	
+
 	if ( wp_is_mobile() ) {
 		if ( is_page_template('office-location.php') || is_page_template('practice-area.php') )  {
 
@@ -1504,7 +1505,7 @@ function insert_cta_after_paragraph( $insertion,$paragraph_id, $content ) {
 		}
 
 		return implode( '', $paragraphs );
-		
+
 	}
 
 }

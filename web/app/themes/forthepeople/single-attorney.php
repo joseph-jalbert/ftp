@@ -132,7 +132,7 @@ get_header(); ?>
 
 
           },
-          onFormSubmit: '<?php echo esc_js( forthepeople_render_hubspot_text_filter_callback() ); ?>'
+          onFormSubmit: <?php echo esc_js( forthepeople_render_hubspot_text_filter_callback() ); ?>
         });
       });
     });

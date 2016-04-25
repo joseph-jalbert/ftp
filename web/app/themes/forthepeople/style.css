@@ -1868,6 +1868,13 @@ footer#footer .offices {
 	margin-left:0;
 }
 
+/*
+ * Attorney page Location Links
+ */
+#profile-wrap .location .location-link {
+	color: #c2c2c2;
+}
+
 /* Nav Bar Search
 --------------------------------------*/
 .search-container{
@@ -1949,3 +1956,4 @@ footer#footer .offices {
 .searchbox-open{
 	width:100%;
 }
+

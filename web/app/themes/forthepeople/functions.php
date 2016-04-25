@@ -1452,13 +1452,13 @@ function rewritearchives_init(){
 add_action( 'init', 'rewritearchives_init' );
 
 /*
-  Prevent WP Search functionality by redirecting to home url
+  Parse Query. Left this just incase we wanted to
+  do something with the query.
 */
 function forthepeople_filter_query( $wp_query ) {
  if (!is_admin()) {
   if ($wp_query->is_search()) {
-    wp_redirect( home_url() );
-    exit;
+
   }
  }
 }

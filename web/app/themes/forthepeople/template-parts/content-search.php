@@ -27,3 +27,4 @@
 		<?php forthepeople_entry_footer(); ?>
 	</footer><!-- .entry-footer -->
 </article><!-- #post-## -->
+<hr/>

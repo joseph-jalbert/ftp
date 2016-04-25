@@ -6,40 +6,44 @@
  */
 
 get_header(); ?>
+<div id="content" class="site-content container">
+	<div id="interior-page">
+		<div class="row-fluid row-leading row-follow">
+			<div id="col1" class="span8">
+				<main id="main" class="site-main" role="main">
 
-	<section id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
+					<?php if ( have_posts() ) : ?>
+						<header class="page-header">
+							<h1 class="page-title"><?php printf( esc_html__( 'Search Results for: %s', 'forthepeople' ), '<span>' . get_search_query() . '</span>' ); ?></h1>
+						</header><!-- .page-header -->
 
-		<?php if ( have_posts() ) : ?>
+						<?php while ( have_posts() ) : the_post(); ?>
+							<?php get_template_part( 'template-parts/content', 'search' ); ?>
+							<?php
+							// If comments are open or we have at least one comment, load up the comment template
+							if ( comments_open() || get_comments_number() ) :
+								comments_template();
+							endif;
+							?>
+						<?php endwhile; // end of the loop. ?>
 
-			<header class="page-header">
-				<h1 class="page-title"><?php printf( esc_html__( 'Search Results for: %s', 'forthepeople' ), '<span>' . get_search_query() . '</span>' ); ?></h1>
-			</header><!-- .page-header -->
+						<?php the_posts_navigation(); ?>
 
-			<?php /* Start the Loop */ ?>
-			<?php while ( have_posts() ) : the_post(); ?>
+					<?php else : ?>
 
-				<?php
-				/**
-				 * Run the loop for the search to output the results.
-				 * If you want to overload this in a child theme then include a file
-				 * called content-search.php and that will be used instead.
-				 */
-				get_template_part( 'template-parts/content', 'search' );
-				?>
+						<?php get_template_part( 'template-parts/content', 'none' ); ?>
 
-			<?php endwhile; ?>
+					<?php endif; ?>
 
-			<?php the_posts_navigation(); ?>
+				</main>
+				<!-- #main -->
+			</div>
+			<!-- #primary -->
+			<div id="col2" class="span4">
+				<?php get_sidebar(); ?>
+			</div>
+		</div>
+	</div>
 
-		<?php else : ?>
-
-			<?php get_template_part( 'template-parts/content', 'none' ); ?>
-
-		<?php endif; ?>
-
-		</main><!-- #main -->
-	</section><!-- #primary -->
-
-<?php get_sidebar(); ?>
-<?php get_footer(); ?>
+	<?php get_sidebar(); ?>
+	<?php get_footer(); ?>

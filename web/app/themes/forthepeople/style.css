@@ -1867,3 +1867,7 @@ footer#footer .offices {
 .locations .location:first-child {
 	margin-left:0;
 }
+
+#profile-wrap .location .location-link {
+	color: #c2c2c2;
+}

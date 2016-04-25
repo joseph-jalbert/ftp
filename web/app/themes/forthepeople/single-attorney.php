@@ -41,10 +41,10 @@ get_header(); ?>
             <?php
 
             $locations         = wp_get_post_terms( $post->ID, 'location' );
-            $location_template = '<span class="location"><i class="icon-map-marker"></i> %s</span>';
+            $location_template = '<span class="location"><i class="icon-map-marker"></i> <a href="/%s" class="location-link">%s</a></span>';
             if ( is_array( $locations ) ) :
               foreach ( $locations as $location ) :
-                echo sprintf( $location_template, esc_html( $location->name ) );
+                echo sprintf( $location_template, $location->slug, esc_html( $location->name ) );
               endforeach;
             endif;
 

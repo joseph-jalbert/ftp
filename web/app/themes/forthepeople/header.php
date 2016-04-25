@@ -117,7 +117,18 @@ $menuslug = 'main-navigation';
 
         <div class="phone pull-right hidden-phone">
         	<div class="actions">
-                 <div id="head-search"><gcse:searchbox-only resultsUrl="/search"></div>
+                 <div id="head-search" class="clearfix">
+
+
+					<div class="search-container clearfix">
+						<form class="searchbox" action="/" method="GET">
+							<input type="search" placeholder="Search..." name="s" class="searchbox-input" onkeyup="buttonUp();" required>
+							<input type="submit" class="searchbox-submit" value="GO">
+							<span class="searchbox-icon">&nbsp;</span>
+						</form>
+					</div>
+
+                 </div>
         	</div>
             <div class="cta">24 hours / 7 days a week. Se habla español.</div>
             <span class="number tk-minion-pro">877.667.4265</span>

@@ -80,6 +80,7 @@
 <!-- #page -->
 <?php wp_footer(); ?>
 <script>
+/* Removed Google Search. Bill V.P.
 (function(){
 	var cx = '011106375241371260146:4-r2y4eom2i';
 	var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
@@ -87,6 +88,8 @@
 		'//www.google.com/cse/cse.js?cx=' + cx;
 	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
 })();
+*/
+
 jQuery(function($) {
   $('a[href*=#]:not([href=#],[data-toggle=tab],[data-toggle=collapse])').click(function() {
     if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {

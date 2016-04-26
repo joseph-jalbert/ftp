@@ -1,0 +1,21 @@
+.body.google-review {
+    padding: 10px !important;
+    font-family: ff-basic-gothic-web-pro, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.schema-review-body {
+    line-height: 25px;
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+.schema-review .author {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.review-stars {
+    display: block;
+    float: right;
+}

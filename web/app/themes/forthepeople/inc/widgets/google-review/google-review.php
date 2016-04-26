@@ -14,6 +14,11 @@ class Google_Review extends WP_Widget {
 	 * Initialization method
 	 */
 	public static function init() {
+		$api_key_settings = get_option('google_api_key');
+		if ( ! empty( $api_key_settings['google_api_key'] ) ) :
+			self::$google_api_key = $api_key_settings['google_api_key'];
+		endif;
+
 		add_action( 'widgets_init', create_function( '', 'register_widget( "Google_Review" );' ) );
 	}
 
@@ -125,35 +130,43 @@ class Google_Review extends WP_Widget {
 	}
 
 
-	private static function get_review() {
+	private static function get_review()
+	{
 		$place_id = '';
+		$gr = new Google_Review();
+		$settings = $gr->get_settings();
+		if (!empty($settings[2])) :
+			$place_id = $settings[2]['google-place-id'];
+		endif;
+
 		$the_place = array();
 		$address = urlencode('Morgan and Morgan ' . self::get_office_address());
 		$placesearchurl = sprintf(self::$place_search_url, $address, self::$google_api_key);
 
-		$cacheKey = md5( 'office-place-id-' . $address );
-		$rreviews = get_transient( $cacheKey );
-
-		if ( false === $rreviews ) :
-
-			$data = wp_remote_get($placesearchurl);
-
-			if ( empty($data['body'] ) ) :
-				return false;
-			endif;
-
-			$place_info = json_decode($data['body']);
-			if ( ! empty($place_info->results) ) :
-				$place_id = $place_info->results[0]->place_id;
-			endif;
+		$cacheKey = md5('office-place-id-' . $address . $place_id);
+		$rreviews = get_transient($cacheKey);
+		if (false === $rreviews) :
 
 			if ( empty( $place_id ) ) :
-				return false;
+
+				$data = wp_remote_get($placesearchurl);
+
+				if (empty($data['body'])) :
+					return false;
+				endif;
+
+				$place_info = json_decode($data['body']);
+				if (!empty($place_info->results)) :
+					$place_id = $place_info->results[0]->place_id;
+				endif;
+
+				if (empty($place_id)) :
+					return false;
+				endif;
 			endif;
 
 			$placeurl = sprintf(self::$place_details_url, $place_id, self::$google_api_key);
 			$place_data = wp_remote_get($placeurl);
-
 
 			if ( ! empty($place_data['body'] ) ) :
 				$place_data_info = json_decode($place_data['body']);
@@ -205,7 +218,6 @@ class Google_Review extends WP_Widget {
 		$address = get_transient( $cacheKey );
 
 		if ( false === $address ) :
-			print "Inside Address";
 			if ($officeinfo->have_posts()) {
 				while ($officeinfo->have_posts()) {
 					$officeinfo->the_post();

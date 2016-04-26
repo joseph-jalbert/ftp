@@ -1466,6 +1466,22 @@ function forthepeople_filter_query( $wp_query ) {
 add_action( 'parse_query', 'forthepeople_filter_query' );
 
 
+/**
+ * Limit Search to specific post types
+ * @param $query
+ * @return mixed
+ */
+function searchfilter($query) {
+
+	if ( $query->is_search && ! is_admin() ) {
+		$query->set( 'post_type', array( 'post', 'page', 'attorney', 'office', 'verdict', 'testimonial', 'classactionlawyers', 'btg_news' ) );
+	}
+
+	return $query;
+}
+
+add_filter('pre_get_posts','searchfilter');
+
 //Insert the CTA button on mobile after the first paragraph of the location and practice area pages.
 
 add_filter( 'the_content','insert_cta_btn_on_mobile' );

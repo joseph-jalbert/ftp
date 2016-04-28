@@ -151,13 +151,9 @@ class Google_Review extends WP_Widget {
 
 		if ( empty( $place_id ) ) :
 
-			try {
-				$data = wp_remote_get($placesearchurl, array('timeout' => 5));
-			} catch ( Exception $e ) {
-				return false;
-			}
+			$data = wp_remote_get($placesearchurl, array('timeout' => 5));
 
-			if (empty($data['body'])) :
+			if ( is_wp_error( $data ) || empty( $data['body'] ) ) :
 				return false;
 			endif;
 
@@ -172,14 +168,9 @@ class Google_Review extends WP_Widget {
 		endif;
 
 		$placeurl = sprintf(self::$place_details_url, $place_id, self::$google_api_key);
+		$place_data = wp_remote_get($placeurl, array( 'timeout' => 5 ) );
 
-		try {
-			$place_data = wp_remote_get($placeurl, array('timeout' => 5));
-		} catch ( Exception $e ) {
-			return false;
-		}
-
-		if ( ! empty($place_data['body'] ) ) :
+		if ( ! is_wp_error( $place_data ) && ! empty($place_data['body'] ) ) :
 			$place_data_info = json_decode($place_data['body']);
 			if ( ! empty( $place_data_info->result ) ) :
 				$the_place = $place_data_info->result;

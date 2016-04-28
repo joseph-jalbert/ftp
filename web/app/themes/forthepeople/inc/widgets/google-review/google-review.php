@@ -130,67 +130,62 @@ class Google_Review extends WP_Widget {
 	}
 
 
-	private static function get_review()
-	{
+	private static function get_review() {
 		$place_id = '';
 		$gr = new Google_Review();
 		$settings = $gr->get_settings();
+		$rreviews = array();
+
 		if (!empty($settings[2])) :
 			$place_id = $settings[2]['google-place-id'];
 		endif;
 
+		$office_address = self::get_office_address();
+		if ( empty ( $office_address ) ) :
+			return false;
+		endif;
+
 		$the_place = array();
-		$address = urlencode('Morgan and Morgan ' . self::get_office_address());
+		$address = urlencode('Morgan and Morgan ' . $office_address);
 		$placesearchurl = sprintf(self::$place_search_url, $address, self::$google_api_key);
 
-		$cacheKey = md5('office-place-id-' . $address . $place_id);
-		$rreviews = get_transient($cacheKey);
-		if (false === $rreviews) :
+		if ( empty( $place_id ) ) :
 
-			if ( empty( $place_id ) ) :
+			$data = wp_remote_get($placesearchurl, array('timeout' => 5));
 
-				$data = wp_remote_get($placesearchurl);
-
-				if (empty($data['body'])) :
-					return false;
-				endif;
-
-				$place_info = json_decode($data['body']);
-				if (!empty($place_info->results)) :
-					$place_id = $place_info->results[0]->place_id;
-				endif;
-
-				if (empty($place_id)) :
-					return false;
-				endif;
+			if ( is_wp_error( $data ) || empty( $data['body'] ) ) :
+				return false;
 			endif;
 
-			$placeurl = sprintf(self::$place_details_url, $place_id, self::$google_api_key);
-			$place_data = wp_remote_get($placeurl);
-
-			if ( ! empty($place_data['body'] ) ) :
-				$place_data_info = json_decode($place_data['body']);
-				if ( ! empty( $place_data_info->result ) ) :
-					$the_place = $place_data_info->result;
-				endif;
+			$place_info = json_decode($data['body']);
+			if (!empty($place_info->results)) :
+				$place_id = $place_info->results[0]->place_id;
 			endif;
 
-			if ( ! empty( $the_place ) ) :
-				$reviews = $the_place->reviews;
+			if (empty($place_id)) :
+				return false;
+			endif;
+		endif;
 
-				if ( ! empty( $reviews ) ) :
-					$rreviews = array();
-					foreach ( $reviews as $review ) :
-						if ( $review->rating >= 4 ) :
-							$rreviews[] = $review;
-						endif;
-					endforeach;
+		$placeurl = sprintf(self::$place_details_url, $place_id, self::$google_api_key);
+		$place_data = wp_remote_get($placeurl, array( 'timeout' => 5 ) );
 
-					if ( ! empty( $rreviews ) ) :
-						set_transient( $cacheKey, $rreviews );
+		if ( ! is_wp_error( $place_data ) && ! empty($place_data['body'] ) ) :
+			$place_data_info = json_decode($place_data['body']);
+			if ( ! empty( $place_data_info->result ) ) :
+				$the_place = $place_data_info->result;
+			endif;
+		endif;
+
+		if ( ! empty( $the_place ) ) :
+			$reviews = ! empty( $the_place->reviews ) ? $the_place->reviews : false;
+
+			if ( ! empty( $reviews ) ) :
+				foreach ( $reviews as $review ) :
+					if ( $review->rating >= 4 ) :
+						$rreviews[] = $review;
 					endif;
-
-				endif;
+				endforeach;
 			endif;
 		endif;
 
@@ -199,46 +194,36 @@ class Google_Review extends WP_Widget {
 		else:
 			return false;
 		endif;
-
 	}
 
 	private static function get_office_address() {
 		global $post;
 
-		$cacheKey = md5( 'office-address-' . $parentslug );
-
 		$office_info = array();
-
+		$address = '';
 		$parents = get_post_ancestors($post->ID);
 		$id = ($parents) ? $parents[count($parents) - 1] : $post->ID;
 		$parent = get_post($id);
 		$parentslug = $parent->post_name;
 		$officeinfo = new WP_Query('post_type=office&name=' . $parentslug);
 
-		$address = get_transient( $cacheKey );
+		if ($officeinfo->have_posts()) {
+			while ($officeinfo->have_posts()) {
+				$officeinfo->the_post();
 
-		if ( false === $address ) :
-			if ($officeinfo->have_posts()) {
-				while ($officeinfo->have_posts()) {
-					$officeinfo->the_post();
-
-					$office_info['title'] = get_the_title();
-					$office_info['state'] = get_field('state');
-					$office_info['address'] = get_field('street_address');
-					$office_info['suite'] = get_field('suite_information');
-					$office_info['zipcode'] = get_field('zip_code');
-					if ($locality = get_field('state_override')) {
-						$office_info['state'] = esc_html($locality);
-					}
+				$office_info['title'] = get_the_title();
+				$office_info['state'] = get_field('state');
+				$office_info['address'] = get_field('street_address');
+				$office_info['suite'] = get_field('suite_information');
+				$office_info['zipcode'] = get_field('zip_code');
+				if ($locality = get_field('state_override')) {
+					$office_info['state'] = esc_html($locality);
 				}
-
-				$address = $office_info['address'] . ' ' . $office_info['suite'] . ', ' . $office_info['state'] . ' ' . $office_info['zipcode'];
-
-				set_transient( $cacheKey, $address );
-
 			}
-			wp_reset_postdata();
-		endif;
+
+			$address = $office_info['address'] . ' ' . $office_info['suite'] . ', ' . $office_info['state'] . ' ' . $office_info['zipcode'];
+		}
+		wp_reset_postdata();
 
 		return $address;
 	}

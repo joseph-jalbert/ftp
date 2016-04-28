@@ -134,6 +134,8 @@ class Google_Review extends WP_Widget {
 		$place_id = '';
 		$gr = new Google_Review();
 		$settings = $gr->get_settings();
+		$rreviews = array();
+
 		if (!empty($settings[2])) :
 			$place_id = $settings[2]['google-place-id'];
 		endif;
@@ -176,10 +178,9 @@ class Google_Review extends WP_Widget {
 		endif;
 
 		if ( ! empty( $the_place ) ) :
-			$reviews = $the_place->reviews;
+			$reviews = ! empty( $the_place->reviews ) ? $the_place->reviews : false;
 
 			if ( ! empty( $reviews ) ) :
-				$rreviews = array();
 				foreach ( $reviews as $review ) :
 					if ( $review->rating >= 4 ) :
 						$rreviews[] = $review;

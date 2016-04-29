@@ -218,7 +218,7 @@ function forthepeople_scripts() {
     return;
   }
 
-	wp_enqueue_script( 'forthepeople-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20120206', true );
+	wp_enqueue_script( 'forthepeople-navigation', get_template_directory_uri() . '/js/navigation.js', array(), date('Ymdh'), true );
 
 	wp_enqueue_script( 'forthepeople-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20130115', true );
 
@@ -278,7 +278,7 @@ function wpmice_scripts() {
 
 //    wp_enqueue_style( 'wpmice-style', get_stylesheet_uri() );
 
-    wp_enqueue_script( 'wpmice-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20120206', true );
+    wp_enqueue_script( 'wpmice-navigation', get_template_directory_uri() . '/js/navigation.js', array(), date('Ymdh'), true );
 
     wp_enqueue_script( 'wpmice-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20130115', true );
 

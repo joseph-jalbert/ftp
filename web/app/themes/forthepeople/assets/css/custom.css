@@ -366,3 +366,92 @@ body.down #scrollhdr {
 .local-social-widget  ul li {
 	display: inline;
 }
+
+/*
+ * Attorney page Location Links
+ */
+#profile-wrap .location .location-link {
+	color: #c2c2c2;
+}
+
+/* Nav Bar Search
+--------------------------------------*/
+.search-container{
+	width:300px;
+	margin:0 auto;
+}
+
+.searchbox{
+	position:relative;
+	min-width:25px;
+	width:0%;
+	height:25px;
+	float:right;
+	overflow:hidden;
+
+	-webkit-transition: width 0.3s;
+	-moz-transition: width 0.3s;
+	-ms-transition: width 0.3s;
+	-o-transition: width 0.3s;
+	transition: width 0.3s;
+}
+
+.searchbox-input{
+	top:0;
+	right:0;
+	border: solid 1px #ccc !important;
+	outline:0;
+	background:#dcddd8;
+	width:175px;
+	height:23px !important;
+	margin: -2px 0 0 0 !important;
+	padding: 0 0 0 5px !important;
+	font-size:20px;
+	color: #4f5564;
+	box-shadow: none !important;
+}
+.searchbox-input::-webkit-input-placeholder {
+	color: #e0e0e0;
+}
+.searchbox-input:-moz-placeholder {
+	color: #e0e0e0;
+}
+.searchbox-input::-moz-placeholder {
+	color: #e0e0e0;
+}
+.searchbox-input:-ms-input-placeholder {
+	color: #e0e0e0;
+}
+
+.searchbox-submit {
+	position: absolute;
+	top: 0;
+	left: -9999px;
+}
+
+.searchbox-icon,
+.searchbox-submit{
+	width:25px;
+	height:25px;
+	display:block;
+	position:absolute;
+	top:0;
+	font-family:verdana;
+	font-size:22px;
+	right:0;
+	padding:0;
+	margin:0;
+	border:0;
+	outline:0;
+	line-height:50px;
+	text-align:center;
+	cursor:pointer;
+	color:#dcddd8;
+	background:#01497e url(assets/images/search.png);
+	background-size: 50px;
+	border-radius: 5px;
+}
+
+.searchbox-open{
+	width:100%;
+}

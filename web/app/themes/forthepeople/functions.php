@@ -162,7 +162,7 @@ function forthepeople_styles() {
 
   wp_enqueue_style( 'borrowed', get_template_directory_uri() . '/assets/css/borrowed.css');
 
-  wp_enqueue_style( 'custom', get_template_directory_uri() . '/assets/css/custom.css', array(), '20160420' );
+  wp_enqueue_style( 'custom', get_template_directory_uri() . '/assets/css/custom.css', array(), date('Ymdh') );
 
   wp_enqueue_style( 'fontawesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
 

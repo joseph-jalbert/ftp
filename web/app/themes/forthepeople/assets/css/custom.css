@@ -447,7 +447,7 @@ body.down #scrollhdr {
 	text-align:center;
 	cursor:pointer;
 	color:#dcddd8;
-	background:#01497e url(assets/images/search.png);
+	background:#01497e url(../images/search.png);
 	background-size: 50px;
 	border-radius: 5px;
 }

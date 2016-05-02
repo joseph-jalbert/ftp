@@ -167,6 +167,8 @@ function forthepeople_styles() {
 
   wp_enqueue_style( 'fontawesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
 
+  wp_enqueue_script('optimizely', 'https://cdn.optimizely.com/js/5637261886.js');
+
   if (is_page_template('business-litigation.php') || is_page_template('attorney-referrals.php')) {
       wp_enqueue_style( 'siteinsite', get_template_directory_uri() . '/assets/media/siteinsite/css/siteinsite.css');
       wp_enqueue_style( 'siteinsitebtg', get_template_directory_uri() . '/assets/media/siteinsite/css/siteinsite.btg.css');

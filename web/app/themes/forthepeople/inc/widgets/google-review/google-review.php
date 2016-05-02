@@ -130,95 +130,101 @@ class Google_Review extends WP_Widget {
 	}
 
 
-	private static function get_review()
-	{
+	private static function get_review() {
 		$place_id = '';
 		$gr = new Google_Review();
 		$settings = $gr->get_settings();
-		$rreviews = array();
 
-		if (!empty($settings[2])) :
+		if ( ! empty( $settings[2] ) ) :
 			$place_id = $settings[2]['google-place-id'];
 		endif;
 
 		$office_address = self::get_office_address();
-		if (empty ($office_address)) :
+		if ( empty ( $office_address ) ) :
 			return false;
 		endif;
 
-		$the_place = array();
-		$address = urlencode('Morgan and Morgan ' . $office_address);
-		$placesearchurl = sprintf(self::$place_search_url, $address, self::$google_api_key);
+		/**
+		 * Check to see if we already have cached results for this address.
+		 */
+		$place_review_key = md5( 'google-reviews-' . $office_address );
+		$rreviews = get_transient( $place_review_key );
+		if ( false === $rreviews ) :
 
-		if (empty($place_id)) :
+			$the_place = array();
+			$address = urlencode( 'Morgan and Morgan ' . $office_address );
+			$placesearchurl = sprintf( self::$place_search_url, $address, self::$google_api_key );
+
+			if (empty($place_id)) :
+
+				/**
+				 * Check to see if we already have this cached
+				 */
+				$place_id_key = md5( 'google-place-id-' . $placesearchurl );
+				$data = get_transient( $place_id_key );
+
+				/**
+				 * We don't have this in cache. Get remote data
+				 */
+				if ( false === $data ) :
+					$data = wp_remote_get( $placesearchurl, array( 'timeout' => 5 ) );
+					set_transient( $place_id_key, $data, 86400 );
+				endif;
+
+				if ( is_wp_error( $data ) || empty( $data['body'] ) ) :
+					return false;
+				endif;
+
+				$place_info = json_decode( $data['body'] );
+				if ( ! empty( $place_info->results ) ) :
+					$place_id = $place_info->results[0]->place_id;
+				endif;
+
+				if (empty($place_id)) :
+					return false;
+				endif;
+			endif;
+
+			$placeurl = sprintf(self::$place_details_url, $place_id, self::$google_api_key);
 
 			/**
 			 * Check to see if we already have this cached
 			 */
-			$place_id_key = md5('google-place-id-' . $placesearchurl);
-			$data = get_transient($place_id_key);
+			$place_data_key = md5( 'google-place-data-' . $placeurl );
+			$place_data = get_transient( $place_data_key );
 
 			/**
 			 * We don't have this in cache. Get remote data
 			 */
-			if ( false === $data ) :
-				echo 'No Cache ' . $place_id_key;
-				$data = wp_remote_get($placesearchurl, array('timeout' => 5));
-				set_transient($place_id_key, $data, 3600);
+			if ( false === $place_data ) :
+				$place_data = wp_remote_get( $placeurl, array( 'timeout' => 5 ) );
+				set_transient( $place_data_key, $place_data, 86400 );
 			endif;
 
-			if ( is_wp_error( $data ) || empty( $data['body'] ) ) :
-				return false;
+			if ( ! is_wp_error( $place_data ) && ! empty($place_data['body'] ) ) :
+				$place_data_info = json_decode( $place_data['body'] );
+				if ( ! empty( $place_data_info->result ) ) :
+					$the_place = $place_data_info->result;
+				endif;
 			endif;
 
-			$place_info = json_decode($data['body']);
-			if (!empty($place_info->results)) :
-				$place_id = $place_info->results[0]->place_id;
-			endif;
+			if ( ! empty( $the_place ) ) :
+				$reviews = ! empty( $the_place->reviews ) ? $the_place->reviews : false;
 
-			if (empty($place_id)) :
-				return false;
-			endif;
-		endif;
+				if ( ! empty( $reviews ) ) :
+					foreach ( $reviews as $review ) :
+						if ( $review->rating >= 4 ) :
+							$rreviews[] = $review;
+						endif;
+					endforeach;
 
-		$placeurl = sprintf(self::$place_details_url, $place_id, self::$google_api_key);
-
-		/**
-		 * Check to see if we already have this cached
-		 */
-		$place_data_key = md5('google-place-data-' . $placeurl);
-		$place_data = get_transient($place_data_key);
-
-		/**
-		 * We don't have this in cache. Get remote data
-		 */
-		if ( false === $place_data ) :
-			echo 'No Cache ' . $place_data_key;
-			$place_data = wp_remote_get($placeurl, array( 'timeout' => 5 ) );
-			set_transient($place_data_key, $place_data, 3600);
-		endif;
-
-		if ( ! is_wp_error( $place_data ) && ! empty($place_data['body'] ) ) :
-			$place_data_info = json_decode($place_data['body']);
-			if ( ! empty( $place_data_info->result ) ) :
-				$the_place = $place_data_info->result;
-			endif;
-		endif;
-
-		if ( ! empty( $the_place ) ) :
-			$reviews = ! empty( $the_place->reviews ) ? $the_place->reviews : false;
-
-			if ( ! empty( $reviews ) ) :
-				foreach ( $reviews as $review ) :
-					if ( $review->rating >= 4 ) :
-						$rreviews[] = $review;
-					endif;
-				endforeach;
+					set_transient( $place_review_key, $rreviews, 86400 );
+				endif;
 			endif;
 		endif;
 
 		if ( ! empty( $rreviews ) ) :
-			return $rreviews[array_rand($rreviews, 1)];
+			return $rreviews[array_rand( $rreviews, 1 )];
 		else:
 			return false;
 		endif;

@@ -9,12 +9,12 @@ class Google_Review extends WP_Widget {
 	protected static $place_search_url = 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=%s&key=%s';
 	protected static $place_details_url = 'https://maps.googleapis.com/maps/api/place/details/json?placeid=%s&key=%s';
 
-	
+
 	/**
 	 * Initialization method
 	 */
 	public static function init() {
-		$api_key_settings = get_option('google_api_key');
+		$api_key_settings = get_option( 'google_api_key' );
 		if ( ! empty( $api_key_settings['google_api_key'] ) ) :
 			self::$google_api_key = $api_key_settings['google_api_key'];
 		endif;
@@ -43,44 +43,67 @@ class Google_Review extends WP_Widget {
 	 * @param array $args Widget arguments.
 	 * @param array $instance Saved values from database.
 	 */
-	public function widget( $args, $instance )
-	{
+	public function widget( $args, $instance ) {
 		$review = self::get_review();
 
 		if ( ! empty( $review ) ) :
-			wp_enqueue_style( 'google-review', get_template_directory_uri() . '/inc/widgets/google-review/google-review.css');
+			wp_enqueue_style( 'google-review', get_template_directory_uri() . '/inc/widgets/google-review/google-review.css' );
 
 			echo $before_widget; ?>
-			<div class="execphpwidget">
-				<div class="widgetWrap aside row-leading">
-					<div class="title"><span>Review</span></div>
-					<div class="body google-review">
+			<div
+				class="execphpwidget">
+				<div
+					class="widgetWrap aside row-leading">
+					<div
+						class="title">
+						<span>Review</span>
+					</div>
+					<div
+						class="body google-review">
 
-						<div class="schema-block">
-							<div class="schema-review" typeof="schema:Review">
-								<div property="schema:author" typeof="schema:Person">
-									<span class="author" property="schema:name"><?php echo $review->author_name; ?></span>
+						<div
+							class="schema-block">
+							<div
+								class="schema-review"
+								typeof="schema:Review">
+								<div
+									property="schema:author"
+									typeof="schema:Person">
+									<span
+										class="author"
+										property="schema:name"><?php echo $review->author_name; ?></span>
 								</div>
-								<div class="schema-review-body" property="schema:reviewBody">
+								<div
+									class="schema-review-body"
+									property="schema:reviewBody">
 									<?php echo $review->text; ?>
 								</div>
-								<span class="review-stars">
-									<?php for ( $i = 1; $i <= $review->rating; $i++ ) {
+								<span
+									class="review-stars">
+									<?php for ( $i = 1; $i <= $review->rating; $i ++ ) {
 										echo '★ ';
 									} ?>
 								</span>
 
-								<div property="schema:reviewRating" typeof="schema:Rating">
-									<meta property="schema:worstRating" content="1">
-									<span property="schema:ratingValue">
-										<?php echo $review->rating; ?>/ <span property="schema:bestRating">5</span> stars
+								<div
+									property="schema:reviewRating"
+									typeof="schema:Rating">
+									<meta
+										property="schema:worstRating"
+										content="1">
+									<span
+										property="schema:ratingValue">
+										<?php echo $review->rating; ?>
+										/ <span
+											property="schema:bestRating">5</span> stars
 									</span>
 								</div>
 
 							</div>
 						</div>
 					</div>
-					<div class="foot"></div>
+					<div
+						class="foot"></div>
 				</div>
 			</div>
 			<?php echo $after_widget;
@@ -98,8 +121,9 @@ class Google_Review extends WP_Widget {
 	 * @return array Updated safe values to be saved.
 	 */
 	public function update( $new_instance, $old_instance ) {
-		$instance                      = array();
-		$instance['google-place-id']   = sanitize_text_field( $new_instance['google-place-id'] );
+		$instance                    = array();
+		$instance['google-place-id'] = sanitize_text_field( $new_instance['google-place-id'] );
+
 		return $instance;
 	}
 
@@ -112,17 +136,21 @@ class Google_Review extends WP_Widget {
 	 */
 	public function form( $instance ) {
 		$defaults = array(
-			'google-place-id'   => null
+			'google-place-id' => null
 		);
 		$instance = wp_parse_args( (array) $instance, $defaults );
 		?>
-		<div class="hubspot-form">
+		<div
+			class="hubspot-form">
 			<p>
 				<label
 					for="<?php echo $this->get_field_id( 'google-place-id' ); ?>"><?php _e( 'Place ID Override:', self::$text_domain ); ?></label>
-				<input class="widefat" id="<?php echo $this->get_field_id( 'google-place-id' ); ?>"
-				       name="<?php echo $this->get_field_name( 'google-place-id' ); ?>" type="text"
-				       value="<?php echo $instance['google-place-id']; ?>"/>
+				<input
+					class="widefat"
+					id="<?php echo $this->get_field_id( 'google-place-id' ); ?>"
+					name="<?php echo $this->get_field_name( 'google-place-id' ); ?>"
+					type="text"
+					value="<?php echo $instance['google-place-id']; ?>"/>
 			</p>
 		</div>
 
@@ -132,7 +160,7 @@ class Google_Review extends WP_Widget {
 
 	private static function get_review() {
 		$place_id = '';
-		$gr = new Google_Review();
+		$gr       = new Google_Review();
 		$settings = $gr->get_settings();
 
 		if ( ! empty( $settings[2] ) ) :
@@ -148,20 +176,20 @@ class Google_Review extends WP_Widget {
 		 * Check to see if we already have cached results for this address.
 		 */
 		$place_review_key = md5( 'google-reviews-' . $office_address );
-		$rreviews = get_transient( $place_review_key );
+		$rreviews         = get_transient( $place_review_key );
 		if ( false === $rreviews ) :
 
-			$the_place = array();
-			$address = urlencode( 'Morgan and Morgan ' . $office_address );
+			$the_place      = array();
+			$address        = urlencode( 'Morgan and Morgan ' . $office_address );
 			$placesearchurl = sprintf( self::$place_search_url, $address, self::$google_api_key );
 
-			if (empty($place_id)) :
+			if ( empty( $place_id ) ) :
 
 				/**
 				 * Check to see if we already have this cached
 				 */
 				$place_id_key = md5( 'google-place-id-' . $placesearchurl );
-				$data = get_transient( $place_id_key );
+				$data         = get_transient( $place_id_key );
 
 				/**
 				 * We don't have this in cache. Get remote data
@@ -176,22 +204,26 @@ class Google_Review extends WP_Widget {
 				endif;
 
 				$place_info = json_decode( $data['body'] );
+				if ( null === $place_info ) {
+					return false;
+				}
+
 				if ( ! empty( $place_info->results ) ) :
 					$place_id = $place_info->results[0]->place_id;
 				endif;
 
-				if (empty($place_id)) :
+				if ( empty( $place_id ) ) :
 					return false;
 				endif;
 			endif;
 
-			$placeurl = sprintf(self::$place_details_url, $place_id, self::$google_api_key);
+			$placeurl = sprintf( self::$place_details_url, $place_id, self::$google_api_key );
 
 			/**
 			 * Check to see if we already have this cached
 			 */
 			$place_data_key = md5( 'google-place-data-' . $placeurl );
-			$place_data = get_transient( $place_data_key );
+			$place_data     = get_transient( $place_data_key );
 
 			/**
 			 * We don't have this in cache. Get remote data
@@ -201,7 +233,7 @@ class Google_Review extends WP_Widget {
 				set_transient( $place_data_key, $place_data, 86400 );
 			endif;
 
-			if ( ! is_wp_error( $place_data ) && ! empty($place_data['body'] ) ) :
+			if ( ! is_wp_error( $place_data ) && ! empty( $place_data['body'] ) ) :
 				$place_data_info = json_decode( $place_data['body'] );
 				if ( ! empty( $place_data_info->result ) ) :
 					$the_place = $place_data_info->result;
@@ -224,34 +256,34 @@ class Google_Review extends WP_Widget {
 		endif;
 
 		if ( ! empty( $rreviews ) ) :
-			return $rreviews[array_rand( $rreviews, 1 )];
-		else:
-			return false;
+			return $rreviews[ array_rand( $rreviews, 1 ) ];
 		endif;
+
+		return false;
 	}
 
 	private static function get_office_address() {
 		global $post;
 
 		$office_info = array();
-		$address = '';
-		$parents = get_post_ancestors($post->ID);
-		$id = ($parents) ? $parents[count($parents) - 1] : $post->ID;
-		$parent = get_post($id);
-		$parentslug = $parent->post_name;
-		$officeinfo = new WP_Query('post_type=office&name=' . $parentslug);
+		$address     = '';
+		$parents     = get_post_ancestors( $post->ID );
+		$id          = ( $parents ) ? $parents[ count( $parents ) - 1 ] : $post->ID;
+		$parent      = get_post( $id );
+		$parentslug  = $parent->post_name;
+		$officeinfo  = new WP_Query( 'post_type=office&name=' . $parentslug );
 
-		if ($officeinfo->have_posts()) {
-			while ($officeinfo->have_posts()) {
+		if ( $officeinfo->have_posts() ) {
+			while ( $officeinfo->have_posts() ) {
 				$officeinfo->the_post();
 
-				$office_info['title'] = get_the_title();
-				$office_info['state'] = get_field('state');
-				$office_info['address'] = get_field('street_address');
-				$office_info['suite'] = get_field('suite_information');
-				$office_info['zipcode'] = get_field('zip_code');
-				if ($locality = get_field('state_override')) {
-					$office_info['state'] = esc_html($locality);
+				$office_info['title']   = get_the_title();
+				$office_info['state']   = get_field( 'state' );
+				$office_info['address'] = get_field( 'street_address' );
+				$office_info['suite']   = get_field( 'suite_information' );
+				$office_info['zipcode'] = get_field( 'zip_code' );
+				if ( $locality = get_field( 'state_override' ) ) {
+					$office_info['state'] = esc_html( $locality );
 				}
 			}
 

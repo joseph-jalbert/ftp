@@ -130,7 +130,8 @@ class Google_Review extends WP_Widget {
 	}
 
 
-	private static function get_review() {
+	private static function get_review()
+	{
 		$place_id = '';
 		$gr = new Google_Review();
 		$settings = $gr->get_settings();
@@ -141,7 +142,7 @@ class Google_Review extends WP_Widget {
 		endif;
 
 		$office_address = self::get_office_address();
-		if ( empty ( $office_address ) ) :
+		if (empty ($office_address)) :
 			return false;
 		endif;
 
@@ -149,9 +150,22 @@ class Google_Review extends WP_Widget {
 		$address = urlencode('Morgan and Morgan ' . $office_address);
 		$placesearchurl = sprintf(self::$place_search_url, $address, self::$google_api_key);
 
-		if ( empty( $place_id ) ) :
+		if (empty($place_id)) :
 
-			$data = wp_remote_get($placesearchurl, array('timeout' => 5));
+			/**
+			 * Check to see if we already have this cached
+			 */
+			$place_id_key = md5('google-place-id-' . $placesearchurl);
+			$data = get_transient($place_id_key);
+
+			/**
+			 * We don't have this in cache. Get remote data
+			 */
+			if ( false === $data ) :
+				echo 'No Cache ' . $place_id_key;
+				$data = wp_remote_get($placesearchurl, array('timeout' => 5));
+				set_transient($place_id_key, $data, 3600);
+			endif;
 
 			if ( is_wp_error( $data ) || empty( $data['body'] ) ) :
 				return false;
@@ -168,7 +182,21 @@ class Google_Review extends WP_Widget {
 		endif;
 
 		$placeurl = sprintf(self::$place_details_url, $place_id, self::$google_api_key);
-		$place_data = wp_remote_get($placeurl, array( 'timeout' => 5 ) );
+
+		/**
+		 * Check to see if we already have this cached
+		 */
+		$place_data_key = md5('google-place-data-' . $placeurl);
+		$place_data = get_transient($place_data_key);
+
+		/**
+		 * We don't have this in cache. Get remote data
+		 */
+		if ( false === $place_data ) :
+			echo 'No Cache ' . $place_data_key;
+			$place_data = wp_remote_get($placeurl, array( 'timeout' => 5 ) );
+			set_transient($place_data_key, $place_data, 3600);
+		endif;
 
 		if ( ! is_wp_error( $place_data ) && ! empty($place_data['body'] ) ) :
 			$place_data_info = json_decode($place_data['body']);

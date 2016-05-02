@@ -15,6 +15,7 @@ require __DIR__ . '/inc/videos-page/videos-page.php';
 require __DIR__ . '/inc/attorneys-caching/attorneys-caching.php';
 require __DIR__ . '/inc/filters.php';
 require __DIR__ . '/inc/local-social/local-social.php';
+require __DIR__ . '/inc/office-page-redirect.php';
 
 if ( ! function_exists( 'forthepeople_setup' ) ) :
 /**

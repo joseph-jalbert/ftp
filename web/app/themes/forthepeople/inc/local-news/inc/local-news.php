@@ -21,6 +21,8 @@ class Local_News {
 		add_action( 'init', array( __CLASS__, 'add_rewrite_rule' ) );
 		add_filter( 'post_type_link', array( __CLASS__, 'post_type_permalink' ), 10, 2 );
 		add_action( 'save_post', array( __CLASS__, 'save_meta_action' ), 10, 2 );
+		add_action( 'save_post', array( __CLASS__, 'save_location_page_id' ), 10, 2 );
+		add_action( 'the_post', array( __CLASS__, 'ensure_saved_location_page_id') );
 		add_filter( 'wpseo_breadcrumb_links', array( __CLASS__, 'update_breadcrumbs' ) );
 
 	}
@@ -78,32 +80,62 @@ class Local_News {
 
 	public static function save_meta_action( $post_id, $post ) {
 
-		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) :
 			return;
-		}
-
-
-		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+		endif;
+		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) :
 			return;
-		}
-
-		if ( ! current_user_can( 'edit_post', $post_id ) ) {
+		endif;
+		if ( ! current_user_can( 'edit_post', $post_id ) ) :
 			return;
-		}
-
-		if ( false !== wp_is_post_revision( $post_id ) ) {
+		endif;
+		if ( false !== wp_is_post_revision( $post_id ) ) :
 			return;
-		}
+		endif;
 
 		if ( $post->post_type === self::POST_TYPE ) {
-
 			self::update_locations( $post_id );
-
 		}
-
-
 	}
 
+	public static function save_location_page_id( $post_id, $post ) {
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) :
+			return;
+		endif;
+		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) :
+			return;
+		endif;
+		if ( ! current_user_can( 'edit_post', $post_id ) ) :
+			return;
+		endif;
+		if ( false !== wp_is_post_revision( $post_id ) ) :
+			return;
+		endif;
+		if ( ! Local_Social_Helper::is_local() ) :
+			return;
+		endif;
+
+		self::set_location_page_id( $post_id, $post );
+	}
+
+	public static function ensure_saved_location_page_id( $post ) {
+		if ( self::POST_TYPE !== $post->post_type ) :
+			return;
+		endif;
+
+		if ( empty( get_post_meta( $post->ID, 'location_page_id' ) ) ) :
+			self::set_location_page_id( $post->ID, $post );
+		endif;
+	}
+
+	private static function set_location_page_id( $post_id, $post ) {
+		$location      = array_shift( get_the_terms( $post, Location_Taxonomy::LOCATION_TAXONOMY ) );
+		$location_page = get_page_by_path( $location->slug, OBJECT, 'page' );
+
+		if ( $location_page ) :
+			update_post_meta( $post_id, 'location_page_id', $location_page->ID );
+		endif;
+	}
 
 	public static function update_locations( $post_id ) {
 

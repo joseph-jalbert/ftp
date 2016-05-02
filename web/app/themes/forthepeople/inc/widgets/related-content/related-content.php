@@ -4,7 +4,7 @@ class Related_Content extends WP_Widget {
 
 	protected static $text_domain = 'related_content';
 	protected static $ver = '0.1';
-	protected static $transient_key = 'ftp-related-posts-'; // Will stick the post id at the end
+	protected static $transient_key = 'ftp-related-posts'; // Will stick the post id at the end
 
 	/**
 	 * Initialization method
@@ -43,7 +43,7 @@ class Related_Content extends WP_Widget {
 		}
 
 		$related_posts = self::get_related_posts( $post_id );
-		if ( false === $related_posts ) :
+		if ( empty( $related_posts ) ) :
 			return;
 		endif;
 
@@ -87,11 +87,14 @@ class Related_Content extends WP_Widget {
 	 * @return bool|mixed|WP_Query
 	 */
 	public static function get_related_posts( $post_id ) {
-		$transient_key = self::$transient_key . $post_id;
-		$related_posts = get_transient( $transient_key );
+		$related_posts = get_transient( self::$transient_key );
 
-		if ( false !== $related_posts ) :
-			return $related_posts;
+		/**
+		 * See if we have this element in the array.
+		 * If so, return it.
+		 */
+		if ( !empty ( $related_posts[$post_id] ) ) :
+			return $related_posts[$post_id];
 		endif;
 
 		$local_category = get_the_terms( $post_id, 'location_category' );
@@ -116,14 +119,18 @@ class Related_Content extends WP_Widget {
 				'tax_query'      => $categories
 			);
 
-			$related_posts = new WP_Query( $args );
-			if ( empty ( $related_posts ) ) :
+			$posts = new WP_Query( $args );
+			if ( empty ( $posts ) ) :
 				return false;
 			endif;
 
-			set_transient( $transient_key, $related_posts );
+			/**
+			 * Save element to global array
+			 */
+			$related_posts[$post_id] = $posts;
+			set_transient( self::$transient_key, $related_posts );
 
-			return $related_posts;
+			return $related_posts[$post_id];
 		endif;
 
 		return false;
@@ -134,9 +141,8 @@ class Related_Content extends WP_Widget {
 	 *
 	 * @param $post_id
 	 */
-	public function save_post( $post_id ) {
-		$transient_key = self::$transient_key . $post_id;
-		delete_transient( $transient_key );
+	public function save_post() {
+		delete_transient( self::$transient_key );
 	}
 }
 

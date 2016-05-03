@@ -189,7 +189,6 @@ class Google_Helper {
 	}
 
 	public static function remove_transients() {
-		return '';
 		global $wpdb;
 		$sql = "SELECT * FROM `wp_options` WHERE `option_name` LIKE ('_transient_google-place-%')";
 

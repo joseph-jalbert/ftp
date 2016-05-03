@@ -48,26 +48,19 @@ class Related_Content extends WP_Widget {
 		endif;
 
 		echo $before_widget; ?>
-		<div
-			class="execphpwidget">
-			<div
-				class="widgetWrap aside row-leading">
-				<div
-					class="title">
+		<div class="execphpwidget">
+			<div class="widgetWrap aside row-leading">
+				<div class="title">
 					<span>Related Content</span>
 				</div>
-				<div
-					class="body related-content">
+				<div class="body related-content">
 					<ul class="related-content"><?php
 						if ( $related_posts->have_posts() ) :
 							while ( $related_posts->have_posts() ) : $related_posts->the_post(); ?>
 								<li>
 								<p class="title"><?php the_title(); ?></p>
 								<p class="content"><?php echo rtrim( substr( get_the_content( null, true ), 0, 150 ) ); ?>
-									...<br/><a
-										href="<?php the_permalink(); ?>"
-										alt="<?php echo the_title(); ?>">Read
-										More</a>
+									...<br/><a href="<?php the_permalink(); ?>" alt="<?php echo the_title(); ?>">Read More</a>
 								</p>
 								</li><?php
 							endwhile;

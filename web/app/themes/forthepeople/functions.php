@@ -216,7 +216,7 @@ function forthepeople_styles() {
  */
 function forthepeople_scripts() {
 
-	wp_enqueue_script('optimizely', 'https://cdn.optimizely.com/js/5776261239.js');
+	wp_enqueue_script('optimizely', 'https://cdn.optimizely.com/js/5637261886.js');
 
 	if (is_page_template('landing-page.php')) {
     return;

@@ -116,4 +116,6 @@ web/wp
 #we may need to revisit this
 web/app/mu-plugins/
 
+web/app/themes/forthepeople/js/main.min.js
+web/app/themes/forthepeople/style.min.css
 

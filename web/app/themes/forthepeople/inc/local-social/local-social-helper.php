@@ -23,8 +23,8 @@ class Local_Social_Helper {
 	 * @return bool|int
 	 */
 	private static function is_local_page() {
-		global $post;
-		if ( ! $post ) :
+		$post = get_queried_object();
+		if ( ! $post || ! $post instanceof \WP_Post ) :
 			return false;
 		endif;
 
@@ -42,8 +42,8 @@ class Local_Social_Helper {
 	}
 
 	private static function is_local_news() {
-		global $post;
-		if ( ! $post ) :
+		$post = get_queried_object();
+		if ( ! $post || ! $post instanceof \WP_Post ) :
 			return false;
 		endif;
 

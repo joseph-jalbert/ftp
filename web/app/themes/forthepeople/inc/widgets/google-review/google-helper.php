@@ -10,11 +10,15 @@ class Google_Helper {
 	protected static $place_details_url = 'https://maps.googleapis.com/maps/api/place/details/json?placeid=%s&key=%s';
 	protected static $place_meta_field = 'google_place_id';
 	protected static $place_md5_field = 'google_place_id_md5';
+	protected static $transient_hash_key = 'google-place-keys';
+	protected static $key_hash = array();
 
 	public function init() {
 		if (self::$bInitialized) {
 			return;
 		}
+
+		self::$key_hash = get_transient( self::$transient_hash_key, array() );
 
 		$api_key_settings = get_option( 'google_api_key' );
 		if ( ! empty( $api_key_settings['google_api_key'] ) ) :
@@ -89,6 +93,7 @@ class Google_Helper {
 		 */
 		$place_id_key = 'google-place-id-' . md5( $place_search_url );
 		$data         = get_transient( $place_id_key );
+		self::store_key( $place_id_key );
 
 		/**
 		 * We don't have this in cache. Get remote data
@@ -123,15 +128,18 @@ class Google_Helper {
 		return $place_id;
 	}
 
-	public static function get_review() {
-		global $post;
-
+	/**
+	 * Get Reviews For An Address
+	 * 
+	 * @return bool|mixed
+	 */
+	public static function get_review( $post_id ) {
 		self::init();
 
-		$place_id  = Google_Helper::get_place_id( $post->ID );
+		$place_id  = self::get_place_id( $post_id );
 
 		/**
-		 * If no place id return
+		 * If no place id return false
 		 */
 		if ( empty( $place_id ) ) :
 			return false;
@@ -142,29 +150,10 @@ class Google_Helper {
 		 */
 		$place_review_key = 'google-place-reviews-' . md5( $place_id );
 		$return_reviews   = get_transient( $place_review_key );
+		self::store_key( $place_review_key );
 
 		if ( false === $return_reviews ) :
-			$place_url = sprintf( self::$place_details_url, $place_id, self::$google_api_key );
-
-			/**
-			 * Check to see if we already have this cached
-			 */
-			$place_data_key = 'google-place-data-' . md5( $place_url );
-			$the_place      = get_transient( $place_data_key );
-
-			/**
-			 * We don't have this in cache. Get remote data
-			 */
-			if ( false === $the_place ) :
-				$place_data = wp_remote_get( $place_url, array( 'timeout' => 5 ) );
-				if ( ! is_wp_error( $place_data ) && ! empty( $place_data['body'] ) ) :
-					$place_data_info = json_decode( $place_data['body'] );
-					if ( ! empty( $place_data_info->result ) ) :
-						$the_place = $place_data_info->result;
-						set_transient( $place_data_key, $the_place, 86400 );
-					endif;
-				endif;
-			endif;
+			$the_place = self::get_place_details( $place_id );
 
 			if ( ! empty( $the_place ) ) :
 				$reviews = ! empty( $the_place->reviews ) ? $the_place->reviews : false;
@@ -176,6 +165,7 @@ class Google_Helper {
 						endif;
 					endforeach;
 
+					// Set cache for 1 day
 					set_transient( $place_review_key, $return_reviews, 86400 );
 				endif;
 			endif;
@@ -188,16 +178,69 @@ class Google_Helper {
 		return false;
 	}
 
+	/**
+	 * Get Place Details From Google API
+	 *
+	 * @param $place_id
+	 */
+	public static function get_place_details( $place_id ) {
+		/**
+		 * Check to see if we already have this cached
+		 */
+		$place_url      = sprintf( self::$place_details_url, $place_id, self::$google_api_key );
+		$place_data_key = 'google-place-data-' . md5( $place_url );
+		$the_place      = get_transient( $place_data_key );
+
+		self::store_key( $place_data_key );
+
+		if ( empty( $the_place ) ) :
+			$place_data = wp_remote_get( $place_url, array( 'timeout' => 5 ) );
+			if ( ! is_wp_error( $place_data ) && ! empty( $place_data['body'] ) ) :
+				$place_data_info = json_decode( $place_data['body'] );
+				if ( ! empty( $place_data_info->result ) ) :
+					$the_place = $place_data_info->result;
+					set_transient( $place_data_key, $the_place, 86400 );
+				endif;
+			endif;
+		endif;
+
+		return $the_place;
+	}
+
+	/**
+	 * Clear Transients
+	 *
+	 * @return bool
+	 */
 	public static function remove_transients() {
-		global $wpdb;
-		$sql = "SELECT * FROM `wp_options` WHERE `option_name` LIKE ('_transient_google-place-%')";
+		self::init();
 
-		$results = $wpdb->get_results( $sql );
-
-		foreach ( $results as $result ) :
-			delete_transient( str_replace( '_transient_', '', $result->option_name) );
-		endforeach;
+		if ( ! empty( self::$key_hash ) ) :
+			foreach ( self::$key_hash as $key ) :
+				delete_transient( $key );
+				self::remove_transient( $key );
+			endforeach;
+		endif;
 
 		return true;
+	}
+
+	/**
+	 * Store Transient Key In Master Array
+	 * 
+	 * @param $key
+	 */
+	public static function store_key( $key ) {
+		if ( ! in_array( $key, (array) self::$key_hash ) ) :
+			self::$key_hash[] = $key;
+			set_transient( self::$transient_hash_key, self::$key_hash );
+		endif;
+	}
+
+	public function remove_transient( $transient ) {
+		if ( ( $key = array_search($transient, self::$key_hash ) ) !== false ) :
+			unset( self::$key_hash[$key] );
+		endif;
+		set_transient( self::$transient_hash_key, self::$key_hash );
 	}
 }

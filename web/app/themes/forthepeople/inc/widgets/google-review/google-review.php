@@ -12,9 +12,8 @@ class Google_Review extends WP_Widget {
 	 * Initialization method
 	 */
 	public static function init() {
-		//Google_Helper::remove_transients();
-
 		add_action( 'widgets_init', create_function( '', 'register_widget( "Google_Review" );' ) );
+		add_action( 'delete_transient', array('Google_Helper', 'remove_transient' ), 10, 1 );
 	}
 
 	/**
@@ -39,7 +38,9 @@ class Google_Review extends WP_Widget {
 	 * @param array $instance Saved values from database.
 	 */
 	public function widget( $args, $instance ) {
-		$review = Google_Helper::get_review();
+		global $post;
+
+		$review = Google_Helper::get_review( $post->ID );
 
 		if ( ! empty( $review ) ) :
 			wp_enqueue_style( 'google-review', get_template_directory_uri() . '/inc/widgets/google-review/google-review.css' );

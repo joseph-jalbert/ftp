@@ -38,13 +38,24 @@ class GoogleSettings {
 		?>
 		<div class="wrap">
 			<h2>Google API Settings</h2>
-			<form method="post" action="options.php">
+			<form method="post" action="options.php" id="google-save-options">
 				<?php
-				// This prints out all hidden setting fields
 				settings_fields( 'my_option_group' );
 				do_settings_sections( 'google-api-settings-admin' );
 				submit_button();
 				?>
+
+				<h2>Tools</h2>
+				<table class="form-table">
+					<tbody>
+					<tr>
+						<th scope="row">Clear Cache</th>
+						<td><input type="submit" name="submit" id="submit" class="button" value="Clear Cache" onclick="document.getElementById('google-clear-cache').value = 1;"></td>
+					</tr>
+					</tbody>
+				</table>
+
+				<input type="hidden" name="google_clear_cache" id="google-clear-cache" value="0" />
 			</form>
 		</div>
 		<?php
@@ -60,9 +71,16 @@ class GoogleSettings {
 			array( $this, 'sanitize' ) // Sanitize
 		);
 
+		register_setting(
+			'my_option_group', // Option group
+			'google_clear_cache', // Option name
+			array( $this, 'clear_cache' ) // Sanitize
+		);
+
+
 		add_settings_section(
 			'setting_section_id', // ID
-			'API Settings', // Title
+			'API Key', // Title
 			array( $this, 'print_section_info' ), // Callback
 			'google-api-settings-admin' // Page
 		);
@@ -74,6 +92,15 @@ class GoogleSettings {
 			'google-api-settings-admin', // Page
 			'setting_section_id' // Section
 		);
+	}
+
+	public function clear_cache( $input ) {
+		if ( 0 === (int) $input ) :
+			return $input;
+		endif;
+
+		Google_Helper::remove_transients();
+		return 0;
 	}
 
 	/**
@@ -92,16 +119,22 @@ class GoogleSettings {
 	/**
 	 * Print the Section text
 	 */
-	public function print_section_info()
-	{
-		print 'Enter your settings below:';
+	public function print_section_info() {
+		print '';
 	}
+
+	/**
+	 * Print the Tools text
+	 */
+	public function print_tools_info() {
+		print '';
+	}
+
 
 	/**
 	 * Get the settings option array and print one of its values
 	 */
-	public function api_key_callback()
-	{
+	public function api_key_callback() {
 		printf(
 			'<input type="text" id="google_api_key" name="google_api_key[google_api_key]" value="%s" style="width: 335px;"/>',
 			isset( $this->options['google_api_key'] ) ? esc_attr( $this->options['google_api_key']) : ''

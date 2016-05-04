@@ -164,7 +164,6 @@ class Google_Helper {
 		self::store_key( $place_review_key );
 
 		if ( false === $return_reviews ) :
-			echo 'No Return Reviews Cache For ' . $place_review_key . '<br/>';
 			$the_place = self::get_place_details( $place_id );
 
 			if ( ! empty( $the_place ) ) :

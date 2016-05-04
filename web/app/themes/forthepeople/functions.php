@@ -15,6 +15,7 @@ require __DIR__ . '/inc/videos-page/videos-page.php';
 require __DIR__ . '/inc/attorneys-caching/attorneys-caching.php';
 require __DIR__ . '/inc/filters.php';
 require __DIR__ . '/inc/local-social/local-social.php';
+require __DIR__ . '/inc/office-page-redirect.php';
 
 if ( ! function_exists( 'forthepeople_setup' ) ) :
 /**
@@ -214,9 +215,13 @@ function forthepeople_styles() {
  * Enqueue scripts
  */
 function forthepeople_scripts() {
-  if (is_page_template('landing-page.php')) {
+
+	wp_enqueue_script('optimizely', 'https://cdn.optimizely.com/js/5637261886.js');
+
+	if (is_page_template('landing-page.php')) {
     return;
   }
+
 
 	wp_enqueue_script( 'forthepeople-navigation', get_template_directory_uri() . '/js/navigation.js', array(), date('Ymdh'), true );
 

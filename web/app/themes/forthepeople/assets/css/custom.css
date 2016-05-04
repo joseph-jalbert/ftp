@@ -455,3 +455,29 @@ body.down #scrollhdr {
 .searchbox-open{
 	width:100%;
 }
+
+/* Related Content
+--------------------------------------*/
+ul.related-content {
+
+}
+
+ul.related-content p.title {
+	padding: 5px 40px 0 0 !important;
+	margin: 0 !important;
+	line-height: 30px !important;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-style: italic;
+	font-size: 15px !important;
+	font-weight: bold !important;
+}
+
+ul.related-content p.content {
+	margin: 0 0 20px 0 !important;
+	line-height: 20px !important;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	padding: 0 10px !important;
+}

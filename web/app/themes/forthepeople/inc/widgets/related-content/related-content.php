@@ -48,26 +48,19 @@ class Related_Content extends WP_Widget {
 		endif;
 
 		echo $before_widget; ?>
-		<div
-			class="execphpwidget">
-			<div
-				class="widgetWrap aside row-leading">
-				<div
-					class="title">
+		<div class="execphpwidget">
+			<div class="widgetWrap aside row-leading">
+				<div class="title">
 					<span>Related Content</span>
 				</div>
-				<div
-					class="body related-content">
+				<div class="body related-content">
 					<ul class="related-content"><?php
 						if ( $related_posts->have_posts() ) :
 							while ( $related_posts->have_posts() ) : $related_posts->the_post(); ?>
 								<li>
 								<p class="title"><?php the_title(); ?></p>
 								<p class="content"><?php echo rtrim( substr( get_the_content( null, true ), 0, 150 ) ); ?>
-									...<br/><a
-										href="<?php the_permalink(); ?>"
-										alt="<?php echo the_title(); ?>">Read
-										More</a>
+									...<br/><a href="<?php the_permalink(); ?>" alt="<?php echo the_title(); ?>">Read More</a>
 								</p>
 								</li><?php
 							endwhile;
@@ -141,7 +134,23 @@ class Related_Content extends WP_Widget {
 	 *
 	 * @param $post_id
 	 */
-	public function save_post() {
+	public function save_post( $post ) {
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) :
+			return;
+		endif;
+
+		if ( 'auto-draft' === $post->post_status ) :
+			return;
+		endif;
+
+		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) :
+			return;
+		endif;
+
+		if ( ! current_user_can( 'edit_post', $post->ID ) ) :
+			return;
+		endif;
+
 		delete_transient( self::$transient_key );
 	}
 }

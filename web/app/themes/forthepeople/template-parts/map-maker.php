@@ -14,7 +14,7 @@
         <div class="row-fluid"><div class="span6">
     			<?php $break = (int) ceil(count($office_locations) / 2); $n = 0; foreach( $office_locations as $post ) : $n++; ?>
                 	<address itemtype="http://schema.org/Attorney" itemscope="">
-						<strong><a href="<?php echo esc_html(get_permalink()); ?>"><?php echo esc_html(get_the_title()); ?>, <?php echo esc_html(get_field('state')); ?></a></strong>
+						<strong><a href="<?php echo str_replace('/office/', '/', esc_html(get_permalink())); ?>"><?php echo esc_html(get_the_title()); ?>, <?php echo esc_html(get_field('state')); ?></a></strong>
 							<p>
 								<span itemtype="http://schema.org/PostalAddress" itemscope="" itemprop="address">
 									<span itemprop="streetAddress"><?php echo esc_html(get_field('street_address')); ?><br>

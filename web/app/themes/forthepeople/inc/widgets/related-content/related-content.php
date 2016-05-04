@@ -38,38 +38,39 @@ class Related_Content extends WP_Widget {
 		$current_post = get_queried_object();
 		$post_id      = $current_post ? $current_post->ID : null;
 
-		if ( ! $post_id ) {
+		if ( ! $post_id ) :
 			return;
-		}
+		endif;
 
 		$related_posts = self::get_related_posts( $post_id );
 		if ( empty( $related_posts ) ) :
 			return;
 		endif;
 
-		echo $before_widget; ?>
-		<div class="execphpwidget">
+		echo $before_widget;
+		?><div class="execphpwidget">
 			<div class="widgetWrap aside row-leading">
 				<div class="title">
 					<span>Related Content</span>
 				</div>
 				<div class="body related-content">
 					<ul class="related-content"><?php
-						if ( $related_posts->have_posts() ) :
-							while ( $related_posts->have_posts() ) : $related_posts->the_post(); ?>
-								<li>
+					if ( $related_posts->have_posts() ) :
+						while ( $related_posts->have_posts() ) :
+							$related_posts->the_post();
+							?><li>
 								<p class="title"><?php the_title(); ?></p>
 								<p class="content"><?php echo rtrim( substr( get_the_content( null, true ), 0, 150 ) ); ?>
 									...<br/><a href="<?php the_permalink(); ?>" alt="<?php echo the_title(); ?>">Read More</a>
 								</p>
-								</li><?php
-							endwhile;
-						endif; ?>
-					</ul>
+							</li><?php
+						endwhile;
+					endif;
+					?></ul>
 				</div>
 			</div>
-		</div>
-		<?php echo $after_widget;
+		</div><?php
+		echo $after_widget;
 	}
 
 	/**
@@ -86,8 +87,8 @@ class Related_Content extends WP_Widget {
 		 * See if we have this element in the array.
 		 * If so, return it.
 		 */
-		if ( !empty ( $related_posts[$post_id] ) ) :
-			return $related_posts[$post_id];
+		if ( ! empty ( $related_posts[ $post_id ] ) ) :
+			return $related_posts[ $post_id ];
 		endif;
 
 		$local_category = get_the_terms( $post_id, 'location_category' );
@@ -120,10 +121,10 @@ class Related_Content extends WP_Widget {
 			/**
 			 * Save element to global array
 			 */
-			$related_posts[$post_id] = $posts;
+			$related_posts[ $post_id ] = $posts;
 			set_transient( self::$transient_key, $related_posts );
 
-			return $related_posts[$post_id];
+			return $related_posts[ $post_id ];
 		endif;
 
 		return false;

@@ -8,10 +8,11 @@ class Google_Helper {
 	protected static $google_api_key = 'AIzaSyBh7MqzTTLjjMzGpiWUylshG72U_FAPPkc';
 	protected static $place_search_url = 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=%s&key=%s';
 	protected static $place_details_url = 'https://maps.googleapis.com/maps/api/place/details/json?placeid=%s&key=%s';
-	protected static $place_meta_field = 'google_place_id';
-	protected static $place_md5_field = 'google_place_id_md5';
+	protected static $place_id_meta_key = 'google_place_id';
+	protected static $place_md5_key = 'google_place_id_md5';
 	protected static $transient_hash_key = 'google-place-keys';
 	protected static $key_hash = array();
+	protected static $place_id_md5_meta_key = 'google-place-md5';
 
 	public function init() {
 		if (self::$bInitialized) {
@@ -31,17 +32,20 @@ class Google_Helper {
 	public static function get_office_address( $post_id ) {
 		self::init();
 
-		$office_info = array();
-		$address     = '';
-		$parents     = get_post_ancestors( $post_id );
-		$id          = ( $parents ) ? $parents[ count( $parents ) - 1 ] : $post_id;
-		$parent      = get_post( $id );
-		$parentslug  = $parent->post_name;
-		$officeinfo  = new WP_Query( 'post_type=office&name=' . $parentslug );
+		$office_info       = array();
+		$address           = '';
+		$parents           = get_post_ancestors( $post_id );
+		$id                = ( $parents ) ? $parents[ count( $parents ) - 1 ] : $post_id;
+		$parent            = get_post( $id );
+		$parent_slug       = $parent->post_name;
+		$office_info_posts = new WP_Query( array(
+			'post_type' => 'office',
+			'name'      => $parent_slug
+		) );
 
-		if ( $officeinfo->have_posts() ) {
-			while ( $officeinfo->have_posts() ) {
-				$officeinfo->the_post();
+		if ( $office_info_posts->have_posts() ) {
+			while ( $office_info_posts->have_posts() ) {
+				$office_info_posts->the_post();
 
 				$office_info['title']   = get_the_title();
 				$office_info['state']   = get_field( 'state' );
@@ -73,34 +77,41 @@ class Google_Helper {
 			 return $settings[2]['google-place-id'];
 		endif;
 
-
+		/**
+		 * If there is no address we can't look anything up.
+		 */
 		$office_address = self::get_office_address( $post_id );
 		if ( empty ( $office_address ) ) :
+			return false;
 		endif;
 
-		$place_id  = get_post_meta( $post_id, self::$place_meta_field, true );
-		$place_md5 = get_post_meta( $post_id, self::$place_md5_field, true );
-		$address   = 'Morgan and Morgan ' . $office_address;
+		$place_search_url = sprintf( self::$place_search_url, urlencode( $office_address ), self::$google_api_key );
+		$place_id = get_post_meta($post_id, self::$place_id_meta_key, true );
 
-		if ( md5( $address ) === $place_md5 && ! empty( $place_id ) ) :
+		$latest_place_id_key = 'google-place-id-' . md5( $place_search_url );
+		$extant_place_id_key = get_post_meta( $post_id, self::$place_id_md5_meta_key, true );
+		/**
+		 * Check to make sure the current address matches
+		 * in case the address changed.
+		 */
+		if ( $latest_place_id_key === $extant_place_id_key ) {
+			self::remove_key($extant_place_id_key);
 			return $place_id;
-		endif;
-
-		$place_search_url = sprintf( self::$place_search_url, urlencode( $address ), self::$google_api_key );
+		}
+		update_post_meta($post_id, self::$place_id_md5_meta_key, $latest_place_id_key);
 
 		/**
 		 * Check to see if we already have this cached
 		 */
-		$place_id_key = 'google-place-id-' . md5( $place_search_url );
-		$data         = get_transient( $place_id_key );
-		self::store_key( $place_id_key );
+		$data         = get_transient( $latest_place_id_key );
+		self::store_key( $latest_place_id_key );
 
 		/**
 		 * We don't have this in cache. Get remote data
 		 */
 		if ( false === $data ) :
 			$data = wp_remote_get( $place_search_url, array( 'timeout' => 5 ) );
-			set_transient( $place_id_key, $data, 86400 );
+			set_transient( $latest_place_id_key, $data, DAY_IN_SECONDS );
 		endif;
 
 		if ( is_wp_error( $data ) || empty( $data['body'] ) ) :
@@ -108,9 +119,9 @@ class Google_Helper {
 		endif;
 
 		$place_info = json_decode( $data['body'] );
-		if ( null === $place_info ) {
+		if ( null === $place_info ) :
 			return false;
-		}
+		endif;
 
 		if ( isset( $place_info->error_message ) ) :
 			echo '<!-- Google Error: ' . $place_info->error_message . ' -->';
@@ -122,8 +133,8 @@ class Google_Helper {
 		endif;
 
 		$place_id = $place_info->results[0]->place_id;
-		update_post_meta( $post_id, self::$place_meta_field, $place_id );
-		update_post_meta( $post_id, self::$place_md5_field, md5( $address ) );
+		update_post_meta( $post_id, self::$place_id_meta_key, $place_id );
+		update_post_meta( $post_id, self::$place_md5_key, md5( $address ) );
 
 		return $place_id;
 	}
@@ -148,11 +159,12 @@ class Google_Helper {
 		/**
 		 * Check to see if we already have cached results for this address.
 		 */
-		$place_review_key = 'google-place-reviews-' . md5( $place_id );
+		$place_review_key = 'google-place-reviews-' . $place_id;
 		$return_reviews   = get_transient( $place_review_key );
 		self::store_key( $place_review_key );
 
 		if ( false === $return_reviews ) :
+			echo 'No Return Reviews Cache For ' . $place_review_key . '<br/>';
 			$the_place = self::get_place_details( $place_id );
 
 			if ( ! empty( $the_place ) ) :
@@ -166,7 +178,7 @@ class Google_Helper {
 					endforeach;
 
 					// Set cache for 1 day
-					set_transient( $place_review_key, $return_reviews, 86400 );
+					set_transient( $place_review_key, $return_reviews, DAY_IN_SECONDS );
 				endif;
 			endif;
 		endif;
@@ -199,7 +211,7 @@ class Google_Helper {
 				$place_data_info = json_decode( $place_data['body'] );
 				if ( ! empty( $place_data_info->result ) ) :
 					$the_place = $place_data_info->result;
-					set_transient( $place_data_key, $the_place, 86400 );
+					set_transient( $place_data_key, $the_place, DAY_IN_SECONDS );
 				endif;
 			endif;
 		endif;
@@ -218,7 +230,7 @@ class Google_Helper {
 		if ( ! empty( self::$key_hash ) ) :
 			foreach ( self::$key_hash as $key ) :
 				delete_transient( $key );
-				self::remove_transient( $key );
+				self::remove_key( $key );
 			endforeach;
 		endif;
 
@@ -237,9 +249,14 @@ class Google_Helper {
 		endif;
 	}
 
-	public function remove_transient( $transient ) {
-		if ( ( $key = array_search($transient, self::$key_hash ) ) !== false ) :
-			unset( self::$key_hash[$key] );
+	/**
+	 * Remove Transient Key In Master Array
+	 *
+	 * @param $key
+	 */
+	public function remove_key( $key ) {
+		if ( ( $transient = array_search($key, self::$key_hash ) ) !== false ) :
+			unset( self::$key_hash[$transient] );
 		endif;
 		set_transient( self::$transient_hash_key, self::$key_hash );
 	}

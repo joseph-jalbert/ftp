@@ -134,7 +134,23 @@ class Related_Content extends WP_Widget {
 	 *
 	 * @param $post_id
 	 */
-	public function save_post() {
+	public function save_post( $post ) {
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) :
+			return;
+		endif;
+
+		if ( 'auto-draft' === $post->post_status ) :
+			return;
+		endif;
+
+		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) :
+			return;
+		endif;
+
+		if ( ! current_user_can( 'edit_post', $post->ID ) ) :
+			return;
+		endif;
+
 		delete_transient( self::$transient_key );
 	}
 }

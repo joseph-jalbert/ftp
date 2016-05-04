@@ -36,27 +36,30 @@ class Local_Social_Widget extends WP_Widget {
 	public function widget( $args, $instance ) {
 		$post_id = Local_Social_Helper::is_local();
 
-		if ( ! $post_id ) { // if we're not on a local page, let's exit
+		if ( ! $post_id ) : // if we're not on a local page, let's exit
 			return;
-		}
+		endif;
 
 		$facebook_default    = esc_attr( $instance['facebook-default'] );
 		$google_plus_default = esc_attr( $instance['google-plus-default'] );
 		$twitter_default    = esc_attr( $instance['twitter-default'] );
 
-		if ( $post_id && get_field( 'facebook_local_url', $post_id ) ) {
-			$facebook_default = get_field( 'facebook_local_url', $post_id );
-		}
-		if ( $post_id && get_field( 'twitter_local_url', $post_id ) ) {
-			$twitter_default = get_field( 'twitter_local_url', $post_id );
-		}
-		if ( $post_id && get_field( 'google_plus_local_url', $post_id ) ) {
-			$google_plus_default = get_field( 'google_plus_local_url', $post_id );
-		}
+		$facebook_local_url    = Local_Social_Helper::get_field( 'facebook_local_url', $post_id );
+		$twitter_local_url     = Local_Social_Helper::get_field( 'twitter_local_url', $post_id );
+		$google_plus_local_url = Local_Social_Helper::get_field( 'google_plus_local_url', $post_id );
+		if ( $post_id && $facebook_local_url ) :
+			$facebook_default = $facebook_local_url;
+		endif;
+		if ( $post_id && $twitter_local_url ) :
+			$twitter_default = $twitter_local_url;
+		endif;
+		if ( $post_id && $google_plus_local_url ) :
+			$google_plus_default = $google_plus_local_url;
+		endif;
 
-		if ( ! $google_plus_default && ! $facebook_default && ! $twitter_default ) {
+		if ( ! $google_plus_default && ! $facebook_default && ! $twitter_default ) :
 			return;
-		}
+		endif;
 
 
 		?>

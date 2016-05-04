@@ -6,15 +6,22 @@ class Local_Social_Helper {
 
 
 	public static function is_local() {
-		$local_page = self::is_local_page();
-		$local_news = self::is_local_news();
+		$local_page    = self::is_local_page();
 		if ( $local_page ) :
 			return $local_page;
-		elseif ( $local_news ) :
-			return $local_news;
-		else :
-			return false;
 		endif;
+
+		$local_news    = self::is_local_news();
+		if ( $local_news ) :
+			return $local_news;
+		endif;
+
+		$local_archive = self::is_local_archive();
+		if ( $local_archive ) :
+			return $local_archive;
+		endif;
+
+		return false;
 	}
 
 	/**
@@ -23,8 +30,8 @@ class Local_Social_Helper {
 	 * @return bool|int
 	 */
 	private static function is_local_page() {
-		global $post;
-		if ( ! $post ) :
+		$post = get_queried_object();
+		if ( ! $post || ! $post instanceof \WP_Post ) :
 			return false;
 		endif;
 
@@ -42,14 +49,26 @@ class Local_Social_Helper {
 	}
 
 	private static function is_local_news() {
-		global $post;
-		if ( ! $post ) :
+		$post = get_queried_object();
+		if ( ! $post || ! $post instanceof \WP_Post ) :
 			return false;
 		endif;
 
 		$local_news_post_id = $post->ID;
 		if ( $post->post_type === Local_News::POST_TYPE ) :
 			return $local_news_post_id;
+		endif;
+
+		return false;
+	}
+
+	private static function is_local_archive() {
+		if ( get_query_var( 'local_blog_archive' ) ) :
+			$location      = get_query_var( 'office_location' );
+			$location_page = get_page_by_path( '/' . $location );
+			if ( $location_page ) :
+				return $location_page->ID;
+			endif;
 		endif;
 
 		return false;

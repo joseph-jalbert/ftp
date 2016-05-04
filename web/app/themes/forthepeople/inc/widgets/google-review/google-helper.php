@@ -19,7 +19,7 @@ class Google_Helper {
 			return;
 		}
 
-		self::$key_hash = get_transient( self::$transient_hash_key, array() );
+		self::$key_hash = (array) get_transient( self::$transient_hash_key );
 
 		$api_key_settings = get_option( 'google_api_key' );
 		if ( ! empty( $api_key_settings['google_api_key'] ) ) :
@@ -95,9 +95,9 @@ class Google_Helper {
 		 * in case the address changed.
 		 */
 		if ( $latest_place_id_key === $extant_place_id_key ) {
-			self::remove_key($extant_place_id_key);
 			return $place_id;
 		}
+		self::remove_key($extant_place_id_key);
 		update_post_meta($post_id, self::$place_id_md5_meta_key, $latest_place_id_key);
 
 		/**

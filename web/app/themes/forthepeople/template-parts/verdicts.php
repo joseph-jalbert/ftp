@@ -13,7 +13,7 @@ $args = array(
 );
 ?>
 <div id="verdictScroll" data-practicearea="-1" data-attorney="-1" data-officelocation="-1" data-stateabb="" data-startrow="9" data-type="all" class="widgetWrap section" style="margin-top:70px;">
-  <div class="title"><span>Verdicts &amp; Settlements</span></div>
+  <div class="title" role="complementary"><span>Verdicts &amp; Settlements</span></div>
   <div class="body">
     <ul class="verdictList">
       <?php

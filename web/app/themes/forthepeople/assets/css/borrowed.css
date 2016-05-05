@@ -20,7 +20,7 @@
 
 .fullSlider-wrap {
     position: relative;
-    background: url('/wp-content/themes/forthepeople/assets/images/structure/pagebg-textured.png') repeat-x
+    background: url('assets/images/structure/pagebg-textured.png') repeat-x
 }
 
 .fullSliderNav {
@@ -33,7 +33,7 @@
     background-image: linear-gradient(bottom, rgba(0, 0, 0, 0.08) -25%, rgba(255, 255, 255, 0.08) 125%);
     background-size: cover;
     -pie-background: linear-gradient(#fafafa, #efefef);
-    behavior: url('/wp-content/themes/forthepeople/assets/js/libs/pie/pie.htc')
+    behavior: url('assets/js/libs/pie/pie.htc')
 }
 
 .fullSliderNav ul {
@@ -59,7 +59,7 @@
 .fullSliderNav li a.active, .fullSliderNav li a:hover {
     text-decoration: none;
     padding: 0 29px;
-    background: url('/wp-content/themes/forthepeople/assets/images/structure/shade-60.png') repeat-x;
+    background: url('assets/images/structure/shade-60.png') repeat-x;
     border-left: solid 1px #d7d7d7;
     border-right: solid 1px #d7d7d7
 }
@@ -149,7 +149,7 @@ h4.tan {
     right: 0;
     width: 401px;
     height: 357px;
-    background: url('/wp-content/themes/forthepeople/assets/media/images/slider/main-presenter.png') no-repeat
+    background: url('assets/media/images/slider/main-presenter.png') no-repeat
 }
 
 .slideContent .mainPresenter-morgan {
@@ -158,7 +158,7 @@ h4.tan {
     right: -81px;
     width: 458px;
     height: 374px;
-    background: url('/wp-content/themes/forthepeople/assets/media/images/slider/morgan2014.png') no-repeat
+    background: url('assets/media/images/slider/morgan2014.png') no-repeat
 }
 
 .slideContent .mainPresenter-morgan2 {
@@ -167,7 +167,7 @@ h4.tan {
     right: -60px;
     width: 309px;
     height: 355px;
-    background: url('/wp-content/themes/forthepeople/assets/media/images/slider/morgan-2-2014.png') no-repeat
+    background: url('assets/media/images/slider/morgan-2-2014.png') no-repeat
 }
 
 .slideContent .mainPresenter-atlanta-attorneys {
@@ -176,7 +176,7 @@ h4.tan {
     right: -110px;
     width: 509px;
     height: 334px;
-    background: url('/wp-content/themes/forthepeople/assets/media/images/slider/atlanta-attorneys.png') no-repeat
+    background: url('assets/media/images/slider/atlanta-attorneys.png') no-repeat
 }
 
 .slideContent .mainPresenter-ambulance {
@@ -185,7 +185,7 @@ h4.tan {
     right: -420px;
     width: 570px;
     height: 374px;
-    background: url('/wp-content/themes/forthepeople/assets/media/images/slider/ambulance.png') no-repeat
+    background: url('assets/media/images/slider/ambulance.png') no-repeat
 }
 
 .slideContent .mainPresenter-injured {
@@ -194,7 +194,7 @@ h4.tan {
     right: -21px;
     width: 305px;
     height: 374px;
-    background: transparent url('/wp-content/themes/forthepeople/assets/media/images/slider/injured.png') no-repeat 0 0
+    background: transparent url('assets/media/images/slider/injured.png') no-repeat 0 0
 }
 
 .slideContent .mainPresenter-scales {
@@ -203,7 +203,7 @@ h4.tan {
     right: -150px;
     width: 378px;
     height: 409px;
-    background: transparent url('/wp-content/themes/forthepeople/assets/media/images/slider/scales.png') no-repeat 0 0
+    background: transparent url('assets/media/images/slider/scales.png') no-repeat 0 0
 }
 
 .slideContent .mainPresenter-statue {
@@ -212,7 +212,7 @@ h4.tan {
     right: -250px;
     width: 341px;
     height: 365px;
-    background: transparent url('/wp-content/themes/forthepeople/assets/media/images/slider/statue.png') no-repeat 0 0
+    background: transparent url('assets/media/images/slider/statue.png') no-repeat 0 0
 }
 
 .slideContent .mainPresenter-firetruck {
@@ -221,7 +221,7 @@ h4.tan {
     right: -450px;
     width: 500px;
     height: 283px;
-    background: transparent url('/wp-content/themes/forthepeople/assets/media/images/slider/firetruck.png') no-repeat 0 0
+    background: transparent url('assets/media/images/slider/firetruck.png') no-repeat 0 0
 }
 
 .slideContent .presenter-casey-anthony {
@@ -230,7 +230,7 @@ h4.tan {
     right: -265px;
     width: 348px;
     height: 374px;
-    background: transparent url('/wp-content/themes/forthepeople/assets/media/images/slider/casey-anthony.png') no-repeat 0 0
+    background: transparent url('assets/media/images/slider/casey-anthony.png') no-repeat 0 0
 }
 
 .slideContent .presenter-wallstreet {
@@ -239,7 +239,7 @@ h4.tan {
     right: -650px;
     width: 564px;
     height: 374px;
-    background: transparent url('/wp-content/themes/forthepeople/assets/media/images/slider/wallstreet.png') no-repeat 0 0
+    background: transparent url('assets/media/images/slider/wallstreet.png') no-repeat 0 0
 }
 
 .slideContent .presenter-statue {
@@ -248,7 +248,7 @@ h4.tan {
     left: 390px;
     width: 341px;
     height: 365px;
-    background: transparent url('/wp-content/themes/forthepeople/assets/media/images/slider/statue.png') no-repeat 0 0;
+    background: transparent url('assets/media/images/slider/statue.png') no-repeat 0 0;
     z-index: 4
 }
 
@@ -267,7 +267,7 @@ h4.tan {
     left: 300px;
     width: 450px;
     height: 399px;
-    background: transparent url('/wp-content/themes/forthepeople/assets/media/images/slider/gavel.png') no-repeat 0 0;
+    background: transparent url('assets/media/images/slider/gavel.png') no-repeat 0 0;
     z-index: 1
 }
 
@@ -280,7 +280,7 @@ h4.tan {
     top: 70px;
     width: 410px;
     height: auto;
-    background: rgba(255, 255, 255, 0.5) url('/wp-content/themes/forthepeople/assets/media/images/slider/bg-slide.png') repeat 0 0;
+    background: rgba(255, 255, 255, 0.5) url('assets/media/images/slider/bg-slide.png') repeat 0 0;
     *background-color: #fff;
     -ms-box-sizing: border-box;
     box-sizing: border-box;
@@ -936,7 +936,7 @@ strong {
 }
 
 .vertical-pike:before {
-    background: url(/wp-content/themes/forthepeople/assets/images/sprite-dots.png) no-repeat 0 0;
+    background: url(assets/images/sprite-dots.png) no-repeat 0 0;
     content: ' ';
     height: 9px;
     left: -3px;
@@ -946,7 +946,7 @@ strong {
 }
 
 .vertical-pike:after {
-    background: url(/wp-content/themes/forthepeople/assets/images/sprite-dots.png) no-repeat 0 0;
+    background: url(assets/images/sprite-dots.png) no-repeat 0 0;
     bottom: 0;
     content: ' ';
     height: 9px;
@@ -968,7 +968,7 @@ strong {
     content: ' ';
     width: 9px;
     height: 9px;
-    background: url(/wp-content/themes/forthepeople/assets/images/sprite-dots.png) no-repeat 0 0
+    background: url(assets/images/sprite-dots.png) no-repeat 0 0
 }
 
 #fullSlider.hero .slide, #fullSlider.hero .slideContent {
@@ -1105,7 +1105,7 @@ strong {
 }
 
 .jumbotron .vertical-puller {
-    background: url(/wp-content/themes/forthepeople/assets/images/puller.png) no-repeat;
+    background: url(assets/images/puller.png) no-repeat;
     bottom: 0;
     height: 26px;
     left: 50%;
@@ -1333,7 +1333,7 @@ strong {
 }
 
 .section .fancy-list li:after {
-    background: url(/wp-content/themes/forthepeople/assets/images/bullet-arrow.png) no-repeat;
+    background: url(assets/images/bullet-arrow.png) no-repeat;
     content: "";
     height: 14px;
     left: 44px;
@@ -1399,7 +1399,7 @@ strong {
     position: absolute;
     left: -50px;
     top: -10px;
-    background: url(/wp-content/themes/forthepeople/assets/images/big-quote.png) no-repeat;
+    background: url(assets/images/big-quote.png) no-repeat;
     width: 47px;
     height: 39px
 }
@@ -2233,7 +2233,7 @@ strong {
 }
 
 .circle.who-we-are {
-    background: url('/wp-content/themes/forthepeople/assets/images/circle-who-we-are.png') no-repeat;
+    background: url('assets/images/circle-who-we-are.png') no-repeat;
     display: block;
     height: 171px;
     position: relative;
@@ -2241,7 +2241,7 @@ strong {
 }
 
 .section.btg.attorneys {
-    background: #ffffff url('/wp-content/themes/forthepeople/assets/images/btg-attorneys.jpg') no-repeat top center;
+    background: #ffffff url('assets/images/btg-attorneys.jpg') no-repeat top center;
     background-size: cover;
     color: #fff;
     height: 715px;
@@ -2258,7 +2258,7 @@ strong {
 
 .section.btg.business .img-btg-office {
     background-position: 96px 0;
-    background: #ffffff url('/wp-content/themes/forthepeople/assets/images/btg-morgan-glass.jpg') no-repeat top right;
+    background: #ffffff url('assets/images/btg-morgan-glass.jpg') no-repeat top right;
     background-size: cover;
     height: 1122px;
     position: absolute;
@@ -2275,7 +2275,7 @@ strong {
 }
 
 .img-btg-mosaic {
-    background: url('/wp-content/themes/forthepeople/assets/images/btg-mosaic.jpg') no-repeat center;
+    background: url('assets/images/btg-mosaic.jpg') no-repeat center;
     height: 546px;
     margin: 0 auto;
     position: relative;
@@ -2283,7 +2283,7 @@ strong {
 }
 
 .jumbotron {
-    background: #458ed5 url('/wp-content/themes/forthepeople/assets/images/btg-hero.jpg') no-repeat top center;
+    background: #458ed5 url('assets/images/btg-hero.jpg') no-repeat top center;
     background-size: cover;
 }
 
@@ -2326,7 +2326,7 @@ strong {
 /*
 /*----------------------------------------------------------------*/
 .contingency-fee-benefits.jumbotron {
-    background: #458ed5 url('/wp-content/themes/forthepeople/assets/images/contingency-fee/jumbotron.jpg') no-repeat;
+    background: #458ed5 url('assets/images/contingency-fee/jumbotron.jpg') no-repeat;
     background-size: cover;
     height: 530px;
 }
@@ -2348,7 +2348,7 @@ strong {
 }
 
 .contingency-fee-benefits.playing-field-section {
-    background: #f6f6f6 url('/wp-content/themes/forthepeople/assets/images/contingency-fee/section-playing-field_bg.jpg') no-repeat left;
+    background: #f6f6f6 url('assets/images/contingency-fee/section-playing-field_bg.jpg') no-repeat left;
 }
 
 .contingency-fee-benefits.section p:last-child {
@@ -2369,7 +2369,7 @@ strong {
 }
 
 .breach-contract.jumbotron {
-    background: url('/wp-content/themes/forthepeople/assets/images/breach-contract/jumbotron.jpg') no-repeat;
+    background: url('assets/images/breach-contract/jumbotron.jpg') no-repeat;
     background-size: cover;
     text-align: left;
 }
@@ -2405,7 +2405,7 @@ strong {
 }
 
 .section.contingency-fee-section {
-    background: #f8f8f8 url('/wp-content/themes/forthepeople/assets/images/breach-contract/contingency-fee.jpg') no-repeat -100px 0;
+    background: #f8f8f8 url('assets/images/breach-contract/contingency-fee.jpg') no-repeat -100px 0;
     position: relative;
     z-index: 0;
 }
@@ -2434,7 +2434,7 @@ strong {
 }
 
 .section.breach-contract-section {
-    background: #f8f8f8 url('/wp-content/themes/forthepeople/assets/images/breach-contract/breach-contracts_bg.jpg') no-repeat right;
+    background: #f8f8f8 url('assets/images/breach-contract/breach-contracts_bg.jpg') no-repeat right;
     position: relative;
     z-index: 0;
 }
@@ -2445,7 +2445,7 @@ strong {
 /*
 /*----------------------------------------------------------------*/
 .attorney-referrals.jumbotron {
-    background: #1770d9 url('/wp-content/themes/forthepeople/assets/images/attorney-referrals/jumbotron.jpg') no-repeat top center;
+    background: #1770d9 url('assets/images/attorney-referrals/jumbotron.jpg') no-repeat top center;
 }
 
 .attorney-referrals.jumbotron h1 {
@@ -3115,8 +3115,8 @@ strong {
 
 @font-face {
     font-family: FontAwesome;
-    src: url(/wp-content/themes/forthepeople/assets/fonts/fontawesome/fontawesome-webfont.eot);
-    src: url(/wp-content/themes/forthepeople/assets/fonts/fontawesome/fontawesome-webfont.eot?#iefix) format('embedded-opentype'), url(/wp-content/themes/forthepeople/assets/fonts/fontawesome/fontawesome-webfont.woff) format('woff'), url(/wp-content/themes/forthepeople/assets/fonts/fontawesome/fontawesome-webfont.ttf) format('truetype');
+    src: url(assets/fonts/fontawesome/fontawesome-webfont.eot);
+    src: url(assets/fonts/fontawesome/fontawesome-webfont.eot?#iefix) format('embedded-opentype'), url(assets/fonts/fontawesome/fontawesome-webfont.woff) format('woff'), url(assets/fonts/fontawesome/fontawesome-webfont.ttf) format('truetype');
     font-weight: 400;
     font-style: normal
 }
@@ -4293,7 +4293,7 @@ h1.pagetitle {
     color: #303134;
     font-size: 30px;
     font-family: minion-pro-display, "Times New Roman", Times, serif;
-    background: url(/wp-content/themes/forthepeople/assets/images/structure/heading-hr-sprite.png) right no-repeat;
+    background: url(assets/images/structure/heading-hr-sprite.png) right no-repeat;
     background-position: 202px -64px;
     font-weight: 200;
     text-shadow: 0 1px 0 #fff;
@@ -4386,7 +4386,7 @@ blockquote small {
     height: 13px;
     margin: 26px 0;
     display: block;
-    background: url(/wp-content/themes/forthepeople/assets/images/structure/heading-hr-sprite.png) right no-repeat;
+    background: url(assets/images/structure/heading-hr-sprite.png) right no-repeat;
     background-position: 64px 0
 }
 
@@ -4528,7 +4528,7 @@ blockquote small {
 
 .breadBasket {
     position: relative;
-    background: url(/wp-content/themes/forthepeople/assets/images/structure/breadcrumbs-bg.png) no-repeat center bottom;
+    background: url(assets/images/structure/breadcrumbs-bg.png) no-repeat center bottom;
     background-size: 100% 100%;
     height: auto
 }
@@ -4571,7 +4571,7 @@ blockquote small {
 }
 
 .bodyShade {
-    background: url(/wp-content/themes/forthepeople/assets/images/structure/backgroundShade.png) no-repeat
+    background: url(assets/images/structure/backgroundShade.png) no-repeat
 }
 
 .bodyShade p {
@@ -4630,7 +4630,7 @@ blockquote small {
     position: relative;
     width: 109px;
     height: 92px;
-    background: url(/wp-content/themes/forthepeople/assets/images/logos/logo-footer.png) no-repeat
+    background: url(assets/images/logos/logo-footer.png) no-repeat
 }
 
 #footer .offices a:hover, .footer-layer1 li a:hover {
@@ -4641,7 +4641,7 @@ blockquote small {
 .footer-layer1 {
     padding-top: 40px;
     height: 200px;
-    background: url(/wp-content/themes/forthepeople/assets/images/structure/footer-layer1-bg.png) repeat-x;
+    background: url(assets/images/structure/footer-layer1-bg.png) repeat-x;
     color: #d7d7d7;
     font-weight: 200;
     font-size: 12px
@@ -4657,7 +4657,7 @@ blockquote small {
 
 .footer-layer2 {
     height: 42px;
-    background: url(/wp-content/themes/forthepeople/assets/images/structure/footer-layer2-bg.png) repeat-x;
+    background: url(assets/images/structure/footer-layer2-bg.png) repeat-x;
     border-top: solid 1px #fff;
     border-bottom: solid 1px #dedede;
     line-height: 42px;
@@ -4671,7 +4671,7 @@ blockquote small {
 }
 
 #footer-consumerAlertSignup .safesubscribe {
-    background: url(/wp-content/themes/forthepeople/assets/images/media/cc-ss.png) no-repeat;
+    background: url(assets/images/media/cc-ss.png) no-repeat;
     height: 20px;
     width: 123px;
     margin: 2px 0 0 108px
@@ -4865,7 +4865,7 @@ blockquote small {
     height: 100px;
     background-color: #004272;
     background-color: rgba(0, 96, 166, .8);
-    background-image: url(/wp-content/themes/forthepeople/assets/images/logos/mm-logo-blue.png);
+    background-image: url(assets/images/logos/mm-logo-blue.png);
     background-repeat: no-repeat;
     background-position: 95% 45%;
     color: #fff;
@@ -4962,7 +4962,7 @@ button.loadmore {
 .sm-facebook, .sm-googleplus, .sm-twitter, .sm-youtube {
     text-indent: -500px;
     overflow: hidden;
-    background: url(/wp-content/themes/forthepeople/assets/images/socialmedia/socialmedia-sprite.png) no-repeat;
+    background: url(assets/images/socialmedia/socialmedia-sprite.png) no-repeat;
     width: 32px;
     height: 32px;
     display: inline-block;
@@ -5039,7 +5039,7 @@ button.loadmore {
 
 #tabs-vert {
     background-color: #f5f5f5;
-    background: url(/wp-content/themes/forthepeople/assets/images/structure/gradient-white-gray.png);
+    background: url(assets/images/structure/gradient-white-gray.png);
     background-repeat: repeat-y;
     background-position: 86px 0
 }
@@ -5098,7 +5098,7 @@ button.loadmore {
 
 #tabs-vert .nav-tabs > li > a {
     border-radius: 8px 0 0 8px;
-    background-image: url(/wp-content/themes/forthepeople/assets/images/structure/gray-noise-texture.png);
+    background-image: url(assets/images/structure/gray-noise-texture.png);
     background-repeat: repeat;
     background-clip: padding-box;
     background-color: #7f7f7f;
@@ -5188,7 +5188,7 @@ button.loadmore {
     top: 83px;
     height: 64px;
     width: 80px;
-    background: url(/wp-content/themes/forthepeople/assets/images/structure/quote-large.png) no-repeat
+    background: url(assets/images/structure/quote-large.png) no-repeat
 }
 
 .slides_container {
@@ -5235,7 +5235,7 @@ button.loadmore {
     width: 6px;
     height: 0;
     padding-top: 12px;
-    background-image: url(/wp-content/themes/forthepeople/assets/images/testimonialslider/pagination.png);
+    background-image: url(assets/images/testimonialslider/pagination.png);
     background-position: 0 0;
     overflow: hidden
 }
@@ -5290,7 +5290,7 @@ blockquote.quote1:before {
     display: block;
     width: 40px;
     height: 50px;
-    background: url(/wp-content/themes/forthepeople/assets/images/structure/blockquote-sprite.png) no-repeat;
+    background: url(assets/images/structure/blockquote-sprite.png) no-repeat;
     background-position: 0 -157px
 }
 
@@ -5310,7 +5310,7 @@ blockquote.quote2:after, blockquote.quote2:before {
     position: relative;
     display: block;
     height: 22px;
-    background: url(/wp-content/themes/forthepeople/assets/images/structure/blockquote-sprite.png) no-repeat;
+    background: url(assets/images/structure/blockquote-sprite.png) no-repeat;
     background-position: 0 0;
     margin: 0 0 20px 0
 }
@@ -5432,7 +5432,7 @@ blockquote.quote2:after {
     font-size: 13px;
     color: #555;
     font-style: italic;
-    background: url(/wp-content/themes/forthepeople/assets/images/structure/bullet-sprite.png) no-repeat;
+    background: url(assets/images/structure/bullet-sprite.png) no-repeat;
     background-position: -13px -187px;
     padding: 0 0 10px 20px
 }
@@ -5560,7 +5560,7 @@ ul.bullets {
 
 ul.bullets > li {
     list-style: none;
-    background: url(/wp-content/themes/forthepeople/assets/images/structure/bullet-sprite.png) no-repeat;
+    background: url(assets/images/structure/bullet-sprite.png) no-repeat;
     background-position: -13px -184px;
     padding-left: 20px
 }
@@ -5638,14 +5638,14 @@ ul.practice-areas > li a:hover {
 }
 
 .section .accordion-group li {
-    background: url(/wp-content/themes/forthepeople/assets/images/structure/bullet-sprite.png) no-repeat;
+    background: url(assets/images/structure/bullet-sprite.png) no-repeat;
     background-position: -13px -187px;
     padding: 0 0 10px 20px
 }
 
 .section .accordion-heading {
     backgorund-color: #e5e5e5;
-    background: url(/wp-content/themes/forthepeople/assets/images/structure/noise-bg.png) repeat
+    background: url(assets/images/structure/noise-bg.png) repeat
 }
 
 .section .accordion-heading > a {
@@ -5705,7 +5705,7 @@ ul.practice-areas > li a:hover {
 
 .testimonial-block .testimonial {
     position: relative;
-    background: url(/wp-content/themes/forthepeople/assets/images/structure/blockquote-sprite.png) no-repeat;
+    background: url(assets/images/structure/blockquote-sprite.png) no-repeat;
     background-position: 0 -158px;
     padding: 10px 0 30px 50px
 }
@@ -5776,7 +5776,7 @@ ul.practice-areas > li a:hover {
 
 .blog-post .title .wrap {
     position: relative;
-    background: url(/wp-content/themes/forthepeople/assets/images/structure/noise-bg.png) repeat;
+    background: url(assets/images/structure/noise-bg.png) repeat;
     padding: 25px 50px;
     margin-bottom: 1px;
     border-top: 5px solid #F89406
@@ -5801,7 +5801,7 @@ ul.practice-areas > li a:hover {
     content: ' ';
     position: relative;
     display: block;
-    background: url(/wp-content/themes/forthepeople/assets/images/structure/shade-vert.png) repeat-x;
+    background: url(assets/images/structure/shade-vert.png) repeat-x;
     height: 20px
 }
 
@@ -6135,7 +6135,7 @@ p.tos {
 }
 
 .module-www [class*=span] {
-    background: transparent url(/wp-content/themes/forthepeople/assets/images/structure/vertical-divider.gif) no-repeat bottom right
+    background: transparent url(assets/images/structure/vertical-divider.gif) no-repeat bottom right
 }
 
 .module-www [class*=span]:last-child {
@@ -6199,19 +6199,19 @@ p.tos {
 }
 
 .cta-success {
-    border-color: #aabb6a url(/wp-content/themes/forthepeople/assets/images/structure/cta-icon.png) no-repeat 20px 0;
+    border-color: #aabb6a url(assets/images/structure/cta-icon.png) no-repeat 20px 0;
     background: #f1facf;
-    background: url(../images/structure/cta-icon.png) no-repeat 20px 0, -webkit-gradient(linear, left top, left bottom, color-stop(0, #f1facf), color-stop(100%, #c6dc77));
-    background: url(../images/structure/cta-icon.png) no-repeat 20px 0, -webkit-linear-gradient(top, #f1facf 0, #c6dc77 100%);
-    background: url(../images/structure/cta-icon.png) no-repeat 20px 0, linear-gradient(to bottom, #f1facf 0, #c6dc77 100%)
+    background: url(assets/images/structure/cta-icon.png) no-repeat 20px 0, -webkit-gradient(linear, left top, left bottom, color-stop(0, #f1facf), color-stop(100%, #c6dc77));
+    background: url(assets/images/structure/cta-icon.png) no-repeat 20px 0, -webkit-linear-gradient(top, #f1facf 0, #c6dc77 100%);
+    background: url(assets/images/structure/cta-icon.png) no-repeat 20px 0, linear-gradient(to bottom, #f1facf 0, #c6dc77 100%)
 }
 
 .cta-info {
     border-color: #86b5db;
-    background: #c6dff4 url(/wp-content/themes/forthepeople/assets/images/structure/cta-icon.png) no-repeat 20px 0;
-    background: url(../images/structure/cta-icon.png) no-repeat 20px 0, -webkit-gradient(linear, left top, left bottom, color-stop(0, #c6dff4), color-stop(49%, #abd3ee), color-stop(97%, #89c3eb));
-    background: url(../images/structure/cta-icon.png) no-repeat 20px 0, -webkit-linear-gradient(top, #c6dff4 0, #abd3ee 49%, #89c3eb 97%);
-    background: url(../images/structure/cta-icon.png) no-repeat 20px 0, linear-gradient(to bottom, #c6dff4 0, #abd3ee 49%, #89c3eb 97%)
+    background: #c6dff4 url(assets/images/structure/cta-icon.png) no-repeat 20px 0;
+    background: url(assets/images/structure/cta-icon.png) no-repeat 20px 0, -webkit-gradient(linear, left top, left bottom, color-stop(0, #c6dff4), color-stop(49%, #abd3ee), color-stop(97%, #89c3eb));
+    background: url(assets/images/structure/cta-icon.png) no-repeat 20px 0, -webkit-linear-gradient(top, #c6dff4 0, #abd3ee 49%, #89c3eb 97%);
+    background: url(assets/images/structure/cta-icon.png) no-repeat 20px 0, linear-gradient(to bottom, #c6dff4 0, #abd3ee 49%, #89c3eb 97%)
 }
 
 .cta-info .cta-text {
@@ -6220,18 +6220,18 @@ p.tos {
 
 .cta-warning {
     border-color: #e3dda3;
-    background: #fefcea url(/wp-content/themes/forthepeople/assets/images/structure/cta-icon.png) no-repeat 20px 0;
-    background: url(../images/structure/cta-icon.png) no-repeat 20px 0, -webkit-gradient(linear, left top, left bottom, color-stop(0, #fefcea), color-stop(100%, #efdf77));
-    background: url(../images/structure/cta-icon.png) no-repeat 20px 0, -webkit-linear-gradient(top, #fefcea 0, #efdf77 100%);
-    background: url(../images/structure/cta-icon.png) no-repeat 20px 0, linear-gradient(to bottom, #fefcea 0, #efdf77 100%)
+    background: #fefcea url(assets/images/structure/cta-icon.png) no-repeat 20px 0;
+    background: url(assets/images/structure/cta-icon.png) no-repeat 20px 0, -webkit-gradient(linear, left top, left bottom, color-stop(0, #fefcea), color-stop(100%, #efdf77));
+    background: url(assets/images/structure/cta-icon.png) no-repeat 20px 0, -webkit-linear-gradient(top, #fefcea 0, #efdf77 100%);
+    background: url(assets/images/structure/cta-icon.png) no-repeat 20px 0, linear-gradient(to bottom, #fefcea 0, #efdf77 100%)
 }
 
 .cta-danger {
     border-color: #A82121;
-    background: #bc2525 url(/wp-content/themes/forthepeople/assets/images/structure/cta-icon.png) no-repeat 20px 0;
-    background: url(../images/structure/cta-icon.png) no-repeat 20px 0, -webkit-gradient(linear, left top, left bottom, color-stop(0, #bc2525), color-stop(100%, #96261e));
-    background: url(../images/structure/cta-icon.png) no-repeat 20px 0, -webkit-linear-gradient(top, #bc2525 0, #96261e 100%);
-    background: url(../images/structure/cta-icon.png) no-repeat 20px 0, linear-gradient(to bottom, #bc2525 0, #96261e 100%)
+    background: #bc2525 url(assets/images/structure/cta-icon.png) no-repeat 20px 0;
+    background: url(assets/images/structure/cta-icon.png) no-repeat 20px 0, -webkit-gradient(linear, left top, left bottom, color-stop(0, #bc2525), color-stop(100%, #96261e));
+    background: url(assets/images/structure/cta-icon.png) no-repeat 20px 0, -webkit-linear-gradient(top, #bc2525 0, #96261e 100%);
+    background: url(assets/images/structure/cta-icon.png) no-repeat 20px 0, linear-gradient(to bottom, #bc2525 0, #96261e 100%)
 }
 
 .cta-danger .cta-text {
@@ -6267,7 +6267,7 @@ p.tos {
     position: relative;
     width: 441px;
     height: 251px;
-    background: url(/wp-content/themes/forthepeople/assets/images/structure/chat-invite.png) no-repeat;
+    background: url(assets/images/structure/chat-invite.png) no-repeat;
     z-index: 8
 }
 
@@ -6282,7 +6282,7 @@ p.tos {
     top: 15px;
     height: 32px;
     width: 32px;
-    background: url(/wp-content/themes/forthepeople/assets/images/structure/chat-icon-close.png) no-repeat;
+    background: url(assets/images/structure/chat-icon-close.png) no-repeat;
     z-index: 9
 }
 
@@ -6299,7 +6299,7 @@ p.tos {
 }
 
 .gplus-landing {
-    background: url(/wp-content/themes/forthepeople/assets/images/structure/arrow-up.png) no-repeat 180px bottom
+    background: url(assets/images/structure/arrow-up.png) no-repeat 180px bottom
 }
 
 .gplus-landing .heading {
@@ -6321,7 +6321,7 @@ p.tos {
 }
 
 .gplus-wrapper {
-    background: url(/wp-content/themes/forthepeople/assets/images/structure/bg-gplus.jpg) no-repeat 0 0;
+    background: url(assets/images/structure/bg-gplus.jpg) no-repeat 0 0;
     width: 278px;
     height: 142px;
     margin: 0 auto;
@@ -6334,7 +6334,7 @@ p.tos {
     top: 65px;
     width: 385px;
     height: auto;
-    background: rgba(255, 255, 255, .5) url(/wp-content/themes/forthepeople/assets/images/structure/bg-slide.png) repeat 0 0;
+    background: rgba(255, 255, 255, .5) url(assets/images/structure/bg-slide.png) repeat 0 0;
     -ms-box-sizing: border-box;
     box-sizing: border-box;
     padding: 20px;
@@ -6354,7 +6354,7 @@ p.tos {
     top: 80px;
     width: 385px;
     height: auto;
-    background: rgba(255, 255, 255, .5) url(/wp-content/themes/forthepeople/assets/images/structure/bg-slide.png) repeat 0 0;
+    background: rgba(255, 255, 255, .5) url(assets/images/structure/bg-slide.png) repeat 0 0;
     -ms-box-sizing: border-box;
     box-sizing: border-box;
     padding: 20px;
@@ -6526,7 +6526,7 @@ a.newstile-small figure figcaption {
 a.newstile-featured figure figcaption, a.newstile-small figure figcaption {
     height: 90px;
     position: absolute;
-    background: url(/wp-content/themes/forthepeople/assets/images/structure/alpha-50.png) repeat;
+    background: url(assets/images/structure/alpha-50.png) repeat;
     color: #fff;
     -webkit-transition: all .4s ease-in-out;
     transition: all .4s ease-in-out
@@ -6558,7 +6558,7 @@ a.newstile-featured:hover h5, a.newstile-small:hover h5 {
 }
 
 .gr-safe {
-    background: url(/wp-content/themes/forthepeople/assets/images/structure/getresponse_seal.png) no-repeat center;
+    background: url(assets/images/structure/getresponse_seal.png) no-repeat center;
     margin-top: 4px;
     height: 25px;
     background-position-x: 67px
@@ -6592,7 +6592,7 @@ a.newstile-featured:hover h5, a.newstile-small:hover h5 {
     position: relative;
     display: block;
     height: 56px;
-    background: #a03822 url(/wp-content/themes/forthepeople/assets/images/structure/form-cta-1.png) repeat-x;
+    background: #a03822 url(assets/images/structure/form-cta-1.png) repeat-x;
     border: 1px solid #a03822;
     box-shadow: inset 0 0 3px rgba(255, 255, 190, .59);
     text-align: center;
@@ -6608,7 +6608,7 @@ a.newstile-featured:hover h5, a.newstile-small:hover h5 {
     display: block;
     border: 1px solid #e4e0dc;
     border-bottom: none;
-    background: #fdfbf8 url(/wp-content/themes/forthepeople/assets/images/structure/form-body-span4.png) no-repeat 0 0;
+    background: #fdfbf8 url(assets/images/structure/form-body-span4.png) no-repeat 0 0;
     background-size: 100% 100%;
     min-height: 300px;
     padding: 20px 20px 10px 20px
@@ -6679,7 +6679,7 @@ a.newstile-featured:hover h5, a.newstile-small:hover h5 {
 }
 
 #form1 .submit {
-    background: #a03822 url(/wp-content/themes/forthepeople/assets/images/structure/form-cta-1.png) repeat-x;
+    background: #a03822 url(assets/images/structure/form-cta-1.png) repeat-x;
     border: 1px solid #a03822;
     box-shadow: inset 0 0 3px rgba(255, 255, 190, .59);
     font-weight: 700;
@@ -6753,7 +6753,7 @@ a.newstile-featured:hover h5, a.newstile-small:hover h5 {
 }
 
 #form1.contactus .body {
-    background: #fff url(/wp-content/themes/forthepeople/assets/images/structure/form2-shade.gif) repeat-x;
+    background: #fff url(assets/images/structure/form2-shade.gif) repeat-x;
     border: none;
     padding: 30px 30px 10px 30px
 }
@@ -6793,7 +6793,7 @@ a.newstile-featured:hover h5, a.newstile-small:hover h5 {
 }
 
 .form-hr1 {
-    background: url(/wp-content/themes/forthepeople/assets/images/structure/form-hr1.png) no-repeat center;
+    background: url(assets/images/structure/form-hr1.png) no-repeat center;
     height: 14px;
     margin: 20px 0 12px 0
 }
@@ -6805,7 +6805,7 @@ a.newstile-featured:hover h5, a.newstile-small:hover h5 {
     top: 10px;
     width: 31px;
     height: 11px;
-    background: url(/wp-content/themes/forthepeople/assets/images/structure/r-arrow.png) no-repeat
+    background: url(assets/images/structure/r-arrow.png) no-repeat
 }
 
 #col1 #form1.aside {
@@ -6842,13 +6842,13 @@ a.newstile-featured:hover h5, a.newstile-small:hover h5 {
 }
 
 .siteNav-wrap {
-    background: #01497e url(/wp-content/themes/forthepeople/assets/images/structure/navwrapbg.png) repeat-x
+    background: #01497e url(assets/images/structure/navwrapbg.png) repeat-x
 }
 
 .siteNav-container {
     height: 54px;
     padding-top: 1px;
-    background: #01497e url(/wp-content/themes/forthepeople/assets/images/structure/navbarbg.png) no-repeat
+    background: #01497e url(assets/images/structure/navbarbg.png) no-repeat
 }
 
 #topNav {
@@ -6863,7 +6863,7 @@ a.newstile-featured:hover h5, a.newstile-small:hover h5 {
     right: 0;
     height: 54px;
     width: 65px;
-    background: url(/wp-content/themes/forthepeople/assets/images/structure/navglow-sprite.png) no-repeat;
+    background: url(assets/images/structure/navglow-sprite.png) no-repeat;
     background-position: 0 -64px
 }
 
@@ -6893,7 +6893,7 @@ a.newstile-featured:hover h5, a.newstile-small:hover h5 {
 
 #topNav > li > .nav-label + a .dd {
     position: absolute;
-    background: url(/wp-content/themes/forthepeople/assets/images/structure/arrow-sprite.png) no-repeat;
+    background: url(assets/images/structure/arrow-sprite.png) no-repeat;
     height: 8px;
     width: 14px;
     background-position: 0 -30px;
@@ -6904,7 +6904,7 @@ a.newstile-featured:hover h5, a.newstile-small:hover h5 {
 #topNav .dropdown:hover > a, #topNav > li > a:hover {
     color: #f5eea0;
     text-decoration: none;
-    background: url(/wp-content/themes/forthepeople/assets/images/structure/navglow-sprite.png) no-repeat;
+    background: url(assets/images/structure/navglow-sprite.png) no-repeat;
     background-position: 0 -122px
 }
 
@@ -6914,7 +6914,7 @@ a.newstile-featured:hover h5, a.newstile-small:hover h5 {
     left: 0;
     height: 54px;
     width: 65px;
-    background: url(/wp-content/themes/forthepeople/assets/images/structure/navglow-sprite.png) no-repeat;
+    background: url(assets/images/structure/navglow-sprite.png) no-repeat;
     background-position: 0 0
 }
 
@@ -6924,7 +6924,7 @@ a.newstile-featured:hover h5, a.newstile-small:hover h5 {
     right: 0;
     height: 54px;
     width: 65px;
-    background: url(/wp-content/themes/forthepeople/assets/images/structure/navglow-sprite.png) no-repeat;
+    background: url(assets/images/structure/navglow-sprite.png) no-repeat;
     background-position: 2px -64px
 }
 
@@ -6943,7 +6943,7 @@ a.newstile-featured:hover h5, a.newstile-small:hover h5 {
     font-family: minion-pro-display, "Times New Roman", Times, serif;
     font-size: 14px;
     letter-spacing: 1px;
-    background: url(/wp-content/themes/forthepeople/assets/images/structure/navlabel-sprite.png) no-repeat center;
+    background: url(assets/images/structure/navlabel-sprite.png) no-repeat center;
     background-position: 0 -126px
 }
 
@@ -6955,7 +6955,7 @@ a.newstile-featured:hover h5, a.newstile-small:hover h5 {
     margin-left: -8px;
     width: 15px;
     height: 24px;
-    background: url(/wp-content/themes/forthepeople/assets/images/structure/navlabel-sprite.png) no-repeat center;
+    background: url(assets/images/structure/navlabel-sprite.png) no-repeat center;
     background-position: 0 -208px
 }
 
@@ -7004,7 +7004,7 @@ a.newstile-featured:hover h5, a.newstile-small:hover h5 {
     z-index: -1;
     height: 247px;
     width: 427px;
-    background: url(/wp-content/themes/forthepeople/assets/images/structure/body-pane-border.jpg) no-repeat
+    background: url(assets/images/structure/body-pane-border.jpg) no-repeat
 }
 
 .dropdown-menu .active > a.no-background, .dropdown-menu .active > a.no-background:hover, .dropdown-menu li > a.no-background, .dropdown-menu li > a.no-background:focus, .dropdown-menu li > a.no-background:hover, .dropdown-submenu:hover > a.no-background, .navbar-inverse .nav .active > a, .navbar-inverse .nav .active > a:focus, .navbar-inverse .nav .active > a:hover {
@@ -7250,7 +7250,7 @@ html.no-rgba .dropdown-menu {
 
 .dd {
     position: absolute;
-    background: url(/wp-content/themes/forthepeople/assets/images/structure/arrow-sprite.png) no-repeat;
+    background: url(assets/images/structure/arrow-sprite.png) no-repeat;
     height: 8px;
     width: 14px;
     background-position: 0 -30px;
@@ -7334,7 +7334,7 @@ html.no-rgba .dropdown-menu {
 }
 
 .widgetWrap.aside {
-    background: url(/wp-content/themes/forthepeople/assets/images/structure/noise-bg.png) repeat;
+    background: url(assets/images/structure/noise-bg.png) repeat;
     border-top: solid 5px #28618c;
     margin: 40px 0;
     font-weight: 200
@@ -7439,7 +7439,7 @@ html.no-rgba .dropdown-menu {
 
 .widgetWrap.aside ul.verdictList li {
     padding: 20px 35px;
-    background: url(/wp-content/themes/forthepeople/assets/images/structure/heading-hr-sprite.png) no-repeat;
+    background: url(assets/images/structure/heading-hr-sprite.png) no-repeat;
     background-position: -393px -336px
 }
 
@@ -7530,7 +7530,7 @@ html.no-rgba .dropdown-menu {
 .widgetWrap.section.tabWrap .title {
     padding: 5px 0 0 3px;
     margin-bottom: 0;
-    background: url(/wp-content/themes/forthepeople/assets/images/structure/noise-bg.png) repeat;
+    background: url(assets/images/structure/noise-bg.png) repeat;
     border-top: solid 5px #28618c
 }
 
@@ -7570,12 +7570,12 @@ html.no-rgba .dropdown-menu {
 .widgetWrap.aside ul.childrenPageList li a + ul li a {
     padding: 0 0 10px 50px;
     line-height: normal;
-    background: url(/wp-content/themes/forthepeople/assets/images/structure/bullet-sprite.png) no-repeat;
+    background: url(assets/images/structure/bullet-sprite.png) no-repeat;
     background-position: 24px -187px
 }
 
 .widgetWrap.aside .testimonial {
-    background: url(/wp-content/themes/forthepeople/assets/images/structure/quote-large.png) no-repeat;
+    background: url(assets/images/structure/quote-large.png) no-repeat;
     background-position: 0 0;
     padding: 10px 0 30px 0
 }
@@ -7780,7 +7780,7 @@ html.no-rgba .dropdown-menu {
     position: relative;
     top: -1px;
     min-height: 192px;
-    background: url(/wp-content/themes/forthepeople/assets/images/structure/grey-noise-texture2.png) repeat-x
+    background: url(assets/images/structure/grey-noise-texture2.png) repeat-x
 }
 
 #profile-wrap .location, .contactus-block .subtitle {
@@ -7838,7 +7838,7 @@ html.no-rgba .dropdown-menu {
 }
 
 .profile-tab-hr {
-    background: url(/wp-content/themes/forthepeople/assets/images/structure/heading-hr-sprite.png) right no-repeat;
+    background: url(assets/images/structure/heading-hr-sprite.png) right no-repeat;
     background-position: 0 -165px;
     height: 3px;
     margin: 26px 0 0 0
@@ -7867,7 +7867,7 @@ html.no-rgba .dropdown-menu {
 #profileTabs.nav-tabs > .active:after {
     position: absolute;
     content: ' ';
-    background: url(/wp-content/themes/forthepeople/assets/images/structure/arrow-sprite.png) no-repeat;
+    background: url(assets/images/structure/arrow-sprite.png) no-repeat;
     height: 8px;
     width: 14px;
     background-position: 0 1px;
@@ -7919,7 +7919,7 @@ html.no-rgba .dropdown-menu {
 
 #profileTabContent li, .profile-module li {
     list-style-type: none;
-    background: url(/wp-content/themes/forthepeople/assets/images/structure/bullet-sprite.png) no-repeat;
+    background: url(assets/images/structure/bullet-sprite.png) no-repeat;
     background-position: 0 6px;
     padding: 0 0 0 16px
 }
@@ -7940,7 +7940,7 @@ html.no-rgba .dropdown-menu {
 }
 
 .thank-you .hero {
-    background: #fff url(/wp-content/themes/forthepeople/assets/images/thankyou/hero-bg.jpg) no-repeat;
+    background: #fff url(assets/images/thankyou/hero-bg.jpg) no-repeat;
     background-size: cover;
     padding-top: 90px
 }
@@ -7993,7 +7993,7 @@ html.no-rgba .dropdown-menu {
 }
 
 .thank-you .testimonials {
-    background: #134c91 url(/wp-content/themes/forthepeople/assets/images/thankyou/testimonials-bg.jpg) no-repeat;
+    background: #134c91 url(assets/images/thankyou/testimonials-bg.jpg) no-repeat;
     background-size: cover;
     padding: 80px 0;
     color: #FFF
@@ -8422,12 +8422,12 @@ html.lt-ie8.lt-ie9 #form1.form-homepage-offset {
 
 html.no-rgba #form1 {
     border: 10px solid #efefef;
-    behavior: url(/wp-content/themes/forthepeople/assets/js/libs/pie/pie.htc)
+    behavior: url(assets/js/libs/pie/pie.htc)
 }
 
 html.no-rgba .photoFrame {
     -pie-background: linear-gradient(#4d5156, #4d5156);
-    behavior: url(/wp-content/themes/forthepeople/assets/js/libs/pie/pie.htc)
+    behavior: url(assets/js/libs/pie/pie.htc)
 }
 
 .hide-text {
@@ -8700,7 +8700,7 @@ html.no-rgba .photoFrame {
     }
 
     .siteNav-container {
-        background: #303135 url(../images/structure/nav-noise1.jpg) repeat;
+        background: #303135 url(assets/images/structure/nav-noise1.jpg) repeat;
         margin: 0;
         display: block;
         width: 100%;
@@ -8841,7 +8841,7 @@ html.no-rgba .photoFrame {
         background-color: transparent;
         border: none;
         border-radius: 0;
-        background: url(../images/structure/nav-noise2.jpg) repeat;
+        background: url(assets/images/structure/nav-noise2.jpg) repeat;
         box-shadow: inset 0 0 10px rgba(0, 0, 0, .75);
         border-bottom: solid 1px #43454a
     }

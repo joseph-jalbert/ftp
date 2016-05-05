@@ -850,7 +850,7 @@ blockquote small {
 	background: linear-gradient(bottom, rgba(0,0,0,0.08) -25%, rgba(255,255,255,0.08) 125%);
 	background-size: cover;
 	-pie-background: linear-gradient(#fafafa, #efefef);
-	behavior: url('/wp-content/themes/forthepeople/assets/js/libs/pie/pie.htc');
+	behavior: url('assets/js/libs/pie/pie.htc');
 	padding: 0;
 }
 #fullSlider .rsUni .rsTab {

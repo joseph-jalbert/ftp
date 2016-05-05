@@ -422,6 +422,19 @@ module.exports = function (grunt) {
 
                 }
             },
+            buildTheme: {
+                options: {
+                    execOptions: {
+                        cwd: sourceDir
+                    }
+                },
+                command: [
+                    'npm install',
+                    'grunt'
+
+                ].join('&&')
+            },
+
 
             processPantheonSourceRepo: {
                 options: {
@@ -588,6 +601,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('processSourceRepos', [
         'clean:pantheonWpContent',
+        'shell:buildTheme',
         'shell:processPantheonSourceRepo',
         'shell:processWpEngineSourceRepo',
         'processInterimPantheon',

@@ -1,3 +1,23 @@
+var themeBase = 'web/app/themes/forthepeople',
+    projectJsFileList = [
+        themeBase + '/js/navigation.js',
+        themeBase + '/js/skip-link-focus-fix.js',
+        themeBase + '/bootstrap/js/bootstrap.min.js',
+        themeBase + '/assets/js/libs/modernizr.2.6.2.min.js',
+        themeBase + '/assets/js/jquery.slides.js',
+        themeBase + '/assets/js/plugins/jquery.sortAllTheThings.min.js',
+        themeBase + '/assets/js/plugins/scotchPanels.min.js',
+        themeBase + '/assets/js/scripts/global.js',
+    ],
+    projectCssFileList = [
+        themeBase + '/style.css',
+        themeBase + '/bootstrap/css/bootstrap.min.css',
+        themeBase + '/assets/css/borrowed.css',
+        themeBase + '/assets/css/custom.css',
+    ];
+
+
+
 module.exports = function (grunt) {
 
     var d = new Date(),
@@ -33,13 +53,48 @@ module.exports = function (grunt) {
 
 
     grunt.initConfig({
+
+        uglify: {
+            theme: {
+                options: {
+                    preserveComments: "some"
+                },
+                files: {
+
+                    "web/app/themes/forthepeople/js/main.min.js": projectJsFileList
+                }
+            }
+        },
+        cssmin: {
+            options: {
+                shorthandCompacting: false,
+                roundingPrecision: -1
+            },
+            target: {
+                files: {
+                    'web/app/themes/forthepeople/style.min.css': projectCssFileList
+                }
+            }
+        },
+        watch: {
+            scripts: {
+                files: projectCssFileList,
+                tasks: ["default"],
+                options: {
+                    livereload: true
+                }
+            }
+        },
+
+
         gitclone: {
             consumeSourceRepo: {
 
                 options: {
                     repository: sourceRepo,
                     branch: sourceRepoBranch,
-                    directory: sourceDir
+                    directory: sourceDir,
+                    verbose: true
                 }
 
             },
@@ -48,7 +103,8 @@ module.exports = function (grunt) {
                 options: {
                     repository: pantheonRepo,
                     branch: pantheonRepoBranch,
-                    directory: pantheonTempDir
+                    directory: pantheonTempDir,
+                    verbose: true
                 }
 
             },
@@ -267,7 +323,6 @@ module.exports = function (grunt) {
             pantheonWpContent: [pantheonTempDir + '/wp-content/plugins']
 
 
-
         },
 
         shell: {
@@ -477,7 +532,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-git');
     grunt.loadNpmTasks('grunt-merge-copy');
     grunt.loadNpmTasks('grunt-contrib-clean');
-
+    grunt.loadNpmTasks("grunt-contrib-uglify");
+    grunt.loadNpmTasks("grunt-contrib-cssmin");
     grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-composer');
     grunt.registerTask('cleanUp', [
@@ -506,8 +562,6 @@ module.exports = function (grunt) {
         'clean:cleanWpEngineContent'
 
     ]);
-
-
 
 
     grunt.registerTask('processInterimPantheon', [
@@ -555,16 +609,17 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('build', [
-        // todo add tasks!
+        'uglify:theme',
+        'cssmin'
 
 
     ]);
 
 
     grunt.registerTask('deploy', [
+        'build',
         'cleanUp',
         'consumeSources',
-        'build',
         'processConsumed',
         'deployCode'
 

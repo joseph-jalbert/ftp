@@ -157,14 +157,9 @@ function forthepeople_styles() {
     return;
   }
 
-  wp_enqueue_style( 'forthepeople-style', get_stylesheet_uri() );
+  wp_enqueue_style( 'forthepeople-style', get_template_directory_uri() . '/style.min.css' );
 
-  wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/bootstrap/css/bootstrap.min.css');
-
-  wp_enqueue_style( 'borrowed', get_template_directory_uri() . '/assets/css/borrowed.css');
-
-  wp_enqueue_style( 'custom', get_template_directory_uri() . '/assets/css/custom.css', array(), date('Ymdh') );
-
+  
   wp_enqueue_style( 'fontawesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
 
   if (is_page_template('business-litigation.php') || is_page_template('attorney-referrals.php')) {
@@ -223,25 +218,13 @@ function forthepeople_scripts() {
   }
 
 
-	wp_enqueue_script( 'forthepeople-navigation', get_template_directory_uri() . '/js/navigation.js', array(), date('Ymdh'), true );
+	wp_enqueue_script( 'global', get_template_directory_uri() . '/js/main.min.js', array('jquery'), date('Ymdh'), true );
 
-	wp_enqueue_script( 'forthepeople-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20130115', true );
+
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
-
-  wp_enqueue_script( 'bootstrap-js', get_template_directory_uri() . '/bootstrap/js/bootstrap.min.js', array('jquery'), '', true );
-
-  wp_enqueue_script( 'modernizr', get_template_directory_uri() . '/assets/js/libs/modernizr.2.6.2.min.js', false, '', true);
-
-  wp_enqueue_script( 'slides', get_template_directory_uri() . '/assets/js/jquery.slides.js', false, '', true);
-
-  wp_enqueue_script( 'sorting', get_template_directory_uri() . '/assets/js/plugins/jquery.sortAllTheThings.min.js', false, '', true);
-
-  wp_enqueue_script( 'scotchpanels', get_template_directory_uri() . '/assets/js/plugins/scotchPanels.min.js', false, '', true);
-
-  wp_enqueue_script( 'global', get_template_directory_uri() . '/assets/js/scripts/global.js', false, '', true);
 
 	if (is_singular(array('post', 'classactionlawyers', 'local_news', BTG_News::POST_TYPE))) {
     		wp_enqueue_script( 'sharethis', '//w.sharethis.com/button/buttons.js', false, '', true);

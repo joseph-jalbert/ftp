@@ -19,6 +19,6 @@ if [ -n "${RUN_NIGHTLY_BUILD}" ]; then
 
     elif [ $1 = "development" ]; then
 
-        grunt deploy --sourceRepoBranch=development
+        grunt deploy --sourceRepoBranch=gruntify
 
 fi

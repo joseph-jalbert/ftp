@@ -75,7 +75,7 @@ class Google_Review extends WP_Widget {
 								</div>
 
 								<div class="item-reviewed" itemprop="itemReviewed" itemscope itemtype="http://schema.org/Thing">
-									<meta itemprop="name" content="Morgan and Morgan Office at <?php echo $address; ?>" />
+									<meta itemprop="name" content="Morgan and Morgan Office at <?php echo esc_attr( $address ); ?>" />
 								</div>
 							</div>
 						</div>

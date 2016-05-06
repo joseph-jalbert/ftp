@@ -5,6 +5,7 @@ class Related_Content extends WP_Widget {
 	protected static $text_domain = 'related_content';
 	protected static $ver = '0.1';
 	protected static $transient_key = 'ftp-related-posts'; // Will stick the post id at the end
+	protected static $save_for_post_types = array( 'local_news' );
 
 	/**
 	 * Initialization method
@@ -132,9 +133,15 @@ class Related_Content extends WP_Widget {
 	/**
 	 * Delete the transient for the related content
 	 *
-	 * @param $post_id
+	 * @param $post
 	 */
-	public function save_post( $post ) {
+	public function save_post( $post_id ) {
+		$post = get_post( $post_id );
+
+		if ( ! in_array( $post->post_type, self::$save_for_post_types ) ) :
+			return false;
+		endif;
+
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) :
 			return;
 		endif;

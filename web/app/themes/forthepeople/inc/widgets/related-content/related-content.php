@@ -12,7 +12,7 @@ class Related_Content extends WP_Widget {
 	 */
 	public static function init() {
 		add_action( 'widgets_init', create_function( '', 'register_widget( "related_content" );' ) );
-		add_action( 'save_post', array( __CLASS__, 'save_post' ) );
+		add_action( 'save_post', array( __CLASS__, 'save_post' ), 10, 2 );
 	}
 
 	/**
@@ -135,8 +135,7 @@ class Related_Content extends WP_Widget {
 	 *
 	 * @param $post
 	 */
-	public function save_post( $post_id ) {
-		$post = get_post( $post_id );
+	public function save_post( $post ) {
 
 		if ( ! in_array( $post->post_type, self::$save_for_post_types ) ) :
 			return false;

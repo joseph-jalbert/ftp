@@ -135,7 +135,7 @@ class Related_Content extends WP_Widget {
 	 *
 	 * @param $post
 	 */
-	public function save_post( $post ) {
+	public function save_post( $post_id, $post ) {
 
 		if ( ! in_array( $post->post_type, self::$save_for_post_types ) ) :
 			return false;

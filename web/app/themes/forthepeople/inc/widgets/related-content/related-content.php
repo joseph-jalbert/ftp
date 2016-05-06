@@ -133,7 +133,10 @@ class Related_Content extends WP_Widget {
 	/**
 	 * Delete the transient for the related content
 	 *
+	 * @param $post_id
 	 * @param $post
+	 *
+	 * @return bool
 	 */
 	public function save_post( $post_id, $post ) {
 
@@ -142,22 +145,22 @@ class Related_Content extends WP_Widget {
 		endif;
 
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) :
-			return;
+			return false;
 		endif;
 
 		if ( 'auto-draft' === $post->post_status ) :
-			return;
+			return false;
 		endif;
 
 		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) :
-			return;
+			return false;
 		endif;
 
 		if ( ! current_user_can( 'edit_post', $post->ID ) ) :
-			return;
+			return false;
 		endif;
 
-		delete_transient( self::$transient_key );
+		return delete_transient( self::$transient_key );
 	}
 }
 

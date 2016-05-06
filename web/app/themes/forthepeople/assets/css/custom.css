@@ -1,5 +1,9 @@
 /* Enter Your Custom CSS Here */
 
+.contact-btn {
+    color: #FFF !important;
+}
+
 body {
   font-weight: 400;
 }

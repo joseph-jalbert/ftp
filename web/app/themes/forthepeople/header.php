@@ -101,7 +101,7 @@ $menuslug = 'main-navigation';
         <div class="btn-navbar">
     <button class="btn canvas-nav-toggle"><i class="icon-reorder"></i> Menu</button>
     <a class="btn btn-warning pull-right nav-clicktocall" onclick="trackEventGA('Click to Call', 'Call', 'Header', 550);" href="tel:<?php if(is_single('matt-morgan')) { ?>4072443211<?php } else { ?>8776674265<?php } ?>"><i class="icon-phone"></i> Click to Call</a>
-    <a href="<?php echo esc_url( location_aware_contact_us_page_url() ); ?>" class="btn btn-warning pull-right nav-contactus"><i class="icon-legal"></i> Contact Us</a>
+    <a href="<?php echo esc_url( location_aware_contact_us_page_url() ); ?>" class="contact-btn btn btn-warning pull-right nav-contactus"><i class="icon-legal"></i> Contact Us</a>
 	</div>
 	</div>
 
@@ -142,7 +142,7 @@ $menuslug = 'main-navigation';
 		<div class="btn-navbar">
     			<button class="btn canvas-nav-toggle"><i class="icon-reorder"></i> Menu</button>
     			<a class="btn btn-warning pull-right nav-clicktocall" onclick="trackEventGA('Click to Call', 'Call', 'Header', 550);" href="tel:<?php if(is_single('matt-morgan')) { ?>4072443211<?php } else { ?>8776674265<?php } ?>"><i class="icon-phone"></i> Click to Call</a>
-    			<a href="<?php echo esc_url( location_aware_contact_us_page_url() ); ?>" class="btn btn-warning pull-right nav-contactus"><i class="icon-legal"></i> Contact Us</a>
+    			<a href="<?php echo esc_url( location_aware_contact_us_page_url() ); ?>" class="contact-btn btn btn-warning pull-right nav-contactus"><i class="icon-legal"></i> Contact Us</a>
 		</div>
 		<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'forthepeople' ); ?></button>
 <div class="container siteNav-container nav-collapse collapse">
@@ -196,11 +196,11 @@ $menuslug = 'main-navigation';
 	jQuery("#topNav > li.marker").prepend("<div class='nav-label'>National</div>");
 	</script>
 <?php } ?>
- 
+
 <?php if(!is_front_page() &&
          !is_page_template(array(
                         'all-class-actions.php',
-                        'class-action-cats.php', 
+                        'class-action-cats.php',
                         'business-litigation.php',
                         'securities-litigation.php',
                         'all-office-locations.php',
@@ -211,9 +211,9 @@ $menuslug = 'main-navigation';
                         'empty-page.php',
                         'securities-contact-page.php',
                         'tampa-alternate.php',
-                        'empty-page-title.php')) && 
+                        'empty-page-title.php')) &&
           !is_singular('attorney') &&
           !in_category( 'featured-news', $_post ) &&
-          !is_page('featured-news')) {     
+          !is_page('featured-news')) {
     get_template_part( 'template-parts/breadcrumbs' );
 } ?>

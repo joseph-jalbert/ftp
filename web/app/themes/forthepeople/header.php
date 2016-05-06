@@ -101,7 +101,7 @@ $menuslug = 'main-navigation';
         <div class="btn-navbar">
     <button class="btn canvas-nav-toggle"><i class="icon-reorder"></i> Menu</button>
     <a class="btn btn-warning pull-right nav-clicktocall" onclick="trackEventGA('Click to Call', 'Call', 'Header', 550);" href="tel:<?php if(is_single('matt-morgan')) { ?>4072443211<?php } else { ?>8776674265<?php } ?>"><i class="icon-phone"></i> Click to Call</a>
-    <button onclick="contactPush()" class="btn btn-warning pull-right nav-contactus"><i class="icon-legal"></i> Contact Us</button>
+    <a href="<?php echo esc_url( location_aware_contact_us_page_url() ); ?>" class="btn btn-warning pull-right nav-contactus"><i class="icon-legal"></i> Contact Us</a>
 	</div>
 	</div>
 
@@ -142,7 +142,7 @@ $menuslug = 'main-navigation';
 		<div class="btn-navbar">
     			<button class="btn canvas-nav-toggle"><i class="icon-reorder"></i> Menu</button>
     			<a class="btn btn-warning pull-right nav-clicktocall" onclick="trackEventGA('Click to Call', 'Call', 'Header', 550);" href="tel:<?php if(is_single('matt-morgan')) { ?>4072443211<?php } else { ?>8776674265<?php } ?>"><i class="icon-phone"></i> Click to Call</a>
-    			<button onclick="contactPush()" class="btn btn-warning pull-right nav-contactus"><i class="icon-legal"></i> Contact Us</button>
+    			<a href="<?php echo esc_url( location_aware_contact_us_page_url() ); ?>" class="btn btn-warning pull-right nav-contactus"><i class="icon-legal"></i> Contact Us</a>
 		</div>
 		<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'forthepeople' ); ?></button>
 <div class="container siteNav-container nav-collapse collapse">

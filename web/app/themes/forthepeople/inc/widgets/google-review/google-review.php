@@ -73,8 +73,9 @@ class Google_Review extends WP_Widget {
 										/ <span property="schema:bestRating">5</span> stars
 									</span>
 								</div>
+
 								<div class="item-reviewed" itemprop="itemReviewed" itemscope itemtype="http://schema.org/Thing">
-									<span itemprop="name">Morgan and Morgan Office at <?php echo $address; ?></span>
+									<meta itemprop="name" content="Morgan and Morgan Office at <?php echo $address; ?>" />
 								</div>
 							</div>
 						</div>

@@ -142,6 +142,7 @@ class Google_Helper {
 	/**
 	 * Get Reviews For An Address
 	 * 
+	 * @param integer $post_id
 	 * @return bool|mixed
 	 */
 	public static function get_review( $post_id ) {

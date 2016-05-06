@@ -5,13 +5,14 @@ class Related_Content extends WP_Widget {
 	protected static $text_domain = 'related_content';
 	protected static $ver = '0.1';
 	protected static $transient_key = 'ftp-related-posts'; // Will stick the post id at the end
+	protected static $save_for_post_types = array( 'local_news' );
 
 	/**
 	 * Initialization method
 	 */
 	public static function init() {
 		add_action( 'widgets_init', create_function( '', 'register_widget( "related_content" );' ) );
-		add_action( 'save_post', array( __CLASS__, 'save_post' ) );
+		add_action( 'save_post', array( __CLASS__, 'save_post' ), 10, 2 );
 	}
 
 	/**
@@ -134,25 +135,33 @@ class Related_Content extends WP_Widget {
 	 * Delete the transient for the related content
 	 *
 	 * @param $post_id
+	 * @param $post
+	 *
+	 * @return bool
 	 */
-	public function save_post( $post ) {
+	public function save_post( $post_id, $post ) {
+
+		if ( ! in_array( $post->post_type, self::$save_for_post_types ) ) :
+			return false;
+		endif;
+
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) :
-			return;
+			return false;
 		endif;
 
 		if ( 'auto-draft' === $post->post_status ) :
-			return;
+			return false;
 		endif;
 
 		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) :
-			return;
+			return false;
 		endif;
 
 		if ( ! current_user_can( 'edit_post', $post->ID ) ) :
-			return;
+			return false;
 		endif;
 
-		delete_transient( self::$transient_key );
+		return delete_transient( self::$transient_key );
 	}
 }
 

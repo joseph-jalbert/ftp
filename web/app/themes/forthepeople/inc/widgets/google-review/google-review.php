@@ -41,6 +41,7 @@ class Google_Review extends WP_Widget {
 		global $post;
 
 		$review = Google_Helper::get_review( $post->ID );
+		$address = Google_Helper::get_office_address( $post->ID );
 
 		if ( ! empty( $review ) ) :
 			wp_enqueue_style( 'google-review', get_template_directory_uri() . '/inc/widgets/google-review/google-review.css' );
@@ -71,6 +72,10 @@ class Google_Review extends WP_Widget {
 										<?php echo $review->rating; ?>
 										/ <span property="schema:bestRating">5</span> stars
 									</span>
+								</div>
+
+								<div class="item-reviewed" itemprop="itemReviewed" itemscope itemtype="http://schema.org/Thing">
+									<meta itemprop="name" content="Morgan and Morgan Office at <?php echo esc_attr( $address ); ?>" />
 								</div>
 							</div>
 						</div>

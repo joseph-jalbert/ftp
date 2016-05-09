@@ -54,11 +54,15 @@ class Google_Review extends WP_Widget {
 					</div>
 					<div class="body google-review">
 						<div class="schema-block">
-							<div class="schema-review" typeof="schema:Review">
-								<div property="schema:author" typeof="schema:Person">
-									<span class="author" property="schema:name"><?php echo $review->author_name; ?></span>
+							<div class="schema-review" itemscope itemtype="http://schema.org/Review">
+								<div itemprop="itemReviewed" itemscope itemtype="http://schema.org/Thing">
+									<meta itemprop="name" content="Morgan and Morgan Office at <?php echo esc_attr( $address ); ?>" />
 								</div>
-								<div class="schema-review-body" property="schema:reviewBody">
+
+								<div itemprop="author" itemscope itemtype="http://schema.org/Person">
+									<span class="author" itemprop="name"><?php echo $review->author_name; ?></span>
+								</div>
+								<div class="schema-review-body" itemprop="reviewBody">
 									<?php echo $review->text; ?>
 								</div>
 								<span class="review-stars">
@@ -66,18 +70,14 @@ class Google_Review extends WP_Widget {
 										echo '★ ';
 									endfor; ?>
 								</span>
-								<div property="schema:reviewRating" typeof="schema:Rating">
-									<meta property="schema:worstRating" content="1">
-									<span property="schema:ratingValue">
-										<?php echo $review->rating; ?>
-										/ <span property="schema:bestRating">5</span> stars
-									</span>
-								</div>
-
-								<div class="item-reviewed" itemprop="itemReviewed" itemscope itemtype="http://schema.org/Thing">
-									<meta itemprop="name" content="Morgan and Morgan Office at <?php echo esc_attr( $address ); ?>" />
+								<div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+									<meta itemprop="worstRating" content="1">
+									<span itemprop="ratingValue">
+										<?php echo $review->rating; ?></span>
+										/ <span itemprop="bestRating">5</span> stars
 								</div>
 							</div>
+
 						</div>
 					</div>
 					<div class="foot"></div>

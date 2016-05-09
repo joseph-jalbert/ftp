@@ -1564,3 +1564,18 @@ function is_page_or_is_child_of( $slug ) {
 
 
 }
+
+function location_aware_contact_us_page_url() {
+
+	if ( class_exists('Local_Social_Helper') && method_exists('Local_Social_Helper', 'is_local')) {
+		$local_id = (int) Local_Social_Helper::is_local();
+		if ( $local_id ) {
+			return trailingslashit( get_permalink( $local_id ) ) . 'free-case-evaluation';
+
+		}
+	}
+
+	return home_url( '/free-case-evaluation' );
+
+
+}

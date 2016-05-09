@@ -29,24 +29,28 @@ class Local_Social_Helper {
 	 * Will return false otherwise
 	 * @return bool|int
 	 */
-	private static function is_local_page() {
-		$post = get_queried_object();
-		if ( ! $post || ! $post instanceof \WP_Post ) :
-			return false;
-		endif;
+    private static function is_local_page( $post = null ) {
+        if ( null === $post ) :
+            $post = get_queried_object();
+        endif;
+        if ( ! $post || ! $post instanceof \WP_Post ) :
+            return false;
+        endif;
 
-		$parent                 = $post->post_parent;
-		$post_to_check_template = $post->ID;
-		if ( $parent > 0 ) :
-			$post_to_check_template = $post->post_parent;
-		endif;
+        $parent                 = $post->post_parent;
+        $post_to_check_template = $post->ID;
+        if ( $parent > 0 ) :
+            $post_to_check_template = $post->post_parent;
+        endif;
 
-		if ( self::$slug === get_page_template_slug( $post_to_check_template ) ) :
-			return $post_to_check_template;
-		endif;
-
-		return false;
-	}
+        if ( self::$slug === get_page_template_slug( $post_to_check_template ) ) :
+            return $post_to_check_template;
+        elseif ( 0 === $post->post_parent ) :
+            return false;
+        else :
+            return self::is_local_page( get_post( $parent ) );
+        endif;
+    }
 
 	private static function is_local_news() {
 		$post = get_queried_object();

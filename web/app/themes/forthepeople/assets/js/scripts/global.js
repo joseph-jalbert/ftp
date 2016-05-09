@@ -162,10 +162,7 @@ checkStickyNav = function(){
   if( $('div.modal') ){ $(document.body).append( $('div.modal').detach() ); }
 }); //end doc rdy
 
-function contactPush(){
-    var old_url = window.location.href;
-    window.location = old_url + 'free-case-evaluation';
-}
+
 function getRandomInt (min, max) {return Math.floor(Math.random() * (max - min + 1)) + min;};
 function trackEventGA(Category, Action, Label, Value) {
     "use strict";

@@ -55,9 +55,10 @@ class Local_Social_Helper {
 		endif;
 
 		$local_news_post_id = $post->ID;
-		if ( $post->post_type === Local_News::POST_TYPE ) :
+		if ( Local_News::POST_TYPE === $post->post_type ) :
 			$locations = wp_get_object_terms( $local_news_post_id, Location_Taxonomy::LOCATION_TAXONOMY );
-			$post_slug = $locations[0]->slug;
+			$location = array_shift( $locations );
+			$post_slug = $location->slug;
 			return self::get_id_from_slug( $post_slug );
 		endif;
 

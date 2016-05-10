@@ -59,8 +59,11 @@ class Local_Social_Helper {
 		endif;
 
 		$local_news_post_id = $post->ID;
-		if ( $post->post_type === Local_News::POST_TYPE ) :
-			return $local_news_post_id;
+		if ( Local_News::POST_TYPE === $post->post_type ) :
+			$locations = wp_get_object_terms( $local_news_post_id, Location_Taxonomy::LOCATION_TAXONOMY );
+			$location = array_shift( $locations );
+			$post_slug = $location->slug;
+			return self::get_id_from_slug( $post_slug );
 		endif;
 
 		return false;
@@ -69,10 +72,7 @@ class Local_Social_Helper {
 	private static function is_local_archive() {
 		if ( get_query_var( 'local_blog_archive' ) ) :
 			$location      = get_query_var( 'office_location' );
-			$location_page = get_page_by_path( '/' . $location );
-			if ( $location_page ) :
-				return $location_page->ID;
-			endif;
+			return self::get_id_from_slug( $location );
 		endif;
 
 		return false;
@@ -93,6 +93,16 @@ class Local_Social_Helper {
 		endif;
 
 		return false;
+	}
+
+	private function get_id_from_slug( $slug ) {
+		$post = get_page_by_path( '/' . $slug );
+		if ( $post ) :
+			return $post->ID;
+		endif;
+
+		return false;
+
 	}
 
 }

@@ -11,7 +11,7 @@ if ( function_exists( "register_field_group" ) ) {
 				'label'         => 'Exclude',
 				'name'          => 'exclude_from_search',
 				'type'          => 'true_false',
-				'message'       => '',
+				'message'       => "Exclude this from WordPress' internal search, this does not have anything to do with Google or other SERPs",
 				'default_value' => 0,
 			),
 		),
@@ -39,8 +39,7 @@ if ( function_exists( "register_field_group" ) ) {
 			'position'       => 'acf_after_title',
 			'layout'         => 'no_box',
 			'hide_on_screen' => array(),
-		),
-		'menu_order' => 1,
+		)
 	) );
 
 }

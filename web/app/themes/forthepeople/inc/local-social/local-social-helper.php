@@ -90,8 +90,8 @@ class Local_Social_Helper {
 		return false;
 	}
 
-	private function get_id_from_slug( $location_slug ) {
-		$post = get_page_by_path( '/' . $location_slug );
+	private function get_id_from_slug( $slug ) {
+		$post = get_page_by_path( '/' . $slug );
 		if ( $post ) :
 			return $post->ID;
 		endif;

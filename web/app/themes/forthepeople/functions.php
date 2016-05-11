@@ -1566,12 +1566,11 @@ function is_page_or_is_child_of( $slug ) {
 }
 
 function location_aware_contact_us_page_url() {
-
+	$free_case_evaluation_slug = 'free-case-evaluation/';
 	if ( class_exists('Local_Social_Helper') && method_exists('Local_Social_Helper', 'is_local')) {
 		$local_id = (int) Local_Social_Helper::is_local();
 		if ( $local_id ) {
 			$post_slug = get_post($local_id)->post_name;
-			$free_case_evaluation_slug = 'free-case-evaluation';
 			if ( get_page_by_path('/' . $post_slug . '/' . $free_case_evaluation_slug )) {
 				return trailingslashit( get_permalink( $local_id ) ) . $free_case_evaluation_slug;
 			}
@@ -1579,7 +1578,7 @@ function location_aware_contact_us_page_url() {
 		}
 	}
 
-	return false;
+	return home_url( '/' . $free_case_evaluation_slug );
 
 
 }

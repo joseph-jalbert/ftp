@@ -89,7 +89,7 @@ if(is_page_template('securities-litigation.php') || is_child('6162')) {
 $menuslug = 'securities-litigation';
 }
 
-if (empty($menuslug) || is_page('orlando')) {
+if (empty($menuslug)) {
 $menuslug = 'main-navigation';
 }
 ?>

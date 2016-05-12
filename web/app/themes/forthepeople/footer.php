@@ -15,7 +15,7 @@
 <div class="serving-headline">Handling Cases Nationwide</div>
 <?php } else if(is_page_template('empty-page-title.php')) { ?>
 <?php } else { ?>
-<div class="serving-headline">Serving All of Florida, Georgia, Mississippi, Tennessee, Kentucky, New York, Pennsylvania &amp; Alabama</div>
+<div class="serving-headline">Serving All of Florida, Georgia, Mississippi, Tennessee, Kentucky, New York, Pennsylvania, Alabama &amp; Arkansas</div>
 <?php } ?>
 <footer id="footer">
   <div class="footer-layer1">
@@ -48,7 +48,9 @@
                 Alabama </div>
               <div class="span4"> New York
 
-                Kentucky </div>
+                Kentucky
+                  Arkansas
+              </div>
             </div>
           </div>
         </div>

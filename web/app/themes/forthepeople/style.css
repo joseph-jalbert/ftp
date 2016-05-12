@@ -1021,9 +1021,9 @@ div.entry-content h2 {
 	float:left;
     width:215px;
 }
-@media screen and (max-width: 915px) {
+@media screen and (max-width: 985px) {
     .consumer-alerts-form .hs_email {
-        width: 160px;
+        width: 60%;
     }
 }
 .consumer-alerts-form .hs_submit {

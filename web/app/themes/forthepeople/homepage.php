@@ -12,7 +12,7 @@ get_header(); ?>
     <div id="col0" class="span12"> <?php echo get_new_royalslider(1); ?> </div>
   </div>
 </div>
-<div class="container" id="content">
+<div class="container" id="content" role="main" name="content" tabindex="0">
   <div class="row-fluid row-leading row-follow">
     <div id="col1" class="span8">
       <?php while ( have_posts() ) : the_post(); ?>

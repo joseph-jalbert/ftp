@@ -1,0 +1,9 @@
+.wp-core-ui .youtube-importer {
+    margin-bottom: 15px;
+}
+
+.video-error {
+    margin-top:5px;
+    margin-bottom:10px;
+    color:#FF0000;
+}

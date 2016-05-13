@@ -8,12 +8,14 @@ var themeBase = 'web/app/themes/forthepeople',
         themeBase + '/assets/js/plugins/jquery.sortAllTheThings.min.js',
         themeBase + '/assets/js/plugins/scotchPanels.min.js',
         themeBase + '/assets/js/scripts/global.js',
+        themeBase + '/inc/videos-page/js/video-page.js',
     ],
     projectCssFileList = [
         themeBase + '/style.css',
         themeBase + '/bootstrap/css/bootstrap.min.css',
         themeBase + '/assets/css/borrowed.css',
         themeBase + '/assets/css/custom.css',
+        themeBase + '/inc/videos-page/css/video-page.css',
     ];
 
 

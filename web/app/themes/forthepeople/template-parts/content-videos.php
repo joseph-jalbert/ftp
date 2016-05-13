@@ -6,20 +6,28 @@
  */
 
 
-$output = Videos_Page::get_cache();
-if ( ! $output ) {
-	ob_start();
+?>
 
-	?>
-
-
-	<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+	<article class="video-outer-wrap" id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 		<div class="entry-content">
 			<div class="content-pane-border"></div>
 			<h1 class="pagetitle"><?php the_field( 'page_title' ); ?></h1>
 			<div class="subtitle"><?php the_field( 'sub_title' ); ?></div>
-			<div class="heading-hr"></div>
 
+			<div class="heading-hr"></div>
+			<?php
+			$youtube_channel_link = Videos_Settings::get( 'youtube_channel_link' );
+			if ( $youtube_channel_link ) :
+				$youtube_channel_link_title = Videos_Settings::get( 'youtube_channel_link_title' );
+				if ( ! $youtube_channel_link_title ) :
+					$youtube_channel_link_title = 'YouTube Channel';
+				endif;
+
+				?><p class="font-large text-center"><a
+					href="<?php echo esc_url( $youtube_channel_link ); ?>"><?php esc_html_e( $youtube_channel_link_title ); ?></a>
+				</p><?php
+			endif;
+			?>
 			<div class="socialmediawidget vertical offpage">
 				<span class='st_plusone_hcount' displayText='Google +1'></span>
 				<span class='st_facebook_hcount' displayText='Facebook'></span>
@@ -29,139 +37,74 @@ if ( ! $output ) {
 
 
 			<?php
-			$featured    = get_field( 'featured_video' );
-			$featuredvid = $featured[0];
-			$videourl    = get_field( 'video_url', $featuredvid );
-			$videoposter = get_field( 'video_poster_url', $featuredvid );
-			$post_slug   = $post->post_name;
-			?>
-			<div class="well">
-				<div class="videoWrapper">
-					<video id="<?php echo $post_slug; ?>"
-					       class="video-js vjs-default-skin vjs-big-play-centered video-playlist" controls
-					       preload="auto"
-					       width="100%" height="280" poster="<?php echo $videoposter; ?>" data-setup='{}'>
-						<source src="<?php echo $videourl; ?>" type='video/mp4'/>
-					</video>
-				</div>
-				<div class="video-meta"></div>
-			</div>
 
-
-			<ul class="video-playlist unstyled no-margin-no-pad">
-
-				<?php
-
-				$playlist     = get_field( 'video_playlist' );
-				$playlistname = $playlist->name;
-
-				$videotype     = get_field( 'video_type' );
-				$videotypename = $videotype->name;
-
-				if ( $videotypename == "NA" && $playlistname != "NA" ) {
-					$args = array(
-						'post_type'      => 'multimedia',
-						'tax_query'      => array(
-							array(
-								'taxonomy' => 'video_playlist',
-								'field'    => 'name',
-								'terms'    => $playlistname,
-							),
-						),
-						'orderby'        => 'date',
-						'order'          => 'dsc',
-						'posts_per_page' => - 1,
-					);
-
-				} else if ( $playlistname == "NA" && $videotypename != "NA" ) {
-
-					$args = array(
-						'post_type'      => 'multimedia',
-						'tax_query'      => array(
-							array(
-								'taxonomy' => 'media_type',
-								'field'    => 'name',
-								'terms'    => $videotypename,
-							),
-						),
-						'orderby'        => 'date',
-						'order'          => 'dsc',
-						'posts_per_page' => - 1,
-					);
-
-				} else if ( $playlistname == "NA" && $videotypename == "NA" ) {
-
-					echo 'No Videos Selected';
-
-				} else {
-
-					$args = array(
-						'post_type'      => 'multimedia',
-						'tax_query'      => array(
-							'relation' => 'AND',
-							array(
-								'taxonomy' => 'media_type',
-								'field'    => 'name',
-								'terms'    => $videotypename,
-							),
-							array(
-								'taxonomy' => 'video_playlist',
-								'field'    => 'name',
-								'terms'    => $playlistname,
-							),
-						),
-						'orderby'        => 'date',
-						'order'          => 'dsc',
-						'posts_per_page' => - 1,
-					);
-
-				}
-
-				$the_query = new WP_Query( $args );
-				if ( $the_query->have_posts() ) {
-					while ( $the_query->have_posts() ) {
-						$the_query->the_post();
-
-						$theterm  = get_the_terms( $post->ID, 'related_attorney' );
-						$termname = $theterm[0]->name;
+			$videos  = Videos_Settings::get_videos();
+			$counter = 0;
+			if ( isset( $videos ) && is_array( $videos ) ) :
+				foreach ( $videos as $video ) :
+					$counter ++;
+					$video_title       = $video['title'];
+					$video_thumbnail   = $video['thumbnail']['url'];
+					$video_url         = YouTube_Helper::get_youtube_url( $video['youtube_id'] );
+					$video_description = $video['description'];
+					$video_upload_date = $video['upload_date'];
+					$video_transcript  = $video['transcript'];
+					$video_id          = $video['youtube_id'];
+					if ( 1 === $counter ) :
 
 						?>
 
-						<li data-video="<?php the_field( 'video_url' ); ?>" itemtype="http://schema.org/VideoObject"
-						    itemscope="" itemprop="video">
-							<div class="row-fluid">
-								<div class="span4"><img itemprop="thumbnailUrl"
-								                        src="<?php the_field( 'video_poster_url' ); ?>"
-								                        class="thumbnail videoplaylist"></div>
-								<div class="span8 meta">
-									<button itemprop="name"
-									        class="videoplaylist btn btn-link"><?php the_title(); ?></button>
-								<span><?php if ( $termname != 'NA' ) {
-										echo $termname;
-									} ?></span>
-									<p itemprop="description"><?php the_field( 'description' ); ?></p>
-								</div>
-							</div>
-							<meta content="<?php the_field( 'video_url' ); ?>" itemprop="contentURL">
-							<meta content="<?php the_time( 'c' ); ?>" itemprop="uploadDate">
-							<meta content="<?php the_field( 'transcript' ); ?>" itemprop="transcript">
-						</li>
+
+						<div id="player"></div>
+
+						<div class="text-center video-wrapper main-video-wrapper"
+						     data-video-id="<?php esc_attr_e( $video_id ); ?>">
+							<div class="youtube-play-button"><span class="fa-stack fa-lg">
+							  <i class="fa fa-circle fa-stack-2x circle-bg"></i>
+							  <i class="fa fa-play fa-stack-1x fa-inverse"></i>
+							</span></div>
+							<img class="loaded-thumbnail"
+							     src="<?php echo esc_url( $video_thumbnail ); ?>">
+						</div>
 
 
 						<?php
-					}
-				}
 
-				wp_reset_postdata();
-				?>
+					endif;
 
+
+					?>
+
+					<ul class="video-playlist unstyled no-margin-no-pad">
+
+
+						<li data-video-id="<?php echo esc_attr( $video_id ); ?>" class="video-wrapper"
+						    itemtype="http://schema.org/VideoObject"
+						    itemscope="" itemprop="video">
+							<div class="row-fluid">
+								<div class="span4"><img itemprop="thumbnailUrl"
+								                        src="<?php echo esc_url( $video_thumbnail ); ?>"
+								                        class="thumbnail videoplaylist"></div>
+								<div class="span8 meta">
+									<button itemprop="name"
+									        class="videoplaylist btn btn-link"><?php esc_html_e( $video_title ); ?>
+									</button>
+
+									<p itemprop="description"><?php echo wp_kses_post( $video_description ); ?></p>
+								</div>
+							</div>
+							<meta content="<?php echo esc_url( $video_url ); ?>" itemprop="contentURL">
+							<meta content="<?php echo esc_url( $video_upload_date ); ?>" itemprop="uploadDate">
+							<meta content="<?php echo esc_url( $video_transcript ); ?>" itemprop="transcript">
+						</li>
+					</ul>
+				<?php endforeach;
+
+			endif; ?>
 		</div>
 
 	</article>
 
-	<?php
-	$output = ob_get_clean();
-	Videos_Page::set_cache( $output );
-}
-
+<?php
+$output = ob_get_clean();
 echo $output;

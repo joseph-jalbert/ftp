@@ -159,7 +159,7 @@ function forthepeople_styles() {
     return;
   }
 
-  wp_enqueue_style( 'forthepeople-style', get_template_directory_uri() . '/style.min.css' );
+  wp_enqueue_style( 'forthepeople-style', get_template_directory_uri() . '/style.min.css', array(), date('mdyg') );
 
   
   wp_enqueue_style( 'fontawesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');

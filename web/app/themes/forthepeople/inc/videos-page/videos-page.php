@@ -18,20 +18,21 @@ class Videos_Page {
 		add_action( 'save_post', array( __CLASS__, 'save_post' ), 10, 2 );
 	}
 
-	public static function bust_cache( $val ) {
+	public static function bust_cache( $post_id ) {
 
-		return delete_transient( self::TRANSIENT_NAME . $val );
-
-	}
-
-	public static function get_cache( $val ) {
-
-		return get_transient( self::TRANSIENT_NAME . $val );
+		return delete_transient( self::get_transient_name( $post_id ) );
 
 	}
 
-	public static function set_cache( $output, $val  ) {
-		set_transient( self::TRANSIENT_NAME . $val, $output, self::$transient_time );
+	public static function get_cache( $post_id ) {
+
+		return get_transient( self::get_transient_name( $post_id ) );
+
+	}
+
+
+	public static function set_cache( $output, $post_id ) {
+		set_transient( self::get_transient_name( $post_id ), $output, self::$transient_time );
 	}
 
 	public static function save_post( $post_id, $post ) {
@@ -61,6 +62,11 @@ class Videos_Page {
 
 
 	}
+
+	public static function get_transient_name( $post_id ) {
+		return self::TRANSIENT_NAME . $post_id;
+	}
+
 
 }
 

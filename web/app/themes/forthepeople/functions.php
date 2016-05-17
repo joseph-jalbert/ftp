@@ -17,6 +17,7 @@ require __DIR__ . '/inc/filters.php';
 require __DIR__ . '/inc/local-social/local-social.php';
 require __DIR__ . '/inc/office-page-redirect.php';
 require __DIR__ . '/inc/search-filter/search-filter.php';
+require __DIR__ . '/inc/bust-facebook/bust-facebook.php';
 
 
 if ( ! function_exists( 'forthepeople_setup' ) ) :
@@ -159,7 +160,7 @@ function forthepeople_styles() {
     return;
   }
 
-  wp_enqueue_style( 'forthepeople-style', get_template_directory_uri() . '/style.min.css' );
+  wp_enqueue_style( 'forthepeople-style', get_template_directory_uri() . '/style.min.css', array(), date('mdyg') );
 
   
   wp_enqueue_style( 'fontawesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');

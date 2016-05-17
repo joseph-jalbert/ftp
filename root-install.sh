@@ -107,7 +107,7 @@ sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 
 sed -i "s/{{DOMAIN}}/$SITE.dev/" /etc/nginx/sites-available/default
 sed -i 's/index /index index.php' /etc/nginx/sites-available/default
-
+sed -i "s/sendfile .*/sendfile off;/"  /etc/nginx/nginx.conf
 
 echo "---- restart php and nginx ----" >&3
 service nginx restart

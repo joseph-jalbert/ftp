@@ -6,7 +6,7 @@
  */
 
 
-$output = Videos_Page::get_cache();
+$output = Videos_Page::get_cache( get_the_ID() );
 if ( ! $output ) {
 	ob_start();
 

@@ -36,7 +36,7 @@ class YouTube_Global_Settings {
 		$youtube_api_key = $options[ self::$youtube_api_setting_name ];
 
 		?>
-		<input type="text" class="regular-text" value="<?php echo $youtube_api_key; ?>"
+		<input type="text" class="regular-text" value="<?php echo esc_attr( $youtube_api_key ); ?>"
 		       name='<?php echo esc_attr( self::OPTION_NAME ); ?>[<?php echo esc_attr( self::$youtube_api_setting_name ); ?>]'
 		       id="<?php echo esc_attr( self::OPTION_NAME ); ?>">
 		<?php

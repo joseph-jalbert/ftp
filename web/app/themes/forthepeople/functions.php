@@ -1544,6 +1544,16 @@ function ($form) {
 SCRIPT;
 }
 
+function forthepeople_render_hubspot_field_accessibility_callback() {
+    return <<<'SCRIPT'
+function ($form) {
+    jQuery("input[name='yes_sign_me_up_for_the_newsletter_']").attr('aria-describedby', 'informed');
+	jQuery("input[name='yes_sign_me_up_for_the_newsletter_']").next().attr('id', 'informed');
+		   
+		}
+SCRIPT;
+}
+
 function is_page_or_is_child_of( $slug ) {
 	global $post;
 	if ( ! $post ) {

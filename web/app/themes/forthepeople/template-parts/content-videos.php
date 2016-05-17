@@ -104,7 +104,3 @@
 		</div>
 
 	</article>
-
-<?php
-$output = ob_get_clean();
-echo $output;

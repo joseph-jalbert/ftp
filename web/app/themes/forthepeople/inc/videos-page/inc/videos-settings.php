@@ -4,7 +4,7 @@ class Videos_Settings {
 
 	private static $youtube_key = 'youtube_key';
 	private static $template_file = 'videos-page.php';
-	private static $videos_option = 'videos_page';
+	private static $videos_option = 'videos_pages';
 	private static $videos_field = 'youtube_videos';
 
 
@@ -304,36 +304,38 @@ class Videos_Settings {
 
 		$template = get_post_meta( $post_id, '_wp_page_template' );
 		if ( self::$template_file !== $template ) {
-			self::bust_cache();
+			self::bust_cache( $post_id );
 		}
 
+	}
+
+	private static function bust_cache( $post_id ) {
+
+		$videos = get_option( self::$videos_option );
+		unset( $videos[ $post_id ] );
+		self::get_videos( $post_id, true );
 
 	}
 
-	private static function bust_cache() {
-
-		delete_option( self::$videos_option );
-		self::get_videos( true );
-
-	}
-
-	public static function get( $field ) {
-		return get_field( $field );
+	public static function get( $field, $post_id = null ) {
+		return get_field( $field, $post_id );
 	}
 
 
-	public static function get_videos( $force = false ) {
+	public static function get_videos( $post_id, $force = false ) {
 
 		$videos = get_option( self::$videos_option );
 
 		if ( $force || ! $videos ) {
 
-			$videos = get_field( self::$videos_field );
+			$videos_post = get_field( self::$videos_field, $post_id );
+
+			$videos[ $post_id ] = $videos_post;
 			update_option( self::$videos_option, $videos );
 
 		}
 
-		return $videos;
+		return $videos[ $post_id ];
 	}
 
 }

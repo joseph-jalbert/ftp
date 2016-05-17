@@ -16,9 +16,9 @@
 
 			<div class="heading-hr"></div>
 			<?php
-			$youtube_channel_link = Videos_Settings::get( 'youtube_channel_link' );
+			$youtube_channel_link = Videos_Settings::get( 'youtube_channel_link', get_the_ID() );
 			if ( $youtube_channel_link ) :
-				$youtube_channel_link_title = Videos_Settings::get( 'youtube_channel_link_title' );
+				$youtube_channel_link_title = Videos_Settings::get( 'youtube_channel_link_title', get_the_ID() );
 				if ( ! $youtube_channel_link_title ) :
 					$youtube_channel_link_title = 'YouTube Channel';
 				endif;
@@ -38,7 +38,7 @@
 
 			<?php
 
-			$videos  = Videos_Settings::get_videos();
+			$videos  = Videos_Settings::get_videos( get_the_ID() );
 			$counter = 0;
 			if ( isset( $videos ) && is_array( $videos ) ) :
 				foreach ( $videos as $video ) :

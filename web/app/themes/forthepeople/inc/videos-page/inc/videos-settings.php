@@ -20,7 +20,6 @@ class Videos_Settings {
 		add_action( 'acf/render_field', array( __CLASS__, 'add_markup' ) );
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'enqueue_admin' ) );
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'enqueue' ) );
-		add_action( 'wp_ajax_get_youtube_data', array( __CLASS__, 'get_youtube_data' ) );
 		add_action( 'save_post', array( __CLASS__, 'save_post' ), 10, 2 );
 
 	}

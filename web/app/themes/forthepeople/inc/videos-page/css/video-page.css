@@ -1,0 +1,31 @@
+#player {
+    display: none;
+}
+
+.main-video-wrapper {
+    position: relative;
+}
+
+.youtube-play-button {
+
+    position: absolute;
+    top: 50%;
+    margin-top: -68px;
+    text-align: center;
+    width: 100%;
+    font-size: 50px;
+}
+.youtube-play-button .fa-stack-1x {
+    left: 5px;
+}
+
+@media (max-width: 767px) {
+    .youtube-play-button {
+
+        font-size: 40px;
+        margin-top: -54px;
+
+    }
+
+}
+

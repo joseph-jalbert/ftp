@@ -19,6 +19,7 @@ require __DIR__ . '/inc/office-page-redirect.php';
 require __DIR__ . '/inc/search-filter/search-filter.php';
 require __DIR__ . '/inc/bust-facebook/bust-facebook.php';
 
+
 if ( ! function_exists( 'forthepeople_setup' ) ) :
 /**
  * Sets up theme defaults and registers support for various WordPress features.
@@ -197,7 +198,7 @@ function forthepeople_styles() {
     wp_enqueue_style( 'journalfont', get_template_directory_uri() . '/assets/fonts/journal/font.css');
   }
 
-  if (is_page_template('videos-page.php') || is_page_template('contact-page.php') || is_page_template('homepage.php') || is_page('casey-anthony-case')) {
+  if ( is_page_template('contact-page.php') || is_page_template('homepage.php') || is_page('casey-anthony-case')) {
     wp_enqueue_style( 'videojscss', get_template_directory_uri() . '/assets/plugins/videos/assets/css/video-js.css');
   }
 
@@ -237,7 +238,7 @@ function forthepeople_scripts() {
     	wp_enqueue_script( 'scrollreveal', get_template_directory_uri() . '/assets/js/plugins/scrollReveal.min.js', false, '', true);
 	}
 
-	if (is_page_template('videos-page.php') || is_page_template('contact-page.php') || is_page_template('homepage.php') || is_page('casey-anthony-case')) {
+	if ( is_page_template('contact-page.php') || is_page_template('homepage.php') || is_page('casey-anthony-case')) {
     	wp_enqueue_script( 'videojs', get_template_directory_uri() . '/assets/plugins/videos/assets/js/video.js', false, '', true);
     	wp_enqueue_script( 'videoplaylist', get_template_directory_uri() . '/assets/plugins/videos/assets/js/videoplaylist.js', false, '', true);
 	}

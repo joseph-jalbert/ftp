@@ -142,7 +142,7 @@ $menuslug = 'main-navigation';
 </header><!-- #masthead -->
 
 
-	<nav id="site-nav" class="siteNav-wrap clearfix" role="navigation">
+	<nav id="site-nav" class="siteNav-wrap clearfix" role="navigation" aria-label="Main Menu">
 		<div class="btn-navbar">
     			<button class="btn canvas-nav-toggle"><i class="icon-reorder"></i> Menu</button>
     			<a class="btn btn-warning pull-right nav-clicktocall" onclick="trackEventGA('Click to Call', 'Call', 'Header', 550);" href="tel:<?php if(is_single('matt-morgan')) { ?>4072443211<?php } else { ?>8776674265<?php } ?>"><i class="icon-phone"></i> Click to Call</a>
@@ -159,9 +159,11 @@ $menuslug = 'main-navigation';
 <?php
     $defaults = array(
         'menu'  => $menuslug,
+        'menu_class' => 'menu menubar root-level',
         'menu_id'      => 'topNav',
         'walker'          => new My_Sub_Menu(),
-        'container'       =>  false
+        'container'       =>  false,
+        'items_wrap'     => '<ul id="%1$s" class="%2$s" role="menubar" aria-controls="st1">%3$s</ul>',
     );
     wp_nav_menu( $defaults );
 

@@ -66,6 +66,7 @@ class Hubspot_Form extends WP_Widget {
 							portalId: '<?php echo esc_js( $hubspot_portal_id );?>',
 							formId: '<?php echo esc_js( $hubspot_form_id );?>',
 							target: '<?php echo esc_js( $hubspot_target );?>',
+                            onFormReady: <?php echo forthepeople_render_hubspot_field_accessibility_callback();?>,
 							onFormSubmit: <?php echo forthepeople_render_hubspot_text_filter_callback(); ?>
 						});
 					</script>

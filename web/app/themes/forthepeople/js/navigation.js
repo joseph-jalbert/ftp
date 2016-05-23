@@ -13,15 +13,7 @@
 	var isOpen = false;
 
 	submitIcon.click(function(){
-		if(isOpen === false){
-			searchBox.addClass('searchbox-open');
-			inputBox.focus();
-			isOpen = true;
-		} else {
-			searchBox.removeClass('searchbox-open');
-			inputBox.focusout();
-			isOpen = false;
-		}
+		$('form.searchbox').submit();
 	});
 	
 	submitIcon.mouseup(function(){

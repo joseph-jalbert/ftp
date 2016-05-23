@@ -14,11 +14,11 @@
 
 	submitIcon.click(function(){
 		if(isOpen === false){
-			searchBox.addClass('searchbox-open');
+			//searchBox.addClass('searchbox-open');
 			inputBox.focus();
 			isOpen = true;
 		} else {
-			searchBox.removeClass('searchbox-open');
+			//searchBox.removeClass('searchbox-open');
 			inputBox.focusout();
 			isOpen = false;
 		}

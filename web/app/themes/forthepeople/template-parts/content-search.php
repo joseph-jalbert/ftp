@@ -6,12 +6,17 @@
  *
  * @package ForThePeople
  */
+
+/** Get the Yoast SEO title. If there is non, then show default title */
+$title = get_post_meta($post->ID, '_yoast_wpseo_title', true);
+if ( empty ( $title ) ) :
+	$title = get_the_title( $post->ID );
+endif;
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="entry-header">
-		<?php the_title( sprintf( '<h1 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h1>' ); ?>
-
+		<h1 class="entry-title"><?php echo $title; ?></h1>
 		<?php if ( 'post' == get_post_type() ) : ?>
 		<div class="entry-meta">
 			<?php forthepeople_posted_on(); ?>

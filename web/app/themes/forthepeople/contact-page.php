@@ -26,7 +26,6 @@ get_header(); ?>
               <div class="subtitle"><?php echo $subtitle; ?></div>
               <?php endif; ?>
             </div>
-            <div class="span3" align="right"> <a name="trustlink" rel="nofollow" href="http://members.trust-guard.com/certificates/1554" target="_blank" onclick="var nonwin=navigator.appName!='Microsoft Internet Explorer'?'yes':'no'; window.open(this.href.replace('http', 'https'),'welcome','location='+nonwin+',scrollbars=yes,width=517,height='+screen.availHeight+',menubar=no,toolbar=no'); return false;" oncontextmenu="var d = new Date(); alert('Copying Prohibited by Law - This image and all included logos are copyrighted by trust-guard \251 '+d.getFullYear()+'.'); return false;"><img name="trustseal" alt="Business Seal" style="border: 0;" src="http://seals.trust-guard.com/business-1554-small-white.gif"></a> </div>
           </div>
         </div>
       </div>

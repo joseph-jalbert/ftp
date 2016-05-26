@@ -18,6 +18,7 @@ require __DIR__ . '/inc/local-social/local-social.php';
 require __DIR__ . '/inc/office-page-redirect.php';
 require __DIR__ . '/inc/search-filter/search-filter.php';
 require __DIR__ . '/inc/bust-facebook/bust-facebook.php';
+require __DIR__ . '/inc/settings/settings.php';
 
 
 if ( ! function_exists( 'forthepeople_setup' ) ) :

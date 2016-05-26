@@ -313,7 +313,7 @@ class My_Sub_Menu extends Walker_Nav_Menu {
 
       $indent = str_repeat("\t", $depth);
 
-      $output .= "\n$indent<ul class=\"dropdown-menu transition menu\" role=\"menu\" aria-hidden=\"true\" tabindex=\"0\">\n";
+      $output .= "\n$indent<ul class=\"dropdown-menu transition menu\" role=\"menu\" aria-hidden=\"true\">\n";
 
   }
 

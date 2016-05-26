@@ -313,7 +313,7 @@ class My_Sub_Menu extends Walker_Nav_Menu {
 
       $indent = str_repeat("\t", $depth);
 
-      $output .= "\n$indent<ul class=\"dropdown-menu transition menu\" role=\"menu\" aria-hidden=\"true\">\n";
+      $output .= "\n$indent<ul class=\"dropdown-menu transition menu\" role=\"menu\" aria-hidden=\"true\" tabindex=\"0\">\n";
 
   }
 
@@ -351,7 +351,7 @@ class My_Sub_Menu extends Walker_Nav_Menu {
     $class_names_comp = ' class="dropdown ' . esc_attr( $class_names ) . '" aria-haspopup="true" aria-expanded="false" tabindex="0"';
 
     }
-    $output .= $indent . '<li' . $id . $value . $class_names_comp .' tabindex="0">';
+    $output .= $indent . '<li' . $id . $value . $class_names_comp .'>';
     $attributes  = ! empty( $item->attr_title ) ? ' title="'  . esc_attr( $item->attr_title ) .'"' : '';
 
     $attributes .= ! empty( $item->target )     ? ' target="' . esc_attr( $item->target     ) .'"' : '';

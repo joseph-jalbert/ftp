@@ -9,9 +9,18 @@
     });
 
     //set aria-visible to true when focused inside a dropdown menu
+    var dropdown = $(".dropdown-menu");
 
-    $(".dropdown-menu > li").focus(function(){
-        console.log('SUCCESS');
-        $(this).parent().attr('aria-hidden', 'false');
+    dropdown.focus(function(){
+        $(this).attr('aria-hidden', 'false');
+    });
+
+    function focusCheck() {
+        if(dropdown.find(":focus").length == 0){
+            dropdown.attr('aria-hidden', 'true');
+        }
+    }
+    dropdown.find("a").blur(function(){
+        setTimeout(focusCheck, 200);
     })
 }) ( jQuery );

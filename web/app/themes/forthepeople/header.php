@@ -126,8 +126,7 @@ $menuslug = 'main-navigation';
 
 					<div class="search-container clearfix">
 						<form class="searchbox searchbox-open" action="/" method="GET">
-							<input type="search" placeholder="Search..." name="s" class="searchbox-input" onkeyup="buttonUp();" required>
-							<input type="submit" class="searchbox-submit" value="GO">
+							<input type="text" placeholder="Search..." name="s" class="searchbox-input" onkeyup="buttonUp();" required>
 							<span class="searchbox-icon">&nbsp;</span>
 						</form>
 					</div>

@@ -14,7 +14,7 @@ var canvasNav,
   $liDropdown = $('#topNav li.dropdown'),
   windowWidth = window.innerWidth,
   windowHeight = window.innerHeight - 50;
-
+  $('.fitvid').fitVids();
 
 if( $('html').hasClass('touch') ){
 

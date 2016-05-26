@@ -9,6 +9,7 @@ var themeBase = 'web/app/themes/forthepeople',
         themeBase + '/assets/js/plugins/jquery.sortAllTheThings.min.js',
         themeBase + '/assets/js/plugins/scotchPanels.min.js',
         themeBase + '/assets/js/scripts/global.js',
+        themeBase + '/assets/js/libs/jquery.fitvids.js',
         themeBase + '/inc/videos-page/js/video-page.js',
     ],
     projectCssFileList = [

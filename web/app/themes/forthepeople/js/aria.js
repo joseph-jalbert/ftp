@@ -13,11 +13,14 @@
 
     item.focus(function(){
         $(this).parents(".dropdown-menu").attr('aria-hidden', 'false');
+        $(this).parents(".dropdown").attr('aria-expanded', 'true');
+
     });
 
     function focusCheck() {
         if(item.parents(".dropdown-menu").find("a:focus").length == 0){
             item.parents(".dropdown-menu").attr('aria-hidden', 'true');
+            item.parents(".dropdown").attr('aria-expanded', 'false');
         }
     }
     item.blur(function(){

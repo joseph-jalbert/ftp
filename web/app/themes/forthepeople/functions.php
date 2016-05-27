@@ -18,6 +18,7 @@ require __DIR__ . '/inc/local-social/local-social.php';
 require __DIR__ . '/inc/office-page-redirect.php';
 require __DIR__ . '/inc/search-filter/search-filter.php';
 require __DIR__ . '/inc/bust-facebook/bust-facebook.php';
+require __DIR__ . '/inc/settings/settings.php';
 
 
 if ( ! function_exists( 'forthepeople_setup' ) ) :
@@ -348,7 +349,7 @@ class My_Sub_Menu extends Walker_Nav_Menu {
 
     if ( $depth == 0 && $has_children > 0  ) {
 
-    $class_names_comp = ' class="dropdown ' . esc_attr( $class_names ) . '" aria-haspopup="true" aria-expanded="false" tabindex="0"';
+    $class_names_comp = ' class="dropdown ' . esc_attr( $class_names ) . '" aria-haspopup="true" aria-expanded="false"';
 
     }
     $output .= $indent . '<li' . $id . $value . $class_names_comp .'>';

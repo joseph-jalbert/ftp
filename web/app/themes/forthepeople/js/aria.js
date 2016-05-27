@@ -24,6 +24,6 @@
         }
     }
     $item.blur(function(){
-        setTimeout(focusCheck, 200);
+        setTimeout(focusCheck, 0);
     })
 }) ( jQuery );

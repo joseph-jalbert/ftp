@@ -9,21 +9,21 @@
     });
 
     //set aria-visible to true when focused inside a dropdown menu
-    var item = $(".dropdown-menu > li > a");
+    var $item = $(".dropdown-menu > li > a");
 
-    item.focus(function(){
+    $item.focus(function(){
         $(this).parents(".dropdown-menu").attr('aria-hidden', 'false');
         $(this).parents(".dropdown").attr('aria-expanded', 'true');
 
     });
 
     function focusCheck() {
-        if(item.parents(".dropdown-menu").find("a:focus").length == 0){
-            item.parents(".dropdown-menu").attr('aria-hidden', 'true');
-            item.parents(".dropdown").attr('aria-expanded', 'false');
+        if($item.parents(".dropdown-menu").find("a:focus").length == 0){
+            $item.parents(".dropdown-menu").attr('aria-hidden', 'true');
+            $item.parents(".dropdown").attr('aria-expanded', 'false');
         }
     }
-    item.blur(function(){
+    $item.blur(function(){
         setTimeout(focusCheck, 200);
     })
 }) ( jQuery );

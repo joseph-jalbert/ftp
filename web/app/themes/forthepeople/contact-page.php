@@ -5,7 +5,11 @@
 
 //custom field used for the page subtitle
 $subtitle = get_post_meta($post->ID, 'subtitle', true);
-$video_url = get_post_meta($post->ID, 'video_url', true);
+$video_url = get_field('contact_page_video');
+if ( ! $video_url ) :
+	$video_url = 'https://www.youtube.com/watch?v=jpt-J_JHBKs';
+endif;
+
 $video_placeholder_url = get_post_meta($post->ID, 'video_placeholder_url', true);
 
 get_header(); ?>
@@ -84,9 +88,8 @@ get_header(); ?>
 <?php if( !empty( $video_url ) ) : ?>
 <div class="contactus-video">
 <div class="videoWrapper" itemprop="video" itemscope="" itemtype="http://schema.org/VideoObject">
-<video id="example_video_1" class="video-js vjs-big-play-centered vjs-default-skin" controls preload="auto" width="100%" height="253" poster="<?php echo $video_placeholder_url; ?>" data-setup='{}'>
-<source src="<?php echo $video_url; ?>" type='video/mp4' />
-</video>
+	<div class="fitvid"><?php echo apply_filters('the_content', esc_url($video_url)); ?></div>
+	
 </div>
 </div>
 <?php endif; ?>

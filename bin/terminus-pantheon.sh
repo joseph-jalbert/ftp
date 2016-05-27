@@ -13,6 +13,7 @@ if hash terminus 2>/dev/null; then
         #only install wp-redis do not activate it it https://pantheon.io/docs/articles/wordpress/installing-redis-on-wordpress/#install-drop-in-plugin
 
         terminus site set-connection-mode --mode=sftp --site=$PANTHEON_SITE_NAME --env=dev
+        terminus wp plugin delete wp-redis --site=$PANTHEON_SITE_NAME --env=dev
         terminus wp plugin install wp-redis --site=$PANTHEON_SITE_NAME --env=dev
         terminus site code commit --site=$PANTHEON_SITE_NAME --env=dev --message='add wp-redis to codebase'
         terminus site deploy --site=$PANTHEON_SITE_NAME --env=test --note="Updating"

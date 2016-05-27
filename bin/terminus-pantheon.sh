@@ -15,6 +15,7 @@ if hash terminus 2>/dev/null; then
         terminus site set-connection-mode --mode=sftp --site=$PANTHEON_SITE_NAME --env=dev
         terminus wp plugin delete wp-redis --site=$PANTHEON_SITE_NAME --env=dev
         terminus wp plugin install wp-redis --site=$PANTHEON_SITE_NAME --env=dev
+        sleep 5 #does this need a short timeout to register that the code has been updated?
         terminus site code commit --site=$PANTHEON_SITE_NAME --env=dev --message='add wp-redis to codebase'
         terminus site deploy --site=$PANTHEON_SITE_NAME --env=test --note="Updating"
         terminus site deploy --site=$PANTHEON_SITE_NAME --env=live --note="Updating from test"

@@ -55,17 +55,9 @@
 						?>
 
 
-						<div id="player"></div>
+						<div id="yt-player" data-video-id="<?php esc_attr_e( $video_id ); ?>"></div>
 
-						<div class="text-center video-wrapper main-video-wrapper"
-						     data-video-id="<?php esc_attr_e( $video_id ); ?>">
-							<div class="youtube-play-button"><span class="fa-stack fa-lg">
-							  <i class="fa fa-circle fa-stack-2x circle-bg"></i>
-							  <i class="fa fa-play fa-stack-1x fa-inverse"></i>
-							</span></div>
-							<img class="loaded-thumbnail"
-							     src="<?php echo esc_url( $video_thumbnail ); ?>">
-						</div>
+						
 
 
 						<?php

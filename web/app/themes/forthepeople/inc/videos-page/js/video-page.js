@@ -1,3 +1,9 @@
+var tag = document.createElement('script');
+tag.src = "//www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+
 jQuery(document).ready(function ($) {
     var setupVideo = function () {
 
@@ -6,10 +12,10 @@ jQuery(document).ready(function ($) {
         $('html, body').animate({
             scrollTop: $(".entry-content").offset().top
         }, 900, function () {
-            $('.main-video-wrapper').hide();
+
             $('#player').show();
-            changeVideo(videoId);
-            playVideo();
+            playerObject.setVideo(videoId);
+            playerObject.playVideo();
         });
 
 
@@ -24,64 +30,51 @@ jQuery(document).ready(function ($) {
 
 });
 
-var XT = XT || {};
-
-window.onYouTubeIframeAPIReady = function () {
-    setTimeout(XT.yt.onYouTubeIframeAPIReady, 500);
-};
-
-XT.yt = {
-
-    player: null,
-    /* load the YouTube API first */
-    loadApi: function () {
-
-        var j = document.createElement("script"),
-            f = document.getElementsByTagName("script")[0];
-        j.src = "//www.youtube.com/iframe_api";
-        j.async = true;
-        f.parentNode.insertBefore(j, f);
-        this.onYouTubeIframeAPIReady();
-    },
-
-    /*default youtube api listener*/
+var playerObject = {
+    videosPlayer: null,
+    ready: false,
     onYouTubeIframeAPIReady: function () {
-        window.YT = window.YT || {};
-        if (typeof window.YT.Player === 'function') {
-            player = new window.YT.Player('player', {
-                width: '640',
-                height: '390',
-                videoId: jQuery('.main-video-wrapper').attr('data-video-id'),
-                events: {
-                    onStateChange: XT.yt.onPlayerStateChange,
-                    onError: XT.yt.onPlayerError,
-                    onReady: setTimeout(XT.yt.onPlayerReady, 4000)
-                }
-            });
-            this.player = player;
+        this.videosPlayer = new YT.Player('yt-player', {
+            width: '682',
+            height: '383',
+            videoId: jQuery('#yt-player').attr('data-video-id'),
+            events: {
+                'onReady': this.onPlayerReady,
+                'onStateChange': this.onPlayerStateChange
+            }
+        })
+    },
+    onPlayerReady: function (event) {
+        this.ready = true;
+    },
+    onPlayerStateChange: function (event) {
+
+    },
+
+    stopVideo: function () {
+        this.videosPlayer.stopVideo();
+    },
+    playVideo: function () {
+        if (this.ready) this.videosPlayer.playVideo();
+        else setTimeout(function () {
+            this.playVideo()
+        }.bind(this), 1000);
+    },
+    setVideo: function (id) {
+        this.videosPlayer.loadVideoById(id);
+    },
+
+
+    getVars: function () {
+        return {
+            videosPlayer: this.videosPlayer
         }
-    },
-
-
-    getPlayer: function () {
-        return this.player;
-    },
-
-    init: function () {
-        this.loadApi();
-
-    },
-
+    }
 };
 
-function changeVideo(id) {
-    XT.yt.getPlayer().loadVideoById(id);
+function onYouTubeIframeAPIReady() {
+    playerObject.onYouTubeIframeAPIReady();
 }
 
-function playVideo() {
-    XT.yt.getPlayer().playVideo();
-}
-
-XT.yt.init();
 
 

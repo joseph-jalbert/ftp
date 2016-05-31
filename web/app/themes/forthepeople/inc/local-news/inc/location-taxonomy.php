@@ -24,10 +24,10 @@ class Location_Taxonomy {
 		add_filter( 'term_link', array( __CLASS__, 'filter_term_link' ), 10, 3 );
 		add_filter( 'query_vars', array( __CLASS__, 'local_blog_archive_query_var' ) );
 		add_filter( 'request', array( __CLASS__, 'local_blog_archive_request' ), PHP_INT_MAX );
-		add_action( self::LOCATION_TAXONOMY . "_edit_form", array( __CLASS__, 'render_headline_fields_edit' ), 10, 2 );
-		add_action( self::LOCATION_TAXONOMY . "_add_form_fields", array( __CLASS__, 'render_headline_fields_new' ) );
-		add_action( "edited_" . self::LOCATION_TAXONOMY, array( __CLASS__, 'save_headline_fields' ), 10, 2 );
-		add_action( "created_" . self::LOCATION_TAXONOMY, array( __CLASS__, 'save_headline_fields' ), 10, 2 );
+		add_action( self::LOCATION_TAXONOMY . "_edit_form", array( __CLASS__, 'render_fields_edit' ), 10, 2 );
+		add_action( self::LOCATION_TAXONOMY . "_add_form_fields", array( __CLASS__, 'render_fields_new' ) );
+		add_action( "edited_" . self::LOCATION_TAXONOMY, array( __CLASS__, 'save_fields' ), 10, 2 );
+		add_action( "created_" . self::LOCATION_TAXONOMY, array( __CLASS__, 'save_fields' ), 10, 2 );
 		add_action( 'admin_notices', array( __CLASS__, 'location_error_check' ) );
 
 	}
@@ -142,7 +142,7 @@ class Location_Taxonomy {
 		return $query_vars;
 	}
 
-	public static function render_headline_fields_edit( $tag, $taxonomy ) {
+	public static function render_fields_edit( $tag, $taxonomy ) {
 		if ( ! self::term_meta_available() ) :
 			self::render_term_meta_unavailable_notice();
 			return;
@@ -150,6 +150,9 @@ class Location_Taxonomy {
 
 		$headline = get_term_meta( $tag->term_id, 'headline', true );
 		$subheadline = get_term_meta( $tag->term_id, 'subheadline', true );
+		$hubspot_form_id = get_term_meta( $tag->term_id, 'hubspot_form_id', true );
+		$hubspot_portal_id = get_term_meta( $tag->term_id, 'hubspot_portal_id', true );
+		$hubspot_target = get_term_meta( $tag->term_id, 'hubspot_target', true );
 
 		?><table class="form-table">
 		<tbody>
@@ -169,11 +172,35 @@ class Location_Taxonomy {
 				<input name="subheadline" id="subheadline" type="text" value="<?php echo esc_attr( $subheadline ); ?>" size="40">
 			</td>
 		</tr>
+		<tr class="form-field term-hubspot-form-id-wrap">
+			<th scope="row">
+				<label for="hubspot-form-id">Hubspot Form ID</label>
+			</th>
+			<td>
+				<input name="hubspot-form-id" id="hubspot-form-id" type="text" value="<?php echo esc_attr( $hubspot_form_id ); ?>" size="40">
+			</td>
+		</tr>
+		<tr class="form-field term-hubspot-portal-id-wrap">
+			<th scope="row">
+				<label for="hubspot-portal-id">Hubspot Portal ID</label>
+			</th>
+			<td>
+				<input name="hubspot-portal-id" id="hubspot-portal-id" type="text" value="<?php echo esc_attr( $hubspot_portal_id ); ?>" size="40">
+			</td>
+		</tr>
+		<tr class="form-field term-hubspot-target-wrap">
+			<th scope="row">
+				<label for="hubspot-target">Hubspot Target</label>
+			</th>
+			<td>
+				<input name="hubspot-target" id="hubspot-target" type="text" value="<?php echo esc_attr( $hubspot_target ); ?>" size="40">
+			</td>
+		</tr>
 		</tbody>
 		</table><?php
 	}
 
-	public static function render_headline_fields_new() {
+	public static function render_fields_new() {
 		if ( ! self::term_meta_available() ) :
 			self::render_term_meta_unavailable_notice();
 			return;
@@ -187,6 +214,18 @@ class Location_Taxonomy {
 		<div class="form-field term-subheadline-wrap">
 			<label for="subheadline">Subheadline</label>
 			<input name="subheadline" id="subheadline" type="text" size="40">
+		</div>
+		<div class="form-field term-hubspot-form-id-wrap">
+			<label for="hubspot-form-id">Hubspot Form ID</label>
+			<input name="hubspot-form-id" id="hubspot-form-id" type="text" size="40">
+		</div>
+		<div class="form-field term-hubspot-portal-id-wrap">
+			<label for="hubspot-portal-id">Hubspot Portal ID</label>
+			<input name="hubspot-portal-id" id="hubspot-portal-id" type="text" size="40">
+		</div>
+		<div class="form-field term-hubspot-target-wrap">
+			<label for="hubspot-target">Hubspot Target</label>
+			<input name="hubspot-target" id="hubspot-target" type="text" size="40">
 		</div><?php
 	}
 
@@ -194,9 +233,12 @@ class Location_Taxonomy {
 		echo '<h1><strong>Notice: Term Metadata Unavailbale in this version of WordPress</strong></h1>';
 	}
 
-	public static function save_headline_fields( $term_id, $tt_id ) {
+	public static function save_fields( $term_id, $tt_id ) {
 		update_term_meta( $term_id, 'headline', wp_kses_post( $_REQUEST['headline'] ) );
 		update_term_meta( $term_id, 'subheadline', wp_kses_post( $_REQUEST['subheadline'] ) );
+		update_term_meta( $term_id, 'hubspot_form_id', sanitize_text_field( $_REQUEST['hubspot-form-id'] ) );
+		update_term_meta( $term_id, 'hubspot_portal_id', sanitize_text_field( $_REQUEST['hubspot-portal-id'] ) );
+		update_term_meta( $term_id, 'hubspot_target', sanitize_text_field( $_REQUEST['hubspot-target'] ) );
 	}
 
 	public static function location_error_check() {

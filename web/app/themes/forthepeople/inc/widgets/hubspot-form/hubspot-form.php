@@ -38,9 +38,10 @@ class Hubspot_Form extends WP_Widget {
 		$hubspot_portal_id = esc_attr( $instance['hubspot-portal-id'] );
 		$hubspot_target    = esc_attr( $instance['hubspot-target'] );
 		$current_post      = get_queried_object();
-		$post_id           = $current_post ? $current_post->ID : null;
 
-		if ( $post_id ) :
+		if ( is_a( $current_post, 'WP_Post' ) ) :
+			$post_id = $current_post->ID;
+
 			if ( get_field( 'hubspot_form_id', $post_id ) ) :
 				$hubspot_form_id = get_field( 'hubspot_form_id', $post_id );
 			endif;
@@ -50,17 +51,17 @@ class Hubspot_Form extends WP_Widget {
 			if ( get_field( 'hubspot_target', $post_id ) ) :
 				$hubspot_target = get_field( 'hubspot_target', $post_id );
 			endif;
-		endif;
+		elseif ( is_a( $current_post, 'WP_Term' ) ) :
+			$term_id = $current_post->term_id;
 
-		if ( is_a( $current_post, 'WP_Term' ) ) :
-			if ( ! empty( get_term_meta( $current_post->term_id, 'hubspot_form_id', true ) ) ) :
-				$hubspot_form_id = get_term_meta( $current_post->term_id, 'hubspot_form_id', true );
+			if ( ! empty( get_term_meta( $term_id, 'hubspot_form_id', true ) ) ) :
+				$hubspot_form_id = get_term_meta( $term_id, 'hubspot_form_id', true );
 			endif;
-			if ( ! empty( get_term_meta( $current_post->term_id, 'hubspot_portal_id', true ) ) ) :
-				$hubspot_portal_id = get_term_meta( $current_post->term_id, 'hubspot_portal_id', true );
+			if ( ! empty( get_term_meta( $term_id, 'hubspot_portal_id', true ) ) ) :
+				$hubspot_portal_id = get_term_meta( $term_id, 'hubspot_portal_id', true );
 			endif;
-			if ( ! empty( get_term_meta( $current_post->term_id, 'hubspot_target', true ) ) ) :
-				$hubspot_target = get_term_meta( $current_post->term_id, 'hubspot_target', true );
+			if ( ! empty( get_term_meta( $term_id, 'hubspot_target', true ) ) ) :
+				$hubspot_target = get_term_meta( $term_id, 'hubspot_target', true );
 			endif;
 		endif;
 

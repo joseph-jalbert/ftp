@@ -234,11 +234,11 @@ class Location_Taxonomy {
 	}
 
 	public static function save_fields( $term_id, $tt_id ) {
-		// We use wp_kses_post instead of sanitize_text_field here because these fields can contain HTML.
+		// We use wp_kses_post instead of sanitize_text_field here because these fields can contain HTML. Portal ID should be a positive integer.
 		update_term_meta( $term_id, 'headline', wp_kses_post( $_REQUEST['headline'] ) );
 		update_term_meta( $term_id, 'subheadline', wp_kses_post( $_REQUEST['subheadline'] ) );
 		update_term_meta( $term_id, 'hubspot_form_id', sanitize_text_field( $_REQUEST['hubspot-form-id'] ) );
-		update_term_meta( $term_id, 'hubspot_portal_id', sanitize_text_field( $_REQUEST['hubspot-portal-id'] ) );
+		update_term_meta( $term_id, 'hubspot_portal_id', absint( $_REQUEST['hubspot-portal-id'] ) );
 		update_term_meta( $term_id, 'hubspot_target', sanitize_text_field( $_REQUEST['hubspot-target'] ) );
 	}
 

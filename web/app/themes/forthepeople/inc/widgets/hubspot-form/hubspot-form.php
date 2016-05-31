@@ -23,7 +23,6 @@ class Hubspot_Form extends WP_Widget {
 		);
 	}
 
-
 	/**
 	 * Front-end display of widget.
 	 *
@@ -54,6 +53,7 @@ class Hubspot_Form extends WP_Widget {
 		elseif ( is_a( $current_post, 'WP_Term' ) ) :
 			$term_id = $current_post->term_id;
 
+			// Unlike get_field, get_term_meta returns empty string by default if meta is not set. Check for empty instead.
 			if ( ! empty( get_term_meta( $term_id, 'hubspot_form_id', true ) ) ) :
 				$hubspot_form_id = get_term_meta( $term_id, 'hubspot_form_id', true );
 			endif;
@@ -105,8 +105,7 @@ class Hubspot_Form extends WP_Widget {
 		$instance                      = array();
 		$instance['hubspot-form-id']   = sanitize_text_field( $new_instance['hubspot-form-id'] );
 		$instance['hubspot-portal-id'] = absint( $new_instance['hubspot-portal-id'] );
-		$instance['hubspot-target'] = sanitize_text_field( $new_instance['hubspot-target'] );
-
+		$instance['hubspot-target']    = sanitize_text_field( $new_instance['hubspot-target'] );
 
 		return $instance;
 	}

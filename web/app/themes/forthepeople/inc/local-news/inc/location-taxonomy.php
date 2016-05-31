@@ -148,11 +148,11 @@ class Location_Taxonomy {
 			return;
 		endif;
 
-		$headline = get_term_meta( $tag->term_id, 'headline', true );
-		$subheadline = get_term_meta( $tag->term_id, 'subheadline', true );
-		$hubspot_form_id = get_term_meta( $tag->term_id, 'hubspot_form_id', true );
+		$headline          = get_term_meta( $tag->term_id, 'headline', true );
+		$subheadline       = get_term_meta( $tag->term_id, 'subheadline', true );
+		$hubspot_form_id   = get_term_meta( $tag->term_id, 'hubspot_form_id', true );
 		$hubspot_portal_id = get_term_meta( $tag->term_id, 'hubspot_portal_id', true );
-		$hubspot_target = get_term_meta( $tag->term_id, 'hubspot_target', true );
+		$hubspot_target    = get_term_meta( $tag->term_id, 'hubspot_target', true );
 
 		?><table class="form-table">
 		<tbody>
@@ -234,6 +234,7 @@ class Location_Taxonomy {
 	}
 
 	public static function save_fields( $term_id, $tt_id ) {
+		// We use wp_kses_post instead of sanitize_text_field here because these fields can contain HTML.
 		update_term_meta( $term_id, 'headline', wp_kses_post( $_REQUEST['headline'] ) );
 		update_term_meta( $term_id, 'subheadline', wp_kses_post( $_REQUEST['subheadline'] ) );
 		update_term_meta( $term_id, 'hubspot_form_id', sanitize_text_field( $_REQUEST['hubspot-form-id'] ) );

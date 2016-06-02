@@ -23,7 +23,6 @@ class Hubspot_Form extends WP_Widget {
 		);
 	}
 
-
 	/**
 	 * Front-end display of widget.
 	 *
@@ -36,21 +35,35 @@ class Hubspot_Form extends WP_Widget {
 	public function widget( $args, $instance ) {
 		$hubspot_form_id   = esc_attr( $instance['hubspot-form-id'] );
 		$hubspot_portal_id = esc_attr( $instance['hubspot-portal-id'] );
-		$hubspot_target = esc_attr( $instance['hubspot-target'] );
+		$hubspot_target    = esc_attr( $instance['hubspot-target'] );
 		$current_post      = get_queried_object();
-		$post_id           = $current_post ? $current_post->ID : null;
 
-		if ( $post_id && get_field( 'hubspot_form_id', $post_id ) ) {
-			$hubspot_form_id = get_field( 'hubspot_form_id', $post_id );
-		}
-		if ( $post_id && get_field( 'hubspot_portal_id', $post_id ) ) {
-			$hubspot_portal_id = get_field( 'hubspot_portal_id', $post_id );
-		}
-		if ( $post_id && get_field( 'hubspot_target', $post_id ) ) {
-			$hubspot_target = get_field( 'hubspot_target', $post_id );
-		}
+		if ( is_a( $current_post, 'WP_Post' ) ) :
+			$post_id = $current_post->ID;
 
+			if ( get_field( 'hubspot_form_id', $post_id ) ) :
+				$hubspot_form_id = get_field( 'hubspot_form_id', $post_id );
+			endif;
+			if ( get_field( 'hubspot_portal_id', $post_id ) ) :
+				$hubspot_portal_id = get_field( 'hubspot_portal_id', $post_id );
+			endif;
+			if ( get_field( 'hubspot_target', $post_id ) ) :
+				$hubspot_target = get_field( 'hubspot_target', $post_id );
+			endif;
+		elseif ( is_a( $current_post, 'WP_Term' ) ) :
+			$term_id = $current_post->term_id;
 
+			// Unlike get_field, get_term_meta returns empty string by default if meta is not set. Check for empty instead.
+			if ( ! empty( get_term_meta( $term_id, 'hubspot_form_id', true ) ) ) :
+				$hubspot_form_id = get_term_meta( $term_id, 'hubspot_form_id', true );
+			endif;
+			if ( ! empty( get_term_meta( $term_id, 'hubspot_portal_id', true ) ) ) :
+				$hubspot_portal_id = get_term_meta( $term_id, 'hubspot_portal_id', true );
+			endif;
+			if ( ! empty( get_term_meta( $term_id, 'hubspot_target', true ) ) ) :
+				$hubspot_target = get_term_meta( $term_id, 'hubspot_target', true );
+			endif;
+		endif;
 
 		?>
 
@@ -92,8 +105,7 @@ class Hubspot_Form extends WP_Widget {
 		$instance                      = array();
 		$instance['hubspot-form-id']   = sanitize_text_field( $new_instance['hubspot-form-id'] );
 		$instance['hubspot-portal-id'] = absint( $new_instance['hubspot-portal-id'] );
-		$instance['hubspot-target'] = sanitize_text_field( $new_instance['hubspot-target'] );
-
+		$instance['hubspot-target']    = sanitize_text_field( $new_instance['hubspot-target'] );
 
 		return $instance;
 	}

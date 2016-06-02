@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0e370daf6e79a1c7b2a0fc7e0542775b",
-    "content-hash": "59b166fc76b8c97e6f248d4539fcefd5",
+    "hash": "119f0236086355bea3976477fbf04bf3",
+    "content-hash": "7bc9a7b551e727ff52ef86b6810d9bd7",
     "packages": [
         {
             "name": "composer/installers",
@@ -246,7 +246,7 @@
             "version": "1.0.0",
             "source": {
                 "type": "svn",
-                "url": "http://plugins.svn.wordpress.org/hubspot-tracking-code/",
+                "url": "https://plugins.svn.wordpress.org/hubspot-tracking-code/",
                 "reference": "tags/1.0.0"
             },
             "dist": {
@@ -260,6 +260,26 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/hubspot-tracking-code/"
+        },
+        {
+            "name": "wpackagist-plugin/wp-smushit",
+            "version": "2.3.1",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/wp-smushit/",
+                "reference": "tags/2.3.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/wp-smushit.2.3.1.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/wp-smushit/"
         }
     ],
     "packages-dev": [

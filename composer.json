@@ -8,13 +8,14 @@
   "repositories": [
     {
       "type": "composer",
-      "url": "http://wpackagist.org"
+      "url": "https://wpackagist.org"
     }
   ],
   "require": {
     "johnpbloch/wordpress": "~4.4",
     "mnsami/composer-custom-directory-installer": "1.0.*",
-    "wpackagist-plugin/hubspot-tracking-code": "~1.0"
+    "wpackagist-plugin/hubspot-tracking-code": "~1.0",
+    "wpackagist-plugin/wp-smushit": "^2.3"
 
 
   },

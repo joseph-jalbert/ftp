@@ -27,7 +27,6 @@ jQuery(document).ready(function ($) {
 
     });
 
-
 });
 
 var playerObject = {
@@ -76,5 +75,6 @@ function onYouTubeIframeAPIReady() {
     playerObject.onYouTubeIframeAPIReady();
 }
 
-
-
+window.onload = function() {
+    onYouTubeIframeAPIReady();
+};

@@ -8,6 +8,22 @@
         $(skipTo).focus(); // focus on the content container
     });
 
+    //add class 'expanded' when dropdown receives keyboard focus, for screen-readers where mouse pointer does automatically follow keyboard focus
+    var $nav_section = $("li.dropdown > a");
+
+    $nav_section.focus(function(){
+        if (!$(this).parents("li.dropdown").hasClass('open')) {
+            $(this).parents("li.dropdown").addClass('open');
+        }
+    });
+
+    $nav_section.blur(function(){
+        if ($(this).parents("li.dropdown").hasClass('open')) {
+            $(this).parents("li.dropdown").removeClass('open');
+        }
+    }); 
+
+
     //set aria-visible to true when focused inside a dropdown menu
     var $item = $(".dropdown-menu > li > a");
 

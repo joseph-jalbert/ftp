@@ -497,3 +497,7 @@ ul.related-content p.content {
 .font-large {
     font-size: 24px;
 }
+
+.force-bold {
+	font-weight:bold !important;
+}

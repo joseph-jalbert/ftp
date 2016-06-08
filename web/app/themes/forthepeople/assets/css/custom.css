@@ -505,3 +505,7 @@ ul.related-content p.content {
 .force-black {
 	color:#000 !important;
 }
+
+.force-gray20 {
+	color:#333 !important;
+}

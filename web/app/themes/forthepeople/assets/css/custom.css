@@ -501,3 +501,7 @@ ul.related-content p.content {
 .force-bold {
 	font-weight:bold !important;
 }
+
+.force-black {
+	color:#000 !important;
+}

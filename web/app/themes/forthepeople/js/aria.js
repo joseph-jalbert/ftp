@@ -8,6 +8,29 @@
         $(skipTo).focus(); // focus on the content container
     });
 
+    //add class 'expanded' when dropdown receives keyboard focus, for screen-readers where mouse pointer does automatically follow keyboard focus
+    var $nav_section = $("li.dropdown > a");
+    var $dropdown_link = $("ul.dropdown-menu > li > a");
+
+    $nav_section.focus(function(){
+        if (!$(this).parents("li.dropdown").hasClass('open')) {
+            $(this).parents("li.dropdown").addClass('open');
+        }
+    });
+
+    function checker() {
+        var $activeElement = $(this);
+        var $parent_li = $activeElement.parents("li.dropdown");
+        setTimeout((function(){
+            if (!$(document.activeElement).is($dropdown_link)){
+                $parent_li.removeClass('open');
+            }
+        }), 0)
+    }
+
+    $nav_section.blur(checker);
+    $dropdown_link.blur(checker);
+
     //set aria-visible to true when focused inside a dropdown menu
     var $item = $(".dropdown-menu > li > a");
 

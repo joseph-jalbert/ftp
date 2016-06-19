@@ -1867,3 +1867,7 @@ footer#footer .offices {
 .locations .location:first-child {
 	margin-left:0;
 }
+
+.kads-main {
+	margin: 0 auto;
+}

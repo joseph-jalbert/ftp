@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d951f55fb6470425d4d78e68a3f7eaac",
-    "content-hash": "60a6cb878ddfd07a8e73cb5475edd9e7",
+    "hash": "258e8f33dce924bad58094bab79a9a98",
+    "content-hash": "f5fca676aca384062884871db3aeecae",
     "packages": [
         {
             "name": "composer/installers",
@@ -242,6 +242,32 @@
                 "composer-plugin"
             ],
             "time": "2015-06-12 13:57:50"
+        },
+        {
+            "name": "morgan-and-morgan/facebook-buttons",
+            "version": "1.0.5",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:Morgan-and-Morgan/mm-facebook-buttons.git",
+                "reference": "92b32bccfb1aca541675f145ffdfb039648e9d29"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Morgan-and-Morgan/mm-facebook-buttons/zipball/92b32bccfb1aca541675f145ffdfb039648e9d29",
+                "reference": "92b32bccfb1aca541675f145ffdfb039648e9d29",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "description": "Morgan and Morgan Facebook Buttons shortcodes",
+            "homepage": "http://www.forthepeople.com",
+            "support": {
+                "source": "https://github.com/Morgan-and-Morgan/mm-facebook-buttons/tree/1.0.5",
+                "issues": "https://github.com/Morgan-and-Morgan/mm-facebook-buttons/issues"
+            },
+            "time": "2016-06-20 14:25:51"
         },
         {
             "name": "wpackagist-plugin/hubspot-tracking-code",

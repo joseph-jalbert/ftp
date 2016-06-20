@@ -9,14 +9,18 @@
     {
       "type": "composer",
       "url": "https://wpackagist.org"
-    }
+    },
+{
+            "type": "composer",
+            "url": "https://satis.forthepeople.com"
+        }
   ],
   "require": {
-    "johnpbloch/wordpress": "~4.4",
+    "johnpbloch/wordpress": "4.*",
     "mnsami/composer-custom-directory-installer": "1.0.*",
     "wpackagist-plugin/hubspot-tracking-code": "~1.0",
-    "wpackagist-plugin/wp-smushit": "^2.3"
-
+    "wpackagist-plugin/wp-smushit": "^2.3",
+    "morgan-and-morgan/facebook-buttons": "1.0.*"
 
   },
   "require-dev": {

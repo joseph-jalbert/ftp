@@ -30,8 +30,16 @@
         	<?php the_field('jump_box'); ?>
         </div>
 		
-		<?php } the_content(); ?>
-		<?php
+		<?php }
+
+        if ( get_field('remove_wpautop') ) :
+	        remove_filter( 'the_content', 'wpautop' );
+        endif;
+        the_content();
+        if ( get_field('remove_wpautop') ) :
+	        add_filter( 'the_content', 'wpautop' );
+        endif;
+
 			wp_link_pages( array(
 				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'forthepeople' ),
 				'after'  => '</div>',

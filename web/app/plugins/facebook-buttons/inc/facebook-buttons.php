@@ -67,14 +67,14 @@ class MM_Facebook_Buttons {
 			'app_id'     => $app_id
 		), $atts );
 
-		$class                  = ! empty( $atts['class'] )      ? esc_attr__( $atts['class'] )            : null;
-		$qry_args['href']       = ! empty( $atts['url'] )        ? urlencode( esc_attr__( $atts['url'] ) ) : urlencode( get_permalink() );
-		$qry_args['layout']     = ! empty( $atts['layout'] )     ? esc_attr__( $atts['layout'] )           : 'standard';
-		$qry_args['action']     = ! empty( $atts['action'] )     ? esc_attr__( $atts['action'] )           : 'like';
-		$qry_args['show_faces'] = ! empty( $atts['show_faces'] ) ? esc_attr__( $atts['show_faces'] )       : 'true';
-		$qry_args['share']      = ! empty( $atts['share'] )      ? esc_attr__( $atts['share'] )            : 'true';
-		$qry_args['width']      = ! empty( $atts['width'] )      ? esc_attr__( $atts['width'] )            : null;
-		$qry_args['height']     = ! empty( $atts['height'] )     ? esc_attr__( $atts['height'] )           : null;
+		$class                  = ! empty( $atts['class'] )      ? $atts['class']            : null;
+		$qry_args['href']       = ! empty( $atts['url'] )        ? urlencode( $atts['url'] ) : urlencode( get_permalink() );
+		$qry_args['layout']     = ! empty( $atts['layout'] )     ? $atts['layout']           : 'standard';
+		$qry_args['action']     = ! empty( $atts['action'] )     ? $atts['action']           : 'like';
+		$qry_args['show_faces'] = ! empty( $atts['show_faces'] ) ? $atts['show_faces']       : 'true';
+		$qry_args['share']      = ! empty( $atts['share'] )      ? $atts['share']            : 'true';
+		$qry_args['width']      = ! empty( $atts['width'] )      ? $atts['width']            : null;
+		$qry_args['height']     = ! empty( $atts['height'] )     ? $atts['height']           : null;
 		$qry_args['appId']      = $app_id;
 
 		$fb_url = add_query_arg($qry_args, 'https://www.facebook.com/plugins/like.php');
@@ -89,15 +89,15 @@ class MM_Facebook_Buttons {
 			allowTransparency="true"
 
 			<?php if ( ! empty( $qry_args['width'] ) ) : ?>
-				height="<?php echo $qry_args['width']; ?>"
+				height="<?php echo esc_attr( $qry_args['width'] ); ?>"
 			<?php endif; ?>
 
 			<?php if ( ! empty( $qry_args['width'] ) ) : ?>
-				width="<?php echo $qry_args['width']; ?>"
+				width="<?php echo esc_attr( $qry_args['width'] ); ?>"
 			<?php endif; ?>
 
 			<?php if ( ! empty( $class ) ) : ?>
-				class="<?php echo $class; ?>"
+				class="<?php echo esc_attr( $class ); ?>"
 			<?php endif; ?>
 		></iframe>
 		<?php

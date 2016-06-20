@@ -245,16 +245,16 @@
         },
         {
             "name": "morgan-and-morgan/facebook-buttons",
-            "version": "1.0.4",
+            "version": "1.0.5",
             "source": {
                 "type": "git",
                 "url": "git@github.com:Morgan-and-Morgan/mm-facebook-buttons.git",
-                "reference": "aa08811174d5ef8a91fb37c358babbf348e02434"
+                "reference": "92b32bccfb1aca541675f145ffdfb039648e9d29"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Morgan-and-Morgan/mm-facebook-buttons/zipball/aa08811174d5ef8a91fb37c358babbf348e02434",
-                "reference": "aa08811174d5ef8a91fb37c358babbf348e02434",
+                "url": "https://api.github.com/repos/Morgan-and-Morgan/mm-facebook-buttons/zipball/92b32bccfb1aca541675f145ffdfb039648e9d29",
+                "reference": "92b32bccfb1aca541675f145ffdfb039648e9d29",
                 "shasum": ""
             },
             "require": {
@@ -264,10 +264,10 @@
             "description": "Morgan and Morgan Facebook Buttons shortcodes",
             "homepage": "http://www.forthepeople.com",
             "support": {
-                "source": "https://github.com/Morgan-and-Morgan/mm-facebook-buttons/tree/master",
+                "source": "https://github.com/Morgan-and-Morgan/mm-facebook-buttons/tree/1.0.5",
                 "issues": "https://github.com/Morgan-and-Morgan/mm-facebook-buttons/issues"
             },
-            "time": "2016-06-20 12:57:47"
+            "time": "2016-06-20 14:25:51"
         },
         {
             "name": "wpackagist-plugin/hubspot-tracking-code",

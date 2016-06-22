@@ -232,7 +232,7 @@ function forthepeople_scripts() {
 	}
 
 	if (is_singular(array('post', 'classactionlawyers', 'local_news', BTG_News::POST_TYPE))) {
-    		wp_enqueue_script( 'sharethis', '//w.sharethis.com/button/buttons.js', false, '', true);
+    		wp_enqueue_script( 'sharethis', '//ws.sharethis.com/button/buttons.js', false, '', true);
 	}
 
 	if (is_page_template('business-litigation.php') || is_page_template('securities-litigation.php')) {

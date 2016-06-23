@@ -21,6 +21,7 @@ require __DIR__ . '/inc/bust-facebook/bust-facebook.php';
 require __DIR__ . '/inc/settings/settings.php';
 require __DIR__ . '/inc/selective-disable-autop/selective-disable-wpautop.php';
 require __DIR__ . '/inc/shortcodes/shortcodes.php';
+require __DIR__ . '/inc/menu-override/menu-override.php';
 
 
 if ( ! function_exists( 'forthepeople_setup' ) ) :

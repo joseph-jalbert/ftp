@@ -92,6 +92,12 @@ $menuslug = 'securities-litigation';
 if (empty($menuslug)) {
 $menuslug = 'main-navigation';
 }
+
+$menu_override = get_post_meta( get_the_ID(), Menu_Override::META_FIELD_MENU, true );
+if ( $menu_override ) {
+	$menuslug = $menu_override;
+}
+
 ?>
 
 <body <?php body_class(); ?>>

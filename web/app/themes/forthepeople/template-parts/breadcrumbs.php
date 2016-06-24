@@ -9,7 +9,7 @@
 					</div>
 				</div>
 			</div>
-			<?php if (is_child('6110') && !is_page_template('attorney-referrals.php')) { ?>
+			<?php if ((is_child('6110') && !is_page_template('attorney-referrals.php')) || 'business-litigation' == $menuslug) { ?>
 			<div class="row-fluid btg-content-banner text-center">
             	<img alt="Business Litigation" src="/wp-content/themes/forthepeople/assets/media/images/banners/btg-content-banner.jpg">
             </div>            

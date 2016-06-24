@@ -227,6 +227,7 @@ if ( $menu_override ) {
                         'empty-page-title.php')) &&
           !is_singular('attorney') &&
           !in_category( 'featured-news', $_post ) &&
-          !is_page('featured-news')) {
-    get_template_part( 'template-parts/breadcrumbs' );
+          !is_page('featured-news') &&
+          'business-litigation' == $menuslug ) {
+          include(locate_template(array('template-parts/breadcrumbs.php')));
 } ?>

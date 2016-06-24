@@ -41,7 +41,6 @@ get_header(); ?>
                 <span class='st_email_vcount' displayText='Email'></span>
             </div>
         <?php }; ?>
-
 		</main><!-- #main -->
 	</div><!-- #primary -->
 <div id="col2" class="span4">

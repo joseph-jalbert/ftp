@@ -32,8 +32,7 @@ get_header(); ?>
             
 
 		<?php endwhile; // end of the loop. ?>
-
-        <?php if (is_single() && ('local_news' === get_post_type() || 'btg_news' === get_post_type()) ) { ?>
+        <?php if (is_single() && ('local_news' === get_post_type() || 'btg_news' === get_post_type()) || in_category('blog') ) { ?>
             ​<div class="socialmediawidget horizontal aside clearfix">
                 <span class='st_plusone_vcount' displayText='Google +1'></span>
                 <span class='st_facebook_vcount' displayText='Facebook'></span>

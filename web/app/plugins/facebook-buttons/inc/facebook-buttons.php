@@ -15,7 +15,6 @@ class MM_Facebook_Buttons {
 
 	public static function attach_hooks() {
 		add_shortcode( self::SHORTCODE, array( __CLASS__, 'shortcode' ) );
-		add_action( 'wp_footer', array( __CLASS__, 'add_script' ) );
 		add_action( 'admin_init', array( __CLASS__, 'register_settings' ), PHP_INT_MAX );
 	}
 

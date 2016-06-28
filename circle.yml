@@ -1,6 +1,3 @@
-machine:
-  php:
-    version: 5.5.21
 dependencies:
   override:
     - chmod +x ./bin/dependencies.sh

@@ -8,16 +8,6 @@
         $(skipTo).focus(); // focus on the content container
     });
 
-    //add Hover event to dropdown as workaround for Chrome touchbook bug
-
-    var $top_nav = $("li.dropdown");
-    $top_nav.hover(function() {
-        $(this).addClass('open');
-    });
-    $top_nav.mouseout(function() {
-        $(this).removeClass('open');
-    });
-
     //add class 'expanded' when dropdown receives keyboard focus, for screen-readers where mouse pointer does automatically follow keyboard focus
     var $nav_section = $("li.dropdown > a");
     var $dropdown_link = $("ul.dropdown-menu > li > a");
@@ -40,6 +30,20 @@
 
     $nav_section.blur(checker);
     $dropdown_link.blur(checker);
+
+    //add Hover event to dropdown as workaround for Chrome touchbook bug
+
+    // var $top_nav = $("li.dropdown");
+    // $top_nav.hover(function() {
+    //     console.log('in');
+    //     $(this).addClass('open');
+    // });
+    // $top_nav.mouseout(function() {
+    //     console.log('out');
+    //     if ( $("ul.dropdown-menu:hover").length != 0) {
+    //         $top_nav.removeClass('open');
+    //     }
+    // });
 
     //set aria-visible to true when focused inside a dropdown menu
     var $item = $(".dropdown-menu > li > a");

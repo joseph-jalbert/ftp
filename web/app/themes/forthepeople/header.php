@@ -229,5 +229,5 @@ if ( $menu_override ) {
           !in_category( 'featured-news', $_post ) &&
           !is_page('featured-news') &&
           'business-litigation' == $menuslug ) {
-          include(locate_template(array('template-parts/breadcrumbs.php')));
-} ?>
+	include( locate_template( array( 'template-parts/breadcrumbs.php' ) ) );
+}

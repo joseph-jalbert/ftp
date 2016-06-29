@@ -1,5 +1,6 @@
 dependencies:
   override:
+    - npm config set registry http://registry.npmjs.org/
     - chmod +x ./bin/dependencies.sh
     - ./bin/dependencies.sh
 

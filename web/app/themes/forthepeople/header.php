@@ -210,24 +210,26 @@ if ( $menu_override ) {
 	</script>
 <?php } ?>
 
-<?php if(!is_front_page() &&
-         !is_page_template(array(
-                        'all-class-actions.php',
-                        'class-action-cats.php',
-                        'business-litigation.php',
-                        'securities-litigation.php',
-                        'all-office-locations.php',
-                        'contact-page.php',
-                        'diabetes-page.php',
-                        'office-location.php',
-                        'mesothelioma.php',
-                        'empty-page.php',
-                        'securities-contact-page.php',
-                        'tampa-alternate.php',
-                        'empty-page-title.php')) &&
-          !is_singular('attorney') &&
-          !in_category( 'featured-news', $_post ) &&
-          !is_page('featured-news') &&
-          'business-litigation' == $menuslug ) {
-          include(locate_template(array('template-parts/breadcrumbs.php')));
+<?php if ( ( ! is_front_page() &&
+             ! is_page_template( array(
+	             'all-class-actions.php',
+	             'class-action-cats.php',
+	             'business-litigation.php',
+	             'securities-litigation.php',
+	             'all-office-locations.php',
+	             'contact-page.php',
+	             'diabetes-page.php',
+	             'office-location.php',
+	             'mesothelioma.php',
+	             'empty-page.php',
+	             'securities-contact-page.php',
+	             'tampa-alternate.php',
+	             'empty-page-title.php'
+             ) ) &&
+             ! is_singular( 'attorney' ) &&
+             ! in_category( 'featured-news', $_post ) &&
+             ! is_page( 'featured-news' ) ) || false !== strpos( $post->post_name, 'business-litigation-attorneys' )
+
+) {
+	include( locate_template( array( 'template-parts/breadcrumbs.php' ) ) );
 } 

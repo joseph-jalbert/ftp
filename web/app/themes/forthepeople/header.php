@@ -210,6 +210,7 @@ if ( $menu_override ) {
 	</script>
 <?php } ?>
 
+
 <?php if ( ( ! is_front_page() &&
              ! is_page_template( array(
 	             'all-class-actions.php',
@@ -233,3 +234,4 @@ if ( $menu_override ) {
 ) {
 	include( locate_template( array( 'template-parts/breadcrumbs.php' ) ) );
 } 
+

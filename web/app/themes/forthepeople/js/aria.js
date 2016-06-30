@@ -35,13 +35,10 @@
 
     var $top_nav = $("li.dropdown");
     $top_nav.hover(function() {
-        console.log('in');
         $(this).addClass('open');
     });
     $top_nav.mouseleave(function() {
-        console.log('out');
         $top_nav.removeClass('open');
-        
     });
 
     //set aria-visible to true when focused inside a dropdown menu

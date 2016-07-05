@@ -26,7 +26,6 @@
           <ul class="unstyled pull-left hidden-phone">
             <li><a href="/free-case-evaluation/">Free Case Evaluation</a></li>
             <li><a href="http://employment.forthepeople.com">Employment</a></li>
-            <li><a href="/sitemap/">Site Map</a></li>
             <li><a href="/disclaimer-and-terms-of-use/">Terms & Conditions</a></li>
             <li><a href="/site-accessibility/">Site Accessibility</a></li>
           </ul>

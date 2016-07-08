@@ -32,14 +32,6 @@ get_header(); ?>
             
 
 		<?php endwhile; // end of the loop. ?>
-        <?php if (is_single() && ('local_news' === get_post_type() || 'btg_news' === get_post_type()) || in_category('blog') ) { ?>
-            ​<div class="socialmediawidget horizontal aside clearfix">
-                <span class='st_plusone_vcount' displayText='Google +1'></span>
-                <span class='st_facebook_vcount' displayText='Facebook'></span>
-                <span class='st_twitter_vcount' displayText='Tweet'></span>
-                <span class='st_email_vcount' displayText='Email'></span>
-            </div>
-        <?php }; ?>
 		</main><!-- #main -->
 	</div><!-- #primary -->
 <div id="col2" class="span4">

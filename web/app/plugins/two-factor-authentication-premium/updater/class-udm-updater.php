@@ -514,26 +514,16 @@ class Updraft_Manager_Updater_1_0 {
 			'php' => phpversion(),
 			'multi' => (is_multisite() ? 1 : 0),
 			'mem' => ini_get('memory_limit'),
-			'lang' => $this->get_wplang()
+			'lang' => get_locale()
 		);
 
 		if (isset($this->plugin_data['Version'])) {
 			$sinfo['pver'] = $this->plugin_data['Version'];
 		}
 
-		$args['si'] = urlencode(base64_encode(serialize($sinfo)));
+		$args['si2'] = urlencode(base64_encode(json_encode($sinfo)));
 
 		return $args;
-	}
-
-	protected function get_wplang() {
-		# See: https://core.trac.wordpress.org/changeset/29630
-		global $wp_current_db_version; 
-		if ( $wp_current_db_version < 29630 ) { 
-			return (defined('WPLANG')) ? WPLANG : '';
-		} else {
-			return get_option('WPLANG', '');
-		}
 	}
 
 	// Funnelling through here allows for future flexibility

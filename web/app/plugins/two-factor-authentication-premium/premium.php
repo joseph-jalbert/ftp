@@ -179,9 +179,9 @@ class Simba_Two_Factor_Authentication_Premium {
 	public function simba_tfa_users_settings() {
 		$suffix = (defined('SCRIPT_DEBUG') && SCRIPT_DEBUG) ? '' : '.min';
 		wp_deregister_script('select2');
-		wp_register_script('select2', SIMBA_TFA_PLUGIN_URL . '/includes/select2'.$suffix.'.js', array('jquery'), '4.0.0');
+		wp_register_script('select2', SIMBA_TFA_PLUGIN_URL . '/includes/select2'.$suffix.'.js', array('jquery'), '4.0.2');
 		wp_enqueue_script('select2');
-		wp_enqueue_style('select2', SIMBA_TFA_PLUGIN_URL . '/includes/select2.css', array(), '4.0.0');
+		wp_enqueue_style('select2', SIMBA_TFA_PLUGIN_URL . '/includes/select2.css', array(), '4.0.2');
 		add_action('admin_footer', array($this, 'admin_footer_select2'));
 		?>
 		<div class="simba_tfa_users">
@@ -437,6 +437,8 @@ class Simba_Two_Factor_Authentication_Premium {
 
 		if (empty($this->tfa)) $this->tfa = $simba_two_factor_authentication->getTFA();
 
+		$simba_two_factor_authentication->add_footer(false);
+		
 		ob_start();
 
 		if(!$this->tfa->isActivatedForUser($current_user->ID)){
@@ -449,7 +451,7 @@ class Simba_Two_Factor_Authentication_Premium {
 			
 			if(!$tfa_priv_key_64) $tfa_priv_key_64 = $this->tfa->addPrivateKey($current_user->ID);
 
-			$tfa_priv_key = trim($this->tfa->getPrivateKeyPlain($tfa_priv_key_64, $current_user->ID));
+			$tfa_priv_key = trim($this->tfa->getPrivateKeyPlain($tfa_priv_key_64, $current_user->ID), "\x00..\x1F");
 
 			$tfa_priv_key_32 = Base32::encode($tfa_priv_key);
 
@@ -556,4 +558,5 @@ class Simba_Two_Factor_Authentication_Premium {
 
 }
 
+global $simba_two_factor_authentication_premium;
 $simba_two_factor_authentication_premium = new Simba_Two_Factor_Authentication_Premium();

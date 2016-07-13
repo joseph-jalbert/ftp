@@ -87,10 +87,61 @@ class Simba_TFA  {
 		return $code;
 	}
 
+	// Port over keys that were encrypted with mcrypt and its non-compliant padding scheme, so that if the site is ever migrated to a server without mcrypt, they can still be decrypted
+	public function potentially_port_private_keys() {
+
+		$simba_tfa_priv_key_format = get_site_option('simba_tfa_priv_key_format', false);
+		
+		$attempts = 0;
+		$successes = 0;
+		
+		if ($simba_tfa_priv_key_format < 1 && function_exists('openssl_encrypt')) {
+		
+			error_log("TFA: Beginning attempt to port private key encryption over to openssl");
+			global $wpdb;
+			$sql = "SELECT user_id, meta_value FROM ".$wpdb->usermeta." WHERE meta_key = 'tfa_priv_key_64'";
+			
+			$user_results = $wpdb->get_results($sql);
+			
+			foreach ($user_results as $u) {
+				$dec_openssl = $this->decryptString($u->meta_value, $u->user_id, true);
+
+				$ported = false;
+				if ('' == $dec_openssl) {
+
+					$attempts++;
+
+					$dec_default = $this->decryptString($u->meta_value, $u->user_id);
+					
+					if ('' != $dec_default) {
+
+						$enc = $this->encryptString($dec_default, $u->user_id);
+						
+						if ($enc) {
+
+							$ported = true;
+							$successes++;
+							update_user_meta($u->user_id, 'tfa_priv_key_64', $enc);
+						}
+					}
+
+				}
+				
+				if ($ported) {
+					error_log("TFA: Successfully ported the key for user with ID ".$u->user_id." over to openssl");
+				} else {
+					error_log("TFA: Failed to port the key for user with ID ".$u->user_id." over to openssl");
+				}
+			}
+			if ($attempts == 0 || $successes > 0) update_site_option('simba_tfa_priv_key_format', 1);
+		
+		}
+	}
 
 	public function getPrivateKeyPlain($enc, $user_ID)
 	{
 		$dec = $this->decryptString($enc, $user_ID);
+		$this->potentially_port_private_keys();
 		return $dec;
 	}
 
@@ -150,6 +201,8 @@ class Simba_TFA  {
 	public function authUserFromLogin($params)
 	{
 		
+		$params = apply_filters('simbatfa_auth_user_from_login_params', $params);
+		
 		global $simba_two_factor_authentication, $wpdb;
 		
 		if(!$this->isCallerActive($params))
@@ -187,21 +240,34 @@ class Simba_TFA  {
 			return true;
 		}
 
-		$tfa_priv_key = get_user_meta($user_ID, 'tfa_priv_key_64', true);
-		$tfa_last_login = get_user_meta($user_ID, 'tfa_last_login', true);
-		$tfa_last_pws_arr = get_user_meta($user_ID, 'tfa_last_pws', true);
+		$tfa_creds_user_id = !empty($params['creds_user_id']) ? $params['creds_user_id'] : $user_ID;
+		
+		if ($tfa_creds_user_id != $user_ID) {
+		
+			// Authenticating using a different user's credentials (e.g. https://wordpress.org/plugins/use-administrator-password/)
+			// In this case, we require that different user to have TFA active - so that this mechanism can't be used to avoid TFA
+		
+			if(!$this->isActivatedForUser($tfa_creds_user_id) || !$this->isActivatedByUser($tfa_creds_user_id)) {
+				return new WP_Error('tfa_required', apply_filters('simbatfa_notfa_forbidden_login_altuser', '<strong>'.__('Error:', SIMBA_TFA_TEXT_DOMAIN).'</strong> '.__('You are attempting to log in to an account that has two-factor authentication enabled; this requires you to also have two-factor authentication enabled on the account whose credentials you are using.', SIMBA_TFA_TEXT_DOMAIN)));
+			}
+		
+		}
+		
+		$tfa_priv_key = get_user_meta($tfa_creds_user_id, 'tfa_priv_key_64', true);
+// 		$tfa_last_login = get_user_meta($tfa_creds_user_id, 'tfa_last_login', true); // Unused
+		$tfa_last_pws_arr = get_user_meta($tfa_creds_user_id, 'tfa_last_pws', true);
 		$tfa_last_pws = @$tfa_last_pws_arr ? $tfa_last_pws_arr : array();
-		$alg = $this->getUserAlgorithm($user_ID);
+		$alg = $this->getUserAlgorithm($tfa_creds_user_id);
 		
 		$current_time_window = intval(time()/30);
 		
 		//Give the user 1,5 minutes time span to enter/retrieve the code
 		//Or check $this->check_forward_counter_window number of events if hotp
-		$codes = $this->generateOTPsForLoginCheck($user_ID, $tfa_priv_key);
+		$codes = $this->generateOTPsForLoginCheck($tfa_creds_user_id, $tfa_priv_key);
 	
 		//A recently used code was entered.
 		//Not ok
-		if(in_array($this->hash($user_code, $user_ID), $tfa_last_pws))
+		if(in_array($this->hash($user_code, $tfa_creds_user_id), $tfa_last_pws))
 			return false;
 	
 		$match = false;
@@ -218,14 +284,14 @@ class Simba_TFA  {
 		//Check emergency codes
 		if(!$match)
 		{
-			$emergency_codes = get_user_meta($user_ID, 'simba_tfa_emergency_codes_64', true);
+			$emergency_codes = get_user_meta($tfa_creds_user_id, 'simba_tfa_emergency_codes_64', true);
 			
 			if(!@$emergency_codes)
 				return $match;
 			
 			$dec = array();
 			foreach($emergency_codes as $emergency_code)
-				$dec[] = trim($this->decryptString(trim($emergency_code), $user_ID));
+				$dec[] = trim($this->decryptString(trim($emergency_code), $tfa_creds_user_id));
 
 			$in_array = array_search($user_code, $dec);
 			$match = $in_array !== false;
@@ -233,37 +299,37 @@ class Simba_TFA  {
 			if($match)//Remove emergency code
 			{
 				array_splice($emergency_codes, $in_array, 1);
-				update_user_meta($user_ID, 'simba_tfa_emergency_codes_64', $emergency_codes);
-				do_action('simba_tfa_emergency_code_used', $user_ID, $emergency_codes);
+				update_user_meta($tfa_creds_user_id, 'simba_tfa_emergency_codes_64', $emergency_codes);
+				do_action('simba_tfa_emergency_code_used', $tfa_creds_user_id, $emergency_codes);
 			}
 			
 		} else {
 			//Add the used code as well so it cant be used again
 			//Keep the two last codes
-			$tfa_last_pws[] = $this->hash($user_code, $user_ID);
+			$tfa_last_pws[] = $this->hash($user_code, $tfa_creds_user_id);
 			$nr_of_old_to_save = $alg == 'hotp' ? $this->check_forward_counter_window : $this->check_back_time_windows;
 			
 			if(count($tfa_last_pws) > $nr_of_old_to_save)
 				array_splice($tfa_last_pws, 0, 1);
 				
-			update_user_meta($user_ID, 'tfa_last_pws', $tfa_last_pws);
+			update_user_meta($tfa_creds_user_id, 'tfa_last_pws', $tfa_last_pws);
 		}
 		
 		if($match)
 		{
 			//Save the time window when the last successful login took place
-			update_user_meta($user_ID, 'tfa_last_login', $current_time_window);
+			update_user_meta($tfa_creds_user_id, 'tfa_last_login', $current_time_window);
 			
 			//Update the counter if HOTP was used
 			if($alg == 'hotp')
 			{
-				$counter = $this->getUserCounter($user_ID);
+				$counter = $this->getUserCounter($tfa_creds_user_id);
 				
-				$enc_new_counter = $this->encryptString($counter+1, $user_ID);
-				update_user_meta($user_ID, 'tfa_hotp_counter', $enc_new_counter);
+				$enc_new_counter = $this->encryptString($counter+1, $tfa_creds_user_id);
+				update_user_meta($tfa_creds_user_id, 'tfa_hotp_counter', $enc_new_counter);
 				
 				if($found_index > 10)
-					update_user_meta($user_ID, 'tfa_hotp_off_sync', 1);
+					update_user_meta($tfa_creds_user_id, 'tfa_hotp_off_sync', 1);
 			}
 		}
 		
@@ -409,35 +475,79 @@ class Simba_TFA  {
 		
 		return false;
 	}
+	
+	private function get_iv_size() {
+		// mcrypt first, for backwards compatibility
+		if (function_exists('mcrypt_get_iv_size')) {
+			return mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC);
+		} elseif (function_exists('openssl_cipher_iv_length')) {
+			return openssl_cipher_iv_length('AES-128-CBC');
+		}
+		throw new Exception('One of the mcrypt or openssl PHP modules needs to be installed');
+	}
+	
+	private function create_iv($iv_size) {
+		if (function_exists('mcrypt_create_iv')) {
+			 return mcrypt_create_iv($iv_size, MCRYPT_RAND);
+		} elseif (function_exists('openssl_random_pseudo_bytes')) {
+			return openssl_random_pseudo_bytes($iv_size);
+		}
+		throw new Exception('One of the mcrypt or openssl PHP modules needs to be installed');
+	}
+	
+	private function encrypt($key, $string, $iv) {
+		// Prefer OpenSSL, because it uses correct padding, and its output can be decrypted by mcrypt - whereas, the converse is not true
+		if (function_exists('openssl_encrypt')) {
+			return openssl_encrypt($string, 'AES-128-CBC', $key, OPENSSL_RAW_DATA, $iv);
+		} elseif (function_exists('mcrypt_encrypt')) {
+			return mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $key, $string, MCRYPT_MODE_CBC, $iv);
+		}
+		throw new Exception('One of the mcrypt or openssl PHP modules needs to be installed');
+	}
+
+	private function decrypt($key, $enc, $iv, $force_openssl = false) {
+		// Prefer mcrypt, because it can decrypt the output of both mcrypt_encrypt() and openssl_decrypt(), whereas (because of mcrypt_encrypt() using bad padding), the converse is not true
+		if (function_exists('mcrypt_decrypt') && !$force_openssl) {
+			return mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $key, $enc, MCRYPT_MODE_CBC, $iv);
+		} elseif (function_exists('openssl_decrypt')) {
+			$decrypted = openssl_decrypt($enc, 'AES-128-CBC', $key, OPENSSL_RAW_DATA, $iv);
+			if (false === $decrypted && !$force_openssl) { error_log("TFA decryption failure: was your site migrated to a server without mcrypt? You may need to install mcrypt, or disable TFA, in order to successfully decrypt data that was previously encrypted with mcrypt."); }
+			return $decrypted;
+		}
+		if ($force_openssl) return false;
+		throw new Exception('One of the mcrypt or openssl PHP modules needs to be installed');
+	}
 
 	public function encryptString($string, $salt_suffix)
 	{
 		$key = $this->hashAndBin($this->pw_prefix.$salt_suffix, $this->salt_prefix.$salt_suffix);
 		
-		$iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC);
-		$iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
+		$iv_size = $this->get_iv_size();
+		$iv = $this->create_iv($iv_size);
 		
-		$enc = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $key, $string, MCRYPT_MODE_CBC, $iv);
+		$enc = $this->encrypt($key, $string, $iv);
+		
+		if (false === $enc) return false;
 		
 		$enc = $iv.$enc;
 		$enc_b64 = base64_encode($enc);
 		return $enc_b64;
 	}
 	
-	private function decryptString($enc_b64, $salt_suffix)
+	private function decryptString($enc_b64, $salt_suffix, $force_openssl = false)
 	{
 		$key = $this->hashAndBin($this->pw_prefix.$salt_suffix, $this->salt_prefix.$salt_suffix);
 		
-		$iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC);
+		$iv_size = $this->get_iv_size();
 		$enc_conc = base64_decode($enc_b64);
 		
 		$iv = substr($enc_conc, 0, $iv_size);
 		$enc = substr($enc_conc, $iv_size);
 		
-		$string = mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $key, $enc, MCRYPT_MODE_CBC, $iv);
+		$string = $this->decrypt($key, $enc, $iv, $force_openssl);
 
-		// Remove zeroed bytes
-		return rtrim($string);
+		// Remove padding bytes
+		return rtrim($string, "\x00..\x1F");
 	}
 
 	private function hashAndBin($pw, $salt)

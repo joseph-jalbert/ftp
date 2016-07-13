@@ -5,7 +5,7 @@ Plugin URI: https://www.simbahosting.co.uk/s3/product/two-factor-authentication/
 Description: Secure your WordPress login forms with two factor authentication - including WooCommerce login forms
 Author: David Nutbourne + David Anderson, original plugin by Oskar Hane
 Author URI: https://www.simbahosting.co.uk
-Version: 1.2.8
+Version: 1.2.12
 License: GPLv2 or later
 */
 
@@ -15,7 +15,7 @@ define('SIMBA_TFA_PLUGIN_URL', plugins_url('', __FILE__));
 
 class Simba_Two_Factor_Authentication {
 
-	public $version = '1.2.8';
+	public $version = '1.2.12';
 	private $php_required = '5.3';
 
 	private $frontend;
@@ -27,8 +27,8 @@ class Simba_Two_Factor_Authentication {
 			$abort = true;
 		}
 
-		if (!function_exists('mcrypt_get_iv_size')) {
-			add_action('all_admin_notices', array($this, 'admin_notice_missing_mcrypt'));
+		if (!function_exists('mcrypt_get_iv_size') && !function_exists('openssl_cipher_iv_length')) {
+			add_action('all_admin_notices', array($this, 'admin_notice_missing_mcrypt_and_openssl'));
 			$abort = true;
 		}
 
@@ -141,8 +141,8 @@ class Simba_Two_Factor_Authentication {
 		$this->show_admin_warning('<strong>'.__('Higher PHP version required', 'updraftplus').'</strong><br> '.sprintf(__('The Two Factor Authentication plugin requires PHP version %s or higher - your current version is only %s.', SIMBA_TFA_TEXT_DOMAIN), $this->php_required, PHP_VERSION), 'error');
 	}
 
-	public function admin_notice_missing_mcrypt() {
-		$this->show_admin_warning('<strong>'.__('PHP Mcrypt module required', 'updraftplus').'</strong><br> '.__('The Two Factor Authentication plugin requires the PHP mcrypt module to be installed. Please ask your web hosting company to install it.', SIMBA_TFA_TEXT_DOMAIN), 'error');
+	public function admin_notice_missing_mcrypt_and_openssl() {
+		$this->show_admin_warning('<strong>'.__('PHP OpenSSL or mcrypt module required', 'updraftplus').'</strong><br> '.__('The Two Factor Authentication plugin requires either the PHP openssl (preferred) or mcrypt module to be installed. Please ask your web hosting company to install one of them.', SIMBA_TFA_TEXT_DOMAIN), 'error');
 	}
 
 	public function show_admin_warning($message, $class = "updated") {
@@ -359,6 +359,8 @@ class Simba_Two_Factor_Authentication {
 	{
 		$tfa = $this->getTFA();
 		
+		$tfa->potentially_port_private_keys();
+		
 		global $current_user;
 		if(!$tfa->isActivatedForUser($current_user->ID)) return;
 		add_menu_page(__('Two Factor Authentication', SIMBA_TFA_TEXT_DOMAIN), __('Two Factor Auth', SIMBA_TFA_TEXT_DOMAIN), 'read', 'two-factor-auth-user', array($this, 'tfaShowUserSettingsPage'), SIMBA_TFA_PLUGIN_URL.'/img/tfa_admin_icon_16x16.png', 72);
@@ -518,7 +520,7 @@ class Simba_Two_Factor_Authentication {
 		$tfa_priv_key_64 = get_user_meta($user_id, 'tfa_priv_key_64', true);
 		if(!$tfa_priv_key_64) $tfa_priv_key_64 = $tfa->addPrivateKey($user_id);
 
-		$tfa_priv_key = trim($tfa->getPrivateKeyPlain($tfa_priv_key_64, $user_id));
+		$tfa_priv_key = trim($tfa->getPrivateKeyPlain($tfa_priv_key_64, $user_id), "\x00..\x1F");
 
 		$tfa_priv_key_32 = Base32::encode($tfa_priv_key);
 
@@ -576,7 +578,7 @@ class Simba_Two_Factor_Authentication {
 		
 		if(!$tfa_priv_key_64) $tfa_priv_key_64 = $tfa->addPrivateKey($user_id);
 
-		$tfa_priv_key = trim($tfa->getPrivateKeyPlain($tfa_priv_key_64, $user_id));
+		$tfa_priv_key = trim($tfa->getPrivateKeyPlain($tfa_priv_key_64, $user_id), "\x00..\x1F");
 
 		$tfa_priv_key_32 = Base32::encode($tfa_priv_key);
 

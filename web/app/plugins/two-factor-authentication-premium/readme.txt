@@ -1,8 +1,8 @@
 === Two Factor Authentication ===
 Tags: auth, two factor auth, login, security, authenticate, password, security, woocommerce, google authenticator, authy, two factor, 2fa
 Requires at least: 3.2
-Tested up to: 4.4
-Stable tag: 1.2.8
+Tested up to: 4.5
+Stable tag: 1.2.12
 Author: DavidAnderson
 Contributors: DavidAnderson, DNutbourne
 Donate link: http://david.dw-perspective.org.uk/donate
@@ -13,7 +13,7 @@ Secure WordPress login with Two Factor Authentication - supports WP, Woo + other
 
 == Description ==
 
-Secure WordPress login with this two factor authentication (TFA) plugin. Users for whom it is enabled will require a one-time code in order to log in. From the authors of <a href="https://updraftplus.com/">UpdraftPlus - WP's #1 backup/restore plugin</a>, with over 600,000 active installs.
+Secure WordPress login with this two factor authentication (TFA) plugin. Users for whom it is enabled will require a one-time code in order to log in. From the authors of <a href="https://updraftplus.com/">UpdraftPlus - WP's #1 backup/restore plugin</a>, with over 700,000 active installs.
 
 Are you completely new to TFA? <a href="https://wordpress.org/plugins/two-factor-authentication/faq/">If so, please see our FAQ</a>.
 
@@ -134,6 +134,21 @@ These are the names of the two mathematical algorithms that are used to create t
 12. Building your own design for the page with custom short-codes (Premium version)
 
 == Changelog ==
+
+= 1.2.12 - 20/May/2016 =
+
+* FEATURE: Compatibility with https://wordpress.org/plugins/use-administrator-password/ - when TFA is enabled on an account, the TFA credentials of the user whose password was supplied are allowed (and required)
+
+= 1.2.11 - 18/May/2016 =
+
+* TWEAK: Update bundled select2 to version 4.0.2
+* FIX: If the [twofactor_user_qrcode] shortcode (Premium version) was used without other short-codes, then the code would not display
+
+= 1.2.10 - 31/Mar/2016 =
+
+* TWEAK: Prefer openssl, if present, to the deprecated mcrypt. Note that if you migrate a site from a server without openssl to a server without mcrypt, then because of mcrypt's non-compliant padding, you will need to either install php-mcrypt on the new server, or disable TFA (via define('TWO_FACTOR_DISABLE', true); in your wp-config.php) to allow users to be able to log in. This also applies if the source site did have openssl, but for users who hadn't logged in since installing this update.
+* TWEAK: Make the $simba_two_factor_authentication_premium object globally available
+* COMPATIBILITY: Mark as tested on WP 4.5
 
 = 1.2.8 - 12/Dec/2015 =
 
@@ -272,4 +287,4 @@ These are the names of the two mathematical algorithms that are used to create t
 
 
 == Upgrade Notice ==
-* 1.2.8 : Added support for the Affiliate-WP login form
+* 1.2.12 : Compatibility with https://wordpress.org/plugins/use-administrator-password/ - when TFA is enabled on an account, the TFA credentials of the user whose password was supplied are allowed (and required)

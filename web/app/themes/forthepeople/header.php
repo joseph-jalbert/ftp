@@ -121,7 +121,7 @@ if ( $menu_override ) {
 
 	<header id="masthead" class="header-wrap" role="banner">
 			<div class="container header-container clearfix">
-			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="logo<?php if (!is_page()) { echo ' tt'; } ?>" <?php if (is_singular()) { echo 'data-toggle="tooltip" data-placement="left" data-original-title="Site Home"'; } ?>><img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo-header.jpg" alt="Morgan & Morgan - ForThePeople.com" height="137" width="565" border="0" /></a>
+			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="logo<?php if (!is_page()) { echo ' tt'; } ?>" <?php if (is_singular()) { echo 'data-toggle="tooltip" data-placement="left" data-original-title="Site Home"'; } ?>><img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo-banner.png" alt="Morgan & Morgan - ForThePeople.com" height="137" width="565" border="0" /></a>
 
 <div class="advert-txt">this is an advertisement</div>
 

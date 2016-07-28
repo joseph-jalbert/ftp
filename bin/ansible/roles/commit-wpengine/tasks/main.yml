@@ -1,0 +1,31 @@
+---
+
+- name: checkout the github repo
+  shell: git checkout {{ wpengine_branch }} chdir={{ workspace + '/wpengine' }}
+
+- name: kill the cached files within the themes directory
+  shell: git rm -rf --cached --ignore-unmatch wp-content/themes chdir={{ workspace + '/wpengine' }}
+
+- name: kill all the .git subdirectories
+  shell: find . -type d | grep .git | xargs rm -rf chdir={{ workspace + '/wpengine/wp-content' }}
+
+- name: kill all the .gitignore files
+  shell: find . -type f | grep .gitignore | xargs rm -rf chdir={{ workspace + '/wpengine/wp-content' }}
+
+- name: kill all the node_modules subdirectories
+  shell: find . -type d | grep node_modules | xargs rm -rf chdir={{ workspace + '/wpengine/wp-content' }}
+
+- name: kill all the .sass-cache subdirectories
+  shell: find . -type d | grep .sass-cache | xargs rm -rf chdir={{ workspace + '/wpengine/wp-content' }}
+
+- name: kill composer subdirectories
+  shell: find . -type d | grep inc/external | xargs rm -rf chdir={{ workspace + '/wpengine/wp-content' }}
+
+- name: add all the files to the git repo
+  shell: git add . chdir={{ workspace + '/wpengine' }}
+
+- name: commit everything
+  shell: git commit --allow-empty -am "updating the wpengine repo" chdir={{ workspace + '/wpengine' }}
+
+- name: push repo to wpengine
+  shell: git push {{ wpengine_repo }} {{ wpengine_branch }} chdir={{ workspace + '/wpengine' }}

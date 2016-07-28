@@ -1,0 +1,39 @@
+---
+- name: make sure we're logged into terminus
+  shell: terminus auth login $PANTHEON_USER --password=$PANTHEON_PASSWORD
+
+- name: set terminus connection mode to sftp
+  shell: terminus site set-connection-mode --mode=sftp --site=$PANTHEON_SITE_NAME
+
+- name: install redis and native php sessions plugins
+  shell: terminus wp "plugin install wp-redis wp-native-php-sessions" --site=$PANTHEON_SITE_NAME --env=dev
+  register: install_plugins
+
+- debug: msg="{{ install_plugins.stdout_lines }}"
+
+- name: timeout for a short while to register code update
+  pause: seconds=10
+
+- name: Add build datestamp
+  shell: echo 'Built on '$(date) > {{ workspace }}/pantheon/.build-info
+
+- name: add plugins to repository
+  shell: terminus site code commit --site=$PANTHEON_SITE_NAME --env=dev --message='add wp-redis and native sessions to codebase'
+
+- name: deploy test
+  shell: terminus site deploy --site=$PANTHEON_SITE_NAME --env=test --note="Updating"
+
+- name: deploy live
+  shell: terminus site deploy --site=$PANTHEON_SITE_NAME --env=live --note="Updating from test"
+
+- name: make sure redis plugin is not active
+  shell: terminus wp "plugin deactivate wp-redis" --site=$PANTHEON_SITE_NAME --env=live
+
+- name: make sure native php sessions is active
+  shell: terminus wp "plugin activate wp-native-php-sessions" --site=$PANTHEON_SITE_NAME --env=live
+
+- name: flush rewrite rules
+  shell: terminus wp "rewrite flush" --site=$PANTHEON_SITE_NAME --env=live
+
+- name: set terminus connection mode back to git
+  shell: terminus site set-connection-mode --mode=git --site=$PANTHEON_SITE_NAME

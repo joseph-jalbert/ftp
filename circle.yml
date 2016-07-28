@@ -1,8 +1,14 @@
 dependencies:
   override:
     - npm config set registry http://registry.npmjs.org/
-    - chmod +x ./bin/dependencies.sh
-    - ./bin/dependencies.sh
+    - sudo apt-get install software-properties-common
+    - sudo apt-add-repository ppa:ansible/ansible -y
+    - sudo apt-get update
+    - sudo apt-get install ansible
+    - sudo ansible-galaxy install kosssi.gitconfig
+    - curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -
+    - sudo apt-get install -y nodejs
+    - npm install -g bower grunt-cli grunt-contrib-sass
 
 test:
   override:
@@ -18,12 +24,13 @@ deployment:
   staging:
     branch: development
     commands:
-          - chmod +x ./bin/controller.sh
-          - ./bin/controller.sh development
-
+          - sudo chown -R ubuntu ~/
+          - ansible-playbook --extra-vars '{"project_branch":"development","build_target":"pantheon"}' bin/ansible/pantheon-dev.yml
+          - ansible-playbook --extra-vars '{"project_branch":"development","wpengine_repo":"git@git.wpengine.com:staging/forthepeople.git","build_target":"wpengine"}' bin/ansible/wpengine.yml
 
   production:
     branch: master
     commands:
-          - chmod +x ./bin/controller.sh
-          - ./bin/controller.sh master
+          - sudo chown -R ubuntu ~/
+          - ansible-playbook --extra-vars '{"project_branch":"master","build_target":"pantheon"}' bin/ansible/pantheon-prod.yml
+          - ansible-playbook --extra-vars '{"project_branch":"master","wpengine_repo":"git@git.wpengine.com:production/forthepeople.git","build_target":"wpengine"}' bin/ansible/wpengine.yml

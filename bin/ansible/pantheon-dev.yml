@@ -1,0 +1,17 @@
+---
+ - hosts: local
+   tasks:
+     - command: echo "$PATH"
+       register: default_path
+ - hosts: local
+   environment:
+     PATH: "/home/ubuntu/terminus:{{ default_path.stdout }}"
+   roles:
+    - kosssi.gitconfig
+    - install-dependencies
+    - clear-releases
+    - prepare
+    - project
+    - copy-project
+    - commit-pantheon
+    - pantheon-terminus-dev

@@ -1,0 +1,16 @@
+---
+- name: clone git repository
+  shell: git clone -b {{ project_branch }} --single-branch {{ project_repo }} {{ workspace }}/project
+
+- name: add default npm registry
+  shell: npm config set registry http://registry.npmjs.org/
+
+- name: run build steps for the site
+  shell: "{{ item.build_steps | join (' && ') }}"
+  with_items:
+    - build_steps:
+        - npm install
+        - grunt
+        - composer update
+  args:
+    chdir: "{{ workspace }}/project/"

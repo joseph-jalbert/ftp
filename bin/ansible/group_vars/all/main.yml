@@ -1,0 +1,22 @@
+---
+project_repo: git@github.com:Morgan-and-Morgan/forthepeople.com.git
+pantheon_repo: ssh://codeserver.dev.f866bccd-7005-4285-a294-9c15346ec607@codeserver.dev.f866bccd-7005-4285-a294-9c15346ec607.drush.in:2222/~/repository.git
+wpengine_repo: git@git.wpengine.com:staging/forthepeople.git
+workspace: ~/.morgan-temp/releases
+pantheon_branch: master
+wpengine_branch: master
+project_branch: development
+pantheon_cli_version: 0.11.2
+pantheon_site_name: forthepeople
+git_config:
+  user:
+    name: Circle CI
+    email: circleci@forthepeople.com
+  core:
+    editor: nano
+    excludesfile: "~/.gitexcludesfile"
+  push:
+    default: simple
+git_ignore:
+  - "*.log"
+  - ".vagrant"

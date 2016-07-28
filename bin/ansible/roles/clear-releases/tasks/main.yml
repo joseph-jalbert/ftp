@@ -1,0 +1,2 @@
+---
+- file: path={{ workspace }} state=absent

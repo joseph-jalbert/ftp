@@ -1,0 +1,20 @@
+---
+- name: synchronize pantheon
+  synchronize: src={{ item.src }} dest={{ item.dest }} dirs=yes recursive=yes
+
+  with_items:
+    - src: "{{ workspace  + '/project/web/app/themes' }}"
+      dest: "{{ workspace  + '/pantheon/wp-content' }}"
+    - src: "{{ workspace  + '/project/web/app/plugins' }}"
+      dest: "{{ workspace  + '/pantheon/wp-content' }}"
+  when: build_target == "pantheon"
+
+- name: synchronize wpengine
+  synchronize: src={{ item.src }} dest={{ item.dest }} dirs=yes recursive=yes
+
+  with_items:
+    - src: "{{ workspace  + '/project/web/app/themes' }}"
+      dest: "{{ workspace  + '/wpengine/wp-content' }}"
+    - src: "{{ workspace  + '/project/web/app/plugins' }}"
+      dest: "{{ workspace  + '/wpengine/wp-content' }}"
+  when: build_target == "wpengine"

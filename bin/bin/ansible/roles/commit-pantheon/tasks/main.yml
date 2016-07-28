@@ -1,0 +1,9 @@
+---
+- name: make sure we're logged into terminus
+  shell: terminus auth login $PANTHEON_USER --password=$PANTHEON_PASSWORD
+
+- name: set terminus connection mode to git
+  shell: terminus site set-connection-mode --mode=git --site=$PANTHEON_SITE_NAME
+
+- name: commit the updated pantheon repo, then push it up
+  shell: git checkout {{ pantheon_branch }} && git add . && git commit --allow-empty -am "updating the pantheon repo" && git push {{ pantheon_repo }} {{ pantheon_branch }} chdir={{ workspace + '/pantheon' }}

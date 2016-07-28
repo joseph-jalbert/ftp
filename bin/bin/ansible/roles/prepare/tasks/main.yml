@@ -1,0 +1,32 @@
+---
+- name: checkout pantheon git repository
+  shell: git clone -b {{ pantheon_branch }} --single-branch {{ pantheon_repo }} {{ workspace }}/pantheon
+  when: build_target == "pantheon"
+
+- name: checkout wpengine git repository
+  shell: git clone -b {{ wpengine_branch }} --single-branch {{ wpengine_repo }} {{ workspace }}/wpengine
+  when: build_target == "wpengine"
+
+
+- name: remove pantheon directories
+  file: path={{ workspace }}/pantheon/wp-content/{{ item }} state=absent
+  with_items:
+    - themes
+    - plugins
+  when: build_target == "pantheon"
+
+- name: remove wpengine directories
+  file: path={{ workspace }}/wpengine/wp-content/{{ item }} state=absent
+  with_items:
+    - themes
+    - plugins
+  when: build_target == "wpengine"
+
+
+- name: commit the empty pantheon repo
+  shell: git add . && git commit --allow-empty -am "wiping out pantheon" chdir={{ workspace + '/pantheon' }}
+  when: build_target == "pantheon"
+
+- name: commit the empty wpengine repo
+  shell: git add . && git commit --allow-empty -am "wiping out wpengine" chdir={{ workspace + '/wpengine' }}
+  when: build_target == "wpengine"

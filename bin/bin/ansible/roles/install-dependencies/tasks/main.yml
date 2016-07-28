@@ -1,0 +1,33 @@
+---
+- name: Update Cache
+  apt: update_cache=yes
+  become: yes
+  become_user: root
+
+- name: Install ruby gems as Grunt dependencies
+  gem: name=sass state=latest user_install=no
+  become: yes
+  become_user: root
+
+
+- name: Create terminus directory
+  file: path=~/terminus/ state=directory mode=0775
+  when: build_target == "pantheon"
+
+- name: Download packaged terminus
+  get_url:
+    url: https://github.com/pantheon-systems/terminus/releases/download/{{ pantheon_cli_version }}/terminus.phar
+    dest: "~/terminus/terminus"
+    mode: 'ug=rwx,o=r'
+  when: build_target == "pantheon"
+
+- name: Add Terminus alias
+  lineinfile:
+    dest=~/.bash_profile
+    line="alias terminus='~/terminus/terminus'"
+    regexp='^alias terminus='~/terminus/terminus'$'
+    state=present
+    insertafter=EOF
+    create=True
+  when: build_target == "pantheon"
+

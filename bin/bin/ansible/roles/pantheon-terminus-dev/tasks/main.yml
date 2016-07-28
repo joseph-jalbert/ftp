@@ -1,0 +1,12 @@
+---
+- name: make sure we're logged into terminus
+  shell: terminus auth login $PANTHEON_USER --password=$PANTHEON_PASSWORD
+
+- name: set terminus connection mode to sftp
+  shell: terminus site set-connection-mode --mode=sftp --site=$PANTHEON_SITE_NAME
+
+- name: deploy test
+  shell: terminus site deploy --site=$PANTHEON_SITE_NAME --env=test --note="Updating"
+
+- name: set terminus connection mode to git
+  shell: terminus site set-connection-mode --mode=git --site=$PANTHEON_SITE_NAME

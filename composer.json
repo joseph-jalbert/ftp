@@ -10,10 +10,10 @@
       "type": "composer",
       "url": "https://wpackagist.org"
     },
-{
-            "type": "composer",
-            "url": "https://satis.forthepeople.com"
-        }
+    {
+        "type": "composer",
+        "url": "https://satis.forthepeople.com"
+    }
   ],
   "require": {
     "johnpbloch/wordpress": "4.*",

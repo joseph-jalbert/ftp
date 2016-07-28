@@ -1,0 +1,10 @@
+---
+ - hosts: local
+   roles:
+    - kosssi.gitconfig
+    - install-dependencies
+    - clear-releases
+    - prepare
+    - project
+    - copy-project
+    - commit-wpengine

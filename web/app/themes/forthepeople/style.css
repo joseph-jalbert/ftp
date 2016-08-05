@@ -1873,12 +1873,16 @@ footer#footer .offices {
 }
 
 /* Mesothelioma Attorneys Page */
+.meso-cta {
+	margin-left: 20px;
+	font-family: ff-basic-gothic-web-pro,'Helvetica Neue',Helvetica,Arial,sans-serif;
+	font-size: 14px;
+}
+
 .meso-cta h2 {
 	width: 80%;
 	margin-left: auto;
 	margin-right: auto;
-	font-family: 'Helvetica Neue',Helvetica,ff-basic-gothic-web-pro,Arial,sans-serif;
-	font-size: 32px;
 }
 
 .meso-download {

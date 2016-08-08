@@ -9,7 +9,7 @@
     	<div class="content-pane-border"></div>
 		<h1 itemprop="name" class="pagetitle"><?php echo get_the_title() ?></h1>
 		<meta itemprop="headline" content="<?php esc_attr_e( get_the_title() ); ?>">
-		<meta itemprop="publisher" content="Morgan & Morgan">
+		<meta itemprop="publisher" content="Morgan &amp; Morgan">
         <div class="subtitle"><?php the_field('sub_title'); ?></div>
         <div class="heading-hr"></div>
                 

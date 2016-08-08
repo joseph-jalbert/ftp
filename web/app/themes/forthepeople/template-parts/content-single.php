@@ -5,9 +5,9 @@
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<div class="entry-content">
+	<div itemscope itemtype="http://schema.org/Article" class="entry-content">
     	<div class="content-pane-border"></div>
-		<h1 class="pagetitle"><?php echo get_the_title() ?></h1>
+		<h1 itemprop="name" class="pagetitle"><?php echo get_the_title() ?></h1>
         <div class="subtitle"><?php the_field('sub_title'); ?></div>
         <div class="heading-hr"></div>
                 
@@ -32,17 +32,17 @@
     <?php if (has_post_thumbnail()) { ?>
     <div class="title img">
       <?php $feat_image = wp_get_attachment_url(get_post_thumbnail_id()); ?>
-      <img width="603" height="214" src="<?php echo $feat_image; ?>">
+      <img itemprop="image" width="603" height="214" src="<?php echo $feat_image; ?>">
     </div>
 	<?php } else if (get_field('imported_blog_post_image')) { ?>
     <div class="title img">
-      <img width="603" height="214" src="<?php echo get_field('imported_blog_post_image'); ?>">
+      <img itemprop="image" width="603" height="214" src="<?php echo get_field('imported_blog_post_image'); ?>">
     </div>
 <?php } ?>
         <div id="blogmeta" class="span3 push1 pull-left">
 						<ul class="unstyled">
-							<li><i class="icon-calendar"></i> <?php the_time(' M j, Y') ?></li>
-		  					<li><i class="icon-user"></i> <?php the_author(); ?> </li>
+							<li><i itemprop="datePublished" content="<?php the_time('Y-m-d') ?>" class="icon-calendar"></i> <?php the_time(' M j, Y') ?></li>
+		  					<span itemprop="author" itemscope itemtype="http://schema.org/Person"><li itemprop="name"><i class="icon-user"></i> <?php the_author(); ?> </li></span>
 							<?php
 
 							if ( Local_News::POST_TYPE === get_post_type() ) :

@@ -85,7 +85,7 @@ class Google_Helper {
 			return false;
 		endif;
 
-		$place_search_url = sprintf( self::$place_search_url, urlencode( $office_address ), self::$google_api_key );
+		$place_search_url = sprintf( self::$place_search_url, urlencode( "Morgan & Morgan " . $office_address ), self::$google_api_key );
 		$place_id = get_post_meta($post_id, self::$place_id_meta_key, true );
 
 		$latest_place_id_key = 'google-place-id-' . md5( $place_search_url );

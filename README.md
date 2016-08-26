@@ -1,31 +1,49 @@
-
-# For The People
+# Abogados
 
 ## Pre-requisites (you may have some of these installed already)
 
+* Virtualbox at [virtualbox.org](http://virtualbox.org)
 * Vagrant at [vagrantup.com](http://vagrantup.com)
-* Vagrant Host Manager plugin, install directions at [its project page](https://github.com/smdahlen/vagrant-hostmanager).
-* Virtualbox at [virtualbox.com](http://virtualbox.com)
 * Composer instructions for downloading at [getcomposer.org](http://getcomposer.org)
 * Node and NPM	using [homebrew](http://brew.sh/) (preferred) or from [nodejs.org](https://nodejs.org/en/download/)
 * Bower instructions for downloading at [bower.io](http://bower.io)
 * Grunt CLI instructions at [its project page](https://github.com/gruntjs/grunt-cli)
+* Laravel Homestead instructions at https://github.com/laravel/homestead
+
+Optional:
+
 * [terminus](https://github.com/pantheon-systems/cli) which is Pantheon's CLI
 
 ## Setting up to develop locally
 
+
+*  Add the following homestead alias to ~/.bash_profile, note, if necessary change `~/Homestead` to the location you have installed Homestead, also you will need to run `source ~/.bash_profile` after updating your bash profile.
+ ```
+ function homestead() {
+     ( cd ~/Homestead && vagrant $* )
+ }
+ ```
+ 
 *  Clone this repository
-*  Copy `.env.example` to `.env` and set variables accordingly
-*  Run vagrant up, this may ask you for your password and take a lot of time. This is download a linux distribution, installing it along with a bunch of dependencies.
+*  Open the `Homestead.yaml` file that Homestead creates (mine is located at `~/.homestead/Homestead.yaml`)
+*  Add a new entry to the sites key pointing www.forthepeople.dev to the location of your repo + /web, for example mine is  
+ 
+ ```
+ sites:
+     - map: www.forthepeople.dev
+       to: /home/vagrant/Sites/forthepeople.dev/web
+```
+
+*  Optionally, add in a database (this is if you want to do local development) 
+*  Add a new site (and optionally a db) 
+*  Copy `.env.example` to `.env` and set the file's contents to the current .env file (saved in LastPass), unless you want to do local development 
 *  Run `composer install` && `npm install` && `bower install` && `grunt` (Note: if some of these task runners or dependency managers fail or appear to fail it may be because they are not being used by this project)
-*  Navigate to the sites domain + .dev) e.g. forthepeople.dev, run through the installation process, you can use dummy information here, just remember the user name and password.
-*  Log into the admin (e.g. http://forthepeople.dev/wp/wp-admin, note the */wp/* in between the domain and the /wp-admin)
-*  In the plugins section activate all plugins with `WP DB Migrate Pro` in their title.
-*  Obtain the serial and enter where prompted.
-*  Obtain the migration string from production and migrate the database from production, including the media. Save the migration profile so you can pull from production in the future to sync.
-*  Once you have migrated, the login will now be whatever your login is for production. Your dummy login that you previously created is no longer valid.
+*  Navigate to www.forthepeople.dev/wp-admin  you should be able to log in using the credentials on the staging db
+
 
 ## Deployments
+
+Our process has been updated, the below may be out of date.
 
 We use [CircleCI](http//circleci.com) for our deployments. Pushing to development will kick off the build for our staging site, master will kick off the build for our production site.
 
@@ -51,10 +69,6 @@ Some quick notes:
 * Pull in our repo hosted on WPEngine
 * Pull in our interim repos for our hosts (currently,  Pantheon and WPEngine)
 * Pull in WordPress' latest core code from [wordpress.org](http://wordpress.org)
-
-###Build our project
-* This is currently empty, but should include some form of composer for backend dependency management, bower for frontend dependency management, grunt for processing, etc.
-
 ### Process our repos
 
 ##### Pantheon
@@ -109,4 +123,3 @@ grunt rollback --sourceRepoBranch=(development|master) --wpEngineCommit=(INTERIM
 
 
 After you make a fix, deploy as you would normally.
-

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "258e8f33dce924bad58094bab79a9a98",
-    "content-hash": "f5fca676aca384062884871db3aeecae",
+    "hash": "36bd9f6a0c8f71de4c6f9fca053a092f",
+    "content-hash": "504fa704ff453a69581a2fcb373db208",
     "packages": [
         {
             "name": "composer/installers",
@@ -280,7 +280,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/hubspot-tracking-code.1.0.0.zip",
-                "reference": null,
+                "reference": "tags/1.0.0",
                 "shasum": null
             },
             "require": {
@@ -288,6 +288,26 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/hubspot-tracking-code/"
+        },
+        {
+            "name": "wpackagist-plugin/sumome",
+            "version": "1.19",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/sumome/",
+                "reference": "tags/1.19"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/sumome.1.19.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/sumome/"
         },
         {
             "name": "wpackagist-plugin/wp-smushit",
@@ -300,7 +320,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://downloads.wordpress.org/plugin/wp-smushit.2.3.1.zip",
-                "reference": null,
+                "reference": "tags/2.3.1",
                 "shasum": null
             },
             "require": {

@@ -164,36 +164,49 @@ class MMShortURL {
 		} elseif ( empty( $_POST['source'] ) || empty( $_POST['medium'] ) || empty( $_POST['name'] ) ) {
 			wp_send_json_error( array( 'message' => 'One of the required fields is missing. This should not happen.' ) );
 		} else {
-			/* GoDaddy's URL Shortener tries to process encoded URLs and causes the API to choke on
-			 * space and escaped spaces.  You have to escape space and then escape the percent to pass it.
-			 * esc_url trims spaces and sanitize_text_field trims escaped spaces, so you need to build
-			 * source_url and replace replace the space first, then we can escape ampersands and escape the url.
-			 *
-			 * Everything (especially multi-word query params) WILL BREAK if you change this without careful testing.
-			 */
-			$source_url = str_replace( " ", "%2520", self::build_source_url() );
-			$source_url = str_replace( "&", "%26", $source_url );
-			$source_url = esc_url( $source_url );
-
-			$service_url      = self::build_service_url( $source_url );
-			$service_response = wp_remote_get( $service_url );
-
-			if ( is_wp_error( $service_response ) ) {
-				wp_send_json_error( array(
-					'message'   => $service_response->get_error_message(),
-					'new_nonce' => wp_create_nonce( 'url_shortener_nonce' )
-				) );
-			} else {
-				wp_send_json_success( array(
-					'message'   => $service_response,
-					'full_url'  => str_replace( "%2520", "%20", $source_url ), // see note above.
-					'new_nonce' => wp_create_nonce( 'url_shortener_nonce' )
-				) );
-			}
+			self::run();
 		}
 
 		wp_die();
 	}
+
+	private static function run() {
+		/* GoDaddy's URL Shortener tries to process encoded URLs and causes the API to choke on
+		 * space and escaped spaces.  You have to escape space and then escape the percent to pass it.
+		 * esc_url trims spaces and sanitize_text_field trims escaped spaces, so you need to build
+		 * source_url and replace replace the space first, then we can escape ampersands and escape the url.
+		 *
+		 * Everything (especially multi-word query params) WILL BREAK if you change this without careful testing.
+		 */
+		$source_url = str_replace( " ", "%2520", self::build_source_url() );
+		$source_url = str_replace( "&", "%26", $source_url );
+		$source_url = esc_url( $source_url );
+
+		$service_url      = self::build_service_url( $source_url );
+
+		$service_response = wp_remote_get( $service_url );
+
+		$arr = json_decode( $service_response['body']);
+
+		$message = array(
+			'response' => array( 'code' => $arr->statusCode ),
+			'body' => $arr->shorturl
+		);
+
+		if ( is_wp_error( $service_response ) ) {
+			wp_send_json_error( array(
+				'message'   => $service_response->get_error_message(),
+				'new_nonce' => wp_create_nonce( 'url_shortener_nonce' )
+			) );
+		} else {
+			wp_send_json_success( array(
+				'message'   => $message,
+				'full_url'  => str_replace( "%2520", "%20", $source_url ), // see note above.
+				'new_nonce' => wp_create_nonce( 'url_shortener_nonce' )
+			) );
+		}
+	}
+
 
 	public static function shorten_any_url() {
 		if ( ! wp_verify_nonce( $_POST['nonce'], 'url_shortener_nonce' ) ) {
@@ -217,6 +230,14 @@ class MMShortURL {
 			$service_url      = self::build_service_url( $source_url );
 			$service_response = wp_remote_get( $service_url );
 
+			$arr = json_decode( $service_response['body']);
+
+			$message = array(
+				'response' => array( 'code' => $arr->statusCode ),
+				'body' => $arr->shorturl
+			);
+
+
 			if ( is_wp_error( $service_response ) ) {
 				wp_send_json_error( array(
 					'message'   => $service_response->get_error_message(),
@@ -224,7 +245,7 @@ class MMShortURL {
 				) );
 			} else {
 				wp_send_json_success( array(
-					'message'   => $service_response,
+					'message'   => $message,
 					'new_nonce' => wp_create_nonce( 'url_shortener_nonce' )
 				) );
 			}
@@ -248,12 +269,25 @@ class MMShortURL {
 
 	private static function build_service_url( $source_url ) {
 		$service_url_data = array(
-			'apikey' => get_option( self::APIKEY_OPTION_NAME ),
-			'domain' => get_option( self::DOMAIN_OPTION_NAME ),
-			'url'    => $source_url
+			'keyword' => self::generate_keyword(),
+			'url'    => $source_url,
+			'signature' => get_option( self::APIKEY_OPTION_NAME ),
+			'action' => 'shorturl',
+			'format' => 'json'
 		);
 
 		return add_query_arg( $service_url_data, get_option( self::SERVICE_OPTION_NAME ) );
+	}
+
+	private function generate_keyword() {
+		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$charactersLength = strlen($characters);
+		$randomString = '';
+		for ($i = 0; $i < 3; $i++) {
+			$randomString .= $characters[rand(0, $charactersLength - 1)];
+		}
+
+		return 'q' . $randomString;
 	}
 
 	public static function add_apikey_setting() {
@@ -317,8 +351,7 @@ class MMShortURL {
 	}
 
 	private static function check_all_settings_filled() {
-		if ( empty( get_option( self::APIKEY_OPTION_NAME ) ) ||
-		     empty( get_option( self::DOMAIN_OPTION_NAME ) ) ||
+		if ( empty( get_option( self::DOMAIN_OPTION_NAME ) ) ||
 		     empty( get_option( self::SERVICE_OPTION_NAME ) )
 		) {
 			return false;

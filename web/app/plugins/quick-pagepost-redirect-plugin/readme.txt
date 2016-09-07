@@ -1,17 +1,17 @@
 === Quick Page/Post Redirect Plugin ===
-Contributors: prophecy2040
-Donate link: http://www.fischercreativemedia.com/donations/
+Contributors: anadnet
 Tags: redirect, 301, 302, meta, plugin, forward, nofollow, posts, pages, 404, custom post types, nav menu
+Donate Link: 
 Requires at least: 4.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tested up to: 4.3.1
-Stable tag: 5.1.4
+Stable tag: 5.1.8
 
 Easily redirect pages/posts or custom post types to another page/post or external URL by specifying the redirect URL and type (301, 302, 307, meta).
 
 == Description ==
-**Current Version 5.1.4**
+**Current Version 5.1.8**
 
 This plugin has two redirect functionalities - **"Quick Redirects"** and **"Individual Redirects"**:
 
@@ -59,7 +59,7 @@ This plugin is not compatible with WordPress versions less than 4.0. Requires PH
 * If your site uses mixes SSL, use relative links whenever possible (i.e., '/my-page/'). The plugin is designed to detect the incoming protocol and try to apply the appropriate protocol to the destination URL.
 * Links in page/post content and links that are created using get_permalink() or the_permalink() will not open in a new window or add the rel=nofollow UNLESS you have the **Use jQuery?** option set.
 * If your page or post is not redirecting, this is most likely because something else like the theme functions file or another plugin is outputting the header BEFORE the plugin can perform the redirect. This can be tested by turning off all plugins except the Quick Page/Post Redirect Plugin and testing if the redirect works. Many times a plugin or bad code is the culprit.
-* We try to test the plugin in many popular themes and alongside popular plugins. In our experience, (with exception to a few bugs from time to time) many times another plugin is the cause of the issues - or a customized theme. If you do notice a problem, please let us know at plugins@fischercreativemedia.com - along with the WP version, theme you are using and plugins you have installed - and we will try to troubleshoot the problem. 
+* We try to test the plugin in many popular themes and alongside popular plugins. In our experience, (with exception to a few bugs from time to time) many times another plugin is the cause of the issues - or a customized theme. If you do notice a problem, please let us know at info@anadnet.com - along with the WP version, theme you are using and plugins you have installed - and we will try to troubleshoot the problem. 
 * Check the FAQs/Help located in the Plugin menu for more up to date issues and fixes.
 
 == Installation ==
@@ -90,7 +90,7 @@ FINALLY - if you are not using a permalink structure of some sort, it is recomme
 
 If your page or post is still not redirecting, then it is most likely because something else like the theme functions file or another plugin is outputting the header BEFORE the plugin can perform the redirect. This can be tested by turning off all plugins except the Quick Page/Post Redirect Plugin and testing if the redirect works. many time a plugin or bad code is the culprit - or the redirect is just simply turned off. 
 
-We have tested the plugin in dozens of themes and a whole lot more plugins. In our experience, (with exception to a few bugs) many times another plugin or the theme scripting is the problem. If you do notice a problem, please let us know at plugins@fischercreativemedia.com - along with the WP version, theme you are using and plugins you have installed - and we will try to troubleshoot the problem. 
+We have tested the plugin in dozens of themes and a whole lot more plugins. In our experience, (with exception to a few bugs) many times another plugin or the theme scripting is the problem. If you do notice a problem, please let us know at info@anadnet.com - along with the WP version, theme you are using and plugins you have installed - and we will try to troubleshoot the problem. 
 
 = Should I use a full URL with http:// or https:// ? =
 Yes, you can, but you do not always need to. If you are redirecting to an external URL, then yes. If you are just redirecting to another page or post on your site, then no, it is not needed. When in doubt, use the entire URL. For Quick Redirects, it is recommended that you use relative URLs whenever possible.
@@ -181,7 +181,19 @@ NO it isn't! Check the plugin FAQs/Help page for a more up to date list of Frequ
 = TODO =
 * THIS SECTION IS JUST TO KEEP TRACK OF TODO ITEMS FOR FUTURE UPDATES.
 * Add New Window and No Follow to links where the URL has been rewritten. Currently if you rewrite the URL neither will work as they are referenced with the original URL, not the rewrite.
-* Add Canonical Redirect filter to fix potential www/non-www redirect match problems.
+
+= 5.1.8 =
+* **Bug Fix:** Used a different minified version for the qppr_frontend_script.min.js file after it received a false positive of being a Trojan. The 5.1.7 version is totally safe to use too. The false positive was caused due to the way the specific file was minified. This is a confirmation that nothing was infected or was acting as a trojan of any sort in any previous version.
+= 5.1.7 =
+* **Bug Fix:** Fixed Post redirects bug caused by 5.1.6
+
+= 5.1.6 =
+* **Security Fix:** Fixed security concern in the ppr_parse_request_new method
+
+= 5.1.5 =
+* **Feature Addition:** Add Canonical Redirect detection to fix potential www/non-www redirect match problems. Removed from TODO!
+* **Deletion:** Took out testing code that was accidentally left in the previous version.
+* **Filter Addition:** Added 'qppr_filter_quickredirect_index' filter to allow changing the the index just before the redirect. See filters-hooks-helper_funcitons.txt in plugin folder for usage.
 
 = 5.1.4 =
 * **Feature Addition:** Added filter to Meta Box call to allow people to adjust context and priority if they choose. See filters-hooks-helper_funcitons.txt in plugin folder for usage. Thanks [mdmoreau](https://wordpress.org/support/profile/mdmoreau) for the suggestion!
@@ -364,5 +376,5 @@ NO it isn't! Check the plugin FAQs/Help page for a more up to date list of Frequ
 * Initial Plugin creation (7/1/2009)
 
 == Upgrade Notice ==
-= 5.1.4 =
-* Fixes MySQL load issues. Added features. 
+= 5.1.5 =
+* Bug Fixes. 

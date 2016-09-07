@@ -2,7 +2,7 @@
 Contributors: griffinjt, smub
 Tags: wordpress popup, popup, lightbox popup, mailchimp, aweber, campaign monitor, constant contact, exit-intent, madmimi, infusionsoft, getresponse, hubspot, marketo, activecampaign, pardot, totalsend, emma, icontact, mailerlite, mailpoet, google analytics, pop over, optin forms, email list, subscribers, wordpress popup form, lightbox, wordpress popups, popups, lightbox popups, optin form, wordpress optin form, sidebar optin form, sidebar optin, sidebar form, wordpress overlay popup, wordpress popup plugin, popup plugin, wordpress lightbox optin, wordpress lightbox optin form, after post optin form, wordpress after post optin form, after post optin form plugin, lightbox popup plugin, wordpress popup solution, exit intent, exit-intent, optinmonster, optin monster, optin-monster, mobile popup, mobile popups, mobile optin forms, mobile optins, lightbox optins, wordpress mobile popup, wordpress mobile popups, wordpress mobile optin forms, wordpress lightbox optins, lead gen, lead generation, wordpress lead generation, lead generation wordpress, wordpress lead gen, fullscreen, welcome gate, interstitial
 Requires at least: 3.5.1
-Tested up to: 4.3.1
+Tested up to: 4.6
 Stable tag: trunk
 License: GNU General Public License v2.0 or later
 
@@ -13,14 +13,17 @@ OptinMonster helps you grow your email list by converting visitors into subscrib
 = WordPress Popup Plugin =
 Did you know that over 70% of website visitors who leave your website will never return? Why? Because most people find your blog, read, and leave (that's just a natural pattern). Wouldn't it be nice if you can convert some of those people to subscribe to your blog? That's where <a href="http://optinmonster.com" rel="friend" title="OptinMonster">OptinMonster</a> can help. OptinMonster helps you grow your email list and get more subscribers with popup and other types of high converting optin forms.
 
+> <strong>OptinMonster App</strong><br>
+> OptinMonster is a standalone application that integrates with all web platforms including WordPress. You must have an OptinMonster account in order to take advantage of this plugin. <a href="http://optinmonster.com/pricing/" rel="friend" title="OptinMonster Plans">Click here to create your account.</a>
+
 OptinMonster comes with an easy to use form builder that allows you to create beautiful optin forms that are proven to convert. You can create various type of optins including WordPress popup forms, floating header and footer bars, slide-ins also known as scroll triggered boxes, sidebar forms, after post forms, in-line forms, mobile-specific forms, welcome gates and more.
 
 Using OptinMonster forms combined with our exit-intent technology, page-level targeting, and behavior automation, users have seen an instant boost in conversion rate, _even upwards of 785%!_
 
+Let's take a look at how OptinMonster can help you get more email subscribers.
+
 > <strong>OptinMonster App</strong><br>
 > OptinMonster is a standalone application that integrates with all web platforms including WordPress. You must have an OptinMonster account in order to take advantage of this plugin. <a href="http://optinmonster.com/pricing/" rel="friend" title="OptinMonster Plans">Click here to create your account.</a>
-
-Let's take a look at how OptinMonster can help you get more email subscribers.
 
 = OptinMonster Builder + Optin Forms Templates =
 
@@ -147,6 +150,49 @@ OptinMonster is the <a href="http://optinmonster.com" rel="friend" title="OptinM
 > Chris Lema - CTO Crowd Favorite
 
 == Changelog ==
+
+= 1.1.5 =
+* Campaigns will now load on the archive pages of individual taxonomies (if selected) by default.
+* Clarified language regarding how the "load exclusively on" and "never load optin on" settings work.
+* Removed after post optins from RSS feeds.
+* Removed the test mode setting in favor of using the "show only to logged-in users" setting for testing campaign output.
+* When going live, campaigns will load globally by default unless other advanced output settings are specified.
+* Automatically adding an after post optin after a post is now checked on by default for new after post campaigns.
+* Added a new "Support" tab with a helpful video, links to documentation and ability to send support details when submitting a ticket.
+* Migration tab is now only shown if the old plugin exists on the site.
+* Added helpful tooltips in various areas of the admin.
+* Moved all advanced output rules into a toggle field to make working with output settings easier.
+* Fixed the clear local cookies function (it actually works now!).
+* Removed the confusing Delete button - campaigns should be deleted from the app.
+* Added an inline shortcode "copy to clipboard" button for after post campaigns.
+* Improved shortcode processing - it is now automated (no longer need to enter in a setting) and supports non self-closing shortcodes!
+* Improved individual campaign action links by always making them visible.
+
+= 1.1.4.7 =
+* Updated compatibility for WordPress 4.6.
+
+= 1.1.4.6 =
+* Removed shortcode ajax method that could possibly be exploited by other plugins to run malicious shortcode.
+
+= 1.1.4.5 =
+* Added new feature to allow reviews to be given for OptinMonster.
+
+= 1.1.4.4 =
+* Allow API credentials to be force resaved to clean out stale messages about accounts being expired or invalid.
+
+= 1.1.4.3 =
+* Fixed API script getting cached by CloudFlare Rocket Loader.
+* Fixed omhide=true conflicting with MonsterLinks in some cases.
+* Fixed pre 4.1 installs getting incorrect API ID.
+* Updated Readme so OptinMonster App and account requirement is clearly stated.
+
+= 1.1.4.2 =
+* Added Welcome page on first install.
+* Updated error messages.
+* Updated debug code for better error handling.
+
+= 1.1.4.1 =
+* Added No-Cache headers on API requests.
 
 = 1.1.4 =
 * Fixed bug with adblock.

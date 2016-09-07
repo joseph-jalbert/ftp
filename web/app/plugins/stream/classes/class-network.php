@@ -257,7 +257,7 @@ class Network {
 					continue;
 				}
 
-				if ( in_array( $field['name'], $hidden_options[ $section_key ] ) ) {
+				if ( in_array( $field['name'], $hidden_options[ $section_key ], true ) ) {
 					unset( $fields[ $section_key ]['fields'][ $key ] );
 				}
 			}
@@ -319,7 +319,7 @@ class Network {
 			$this->default_settings_page_slug,
 		);
 
-		if ( ! isset( $_GET['action'] ) || ! in_array( $_GET['action'], $allowed_referers ) ) {
+		if ( ! isset( $_GET['action'] ) || ! in_array( $_GET['action'], $allowed_referers, true ) ) {
 			return;
 		}
 
@@ -394,10 +394,10 @@ class Network {
 		);
 
 		// add all sites
-		foreach ( wp_get_sites() as $blog ) {
-			$blog_data = get_blog_details( $blog );
+		foreach ( wp_stream_get_sites() as $blog ) {
+			$blog_data = get_blog_details( $blog->blog_id );
 
-			$blogs[ $blog['blog_id'] ] = array(
+			$blogs[ $blog->blog_id ] = array(
 				'label'    => $blog_data->blogname,
 				'disabled' => '',
 			);

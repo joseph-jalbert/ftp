@@ -16,7 +16,7 @@ if ( !class_exists( 'NewRoyalSliderEdit' ) ):
         function __construct( $is_add_new ) {
 
             $this->is_add_new = $is_add_new;
-            $this->slider_type = isset( $_REQUEST['rstype'] ) ? $_REQUEST['rstype'] : '';
+            $this->slider_type = isset( $_REQUEST['rstype'] ) ? esc_html($_REQUEST['rstype']) : '';
            
             $this->parsed_options = null;
             if(!$is_add_new && isset( $_REQUEST['id'] )) {
@@ -34,8 +34,6 @@ if ( !class_exists( 'NewRoyalSliderEdit' ) ):
                     $this->res = $this->res[0];
                     $this->parsed_options = json_decode($this->res['options'], ARRAY_A);
                 }
-            } else {
-                //echo 'Add new slider';
             }
 
             $this->build_view();
@@ -193,7 +191,7 @@ if ( !class_exists( 'NewRoyalSliderEdit' ) ):
                 <div id="template-editor" style="display:none;">
                     <textarea style="width: 80%; height: 200px;"><?php echo isset($this->res['template_html']) ? esc_html($this->res['template_html']) : esc_html($template_html); ?></textarea>
                 </div>
-                <input id="admin-slider-type" type="hidden" value="<?php echo isset( $_REQUEST['rstype'] ) ? $_REQUEST['rstype'] : ''; ?>" />
+                <input id="admin-slider-type" type="hidden" value="<?php echo isset( $_REQUEST['rstype'] ) ? esc_html($_REQUEST['rstype']) : ''; ?>" />
 
                 <input id="youtube-api-code-setting" type="hidden" value="<?php echo NewRoyalSliderMain::$youtube_api_code; ?>" />
 

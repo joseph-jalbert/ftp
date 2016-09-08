@@ -147,7 +147,7 @@ class RS_Instagram {
    * @return mixed
    */
   public function getUserMedia($id = 'self', $limit = 0) {
-    return $this->_makeCall('users/' . $id . '/wp-content/themes/forthepeople/assets/media/recent', true, array('count' => $limit));
+    return $this->_makeCall('users/' . $id . '/media/recent', true, array('count' => $limit));
   }
 
   /**
@@ -265,7 +265,7 @@ class RS_Instagram {
    * @return mixed
    */
   public function getTagMedia($name, $limit = 0) {
-    return $this->_makeCall('tags/' . $name . '/wp-content/themes/forthepeople/assets/media/recent', false, array('count' => $limit));
+    return $this->_makeCall('tags/' . $name . '/media/recent', false, array('count' => $limit));
   }
 
   /**

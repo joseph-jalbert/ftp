@@ -13,8 +13,9 @@ class A_NextGen_RoyalSlider_Controller extends Mixin {
 		$list = $displayed_gallery->get_included_entities();
 
 		$thumbnail_size_name = 'thumbnail';
+		$display_settings = $displayed_gallery->display_settings;
 
-		if ($display_settings['override_thumbnail_settings'])
+		if ( isset($display_settings['override_thumbnail_settings']) && $display_settings['override_thumbnail_settings'])
 	    {
 	        $dynthumbs = $this->object->get_registry()->get_utility('I_Dynamic_Thumbnails_Manager');
 

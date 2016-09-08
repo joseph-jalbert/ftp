@@ -24,7 +24,7 @@ if ( !class_exists( 'NewRoyalSliderGallery' ) ):
 
 		public function parse_url($form_action_url, $type) {
 			if(isset($_REQUEST['newrs-a-gallery-enabled'])) {
-				$form_action_url = $form_action_url . "&amp;newrs-a-gallery-enabled=".$_REQUEST['newrs-a-gallery-enabled'];
+				$form_action_url = $form_action_url . "&amp;newrs-a-gallery-enabled=".esc_html($_REQUEST['newrs-a-gallery-enabled']);
 				echo '<input type="hidden" id="new_royalslider_media_library" val="1" />';
 			}
 			return $form_action_url;

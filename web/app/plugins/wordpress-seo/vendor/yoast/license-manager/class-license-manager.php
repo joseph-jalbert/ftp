@@ -3,11 +3,15 @@
 if ( ! interface_exists( 'iYoast_License_Manager', false ) ) {
 
 	interface iYoast_License_Manager {
+
 		public function specific_hooks();
+
 		public function setup_auto_updater();
+
 	}
 
 }
+
 
 if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 
@@ -608,6 +612,8 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 				$this->license_constant_is_defined = true;
 			}
 		}
+
+
 	}
 
 }

@@ -10,7 +10,7 @@
 class WPSEO_Frontend {
 
 	/**
-	 * @var    object    Instance of this class.
+	 * @var    object    Instance of this class
 	 */
 	public static $instance;
 
@@ -20,56 +20,44 @@ class WPSEO_Frontend {
 	public $options = array();
 
 	/**
-	 * @var boolean Boolean indicating wether output buffering has been started.
+	 * @var boolean Boolean indicating wether output buffering has been started
 	 */
 	private $ob_started = false;
 
 	/**
-	 * Holds the canonical URL for the current page.
+	 * Holds the canonical URL for the current page
 	 *
 	 * @var string
 	 */
 	private $canonical = null;
 
 	/**
-	 * Holds the canonical URL for the current page that cannot be overriden by a manual canonical input.
+	 * Holds the canonical URL for the current page that cannot be overriden by a manual canonical input
 	 *
 	 * @var string
 	 */
 	private $canonical_no_override = null;
 
 	/**
-	 * Holds the canonical URL for the current page without pagination.
+	 * Holds the canonical URL for the current page without pagination
 	 *
 	 * @var string
 	 */
 	private $canonical_unpaged = null;
 
 	/**
-	 * Holds the pages meta description.
+	 * Holds the pages meta description
 	 *
 	 * @var string
 	 */
 	private $metadesc = null;
 
 	/**
-	 * Holds the generated title for the page.
+	 * Holds the generated title for the page
 	 *
 	 * @var string
 	 */
 	private $title = null;
-
-	/**
-	 * Holds the names of the required options.
-	 *
-	 * @var array
-	 */
-	private $required_options = array( 'wpseo', 'wpseo_rss', 'wpseo_social', 'wpseo_permalinks', 'wpseo_titles' );
-
-	/**
-	 * @var array
-	 */
-	private $hooks;
 
 	/**
 	 * Class constructor
@@ -78,15 +66,15 @@ class WPSEO_Frontend {
 	 */
 	protected function __construct() {
 
-		$this->options = WPSEO_Options::get_options( $this->required_options );
+		$this->options = WPSEO_Options::get_all();
 
 		add_action( 'wp_head', array( $this, 'front_page_specific_init' ), 0 );
 		add_action( 'wp_head', array( $this, 'head' ), 1 );
 
 		// The head function here calls action wpseo_head, to which we hook all our functionality.
 		add_action( 'wpseo_head', array( $this, 'debug_marker' ), 2 );
-		add_action( 'wpseo_head', array( $this, 'metadesc' ), 6 );
-		add_action( 'wpseo_head', array( $this, 'robots' ), 10 );
+		add_action( 'wpseo_head', array( $this, 'robots' ), 6 );
+		add_action( 'wpseo_head', array( $this, 'metadesc' ), 10 );
 		add_action( 'wpseo_head', array( $this, 'metakeywords' ), 11 );
 		add_action( 'wpseo_head', array( $this, 'canonical' ), 20 );
 		add_action( 'wpseo_head', array( $this, 'adjacent_rel_links' ), 21 );
@@ -99,10 +87,7 @@ class WPSEO_Frontend {
 		remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head' );
 		remove_action( 'wp_head', 'noindex', 1 );
 
-		// When using WP 4.4, just use the new hook.
-		add_filter( 'pre_get_document_title', array( $this, 'title' ), 15 );
 		add_filter( 'wp_title', array( $this, 'title' ), 15, 3 );
-
 		add_filter( 'thematic_doctitle', array( $this, 'title' ), 15 );
 
 		add_action( 'wp', array( $this, 'page_redirect' ), 99 );
@@ -115,20 +100,31 @@ class WPSEO_Frontend {
 		// Fix the WooThemes woo_title() output.
 		add_filter( 'woo_title', array( $this, 'fix_woo_title' ), 99 );
 
-		if ( $this->options['disable-date'] === true ||
-		     $this->options['disable-author'] === true ||
-		     $this->options['disable-post_format'] === true
+		if ( $this->options['hide-rsdlink'] === true ) {
+			remove_action( 'wp_head', 'rsd_link' );
+		}
+		if ( $this->options['hide-wlwmanifest'] === true ) {
+			remove_action( 'wp_head', 'wlwmanifest_link' );
+		}
+		if ( $this->options['hide-shortlink'] === true ) {
+			remove_action( 'wp_head', 'wp_shortlink_wp_head' );
+			remove_action( 'template_redirect', 'wp_shortlink_header', 11 );
+		}
+		if ( $this->options['hide-feedlinks'] === true ) {
+			// @todo: add option to display just normal feed and hide comment feed.
+			remove_action( 'wp_head', 'feed_links', 2 );
+			remove_action( 'wp_head', 'feed_links_extra', 3 );
+		}
+
+		if ( ( $this->options['disable-date'] === true ||
+		       $this->options['disable-author'] === true ) ||
+		     ( isset( $this->options['disable-post_formats'] ) && $this->options['disable-post_formats'] )
 		) {
 			add_action( 'wp', array( $this, 'archive_redirect' ) );
 		}
 		if ( $this->options['redirectattachment'] === true ) {
 			add_action( 'template_redirect', array( $this, 'attachment_redirect' ), 1 );
 		}
-
-		/*
-		 * The setting to get here has been deprecated, but don't remove the code as that would break
-		 * the functionality for those that still have it!
-		 */
 		if ( $this->options['trailingslash'] === true ) {
 			add_filter( 'user_trailingslashit', array( $this, 'add_trailingslash' ), 10, 2 );
 		}
@@ -142,8 +138,7 @@ class WPSEO_Frontend {
 		add_filter( 'the_content_feed', array( $this, 'embed_rssfooter' ) );
 		add_filter( 'the_excerpt_rss', array( $this, 'embed_rssfooter_excerpt' ) );
 
-		// For WordPress functions below 4.4.
-		if ( ! current_theme_supports( 'title-tag' ) && $this->options['forcerewritetitle'] === true ) {
+		if ( $this->options['forcerewritetitle'] === true ) {
 			add_action( 'template_redirect', array( $this, 'force_rewrite_output_buffer' ), 99999 );
 			add_action( 'wp_footer', array( $this, 'flush_cache' ), - 1 );
 		}
@@ -151,11 +146,6 @@ class WPSEO_Frontend {
 		if ( $this->options['title_test'] > 0 ) {
 			add_filter( 'wpseo_title', array( $this, 'title_test_helper' ) );
 		}
-
-		$primary_category = new WPSEO_Frontend_Primary_Category();
-		$primary_category->register_hooks();
-
-		$this->hooks = array( $primary_category );
 	}
 
 	/**
@@ -182,7 +172,7 @@ class WPSEO_Frontend {
 				$this->$name = $default;
 			}
 		}
-		$this->options = WPSEO_Options::get_options( $this->required_options );
+		$this->options = WPSEO_Options::get_all();
 	}
 
 	/**
@@ -201,7 +191,7 @@ class WPSEO_Frontend {
 	/**
 	 * Override Woo's title with our own.
 	 *
-	 * @param string $title Title string.
+	 * @param string $title
 	 *
 	 * @return string
 	 */
@@ -248,19 +238,15 @@ class WPSEO_Frontend {
 			$object = $GLOBALS['wp_query']->get_queried_object();
 		}
 
-		if ( is_object( $object ) ) {
-			$title = WPSEO_Meta::get_value( 'title', $object->ID );
+		$title = WPSEO_Meta::get_value( 'title', $object->ID );
 
-			if ( $title !== '' ) {
-				return wpseo_replace_vars( $title, $object );
-			}
-
-			$post_type = ( isset( $object->post_type ) ? $object->post_type : $object->query_var );
-
-			return $this->get_title_from_options( 'title-' . $post_type, $object );
+		if ( $title !== '' ) {
+			return wpseo_replace_vars( $title, $object );
 		}
 
-		return $this->get_title_from_options( 'title-404-wpseo' );
+		$post_type = ( isset( $object->post_type ) ? $object->post_type : $object->query_var );
+
+		return $this->get_title_from_options( 'title-' . $post_type, $object );
 	}
 
 	/**
@@ -540,13 +526,33 @@ class WPSEO_Frontend {
 		}
 		elseif ( is_404() ) {
 
-			$title = $this->get_title_from_options( 'title-404-wpseo' );
+			if ( 0 !== get_query_var( 'year' ) || ( 0 !== get_query_var( 'monthnum' ) || 0 !== get_query_var( 'day' ) ) ) {
+				// @todo [JRF => Yoast] Should these not use the archive default if no title found ?
+				if ( 0 !== get_query_var( 'day' ) ) {
+					$date       = sprintf( '%04d-%02d-%02d 00:00:00', get_query_var( 'year' ), get_query_var( 'monthnum' ), get_query_var( 'day' ) );
+					$date       = mysql2date( get_option( 'date_format' ), $date, true );
+					$date       = apply_filters( 'get_the_date', $date, '' );
+					$title_part = sprintf( __( '%s Archives', 'wordpress-seo' ), $date );
+				}
+				elseif ( 0 !== get_query_var( 'monthnum' ) ) {
+					$title_part = sprintf( __( '%s Archives', 'wordpress-seo' ), single_month_title( ' ', false ) );
+				}
+				elseif ( 0 !== get_query_var( 'year' ) ) {
+					$title_part = sprintf( __( '%s Archives', 'wordpress-seo' ), get_query_var( 'year' ) );
+				}
+				else {
+					$title_part = __( 'Archives', 'wordpress-seo' );
+				}
+			}
+			else {
+				$title = $this->get_title_from_options( 'title-404-wpseo' );
 
-			// @todo [JRF => Yoast] Should these not use the 404 default if no title found ?
-			// WPSEO_Options::get_default( 'wpseo_titles', 'title-404-wpseo' )
-			// Replacement would be needed!
-			if ( empty( $title ) ) {
-				$title_part = __( 'Page not found', 'wordpress-seo' );
+				// @todo [JRF => Yoast] Should these not use the 404 default if no title found ?
+				// WPSEO_Options::get_default( 'wpseo_titles', 'title-404-wpseo' )
+				// Replacement would be needed!
+				if ( empty( $title ) ) {
+					$title_part = __( 'Page not found', 'wordpress-seo' );
+				}
 			}
 		}
 		else {
@@ -615,7 +621,7 @@ class WPSEO_Frontend {
 			 *
 			 * @api bool
 			 */
-			( ( apply_filters( 'wpseo_hide_version', false ) && $this->is_premium() ) ? '' : ' v' . WPSEO_VERSION )
+			( ( apply_filters( 'wpseo_hide_version', false ) && $this->is_premium() ) ? '' : ' v' . WPSEO_VERSION  )
 		);
 
 		if ( $echo === false ) {
@@ -630,6 +636,11 @@ class WPSEO_Frontend {
 	 * Output Webmaster Tools authentication strings
 	 */
 	public function webmaster_tools_authentication() {
+		// Alexa.
+		if ( $this->options['alexaverify'] !== '' ) {
+			echo '<meta name="alexaVerifyID" content="' . esc_attr( $this->options['alexaverify'] ) . "\" />\n";
+		}
+
 		// Bing.
 		if ( $this->options['msverify'] !== '' ) {
 			echo '<meta name="msvalidate.01" content="' . esc_attr( $this->options['msverify'] ) . "\" />\n";
@@ -686,20 +697,21 @@ class WPSEO_Frontend {
 	 * @return string
 	 */
 	public function robots() {
-		global $wp_query, $post;
+		global $wp_query;
 
 		$robots           = array();
 		$robots['index']  = 'index';
 		$robots['follow'] = 'follow';
 		$robots['other']  = array();
 
-		if ( is_singular() && is_object( $post ) ) {
+		if ( is_singular() ) {
+			global $post;
 
-			$option_name = 'noindex-' . $post->post_type;
-			$noindex     = isset( $this->options[ $option_name ] ) && $this->options[ $option_name ] === true;
-			$private     = 'private' === $post->post_status;
+			if ( is_object( $post ) && ( isset( $this->options[ 'noindex-' . $post->post_type ] ) && $this->options[ 'noindex-' . $post->post_type ] === true ) ) {
+				$robots['index'] = 'noindex';
+			}
 
-			if ( $noindex || $private ) {
+			if ( 'private' == $post->post_status ) {
 				$robots['index'] = 'noindex';
 			}
 
@@ -707,7 +719,7 @@ class WPSEO_Frontend {
 
 		}
 		else {
-			if ( is_search() || is_404() ) {
+			if ( is_search() ) {
 				$robots['index'] = 'noindex';
 			}
 			elseif ( is_tax() || is_tag() || is_category() ) {
@@ -720,10 +732,6 @@ class WPSEO_Frontend {
 				$term_meta = WPSEO_Taxonomy_Meta::get_term_meta( $term, $term->taxonomy, 'noindex' );
 				if ( is_string( $term_meta ) && 'default' !== $term_meta ) {
 					$robots['index'] = $term_meta;
-				}
-
-				if ( $this->is_multiple_terms_query() ) {
-					$robots['index'] = 'noindex';
 				}
 			}
 			elseif (
@@ -756,14 +764,15 @@ class WPSEO_Frontend {
 				}
 			}
 
-			$is_paged         = isset( $wp_query->query_vars['paged'] ) && ( $wp_query->query_vars['paged'] && $wp_query->query_vars['paged'] > 1 );
-			$noindex_subpages = $this->options['noindex-subpages-wpseo'] === true;
-			if ( $is_paged && $noindex_subpages ) {
-				$robots['index'] = 'noindex';
+			if ( isset( $wp_query->query_vars['paged'] ) && ( $wp_query->query_vars['paged'] && $wp_query->query_vars['paged'] > 1 ) && ( $this->options['noindex-subpages-wpseo'] === true ) ) {
+				$robots['index']  = 'noindex';
+				$robots['follow'] = 'follow';
 			}
 
-			if ( $this->options['noodp'] === true ) {
-				$robots['other'][] = 'noodp';
+			foreach ( array( 'noodp', 'noydir' ) as $robot ) {
+				if ( $this->options[ $robot ] === true ) {
+					$robots['other'][] = $robot;
+				}
 			}
 			unset( $robot );
 		}
@@ -800,8 +809,8 @@ class WPSEO_Frontend {
 	/**
 	 * Determine $robots values for a single post
 	 *
-	 * @param array $robots  Robots data array.
-	 * @param int   $post_id The post ID for which to determine the $robots values, defaults to current post.
+	 * @param array      $robots
+	 * @param int|string $post_id The post ID for which to determine the $robots values, defaults to current post.
 	 *
 	 * @return    array
 	 */
@@ -828,9 +837,12 @@ class WPSEO_Frontend {
 			unset( $robot );
 		}
 		elseif ( $meta_robots_adv === '' || $meta_robots_adv === '-' ) {
-			if ( $this->options['noodp'] === true ) {
-				$robots['other'][] = 'noodp';
+			foreach ( array( 'noodp', 'noydir' ) as $robot ) {
+				if ( $this->options[ $robot ] === true ) {
+					$robots['other'][] = $robot;
+				}
 			}
+			unset( $robot );
 		}
 		unset( $meta_robots_adv );
 
@@ -904,38 +916,20 @@ class WPSEO_Frontend {
 		}
 		else {
 			if ( is_search() ) {
-				$search_query = get_search_query();
-
-				// Regex catches case when /search/page/N without search term is itself mistaken for search term. R.
-				if ( ! empty( $search_query ) && ! preg_match( '|^page/\d+$|', $search_query ) ) {
-					$canonical = get_search_link();
-				}
+				$canonical = get_search_link();
 			}
 			elseif ( is_front_page() ) {
-				$canonical = WPSEO_Utils::home_url();
+				$canonical = home_url();
 			}
 			elseif ( $this->is_posts_page() ) {
-
-				$posts_page_id = get_option( 'page_for_posts' );
-				$canonical     = WPSEO_Meta::get_value( 'canonical', $posts_page_id );
-
-				if ( empty( $canonical ) ) {
-					$canonical = get_permalink( $posts_page_id );
-				}
+				$canonical = get_permalink( get_option( 'page_for_posts' ) );
 			}
 			elseif ( is_tax() || is_tag() || is_category() ) {
-
 				$term = get_queried_object();
 
-				if ( ! empty( $term ) && ! $this->is_multiple_terms_query() ) {
+				$canonical_override = WPSEO_Taxonomy_Meta::get_term_meta( $term, $term->taxonomy, 'canonical' );
 
-					$canonical_override = WPSEO_Taxonomy_Meta::get_term_meta( $term, $term->taxonomy, 'canonical' );
-					$term_link          = get_term_link( $term, $term->taxonomy );
-
-					if ( ! is_wp_error( $term_link ) ) {
-						$canonical = $term_link;
-					}
-				}
+				$canonical = get_term_link( $term, $term->taxonomy );
 			}
 			elseif ( is_post_type_archive() ) {
 				$post_type = get_query_var( 'post_type' );
@@ -973,7 +967,7 @@ class WPSEO_Frontend {
 				}
 				else {
 					if ( is_front_page() ) {
-						$canonical = WPSEO_Sitemaps_Router::get_base_url( '' );
+						$canonical = wpseo_xml_sitemaps_base_url( '' );
 					}
 					$canonical = user_trailingslashit( trailingslashit( $canonical ) . trailingslashit( $wp_rewrite->pagination_base ) . get_query_var( 'paged' ) );
 				}
@@ -989,22 +983,25 @@ class WPSEO_Frontend {
 			}
 		}
 
-		if ( is_string( $canonical_override ) && $canonical_override !== '' ) {
-			$canonical = $canonical_override;
-		}
-
 		/**
 		 * Filter: 'wpseo_canonical' - Allow filtering of the canonical URL put out by Yoast SEO
 		 *
 		 * @api string $canonical The canonical URL
 		 */
-		$this->canonical = apply_filters( 'wpseo_canonical', $canonical );
+		$canonical = apply_filters( 'wpseo_canonical', $canonical );
+
+		if ( is_string( $canonical_override ) && $canonical_override !== '' ) {
+			$this->canonical = $canonical_override;
+		}
+		else {
+			$this->canonical = $canonical;
+		}
 	}
 
 	/**
 	 * Parse the home URL setting to find the base URL for relative URLs.
 	 *
-	 * @param string $path Optional path string.
+	 * @param string $path
 	 *
 	 * @return string
 	 */
@@ -1057,7 +1054,7 @@ class WPSEO_Frontend {
 
 				// Make sure to use index.php when needed, done after paged == 2 check so the prev links to homepage will not have index.php erroneously.
 				if ( is_front_page() ) {
-					$url = WPSEO_Sitemaps_Router::get_base_url( '' );
+					$url = wpseo_xml_sitemaps_base_url( '' );
 				}
 
 				if ( $paged > 2 ) {
@@ -1186,9 +1183,6 @@ class WPSEO_Frontend {
 					$keywords = wpseo_replace_vars( $this->options[ 'metakey-' . $post->post_type ], $post );
 				}
 			}
-			elseif ( $this->is_posts_page() ) {
-				$keywords = $this->get_keywords( get_post( get_option( 'page_for_posts' ) ) );
-			}
 			elseif ( is_category() || is_tag() || is_tax() ) {
 				$term = $wp_query->get_queried_object();
 
@@ -1234,7 +1228,7 @@ class WPSEO_Frontend {
 	/**
 	 * Outputs the meta description element or returns the description text.
 	 *
-	 * @param bool $echo Echo or return output flag.
+	 * @param bool $echo
 	 *
 	 * @return string
 	 */
@@ -1246,7 +1240,6 @@ class WPSEO_Frontend {
 		if ( $echo !== false ) {
 			if ( is_string( $this->metadesc ) && $this->metadesc !== '' ) {
 				echo '<meta name="description" content="', esc_attr( strip_tags( stripslashes( $this->metadesc ) ) ), '"/>', "\n";
-				$this->add_robot_content_noodp( $this->metadesc );
 			}
 			elseif ( current_user_can( 'manage_options' ) && is_singular() ) {
 				echo '<!-- ', __( 'Admin only notice: this page doesn\'t show a meta description because it doesn\'t have one, either write it for this page specifically or go into the SEO -> Titles menu and set up a template.', 'wordpress-seo' ), ' -->', "\n";
@@ -1427,7 +1420,6 @@ class WPSEO_Frontend {
 
 	/**
 	 * When certain archives are disabled, this redirects those to the homepage.
-	 *
 	 * @return boolean False when no redirect was triggered
 	 */
 	function archive_redirect() {
@@ -1436,7 +1428,7 @@ class WPSEO_Frontend {
 		if (
 			( $this->options['disable-date'] === true && $wp_query->is_date ) ||
 			( $this->options['disable-author'] === true && $wp_query->is_author ) ||
-			( $this->options['disable-post_format'] === true && $wp_query->is_tax( 'post_format' ) )
+			( isset( $this->options['disable-post_formats'] ) && $this->options['disable-post_formats'] && $wp_query->is_tax( 'post_format' ) )
 		) {
 			wp_safe_redirect( get_bloginfo( 'url' ), 301 );
 			exit;
@@ -1467,8 +1459,8 @@ class WPSEO_Frontend {
 	 *
 	 * Thanks to Mark Jaquith for this code.
 	 *
-	 * @param string $url  URL string.
-	 * @param string $type Context (such as single).
+	 * @param string $url
+	 * @param string $type
 	 *
 	 * @return string
 	 */
@@ -1519,11 +1511,10 @@ class WPSEO_Frontend {
 
 	/**
 	 * Removes unneeded query variables from the URL.
-	 *
 	 * @return boolean
 	 */
 	public function clean_permalink() {
-		if ( is_robots() || get_query_var( 'sitemap' ) || empty( $_GET ) ) {
+		if ( is_robots() || get_query_var( 'sitemap' ) ) {
 			return false;
 		}
 
@@ -1751,10 +1742,9 @@ class WPSEO_Frontend {
 	function embed_rss( $content, $context = 'full' ) {
 
 		/**
-		 * Filter: 'wpseo_include_rss_footer' - Allow the RSS footer to be dynamically shown/hidden.
+		 * Filter: 'wpseo_include_rss_footer' - Allow the the RSS footer to be dynamically shown/hidden
 		 *
 		 * @api boolean $show_embed Indicates if the RSS footer should be shown or not
-		 *
 		 * @param string $context The context of the RSS content - 'full' or 'excerpt'.
 		 */
 		if ( ! apply_filters( 'wpseo_include_rss_footer', true, $context ) ) {
@@ -1795,7 +1785,8 @@ class WPSEO_Frontend {
 			return false;
 		}
 
-		$content = ob_get_clean();
+		$content = ob_get_contents();
+		ob_end_clean();
 
 		$old_wp_query = $wp_query;
 
@@ -1825,7 +1816,7 @@ class WPSEO_Frontend {
 	/**
 	 * Function used in testing whether the title should be force rewritten or not.
 	 *
-	 * @param string $title Title string.
+	 * @param string $title
 	 *
 	 * @return string
 	 */
@@ -1885,55 +1876,4 @@ class WPSEO_Frontend {
 		return file_exists( WPSEO_PATH . 'premium/' );
 	}
 
-	/**
-	 * Checks whether the user has written a meta-description. If written,  makes sure meta robots content is noodp.
-	 *
-	 * @param String $description The content of the meta description.
-	 */
-	private function add_robot_content_noodp( $description ) {
-		if ( ! ( empty( $description ) ) && $this->options['noodp'] === false ) {
-			$this->options['noodp'] = true;
-		}
-	}
-
-	/**
-	 * Getting the keywords
-	 *
-	 * @param WP_Post $post The post object with the values.
-	 *
-	 * @return string
-	 */
-	private function get_keywords( $post ) {
-		$keywords        = WPSEO_Meta::get_value( 'metakeywords', $post->ID );
-		$option_meta_key = 'metakey-' . $post->post_type;
-
-		if ( $keywords === '' && ( is_object( $post ) && ( isset( $this->options[ $option_meta_key ] ) && $this->options[ $option_meta_key ] !== '' ) ) ) {
-			$keywords = wpseo_replace_vars( $this->options[ $option_meta_key ], $post );
-		}
-
-		return $keywords;
-	}
-
-	/**
-	 * Check if term archive query is for multiple terms (/term-1,term2/ or /term-1+term-2/).
-	 *
-	 * @return bool
-	 */
-	protected function is_multiple_terms_query() {
-
-		global $wp_query;
-
-		if ( ! is_tax() && ! is_tag() && ! is_category() ) {
-			return false;
-		}
-
-		$term          = get_queried_object();
-		$queried_terms = $wp_query->tax_query->queried_terms;
-
-		if ( empty( $queried_terms[ $term->taxonomy ]['terms'] ) ) {
-			return false;
-		}
-
-		return count( $queried_terms[ $term->taxonomy ]['terms'] ) > 1;
-	}
-}
+} /* End of class */

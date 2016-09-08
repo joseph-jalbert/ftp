@@ -5,10 +5,10 @@
 
 ?>
 
-<h2 id="wordpress-seo"><?php
+<h3 id="wordpress-seo"><?php
 	/* translators: %1$s expands to Yoast SEO */
 	printf( __( '%1$s settings', 'wordpress-seo' ), 'Yoast SEO' );
-	?></h2>
+	?></h3>
 <table class="form-table">
 	<tr>
 		<th>
@@ -53,36 +53,5 @@
 			       value="on" <?php echo ( get_the_author_meta( 'wpseo_excludeauthorsitemap', $user->ID ) === 'on' ) ? 'checked' : ''; ?> />
 		</td>
 	</tr>
-
-	<?php if ( $options['keyword-analysis-active'] === true ) { ?>
-		<tr>
-			<th>
-				<label
-					for="wpseo_keyword_analysis_disable"><?php _e( 'Disable SEO analysis', 'wordpress-seo' ); ?></label>
-			</th>
-			<td>
-				<input class="checkbox double" type="checkbox" id="wpseo_keyword_analysis_disable"
-				       name="wpseo_keyword_analysis_disable"
-				       value="on" <?php echo ( get_the_author_meta( 'wpseo_keyword_analysis_disable', $user->ID ) === 'on' ) ? 'checked' : ''; ?> />
-				<p class="description"><label for="wpseo_keyword_analysis_disable"><?php _e( 'Removes the keyword tab from the metabox and disables all SEO-related suggestions.', 'wordpress-seo' ); ?></label></p>
-			</td>
-		</tr>
-
-	<?php } ?>
-
-	<?php if ( $options['content-analysis-active'] === true ) { ?>
-		<tr>
-			<th>
-				<label
-					for="wpseo_content_analysis_disable"><?php _e( 'Disable readability analysis', 'wordpress-seo' ); ?></label>
-			</th>
-			<td>
-				<input class="checkbox double" type="checkbox" id="wpseo_content_analysis_disable"
-				       name="wpseo_content_analysis_disable"
-				       value="on" <?php echo ( get_the_author_meta( 'wpseo_content_analysis_disable', $user->ID ) === 'on' ) ? 'checked' : ''; ?> />
-				<p class="description"><label for="wpseo_content_analysis_disable"><?php _e( 'Removes the readability tab from the metabox and disables all readability-related suggestions.', 'wordpress-seo' ); ?></label></p>
-			</td>
-		</tr>
-	<?php } ?>
 </table>
 <br/><br/>

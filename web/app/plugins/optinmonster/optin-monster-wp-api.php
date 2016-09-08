@@ -5,7 +5,7 @@
  * Description: OptinMonster API plugin to connect your WordPress site to your OptinMonster forms.
  * Author:		Thomas Griffin
  * Author URI:	https://thomasgriffin.io
- * Version:		1.1.4
+ * Version:		1.1.5
  * Text Domain: optin-monster-api
  * Domain Path: languages
  *
@@ -30,6 +30,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // Autoload the class files.
 spl_autoload_register( 'OMAPI::autoload' );
+
+// Store base file location
+define( 'OMAPI_FILE', __FILE__ );
 
 /**
  * Main plugin class.
@@ -57,7 +60,7 @@ class OMAPI {
 	 *
 	 * @var string
 	 */
-	public $version = '1.1.4';
+	public $version = '1.1.5';
 
 	/**
 	 * The name of the plugin.
@@ -204,6 +207,8 @@ class OMAPI {
 		$this->save     = new OMAPI_Save();
 		$this->refresh  = new OMAPI_Refresh();
 		$this->validate = new OMAPI_Validate();
+		$this->welcome  = new OMAPI_Welcome();
+		$this->review   = new OMAPI_Review();
 
 		// Fire a hook to say that the admin classes are loaded.
 		do_action( 'optin_monster_api_admin_loaded' );
@@ -360,6 +365,21 @@ class OMAPI {
 	}
 
 	/**
+	 * Check for legacy Optin_Monster class
+	 *
+	 * @since 1.1.5
+	 *
+	 * @return bool
+	 */
+	public function is_legacy_active() {
+		if( class_exists( 'Optin_Monster' ) ) {
+			return true;
+		}
+		
+		return false;
+	}
+
+	/**
 	 * Returns possible API key error flag.
 	 *
 	 * @since 1.0.0
@@ -400,7 +420,12 @@ class OMAPI {
 			'optins' 	  => array(),
 			'is_expired'  => false,
 			'is_disabled' => false,
-			'is_invalid'  => false
+			'is_invalid'  => false,
+			'welcome'     => array(
+				'status'  => 'none', //none, welcomed
+				'review'    => 'ask', //ask, asked, dismissed
+				'version'   => '1141', //base to check against
+			)
 		);
 		return apply_filters( 'optin_monster_api_default_options', $options );
 
@@ -487,6 +512,7 @@ function optin_monster_api_activation_hook( $network_wide ) {
 		if ( ! $option || empty( $option ) ) {
 			update_option( 'optin_monster_api', OMAPI::default_options() );
 		}
+
 	}
 
 }

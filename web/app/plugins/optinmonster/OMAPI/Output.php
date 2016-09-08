@@ -43,7 +43,7 @@ class OMAPI_Output {
      *
      * @var array
      */
-    public $fields = array( 'enabled', 'global', 'automatic', 'users', 'never', 'only', 'categories', 'taxonomies', 'show', 'type', 'test', 'shortcode', 'shortcode_output', 'mailpoet' );
+    public $fields = array( 'enabled', 'automatic', 'users', 'never', 'only', 'categories', 'taxonomies', 'show', 'type', 'shortcode', 'shortcode_output', 'mailpoet', 'test' );
 
     /**
      * Flag for determining if localized JS variable is output.
@@ -84,7 +84,6 @@ class OMAPI_Output {
 
 		// Load actions and filters.
 		add_action( 'wp_enqueue_scripts', array( $this, 'api_script' ) );
-        add_filter( 'optin_monster_api_query_filter', array( $this, 'query_filter' ) );
         add_action( 'wp_footer', array( $this, 'localize' ), 9999 );
         add_action( 'wp_footer', array( $this, 'maybe_parse_shortcodes' ), 11 );
 
@@ -140,7 +139,7 @@ class OMAPI_Output {
 	    }
 
 	    // Adjust the output to add our custom script ID.
-	    return str_replace( ' src', ' id="omapi-script" src', $tag );
+	    return str_replace( ' src', ' data-cfasync="false" id="omapi-script" src', $tag );
 
     }
 
@@ -155,7 +154,7 @@ class OMAPI_Output {
     public function filter_api_url( $url ) {
 
         // If the handle is not ours, do nothing.
-        if ( false === strpos( $url, 'optinmonster/assets/js/api.js' ) ) {
+        if ( false === strpos( $url, 'a.optnmnstr.com/app/js/api.min.js' ) ) {
 	        return $url;
 	    }
 
@@ -220,8 +219,8 @@ class OMAPI_Output {
      */
     public function load_optinmonster_inline( $query ) {
 
-        // If we are not on the main query, do nothing.
-        if ( ! $query->is_main_query() ) {
+        // If we are not on the main query or if in an rss feed, do nothing.
+        if ( ! $query->is_main_query() || $query->is_feed() ) {
             return;
         }
 
@@ -288,10 +287,10 @@ class OMAPI_Output {
 		        continue;
 	        }
 
-            // If in test mode but not logged in, skip over the optin.
-            if ( isset( $fields['test'] ) && $fields['test'] && ! is_user_logged_in() ) {
-                continue;
-            }
+	        // If in legacy test mode but not logged in, skip over the optin.
+	        if ( isset( $fields['test'] ) && $fields['test'] && ! is_user_logged_in() ) {
+		        continue;
+	        }
 
             // If the type is a sidebar or after post optin, pass over it.
             if ( isset( $fields['type'] ) && 'post' !== $fields['type'] ) {
@@ -409,19 +408,20 @@ class OMAPI_Output {
             // Run a check for specific post types.
             if ( ! empty( $fields['show'] ) ) {
                 // Check if we should show on a selected post type.
-                if ( in_array( get_post_type(), (array) $fields['show'] ) && ! ( is_front_page() || is_home() || is_archive() || is_search() ) ) {
+                if ( in_array( get_post_type(), (array) $fields['show'] ) && ! ( is_front_page() || is_home() || is_search() ) ) {
                     $content .= $html;
                     $this->set_slug( $optin );
                     continue;
                 }
             }
 
-            // If the optin is set to be automatically displayed, show it.
-            if ( isset( $fields['automatic'] ) && $fields['automatic'] && is_singular( 'post' ) ) {
-                $content .= $html;
-                $this->set_slug( $optin );
-                continue;
-            }
+			// If the optin is set to be automatically displayed, show it.
+	        if ( isset( $fields['automatic'] ) && $fields['automatic'] && is_singular( 'post' ) ) {
+		        $content .= $html;
+		        $this->set_slug( $optin );
+		        continue;
+	        }
+
         }
 
         // Return the content.
@@ -455,6 +455,7 @@ class OMAPI_Output {
 
         // Loop through each optin and optionally output it on the site.
         foreach ( $optins as $optin ) {
+
 	        // Grab all the fields to check against.
 	        foreach ( (array) $this->fields as $field ) {
 		        $fields[ $field ] = get_post_meta( $optin->ID, '_omapi_' . $field, true );
@@ -465,10 +466,10 @@ class OMAPI_Output {
 		        continue;
 	        }
 
-            // If in test mode but not logged in, skip over the optin.
-            if ( isset( $fields['test'] ) && $fields['test'] && ! is_user_logged_in() ) {
-                continue;
-            }
+	        // If in legacy test mode but not logged in, skip over the optin.
+	        if ( isset( $fields['test'] ) && $fields['test'] && ! is_user_logged_in() ) {
+		        continue;
+	        }
 
             // If the type is a sidebar or after post optin, pass over it.
             if ( isset( $fields['type'] ) && ( 'post' == $fields['type'] || 'sidebar' == $fields['type'] ) ) {
@@ -491,10 +492,17 @@ class OMAPI_Output {
             }
 
             // Prepare the optin campaign.
-            $html = trim( html_entity_decode( stripslashes( $optin->post_content ), ENT_QUOTES ), '\'' );
+            $html   = trim( html_entity_decode( stripslashes( $optin->post_content ), ENT_QUOTES ), '\'' );
+            $global = true;
 
             // If the optin is only to be shown on specific post IDs, get the code and break.
             if ( ! empty( $fields['only'] ) ) {
+	            // Set flag for possibly not loading globally.
+	            $values = array_filter( array_values( $fields['only'] ) );
+	            if ( ! empty( $values ) ) {
+		            $global = false;
+	            }
+
                 if ( $post_id && in_array( $post_id, (array) $fields['only'] ) ) {
                     $init[ $optin->post_name ] = $html;
                     $this->set_slug( $optin );
@@ -504,6 +512,7 @@ class OMAPI_Output {
 
             // Exclude posts/pages from optin display.
             if ( ! empty( $fields['never'] ) ) {
+	            // No global check on purpose. Global is still true if only this setting is populated.
                 if ( $post_id && in_array( $post_id, (array) $fields['never'] ) ) {
                     continue;
                 }
@@ -511,13 +520,19 @@ class OMAPI_Output {
 
             // If the optin is only to be shown on particular categories, get the code and break.
             if ( ! empty( $fields['categories'] ) && ( 'post' == get_post_type() ) ) {
+	            // Set flag for possibly not loading globally.
+	            $values = array_filter( array_values( $fields['categories'] ) );
+	            if ( ! empty( $values ) ) {
+		            $global = false;
+	            }
+
                 // Don't try to load on the blog home page even if a category that is selected appears in the loop.
                 if ( is_home() ) {
                     // Run a check for archive-type pages.
                     if ( ! empty( $fields['show'] ) ) {
                         // If showing on index pages and we are on an index page, show the optin.
                         if ( in_array( 'index', (array) $fields['show'] ) ) {
-                            if ( is_front_page() || is_home() || is_archive() || is_search() ) {
+                            if ( is_front_page() || is_home() || is_search() ) {
                                 $init[ $optin->post_name ] = $html;
                                 $this->set_slug( $optin );
                                 continue;
@@ -525,7 +540,7 @@ class OMAPI_Output {
                         }
 
                         // Check if we should show on the 'post' post type.
-                        if ( in_array( 'post', (array) $fields['show'] ) && ! ( is_front_page() || is_home() || is_archive() || is_search() ) ) {
+                        if ( in_array( 'post', (array) $fields['show'] ) && ! ( is_front_page() || is_home() || is_search() ) ) {
                             $init[ $optin->post_name ] = $html;
                             $this->set_slug( $optin );
                             continue;
@@ -534,24 +549,45 @@ class OMAPI_Output {
                 }
 
                 $categories = wp_get_object_terms( $post_id, 'category', array( 'fields' => 'ids' ) );
+
+	            // Check againts singular.
                 foreach ( (array) $categories as $category_id ) {
-                    if ( $category_id && in_array( $category_id, $fields['categories'] ) && ! is_archive() ) {
+                    if ( $category_id && in_array( $category_id, $fields['categories'] ) ) {
                         $init[ $optin->post_name ] = $html;
                         $this->set_slug( $optin );
                         continue 2;
                     }
                 }
+
+	            // Check archives.
+	            if ( is_category( $fields['categories'] ) ) {
+		            $init[ $optin->post_name ] = $html;
+		            $this->set_slug( $optin );
+		            continue;
+	            }
             }
 
             // If the optin is only to be shown on particular taxonomies, get the code and break.
-		    if ( ! empty( $fields['taxonomies'] ) && ( is_singular() ) ) {
+		    if ( ! empty( $fields['taxonomies'] )  ) {
+			    // Set flag for possibly not loading globally.
+	            $values = array_filter( array_values( $fields['taxonomies'] ) );
+	            if ( ! empty( $values ) ) {
+		            foreach ( $values as $i => $value ) {
+			            $value = array_filter( array_values( $value ) );
+			            if ( $value ) {
+				            $global = false;
+				            break;
+			            }
+		            }
+	            }
+
 		        // If this is the home page, check to see if they have decided to load on certain archive pages.
 		        if ( is_home() ) {
                     // Run a check for archive-type pages.
                     if ( ! empty( $fields['show'] ) ) {
                         // If showing on index pages and we are on an index page, show the optin.
                         if ( in_array( 'index', (array) $fields['show'] ) ) {
-                            if ( is_front_page() || is_home() || is_archive() || is_search() ) {
+                            if ( is_front_page() || is_home() || is_search() ) {
                                 $init[ $optin->post_name ] = $html;
                                 $this->set_slug( $optin );
                                 continue;
@@ -559,7 +595,7 @@ class OMAPI_Output {
                         }
 
                         // Check if we should show on the 'post' post type.
-                        if ( in_array( 'post', (array) $fields['show'] ) && ! ( is_front_page() || is_home() || is_archive() || is_search() ) ) {
+                        if ( in_array( 'post', (array) $fields['show'] ) && ! ( is_front_page() || is_home() || is_search() ) ) {
                             $init[ $optin->post_name ] = $html;
                             $this->set_slug( $optin );
                             continue;
@@ -580,14 +616,27 @@ class OMAPI_Output {
 					        continue 2;
 				        }
 			        }
+			        foreach ( $tax_ids as $tax_id ) {
+				        if ( is_tag($tax_id) ) {
+					        $init[ $optin->post_name ] = $html;
+					        $this->set_slug( $optin );
+					        continue 2;
+				        }
+			        }
 		        }
 		    }
 
             // Run a check for archive-type pages.
             if ( ! empty( $fields['show'] ) ) {
+	            // Set flag for possibly not loading globally.
+	            $values = array_filter( array_values( $fields['show'] ) );
+	            if ( ! empty( $values ) ) {
+		            $global = false;
+	            }
+
                 // If showing on index pages and we are on an index page, show the optin.
                 if ( in_array( 'index', (array) $fields['show'] ) ) {
-                    if ( is_front_page() || is_home() || is_archive() || is_search() ) {
+                    if ( is_front_page() || is_home() || is_search() ) {
                         $init[ $optin->post_name ] = $html;
                         $this->set_slug( $optin );
                         continue;
@@ -595,18 +644,18 @@ class OMAPI_Output {
                 }
 
                 // Check if we should show on a selected post type.
-                if ( in_array( get_post_type(), (array) $fields['show'] ) && ! ( is_front_page() || is_home() || is_archive() || is_search() ) ) {
+                if ( in_array( get_post_type(), (array) $fields['show'] ) && ! ( is_front_page() || is_home() || is_search() ) ) {
                     $init[ $optin->post_name ] = $html;
                     $this->set_slug( $optin );
                     continue;
                 }
             }
 
-            // Finally, check the global scope to load an optin.
-            if ( isset( $fields['global'] ) && $fields['global'] ) {
-                $init[ $optin->post_name ] = $html;
-                $this->set_slug( $optin );
-                continue;
+            // If we should be loading globally, do it now.
+            if ( $global ) {
+	            $init[ $optin->post_name ] = $html;
+			    $this->set_slug( $optin );
+			    continue;
             }
 
             // Allow devs to filter the final output for more granular control over optin targeting.
@@ -668,7 +717,12 @@ class OMAPI_Output {
 				continue;
 			}
 
-			$all_shortcode = explode( ',', $shortcode_string );
+			if ( strpos( $shortcode_string, '|||' ) !== false ) {
+				$all_shortcode = explode( '|||', $shortcode_string );
+			} else { // Backwards compat.
+				$all_shortcode = explode( ',', $shortcode_string );
+			}
+
 			foreach ( $all_shortcode as $shortcode ) {
 				if ( empty( $shortcode ) ) {
 					continue;
@@ -719,7 +773,7 @@ class OMAPI_Output {
 
 		wp_enqueue_script(
             $this->base->plugin_slug . '-wp-helper',
-            plugins_url( 'assets/js/helper.js', $this->base->file ),
+            plugins_url( 'assets/js/helper.js', OMAPI_FILE ),
             array( 'jquery'),
             $this->base->version,
             true

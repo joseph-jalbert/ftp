@@ -326,7 +326,8 @@ String.prototype.capitalize = function() {
 	 rsgallery => newrs-a-gallery
 	  */
 	 	$(document).on("click", "#add-images", function() { 
-	 		self.showThickbox('media-upload.php?type=image&post_id=&newrs-a-gallery-enabled=true&TB_iframe=true');
+	 		//self.showThickbox('media-upload.php?type=image&post_id=&newrs-a-gallery-enabled=true&TB_iframe=true');
+			self.selectImages();
 			return false;
 	 	});
 
@@ -406,6 +407,100 @@ String.prototype.capitalize = function() {
 				height: self.getOpt('height')
 			};
 		},
+
+
+		getAdminAttachmentsData: function(attachments) {
+			var self = this;
+
+			
+			$('#add-images').html(newRsVars.adding_images_button_text);
+
+			$.ajax({
+				url: newRsVars.ajaxurl,
+				type: 'post',
+				data: {
+					action : 'newRsCustomMedia',
+					_ajax_nonce: newRsVars.getImagesNonce,
+					attachments: attachments
+				},
+				complete: function(data) {			
+					window.rsAdminGlobal.addItems( data.responseText );
+					$('#add-images').html(newRsVars.add_images_button_text);
+				},
+			    error: function(jqXHR, textStatus, errorThrown) { 
+			    	$('#add-images').html(newRsVars.add_images_button_text); 
+			    	alert('There was a problem with request, please try again.'); 
+			    }
+			});
+
+		},
+		selectImages: function( callbackFn, isSingle, chooseSelected ) {
+			var self = this;
+			var frame = wp.media({
+                title : isSingle ? newRsVars.add_single_image_title : newRsVars.add_multiple_images_title,
+                multiple : isSingle ? false : 'add',
+                library : { type : 'image' },
+                button : { text : isSingle ? newRsVars.add_single_image_button_text : newRsVars.add_multiple_images_button_text }
+            });
+            // close event media manager
+            frame.on('select', function () {
+                var images = frame.state().get('selection');
+
+                var attachmentIds = [];
+                images.each(function (image) {
+                	image = image.toJSON();
+                	if(image && image.id !== undefined) {
+                		attachmentIds.push(image.id);
+                	}
+                });
+
+                if(isSingle) {
+
+                	var rawImageData = images.first().toJSON();
+
+                	var imageData = {};
+                	imageData.id = rawImageData.id;
+
+                	imageData.title = rawImageData.title;
+                	imageData.caption = rawImageData.caption || rawImageData.description;
+                	if(rawImageData.sizes) {
+                		var largeImageSize = rawImageData.sizes.large || rawImageData.sizes.full;
+                		imageData.src = imageData.large = largeImageSize.url;
+                		imageData.large_width = largeImageSize.width;
+                		imageData.large_height = largeImageSize.height;
+                	}
+
+                	if(callbackFn) {
+                		callbackFn.call(self, imageData);
+                	}
+                } else {
+                	self.getAdminAttachmentsData(attachmentIds);
+                }
+            });
+	
+			if(chooseSelected) {
+				frame.on('open', function () {
+	                var attachment,
+	                    selection = frame.state().get('selection'),
+	                    id = self.imageId.val();
+
+	                if(!id) {
+	                	return true;
+	                }
+	                attachment = wp.media.attachment(id);
+	                attachment.fetch();
+
+	                if(!attachment) {
+	                	return true;
+	                }
+	                selection.add(attachment ? [ attachment ] : []);
+	            });
+			}
+            
+
+            frame.open();
+		},
+
 
 		getOpt: function(optname, section) {
 			var self = this;
@@ -618,7 +713,8 @@ String.prototype.capitalize = function() {
 			// image tab
 			self.selectImageBtn = imageTab.find('.rs-select-image').bind('click', function(e) {
 				e.preventDefault();
-				self.showThickbox('media-upload.php?type=image&post_id=&newrs-a-gallery-enabled=true&newrs-a-gallery-single=true&TB_iframe=true', self.onImageSelect);
+				self.selectImages( self.onImageSelect, true, true );
+				//self.showThickbox('media-upload.php?type=image&post_id=&newrs-a-gallery-enabled=true&newrs-a-gallery-single=true&TB_iframe=true', self.onImageSelect);
 			});
 			self.removeImageBtn = imageTab.find('.rs-remove-image').bind('click', function(e) {
 				e.preventDefault();

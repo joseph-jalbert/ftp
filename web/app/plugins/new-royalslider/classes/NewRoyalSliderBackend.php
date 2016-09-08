@@ -85,7 +85,7 @@ class NewRoyalSliderBackend {
 		//$str = $_POST['classToAdd'];
 		//classToRemove
 		if( isset($_POST['classToAdd']) ) {
-			$arr[] = $_POST['classToAdd'];
+			$arr[] = sanitize_text_field($_POST['classToAdd']);
 			update_option("new_royalslider_anim_block_classes", $arr);
 		} else if( isset($_POST['classToRemove']) ) {
 
@@ -107,11 +107,11 @@ class NewRoyalSliderBackend {
 			require_once('NewRoyalSliderOptions.php');
 
 			$templates = NewRoyalSliderOptions::getRsTemplates();
-			$template_obj = $templates[ $_POST['templateId'] ];
+			$template_obj = $templates[ sanitize_text_field($_POST['templateId']) ];
 
 			ob_start();
 
-       		NewRoyalSliderOptions::output_options( $template_obj, isset($_POST['type']) ? $_POST['type'] : '' );
+       		NewRoyalSliderOptions::output_options( $template_obj, isset($_POST['type']) ? sanitize_text_field($_POST['type']) : '' );
 
        		$template_css = isset($template_obj['template-css']) ? ( NEW_ROYALSLIDER_PLUGIN_URL . 'lib/royalslider/' . $template_obj['template-css'] ) : '';
        		$template_css_class = isset($template_obj['template-css-class']) ? $template_obj['template-css-class'] : '';
@@ -144,8 +144,12 @@ class NewRoyalSliderBackend {
 	    	$slides = null;
 	    }
 
+	    $slider_type = sanitize_text_field($_POST['slider_type']);
+	    $slider_template = sanitize_text_field(stripslashes_deep($_POST['template']));
+	    $slider_skin = sanitize_text_field($_POST['skin']);
+
 	    require_once('rsgenerator/NewRoyalSliderGenerator.php');
-	    echo  NewRoyalSliderGenerator::generateSlides(false, true, '', $_POST['slider_type'], $markup, $slides, $options, stripslashes_deep($_POST['template']), $_POST['skin'], true);
+	    echo  NewRoyalSliderGenerator::generateSlides(false, true, '', $slider_type, $markup, $slides, $options, $slider_template, $slider_skin, true);
 
 	    die();
 	}
@@ -223,7 +227,7 @@ class NewRoyalSliderBackend {
 
 		$curr_config = get_option('new_royalslider_config');
 		if($curr_config) {
-	    	$curr_config['youtube_public_api_code'] = $_POST['youtube_api_code'];
+	    	$curr_config['youtube_public_api_code'] = sanitize_text_field($_POST['youtube_api_code']);
 	    	update_option( 'new_royalslider_config', $curr_config );
 		}
 
@@ -237,11 +241,14 @@ class NewRoyalSliderBackend {
 		if(!isset($_POST['purchase_code'])) {
 			die();
 		}
-		$result = NewRoyalSliderMain::$updater->check_purchase_code( $_POST['purchase_code'] );
+		$result = NewRoyalSliderMain::$updater->check_purchase_code( sanitize_text_field($_POST['purchase_code']) );
 		if($result && is_object($result) && isset($result->ok) ) {
 			echo '[VALID_CODE]';
 		}
 		die();
+	}
+	function parse_instagram_result() {
+
 	}
 	function ajax_instagram_auth() {
 		check_ajax_referer('new_royalslider_ajax_instagram_nonce');
@@ -252,26 +259,41 @@ class NewRoyalSliderBackend {
 			return;
 		}
 
-		// echo 'Hello world';
-
 		require_once('third-party/instagram.class.php');
 		$curr_page_url = get_admin_url() . "admin.php?page=new_royalslider_settings";
 		$instagram = new RS_Instagram(array(
-	      'apiKey'      => $_POST['instagramApiKey'],
-	      'apiSecret'   => $_POST['instagramApiSecret'],
+	      'apiKey'      => sanitize_text_field($_POST['instagramApiKey']),
+	      'apiSecret'   => sanitize_text_field($_POST['instagramApiSecret']),
 	      'apiCallback' => $curr_page_url
 	    ));
 	    $curr_config = get_option('new_royalslider_config');
-	    $curr_config['instagram_client_id'] = $_POST['instagramApiKey'];
-	    $curr_config['instagram_client_secret'] = $_POST['instagramApiSecret'];
+	    $curr_config['instagram_client_id'] = sanitize_text_field($_POST['instagramApiKey']);
+	    $curr_config['instagram_client_secret'] = sanitize_text_field($_POST['instagramApiSecret']);
 	    update_option( 'new_royalslider_config', $curr_config );
 
 
 
-	    $result = $instagram->getOAuthToken($_POST['instagramCode']);
-	    update_option('new_royalslider_instagram_oauth_token', $result);
+	    $result = $instagram->getOAuthToken( sanitize_text_field($_POST['instagramCode']) );
 
-		echo json_encode( $result );
+	    if(is_object($result) && 
+	    	isset($result->access_token) && 
+	    	isset($result->user) && 
+	    	isset($result->user->username) &&
+	    	isset($result->user->profile_picture) 
+
+	    ) {
+	    	$parsed_result = new stdClass();
+	    	$parsed_result->access_token = sanitize_text_field($result->access_token);
+	    	$parsed_result->user = new stdClass();
+	    	$parsed_result->user->username = sanitize_text_field($result->user->username); 
+	    	$parsed_result->user->profile_picture = sanitize_text_field($result->user->profile_picture); 
+	    	$parsed_result->user->id = sanitize_text_field($result->user->id); 
+
+		    update_option('new_royalslider_instagram_oauth_token', $parsed_result);
+
+		    echo json_encode( $parsed_result );
+	    }
+
 		die();
 	}
 
@@ -380,6 +402,20 @@ class NewRoyalSliderBackend {
 							'toggleActiveNonce' => wp_create_nonce( 'new_royalslider_toggle_active_ajax_nonce' ),
 
 			
+
+								'getImagesNonce' => wp_create_nonce( 'new_royalslider_get_images_ajax_nonce' ),
+								'getSingleImageNonce' => wp_create_nonce( 'new_royalslider_get_image_ajax_nonce' ),
+								
+								'add_single_image_title' => __('Select image', 'new_royalslider'),
+								'add_multiple_images_title' => __('Select images', 'new_royalslider'),
+
+								'add_single_image_button_text' => __('Select image', 'new_royalslider'),
+								'add_multiple_images_button_text' => __('Add to slider', 'new_royalslider'),
+
+								'add_images_button_text' => __('Add Images', 'new_royalslider'),
+								'adding_images_button_text' => __('Adding...', 'new_royalslider'),
+
+
 
 							'saveNonce' => wp_create_nonce( 'new_royalslider_save_ajax_nonce' ),
 							'previewNonce' => wp_create_nonce( 'new_royalslider_preview_ajax_nonce' ),
@@ -542,6 +578,17 @@ class NewRoyalSliderBackend {
 	
 	function plugin_config_page() {
 		$settings_api = RS_WeDevs_Settings_API::getInstance();
+
+		if(isset($_GET['code']) && strpos( strtolower($_SERVER["REQUEST_URI"]), 'royalslider') > -1 ) {
+			$instagram_code = sanitize_text_field($_GET['code']);
+			?>
+			<script type="text/javascript">
+			window.opener.processInstagramAuthCode("<?php echo $instagram_code;  ?>");
+			window.close();
+			</script>
+			<?php
+			return;
+		}
  
 	    echo '<div class="wrap">';
 	    echo '<h2>' . __('RoyalSlider Global Settings', 'new_royalslider') . '</h2>';
@@ -560,18 +607,6 @@ class NewRoyalSliderBackend {
 
 
 		$curr_page_url = get_admin_url() . "admin.php?page=new_royalslider_settings";
-
-		if(isset($_GET['code']) && strpos( strtolower($_SERVER["REQUEST_URI"]), 'royalslider') > -1 ) {
-			?>
-			<script type="text/javascript">
-			window.opener.processInstagramAuthCode("<?php echo $_GET['code'];  ?>");
-			window.close();
-			</script>
-			<?php
-			return;
-		}
-
-
 
 		$sections = array(
 	        array(
@@ -855,7 +890,7 @@ jQuery(document).ready(function($){
                 	
                 	$("#connection-status").html("Connecting to your Instagram account...");
 
-					var loginURL = "https://api.instagram.com/oauth/authorize?client_id=" +apiKey+ "&redirect_uri="+redirectURL+"&scope=basic&response_type=code";
+					var loginURL = "https://api.instagram.com/oauth/authorize?client_id=" +apiKey+ "&redirect_uri="+redirectURL+"&scope=basic+public_content&response_type=code";
 
 
 					window.open(loginURL, "intent", "scrollbars=yes,resizable=yes,toolbar=no,location=yes,width=550,height=420,left=" + (window.screen ? Math.round(screen.width / 2 - 275) : 50) + ",top=" + 100);

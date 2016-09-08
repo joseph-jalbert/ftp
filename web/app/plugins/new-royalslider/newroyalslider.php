@@ -4,13 +4,13 @@ Plugin Name: New RoyalSlider
 Plugin URI: http://dimsemenov.com/plugins/royal-slider/wordpress/
 Description: Professional image gallery and content slider plugin. Activation and deactivation of plugin keeps data. "Delete" removes all data and settings completely.
 Author: Dmitry Semenov
-Version: 3.2.6
+Version: 3.3.3
 Author URI: http://dimsemenov.com
 */
 if ( defined( 'ABSPATH' ) && !class_exists("NewRoyalSliderMain") ) {
 
 	if(!defined('NEW_ROYALSLIDER_WP_VERSION')) {
-		define( 'NEW_ROYALSLIDER_WP_VERSION', '3.2.6' );
+		define( 'NEW_ROYALSLIDER_WP_VERSION', '3.3.3' );
 	}
 
 	if(!defined('NEW_ROYALSLIDER_UPDATE_URL')) {

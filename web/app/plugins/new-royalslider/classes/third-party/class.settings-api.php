@@ -118,7 +118,6 @@ if ( !class_exists( 'RS_WeDevs_Settings_API' ) ):
                     'options' => isset( $option['options'] ) ? $option['options'] : '',
                     'std' => isset( $option['default'] ) ? $option['default'] : ''
                 );
-                //var_dump($args);
                 add_settings_field( $section . '[' . $option['name'] . ']', $option['label'], array( $this, 'callback_' . $type ), $section, $section, $args );
 
             }

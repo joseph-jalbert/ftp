@@ -136,13 +136,13 @@ class NewRoyalSliderInstagramSource {
 
 			    if($is_tag) {
 			    	$tag = str_replace('#', '', $options['usernameortag']);
-			    	$url = 'https://api.instagram.com/v1/tags/'. $tag .'/wp-content/themes/forthepeople/assets/media/recent?'.http_build_query($data);
+			    	$url = 'https://api.instagram.com/v1/tags/'. $tag .'/media/recent?'.http_build_query($data);
 			    } else {
 			    	$user_id = self::getInstagramUserID( $options['usernameortag'] );
 			    	if(!$user_id) {
 			    		return 'Username '.$options['usernameortag'].' not found';
 			    	}
-			    	$url = 'https://api.instagram.com/v1/users/'. $user_id .'/wp-content/themes/forthepeople/assets/media/recent?'.http_build_query($data);
+			    	$url = 'https://api.instagram.com/v1/users/'. $user_id .'/media/recent?'.http_build_query($data);
 			    }
 			    $url = apply_filters( 'new_rs_instagram_api_url', $url, $options);
 				
@@ -190,10 +190,11 @@ class NewRoyalSliderInstagramSource {
 
 							$image['image'] = $item['images']['standard_resolution']['url'];
 							$image['thumbnail'] = $item['images']['thumbnail']['url'];
-							//$image['title'] = isset($item['caption']) ? $item['caption']['text'] : '';
 
 							$image['title'] =  isset($item['caption']) ? htmlspecialchars($item['caption']['text']) : '';
 							$image['title'] = mb_convert_encoding( $image['title'] ,'HTML-ENTITIES','utf-8');
+
+							$image['title'] = apply_filters( 'new_rs_instagram_title_text', $image['title'], $image);
 
 							$image['original_obj'] = $item;
 							

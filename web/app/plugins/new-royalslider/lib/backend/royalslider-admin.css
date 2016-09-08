@@ -120,10 +120,12 @@ margin-left: 2px;
 .right-info-bar h2 {
 	font-weight: normal
 }
-.right-info-bar code {
+.right-info-bar code,
+.right-info-bar span.rs-shortcode-example {
 	background: #FFF9D8;
 	padding: 2px 4px;
 	font-size: 13px;
+	font-family: Consolas, Monaco, monospace;
 }
 .right-info-bar h3 {
 	margin-top: 20px;
@@ -400,16 +402,11 @@ clear: both;
 	display: none;
 }
 #new-royalslider-options h3 {
-/*	border: 0;
-	margin: 0 0 10px 0;
-	font-family: sans-serif;
-font-weight: bold;
-font-size: 13px;*/
 	cursor: pointer;
 }
 #new-royalslider-options .handlediv,
 #new-royalslider-options .postbox:hover .handlediv {
-	background: url('img/admin-icons.png') 0 -70px no-repeat transparent;
+	background: url('img/admin-icons.png') 10px -68px no-repeat transparent;
 }
 
 
@@ -640,6 +637,8 @@ top: 6px;
 }
 #rs-no-slides-block h2 {
 	margin-bottom: 0;
+	margin-left: 0;
+	padding-left: 0;
 }
 #rs-no-slides-block  p {
 	margin-top: 0;

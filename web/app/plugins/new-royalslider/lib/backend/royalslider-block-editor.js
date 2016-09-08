@@ -38,7 +38,8 @@
 		});
 
 		self.controls.find('.rs-be-add-image-block').click(function() {
-			self.admin.showThickbox('media-upload.php?type=image&post_id=&newrs-a-gallery-enabled=true&newrs-a-gallery-single=true&TB_iframe=true', function(response) {
+			//self.admin.showThickbox('media-upload.php?type=image&post_id=&newrs-a-gallery-enabled=true&newrs-a-gallery-single=true&TB_iframe=true', function(response) {
+			self.admin.selectImages(function(response) {
 				var el = self.getEmptyBlock();
 				el.find('.rsABlock').html('<img class="rsABImage" src="'+response.large+'" />');
 				el.css({
@@ -46,7 +47,7 @@
 					height: response.large_height
 				})
 				self.addBlock( el );
-			});
+			}, true);
 		});
 
 

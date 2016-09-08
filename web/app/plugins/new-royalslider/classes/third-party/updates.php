@@ -97,6 +97,7 @@ class RoyalSliderUpdater {
 
 	public function update_plugin_transient($transient) {
 
+
 		if ( empty( $transient->checked ) ) {
 		    return $transient;
 		}
@@ -115,12 +116,15 @@ class RoyalSliderUpdater {
 			return $transient;
 		}
 
+		
+
 		$doUpdate = version_compare( $pluginInfo->version, $transient->checked[$this->slug] );
 
 		if($doUpdate) {
 			$obj = new stdClass();
-		    $obj->slug = $this->slug;
-		    $obj->new_version = $pluginInfo->version;//$this->githubAPIResult->tag_name;
+		    $obj->slug = 'new-royalslider';
+		    $obj->plugin = $this->slug;
+		    $obj->new_version = $pluginInfo->version;
 		    $obj->url = $pluginInfo->url;
 		    $obj->package = $pluginInfo->package;
 		    $transient->response[$this->slug] = $obj;

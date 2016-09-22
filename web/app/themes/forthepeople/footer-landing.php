@@ -10,7 +10,7 @@
     <div class="ft-logo"></div>
     <div class="ft-info">
       <div class="advert-txt">this is an advertisement | <a href="/disclaimer-and-terms-of-use/">Terms &amp; Conditions</a></div>
-      <p><span>Morgan and Morgan</span></p>
+      <p><span>Morgan &amp; Morgan</span></p>
       <p><a class="ft-num" href="tel:8776674265">877-667-4265</a></p>
     </div>
   </div>

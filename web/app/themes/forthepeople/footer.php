@@ -74,7 +74,7 @@
     </div>
   </div>
   <!--- /footer-layer1 --->
-  <div class="footer-layer2">© 1998 - <?php echo date("Y"); ?>. All Rights Reserved. Morgan and Morgan, PA</div>
+  <div class="footer-layer2">© 1998 - <?php echo date("Y"); ?>. All Rights Reserved. Morgan &amp; Morgan, PA</div>
 </footer>
 <!--- /footer --->
 </div>

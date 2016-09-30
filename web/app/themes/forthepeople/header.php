@@ -119,9 +119,16 @@ if ( $menu_override ) {
 	<span class="nav-overlay"></span>
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'forthepeople' ); ?></a>
 
-	<header id="masthead" class="header-wrap" role="banner">
+	<header id="masthead" class="header-wrap" role="banner"<?php if (get_field('banner_image', 'option')) { ?> style="background: linear-gradient(<?php the_field('top_gradient', 'option'); ?>,<?php the_field('bottom_gradient', 'option');?>);"<?php } ?>>
 			<div class="container header-container clearfix">
-			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="logo<?php if (!is_page()) { echo ' tt'; } ?>" <?php if (is_singular()) { echo 'data-toggle="tooltip" data-placement="left" data-original-title="Site Home"'; } ?>><img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo-banner.png" alt="Morgan & Morgan - ForThePeople.com" height="137" width="565" border="0" /></a>
+                <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="logo<?php if (!is_page()) { echo ' tt'; } ?>" <?php if (is_singular()) { echo 'data-toggle="tooltip" data-placement="left" data-original-title="Site Home"'; } ?>><img src="
+                    <?php if (get_field('banner_image', 'option') ){
+                        the_field('banner_image', 'option'); ?>"
+                <?php }
+                          else {
+                              echo get_template_directory_uri(); ?>/assets/images/logo-banner.png"
+                <?php } ?>
+                    alt="Morgan &amp; Morgan - ForThePeople.com" height="137" width="565" border="0" /></a>
 
 <div class="advert-txt">this is an advertisement</div>
 

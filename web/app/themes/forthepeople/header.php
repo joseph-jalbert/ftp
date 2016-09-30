@@ -128,7 +128,7 @@ if ( $menu_override ) {
                           else {
                               echo get_template_directory_uri(); ?>/assets/images/logo-banner.png"
                 <?php } ?>
-                    alt="Morgan & Morgan - ForThePeople.com" height="137" width="565" border="0" /></a>
+                    alt="Morgan &amp; Morgan - ForThePeople.com" height="137" width="565" border="0" /></a>
 
 <div class="advert-txt">this is an advertisement</div>
 

@@ -16,7 +16,6 @@ class Banner_Image {
 
         add_action( 'init', array( __CLASS__, 'add_menu_page' ) );
         add_action( 'init', array( __CLASS__, 'add_settings' ) );
-        add_filter( 'acf/update_value', array( __CLASS__, 'update_value' ), 10, 3 );
 
     }
 
@@ -46,14 +45,14 @@ class Banner_Image {
 
             acf_add_local_field_group(array (
                 'key' => 'group_57ebf087aa2f9',
-                'title' => 'Banner Images',
+                'title' => 'Banner Image',
                 'fields' => array (
                     array (
                         'key' => 'field_57ebf0967da5c',
                         'label' => 'Banner Image',
                         'name' => 'banner_image',
                         'type' => 'image',
-                        'instructions' => '',
+                        'instructions' => 'Set custom banner image here. If nothing is set, header will fallback to default image. Must be a transparent .png, 565 X 137 EXACTLY',
                         'required' => 0,
                         'conditional_logic' => 0,
                         'wrapper' => array (
@@ -77,7 +76,7 @@ class Banner_Image {
                         'label' => 'top gradient',
                         'name' => 'top_gradient',
                         'type' => 'text',
-                        'instructions' => '',
+                        'instructions' => 'must be a 6 character hex value in the format "#xxxxx"',
                         'required' => 0,
                         'conditional_logic' => 0,
                         'wrapper' => array (
@@ -96,7 +95,7 @@ class Banner_Image {
                         'label' => 'bottom gradient',
                         'name' => 'bottom_gradient',
                         'type' => 'text',
-                        'instructions' => '',
+                        'instructions' => 'must be a 6 character hex value in the format "#xxxxx"',
                         'required' => 0,
                         'conditional_logic' => 0,
                         'wrapper' => array (
@@ -134,14 +133,6 @@ class Banner_Image {
 
 
     }
-
-    public static function get( $key, $from_where = 'option' ) {
-        if ( function_exists( 'get_field' ) ) {
-            return get_field( $key, $from_where );
-        }
-
-    }
-
 
 }
 

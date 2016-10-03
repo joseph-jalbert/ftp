@@ -38,6 +38,8 @@ Optional:
 *  Add a new site (and optionally a db) 
 *  Copy `.env.example` to `.env` and set the file's contents to the current .env file (saved in LastPass), unless you want to do local development 
 *  Run `composer install` && `npm install` && `bower install` && `grunt` (Note: if some of these task runners or dependency managers fail or appear to fail it may be because they are not being used by this project)
+*  Run `homestead up`
+*  Run `homestead provision`
 *  Navigate to www.forthepeople.dev/wp-admin  you should be able to log in using the credentials on the staging db
 
 

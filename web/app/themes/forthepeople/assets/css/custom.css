@@ -1,11 +1,5 @@
 /* Enter Your Custom CSS Here */
 
-@media screen and (max-width: 767px) {
-    .hide-header-ad-text-mobile {
-        display: none;
-    }
-}
-
 .contact-btn {
     color: #FFF !important;
 }

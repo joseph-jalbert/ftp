@@ -1871,3 +1871,11 @@ footer#footer .offices {
 .kads-main {
 	margin: 0 auto;
 }
+
+.slideContent .slideContainer.nobackground {
+	background:none;
+}
+
+.slideContent .slideContainer.center {
+	margin:auto;
+}

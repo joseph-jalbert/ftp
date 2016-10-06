@@ -130,7 +130,7 @@ if ( $menu_override ) {
                 <?php } ?>
                     alt="Morgan &amp; Morgan - ForThePeople.com" height="137" width="565" border="0" /></a>
 
-<div class="<?php if (get_field('banner_image', 'option')) { ?>hidden-xs <?php } ?>advert-txt">this is an advertisement</div>
+<div class="advert-txt">this is an advertisement</div>
 
         <div class="phone pull-right hidden-phone">
         	<div class="actions">

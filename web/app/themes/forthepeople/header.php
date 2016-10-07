@@ -169,6 +169,9 @@ if ( $menu_override ) {
         <![endif]-->
 
 <?php
+    if (is_search()) {
+    $menuslug = 'main-navigation';
+    }
     $defaults = array(
         'menu'  => $menuslug,
         'menu_class' => 'menu menubar root-level',

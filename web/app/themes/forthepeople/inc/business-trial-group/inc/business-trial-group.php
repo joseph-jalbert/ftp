@@ -89,6 +89,7 @@ class BTG_News {
 			'menu_icon'          => 'dashicons-welcome-learn-more',
 			'publicly_queryable' => true,
 			'public'             => true,
+            'exclude_from_search' => true,
 			'supports'           => array( 'title', 'thumbnail', 'editor', 'author' ),
 			'rewrite'            => array( 'slug' => self::POST_TYPE ),
 

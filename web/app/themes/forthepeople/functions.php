@@ -502,6 +502,7 @@ function mm_ftp_widgets_init() {
 		'labels' => my_labels_for_custom_post_type('Office', 'Offices'),
 		'public' => true,
 		'publicly_queryable' => true,
+        'exclude_from_search' => true,
 	    'show_ui' => true,
 	    'show_in_menu' => true,
 	    'menu_position' => 20,
@@ -524,6 +525,7 @@ function mm_ftp_widgets_init() {
 		'labels' => my_labels_for_custom_post_type('Verdict', 'Verdicts'),
 		'public' => true,
 		'publicly_queryable' => true,
+        'exclude_from_search' => true,
 	    'show_ui' => true,
 	    'show_in_menu' => true,
 	    'menu_position' => 20,
@@ -570,6 +572,7 @@ function mm_ftp_widgets_init() {
 		'labels' => my_labels_for_custom_post_type('Testimonial', 'Testimonials'),
 		'public' => true,
 		'publicly_queryable' => true,
+        'exclude_from_search' => true,
 	    'show_ui' => true,
 	    'show_in_menu' => true,
 	    'menu_position' => 20,
@@ -1470,7 +1473,7 @@ add_action( 'parse_query', 'forthepeople_filter_query' );
 function searchfilter($query) {
 
 	if ( $query->is_search && ! is_admin() ) {
-		$query->set( 'post_type', array( 'post', 'page', 'attorney', 'office', 'verdict', 'testimonial', 'classactionlawyers', 'btg_news' ) );
+		$query->set( 'post_type', array( 'post', 'page', 'attorney', 'classactionlawyers' ) );
 	}
 
 	return $query;

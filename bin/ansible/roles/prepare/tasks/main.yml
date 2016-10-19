@@ -8,11 +8,15 @@
   when: build_target == "wpengine"
 
 - name: update wordpress (if flag is set)
-  command: "{{ item }} chdir={{ workspace }}"
+  shell: "{{ item.build_steps | join (' && ') }}"
   with_items:
-    - wget https://wordpress.org/latest.tar.gz
-    - tar -xzvf latest.tar.gz
-    - cp -R {{ workspace }}/wordpress/* {{ workspace }}/pantheon/
+    - location: ''
+      build_steps :
+        - wget https://wordpress.org/latest.tar.gz
+        - tar -xzvf latest.tar.gz
+        - cp * {{ workspace }}/pantheon/
+  args:
+    chdir: "{{ workspace }}"
   when: update_wordpress == "true"
 
 - name: remove pantheon directories

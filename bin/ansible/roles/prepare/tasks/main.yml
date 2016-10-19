@@ -12,7 +12,7 @@
   with_items:
     - wget https://wordpress.org/latest.tar.gz
     - tar -xzvf latest.tar.gz
-    - cp -R ./wordpress/* {{ workspace }}/pantheon/
+    - cp -R {{ workspace }}/wordpress/* {{ workspace }}/pantheon/
   when: update_wordpress == "true"
 
 - name: remove pantheon directories

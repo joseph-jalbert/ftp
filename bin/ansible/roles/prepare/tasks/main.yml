@@ -7,7 +7,6 @@
   shell: git clone -b {{ wpengine_branch }} --single-branch {{ wpengine_repo }} {{ workspace }}/wpengine
   when: build_target == "wpengine"
 
-
 - name: remove pantheon directories
   file: path={{ workspace }}/pantheon/wp-content/{{ item }} state=absent
   with_items:

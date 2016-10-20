@@ -7,6 +7,13 @@
   shell: git clone -b {{ wpengine_branch }} --single-branch {{ wpengine_repo }} {{ workspace }}/wpengine
   when: build_target == "wpengine"
 
+- name: update wordpress (if flag is set)
+  command: "{{ item }} chdir={{ workspace }}"
+  with_items:
+    - wget https://wordpress.org/latest.tar.gz
+    - tar -xzf latest.tar.gz --strip-components=1 wordpress
+  when: update_wordpress == "true"
+
 - name: remove pantheon directories
   file: path={{ workspace }}/pantheon/wp-content/{{ item }} state=absent
   with_items:

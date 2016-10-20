@@ -37,7 +37,6 @@
     - plugins
   when: build_target == "wpengine"
 
-
 - name: commit the empty pantheon repo
   shell: git add . && git commit --allow-empty -am "wiping out pantheon" chdir={{ workspace + '/pantheon' }}
   when: build_target == "pantheon"

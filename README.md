@@ -105,6 +105,21 @@ Some quick notes:
 * Using LFTP clear out the entire wp-contents directory from the host's server (using SFTP).
 * Push the repo up to the host, environment is determined by CLI arguments in the grunt task (with force flag on, though this should not be necessary) -- Fortunately as part of WPEngine's deployment process automatically adds any plugins that we are not versioning.
 
+## Updating Wordpress
+
+* Updating Wordpress is a manual process, executed from command line.
+* There is a required API Token which is available in the CircleCI dashboard
+
+To update the WordPress version to latest, run this curl command, specifying the branch (development or master) and the API key.
+```
+curl \
+  --header "Content-Type: application/json" \
+  --data '{"build_parameters": {"UPDATE_WORDPRESS": "true"}}' \
+  --request POST \
+  https://circleci.com/api/v1/project/Morgan-and-Morgan/forthepeople.com/tree/BRANCH?circle-token=APIKEY
+```
+Replace BRANCH with the target branch and APIKEY with the API Token.  It's that simple.
+
 
 ## Rollbacks
 

@@ -15,6 +15,14 @@
     - rm latest.tar.gz
   when: (update_wordpress == "true" and build_target == "pantheon")
 
+- name: update wordpress (if flag is set)
+  command: "{{ item }} chdir={{ workspace }}/wpengine"
+  with_items:
+    - wget https://wordpress.org/latest.tar.gz
+    - tar -xzf latest.tar.gz --strip-components=1 wordpress
+    - rm latest.tar.gz
+  when: (update_wordpress == "true" and build_target == "wpengine")
+
 - name: remove pantheon directories
   file: path={{ workspace }}/pantheon/wp-content/{{ item }} state=absent
   with_items:

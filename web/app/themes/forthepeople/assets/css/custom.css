@@ -1,5 +1,9 @@
 /* Enter Your Custom CSS Here */
 
+div #content {
+    outline: none;
+}
+
 .contact-btn {
     color: #FFF !important;
 }

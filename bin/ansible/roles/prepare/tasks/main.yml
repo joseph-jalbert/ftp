@@ -7,6 +7,21 @@
   shell: git clone -b {{ wpengine_branch }} --single-branch {{ wpengine_repo }} {{ workspace }}/wpengine
   when: build_target == "wpengine"
 
+- name: update wordpress (if flag is set)
+  command: "{{ item }} chdir={{ workspace }}/pantheon"
+  with_items:
+    - wget https://wordpress.org/latest.tar.gz
+    - tar -xzf latest.tar.gz --strip-components=1 wordpress
+    - rm latest.tar.gz
+  when: (update_wordpress == "true" and build_target == "pantheon")
+
+- name: update wordpress (if flag is set)
+  command: "{{ item }} chdir={{ workspace }}/wpengine"
+  with_items:
+    - wget https://wordpress.org/latest.tar.gz
+    - tar -xzf latest.tar.gz --strip-components=1 wordpress
+    - rm latest.tar.gz
+  when: (update_wordpress == "true" and build_target == "wpengine")
 
 - name: remove pantheon directories
   file: path={{ workspace }}/pantheon/wp-content/{{ item }} state=absent
@@ -21,7 +36,6 @@
     - themes
     - plugins
   when: build_target == "wpengine"
-
 
 - name: commit the empty pantheon repo
   shell: git add . && git commit --allow-empty -am "wiping out pantheon" chdir={{ workspace + '/pantheon' }}

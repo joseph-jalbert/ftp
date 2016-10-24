@@ -118,6 +118,15 @@ curl \
   --request POST \
   https://circleci.com/api/v1/project/Morgan-and-Morgan/forthepeople.com/tree/BRANCH?circle-token=APIKEY
 ```
+If you wish to specify a WordPress version, add the parameter: WORDPRESS_VERSION:
+```
+curl \
+  --header "Content-Type: application/json" \
+  --data '{"build_parameters": {"UPDATE_WORDPRESS": "true", "WORDPRESS_VERSION": "4.5.2"}}' \
+  --request POST \
+  https://circleci.com/api/v1/project/Morgan-and-Morgan/forthepeople.com/tree/development?circle-token=9d31cc59ad1c727f8fe8442ec9d5e0ff67a2369c
+```
+
 Replace BRANCH with the target branch and APIKEY with the API Token.  It's that simple.
 
 

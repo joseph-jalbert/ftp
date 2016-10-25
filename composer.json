@@ -21,7 +21,8 @@
     "wpackagist-plugin/hubspot-tracking-code": "~1.0",
     "wpackagist-plugin/wp-smushit": "^2.3",
     "morgan-and-morgan/facebook-buttons": "1.0.*",
-    "wpackagist-plugin/sumome": "^1.19"
+    "wpackagist-plugin/sumome": "^1.19",
+    "wpackagist-plugin/debug-bar": "^0.8.4"
 
   },
   "require-dev": {

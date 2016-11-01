@@ -23,6 +23,7 @@ require __DIR__ . '/inc/selective-disable-autop/selective-disable-wpautop.php';
 require __DIR__ . '/inc/shortcodes/shortcodes.php';
 require __DIR__ . '/inc/menu-override/menu-override.php';
 require __DIR__ . '/inc/fix-for-yoast-seo-tour.php';
+require __DIR__ . '/inc/custom-evaluation-page-template.php';
 
 
 if ( ! function_exists( 'forthepeople_setup' ) ) :

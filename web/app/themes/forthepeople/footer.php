@@ -211,15 +211,15 @@ jQuery(document).ready(function($) {
 
 if ( Social_Sharing::check_page() ) :
     $custom_title_value = get_field( 'custom_title', $post->ID );
-    $custom_title       = ! empty( $custom_title_value ) ? 'data-a2a-title="' . esc_attr( $custom_title_value ) . '"' : '';
+    $custom_title       = ! empty( $custom_title_value ) ? 'data-a2a-title="' . $custom_title_value . '"' : '';
 
     $custom_url_value   = get_field( 'custom_url', $post->ID );
-    $custom_url         = ! empty( $custom_title_value ) ? 'data-a2a-url="' . esc_attr( $custom_url_value ) . '"' : '';  ?>
+    $custom_url         = ! empty( $custom_title_value ) ? 'data-a2a-url="' . $custom_url_value . '"' : '';  ?>
 
-    <div id="social-share-icons" class="a2a_kit a2a_kit_size_32 a2a_floating_style a2a_default_style hidden" <?php echo esc_attr( $custom_url ); ?> <?php echo esc_attr( $custom_title ); ?> >
+    <div id="social-share-icons" class="a2a_kit a2a_kit_size_32 a2a_floating_style a2a_default_style hidden" <?php echo wp_kses( $custom_url ); ?> <?php echo wp_kses( $custom_title ); ?> >
         <div id="post-info-wrapper">
             <div class="post-image"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/logos/ftp-logo1.jpg" alt="Morgan & Morgan" /></div>
-            <div class="post-title"><?php echo wp_trim_words( $post->post_title, 6 ); ?></div>
+            <div class="post-title"><?php echo $post->post_title; ?></div>
         </div>
         <div class="icon-wrapper">
             <a class="a2a_button_email">

@@ -45,6 +45,75 @@ class Custom_Evaluation_Page_Template {
 						'default_value'     => '',
 						'placeholder'       => '',
 					),
+
+					array(
+						'key'               => 'field_5fadsfabb999c6c',
+						'label'             => 'Gray Box Title',
+						'name'              => 'gray_box_title',
+						'type'              => 'text',
+						'instructions'      => '',
+						'required'          => 0,
+						'conditional_logic' => 0,
+						'wrapper'           => array(
+							'width' => '',
+							'class' => '',
+							'id'    => '',
+						),
+						'default_value'     => '',
+						'placeholder'       => '',
+					),
+
+					array(
+						'key'               => 'field_5fafasdfbb999c6c',
+						'label'             => 'Gray Box Content',
+						'name'              => 'gray_box_content',
+						'type'              => 'text',
+						'instructions'      => '',
+						'required'          => 0,
+						'conditional_logic' => 0,
+						'wrapper'           => array(
+							'width' => '',
+							'class' => '',
+							'id'    => '',
+						),
+						'default_value'     => '',
+						'placeholder'       => '',
+					),
+
+					array(
+						'key'               => 'field_5fadfasdfaaebb999c6c',
+						'label'             => 'Testimonials Title',
+						'name'              => 'testimonials_title',
+						'type'              => 'text',
+						'instructions'      => '',
+						'required'          => 0,
+						'conditional_logic' => 0,
+						'wrapper'           => array(
+							'width' => '',
+							'class' => '',
+							'id'    => '',
+						),
+						'default_value'     => '',
+						'placeholder'       => '',
+					),
+
+					array(
+						'key'               => 'field_5faddadbb999c6c',
+						'label'             => 'Verdicts and Settlements Title',
+						'name'              => 'verdicts_and_settlements_title',
+						'type'              => 'text',
+						'instructions'      => '',
+						'required'          => 0,
+						'conditional_logic' => 0,
+						'wrapper'           => array(
+							'width' => '',
+							'class' => '',
+							'id'    => '',
+						),
+						'default_value'     => '',
+						'placeholder'       => '',
+					),
+
 					array(
 						'key'               => 'field_5817fadsf99c70',
 						'label'             => 'Verdicts & Settlements',
@@ -64,6 +133,25 @@ class Custom_Evaluation_Page_Template {
 						'layout'            => 'block',
 						'button_label'      => 'Add V&S',
 						'sub_fields'        => array(
+							array(
+								'key'               => 'field_5adaad3fasfc2a99c71',
+								'label'             => 'Verdict Text',
+								'name'              => 'verdict_text',
+								'type'              => 'text',
+								'instructions'      => '',
+								'required'          => 0,
+								'conditional_logic' => 0,
+								'wrapper'           => array(
+									'width' => '',
+									'class' => '',
+									'id'    => '',
+								),
+								'default_value'     => '',
+								'placeholder'       => '',
+								'prepend'           => '',
+								'append'            => '',
+								'maxlength'         => '',
+							),
 							array(
 								'key'               => 'field_5817ac2a99c71',
 								'label'             => 'Litigation Type',

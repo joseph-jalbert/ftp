@@ -12,6 +12,26 @@ endif;
 if ( ! $custom_hubspot_form_id ) {
 	$custom_hubspot_form_id = '69d9a0d1-408f-4ba0-9781-1e834effd8c0';
 }
+$gray_box_title = get_field('gray_box_title');
+if ( ! $gray_box_title ) {
+	$gray_box_title = 'At Morgan & Morgan, we are dedicated to our clients.';
+}
+$gray_box_content = get_field('gray_box_content');
+if ( ! $gray_box_content ) {
+	$gray_box_content = 'Every day, we help people like you get their lives back on track by fighting their legal battles for them.';
+}
+$verdicts_and_settlements_title = get_field('verdicts_and_settlements_title');
+
+if ( ! $verdicts_and_settlements_title ) {
+	$verdicts_and_settlements_title = 'Verdicts &amp; Settlements';
+}
+
+$testimonials_title = get_field('testimonials_title');
+
+if ( ! $testimonials_title ) {
+	$testimonials_title = 'Recent Client Testimonials';
+}
+
 
 get_header(); ?>
 
@@ -78,16 +98,24 @@ get_header(); ?>
 				<div id="verdictScroll" data-practicearea="-1" data-attorney="-1" data-officelocation="-1"
 				     data-stateabb="" data-startrow="9" data-type="all" class="widgetWrap section"
 				     style="margin-top:70px;">
-					<div class="title" role="complementary"><span>Verdicts &amp; Settlements</span></div>
+					<div class="title" role="complementary">
+						<span><?php esc_html_e( $verdicts_and_settlements_title ); ?></span></div>
 					<div class="body">
 						<ul class="verdictList">
 
 							<?php if ( have_rows( 'verdicts_settlements' ) ) : ?>
 								<?php while ( have_rows( 'verdicts_settlements' ) ) : the_row(); ?>
 
+									<?php
+									$verdict_text = get_sub_field('verdict_text');
+									if ( ! $verdict_text ) {
+										$verdict_text = 'Verdict';
+									}
+
+									?>
 									<li>
 										<div class="type">
-											<span>Verdict</span><?php esc_html_e( get_sub_field( 'litigation_type' ) ); ?>
+											<span><?php esc_html_e($verdict_text); ?></span><?php esc_html_e( get_sub_field( 'litigation_type' ) ); ?>
 										</div>
 										<div
 											class="result"><?php esc_html_e( get_sub_field( 'litigation_value' ) ); ?></div>
@@ -117,16 +145,16 @@ get_header(); ?>
 					</div>
 				</div>
 				<div class="well">
-					<p class="no-margin-topbottom"><span class="blue bold format italic">At Morgan &amp; Morgan, we are dedicated to our clients.</span><br/>
-						Every day, we help people like you get their lives back on track by fighting their legal battles
-						for them.</p>
+					<p class="no-margin-topbottom"><span
+							class="blue bold format italic"><?php esc_html_e( $gray_box_title ); ?></span><br/>
+						<?php esc_html_e( nl2br( $gray_box_content ) ); ?></p>
 				</div>
 
 
 				<div id="testimonialScroll" data-practicearea="-1" data-attorney="-1" data-officelocation="-1"
 				     data-stateabb="" data-startrow="9" class="widgetWrap section">
 
-					<div class="title"><span>Recent Client Testimonials</span></div>
+					<div class="title"><span><?php esc_html_e( $testimonials_title ); ?></span></div>
 
 					<div class="body">
 

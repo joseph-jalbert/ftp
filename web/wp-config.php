@@ -7,7 +7,8 @@ require __DIR__ . '/../phpdotenv/src/Validator.php';
 $dotenv = new Dotenv\Dotenv( dirname( __DIR__ ) );
 $dotenv->load();
 $dotenv->required( array( 'DB_NAME', 'DB_USER', 'DB_PASSWORD', 'WP_HOME', 'WP_SITEURL', 'DB_HOST' ) );
-
+define('JWT_AUTH_SECRET_KEY', 'N^*Pi.|u*Ja7z|33lT@jKs;HI+Tqrmy8>G@Wp-^Gca9$I@eP,%G,,*7^UGcFqkOs');
+define('JWT_AUTH_CORS_ENABLE', true);
 
 // ** MySQL settings ** //
 /** The name of the database for WordPress */

@@ -11,7 +11,7 @@ License: GPL
 */
 
 
-remove_action( 'rest_api_init', 'create_initial_rest_routes', 0 );
+
 add_action( 'jwt_auth_expire', function ( $time ) {
 	return time() + ( DAY_IN_SECONDS * 365 );
 } );
@@ -27,5 +27,7 @@ add_action( 'rest_api_init', function () {
 } );
 
 function my_awesome_func() {
-	return array( 'foo' => 'bar' );
+	$settings  = get_site_option( 'wpmdb_settings' );
+
+	return array( 'key' => sprintf( "%s\r%s", site_url( '', 'https' ), $settings['key'] ) );
 }

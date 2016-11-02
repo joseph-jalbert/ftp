@@ -19,14 +19,14 @@ add_action( 'jwt_auth_expire', function ( $time ) {
 add_action( 'rest_api_init', function () {
 	register_rest_route( 'myplugin/v1', '/author', array(
 		'methods'             => 'GET',
-		'callback'            => 'my_awesome_func',
+		'callback'            => 'return_wpmdb_key',
 		'permission_callback' => function () {
 			return current_user_can( 'edit_others_posts' );
 		}
 	) );
 } );
 
-function my_awesome_func() {
+function return_wpmdb_key() {
 	$settings  = get_site_option( 'wpmdb_settings' );
 
 	return array( 'key' => sprintf( "%s\r%s", site_url( '', 'https' ), $settings['key'] ) );

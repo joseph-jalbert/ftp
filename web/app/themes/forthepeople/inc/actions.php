@@ -14,6 +14,7 @@ class Actions {
 		add_action( 'script_loader_tag', array( __CLASS__, 'enqueue_additions' ), 10, 2 );
 		add_action( 'wp_head', array( __CLASS__, 'meta_fields' ) );
         add_action( 'wp_head', array( __CLASS__, 'social_profiles' ) );
+		remove_action( 'rest_api_init', 'create_initial_rest_routes', 0 );
 
 	}
 

@@ -145,8 +145,9 @@ get_header(); ?>
 					</div>
 				</div>
 				<div class="well">
-					<p class="no-margin-topbottom"><span class="blue bold format italic"><?php echo $gray_box_title; ?></span><br/>
-						<?php echo nl2br($gray_box_content); ?></p>
+					<p class="no-margin-topbottom"><span
+							class="blue bold format italic"><?php esc_html_e( $gray_box_title ); ?></span><br/>
+						<?php esc_html_e( nl2br( $gray_box_content ) ); ?></p>
 				</div>
 
 

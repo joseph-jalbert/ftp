@@ -124,7 +124,7 @@ curl \
   --header "Content-Type: application/json" \
   --data '{"build_parameters": {"UPDATE_WORDPRESS": "true", "WORDPRESS_VERSION": "4.5.2"}}' \
   --request POST \
-  https://circleci.com/api/v1/project/Morgan-and-Morgan/forthepeople.com/tree/development?circle-token=APIKEY
+  https://circleci.com/api/v1/project/Morgan-and-Morgan/forthepeople.com/tree/BRANCH?circle-token=APIKEY
 ```
 
 Replace BRANCH with the target branch and APIKEY with the API Token.  It's that simple.

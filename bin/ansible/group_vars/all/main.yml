@@ -9,6 +9,7 @@ project_branch: development
 pantheon_cli_version: 0.11.2
 pantheon_site_name: forthepeople
 update_wordpress: "{{ lookup('env','UPDATE_WORDPRESS') }}"
+wordpress_version: "{{ lookup('env','WORDPRESS_VERSION') | default('latest', true) }}"
 git_config:
   user:
     name: Circle CI

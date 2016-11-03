@@ -12,6 +12,10 @@ body {
   font-weight: 400;
 }
 
+.testimonial-block {
+	margin-bottom:25px;
+}
+
 #verdictScroll, #testimonialScroll {
   margin-top: 0px !important;
   padding-top: 0;

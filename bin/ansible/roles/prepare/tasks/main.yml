@@ -7,21 +7,37 @@
   shell: git clone -b {{ wpengine_branch }} --single-branch {{ wpengine_repo }} {{ workspace }}/wpengine
   when: build_target == "wpengine"
 
-- name: update wordpress (if flag is set)
+- name: update to latest wordpress (if flag is set)
   command: "{{ item }} chdir={{ workspace }}/pantheon"
   with_items:
     - wget https://wordpress.org/latest.tar.gz
     - tar -xzf latest.tar.gz --strip-components=1 wordpress
     - rm latest.tar.gz
-  when: (update_wordpress == "true" and build_target == "pantheon")
+  when: (update_wordpress == "true" and build_target == "pantheon" and wordpress_version == "latest")
 
-- name: update wordpress (if flag is set)
+- name: update to latest wordpress (if flag is set)
   command: "{{ item }} chdir={{ workspace }}/wpengine"
   with_items:
     - wget https://wordpress.org/latest.tar.gz
     - tar -xzf latest.tar.gz --strip-components=1 wordpress
     - rm latest.tar.gz
-  when: (update_wordpress == "true" and build_target == "wpengine")
+  when: (update_wordpress == "true" and build_target == "wpengine" and wordpress_version == "latest")
+
+- name: update to specified wordpress version (if flag and version are set)
+  command: "{{ item }} chdir={{ workspace }}/pantheon"
+  with_items:
+    - wget https://wordpress.org/wordpress-{{ wordpress_version }}.tar.gz
+    - tar -xzf wordpress-{{ wordpress_version }}.tar.gz --strip-components=1 wordpress
+    - rm wordpress-{{ wordpress_version }}.tar.gz
+  when: (update_wordpress == "true" and build_target == "pantheon" and wordpress_version != "latest")
+
+- name: update to specified wordpress version (if flag and version are set)
+  command: "{{ item }} chdir={{ workspace }}/wpengine"
+  with_items:
+    - wget https://wordpress.org/wordpress-{{ wordpress_version }}.tar.gz
+    - tar -xzf wordpress-{{ wordpress_version }}.tar.gz --strip-components=1 wordpress
+    - rm wordpress-{{ wordpress_version }}.tar.gz
+  when: (update_wordpress == "true" and build_target == "wpengine" and wordpress_version != "latest")
 
 - name: remove pantheon directories
   file: path={{ workspace }}/pantheon/wp-content/{{ item }} state=absent

@@ -3,8 +3,8 @@ Contributors: joshbuchea
 Donate link: https://paypal.me/joshbuchea
 Tags: 301, redirect, lowercase, url
 Requires at least: 3.4
-Tested up to: 4.5
-Stable tag: 1.0
+Tested up to: 4.6
+Stable tag: 2.0.1
 License: MIT
 License URI: http://opensource.org/licenses/MIT
 
@@ -12,7 +12,7 @@ Perform a 301 redirect from an uppercase URL to the lowercase version for all no
 
 == Description ==
 
-Perform a 301 redirect from an uppercase URL to the lowercase version for all non-admin URLs (that do not include a filename or query variable).
+Perform a 301 redirect from an uppercase URL to the lowercase version for all non-admin URLs (that do not include a filename).
 
 Please help by reporting any bugs or feature requests at the link below.
 
@@ -22,16 +22,21 @@ Bugs:
 
 Questions/Comments:
 
-* http://www.joshbuchea.com/contact
+* http://joshbuchea.com/
 
 == Installation ==
 
-This section describes how to install the plugin and get it working.
-
-1. Upload `/wp-force-lowercase-urls/` to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
+= Installation =
+1. In your WordPress Dashboard go to "Plugins" -> "Add Plugin".
+2. Search for "WP Force Lowercase URLs".
+3. Install the plugin by pressing the "Install" button.
+4. Activate the plugin by pressing the "Activate" button.
 
 == Changelog ==
+
+= 2.0 =
+* Ground up rewrite
+* URLs with params are now converted & redirected to lowercase as expected
 
 = 1.0 =
 * Initial commit

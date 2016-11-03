@@ -82,6 +82,11 @@ class OMAPI_Output {
 	    // Set our object.
 	    $this->set();
 
+	    // If no credentials have been provided, do nothing.
+	    if ( ! $this->base->get_api_credentials() ) {
+		    return;
+	    }
+
 		// Load actions and filters.
 		add_action( 'wp_enqueue_scripts', array( $this, 'api_script' ) );
         add_action( 'wp_footer', array( $this, 'localize' ), 9999 );
@@ -519,52 +524,55 @@ class OMAPI_Output {
             }
 
             // If the optin is only to be shown on particular categories, get the code and break.
-            if ( ! empty( $fields['categories'] ) && ( 'post' == get_post_type() ) ) {
+            if ( ! empty( $fields['categories'] ) ) {
 	            // Set flag for possibly not loading globally.
 	            $values = array_filter( array_values( $fields['categories'] ) );
 	            if ( ! empty( $values ) ) {
 		            $global = false;
 	            }
 
-                // Don't try to load on the blog home page even if a category that is selected appears in the loop.
-                if ( is_home() ) {
-                    // Run a check for archive-type pages.
-                    if ( ! empty( $fields['show'] ) ) {
-                        // If showing on index pages and we are on an index page, show the optin.
-                        if ( in_array( 'index', (array) $fields['show'] ) ) {
-                            if ( is_front_page() || is_home() || is_search() ) {
-                                $init[ $optin->post_name ] = $html;
-                                $this->set_slug( $optin );
-                                continue;
-                            }
-                        }
+	            // Only load for the main "post" post type.
+	            if ( 'post' == get_post_type() ) {
+	                // Don't try to load on the blog home page even if a category that is selected appears in the loop.
+	                if ( is_home() ) {
+	                    // Run a check for archive-type pages.
+	                    if ( ! empty( $fields['show'] ) ) {
+	                        // If showing on index pages and we are on an index page, show the optin.
+	                        if ( in_array( 'index', (array) $fields['show'] ) ) {
+	                            if ( is_front_page() || is_home() || is_search() ) {
+	                                $init[ $optin->post_name ] = $html;
+	                                $this->set_slug( $optin );
+	                                continue;
+	                            }
+	                        }
 
-                        // Check if we should show on the 'post' post type.
-                        if ( in_array( 'post', (array) $fields['show'] ) && ! ( is_front_page() || is_home() || is_search() ) ) {
-                            $init[ $optin->post_name ] = $html;
-                            $this->set_slug( $optin );
-                            continue;
-                        }
-                    }
-                }
+	                        // Check if we should show on the 'post' post type.
+	                        if ( in_array( 'post', (array) $fields['show'] ) && ! ( is_front_page() || is_home() || is_search() ) ) {
+	                            $init[ $optin->post_name ] = $html;
+	                            $this->set_slug( $optin );
+	                            continue;
+	                        }
+	                    }
+	                }
 
-                $categories = wp_get_object_terms( $post_id, 'category', array( 'fields' => 'ids' ) );
+	                $categories = wp_get_object_terms( $post_id, 'category', array( 'fields' => 'ids' ) );
 
-	            // Check againts singular.
-                foreach ( (array) $categories as $category_id ) {
-                    if ( $category_id && in_array( $category_id, $fields['categories'] ) ) {
-                        $init[ $optin->post_name ] = $html;
-                        $this->set_slug( $optin );
-                        continue 2;
-                    }
-                }
+		            // Check againts singular.
+	                foreach ( (array) $categories as $category_id ) {
+	                    if ( $category_id && in_array( $category_id, $fields['categories'] ) ) {
+	                        $init[ $optin->post_name ] = $html;
+	                        $this->set_slug( $optin );
+	                        continue 2;
+	                    }
+	                }
 
-	            // Check archives.
-	            if ( is_category( $fields['categories'] ) ) {
-		            $init[ $optin->post_name ] = $html;
-		            $this->set_slug( $optin );
-		            continue;
-	            }
+		            // Check archives.
+		            if ( is_category( $fields['categories'] ) ) {
+			            $init[ $optin->post_name ] = $html;
+			            $this->set_slug( $optin );
+			            continue;
+		            }
+		        }
             }
 
             // If the optin is only to be shown on particular taxonomies, get the code and break.
@@ -691,9 +699,12 @@ class OMAPI_Output {
      */
 	public function set_slug( $optin ) {
 
+		// Set the slug.
+		$this->slugs[] = str_replace( '-', '_', $optin->post_name );
+
+		// Maybe set shortcode.
 		$shortcode = get_post_meta( $optin->ID, '_omapi_shortcode', true );
 		if ( $shortcode ) {
-			$this->slugs[] 		= str_replace( '-', '_', $optin->post_name );
 			$this->shortcodes[] = get_post_meta( $optin->ID, '_omapi_shortcode_output', true );
 		}
 
@@ -748,6 +759,11 @@ class OMAPI_Output {
      * @since 1.0.0
      */
     public function localize() {
+
+	    // If no slugs have been set, do nothing.
+	    if ( empty( $this->slugs ) ) {
+		    return;
+	    }
 
 	    // If already localized, do nothing.
 	    if ( $this->localized ) {

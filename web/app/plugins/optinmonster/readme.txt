@@ -2,7 +2,7 @@
 Contributors: griffinjt, smub
 Tags: wordpress popup, popup, lightbox popup, mailchimp, aweber, campaign monitor, constant contact, exit-intent, madmimi, infusionsoft, getresponse, hubspot, marketo, activecampaign, pardot, totalsend, emma, icontact, mailerlite, mailpoet, google analytics, pop over, optin forms, email list, subscribers, wordpress popup form, lightbox, wordpress popups, popups, lightbox popups, optin form, wordpress optin form, sidebar optin form, sidebar optin, sidebar form, wordpress overlay popup, wordpress popup plugin, popup plugin, wordpress lightbox optin, wordpress lightbox optin form, after post optin form, wordpress after post optin form, after post optin form plugin, lightbox popup plugin, wordpress popup solution, exit intent, exit-intent, optinmonster, optin monster, optin-monster, mobile popup, mobile popups, mobile optin forms, mobile optins, lightbox optins, wordpress mobile popup, wordpress mobile popups, wordpress mobile optin forms, wordpress lightbox optins, lead gen, lead generation, wordpress lead generation, lead generation wordpress, wordpress lead gen, fullscreen, welcome gate, interstitial
 Requires at least: 3.5.1
-Tested up to: 4.6
+Tested up to: 4.6.1
 Stable tag: trunk
 License: GNU General Public License v2.0 or later
 
@@ -117,12 +117,21 @@ This plugin is created by <a href="https://thomasgriffin.io" rel="friend" title=
 
 If you like this plugin, then consider checking out our other projects:
 
-* <a href="http://soliloquywp.com/" rel="friend" title="Soliloquy">Soliloquy</a> - Best WordPress Slider Plugin
 * <a href="http://enviragallery.com/" rel="friend" title="Envira Gallery">Envira Gallery</a> - Responsive WordPress Gallery Plugin
-* <a href="http://www.themelab.com/" rel="friend" title="ThemeLab">ThemeLab</a> - Premium WordPress Themes that Work
+* <a href="https://wpforms.com/" rel="friend" title="WPForms">WPForms</a> - Best WordPress Contact Form Plugin
+* <a href="https://www.monsterinsights.com/" rel="friend" title="MonsterInsights">MonsterInsights</a> - Best Google Analytics Plugin for WordPress
 
 Visit WPBeginner to learn from our <a href="http://www.wpbeginner.com/category/wp-tutorials/" rel="friend" title="WordPress Tutorials">WordPress Tutorials</a> and find out about other <a href="http://www.wpbeginner.com/category/plugins/" rel="friend" title="Best WordPress Plugins">best WordPress plugins</a>.
 
+= Press & Brand Assets =
+
+If you are interested in writing about OptinMonster, then we have have prepared a <a href="http://optinmonster.com/press/" rel="friend" title="OptinMonster Press Page">Press & Brand Assets page</a> where you can download our logo, screenshots, and other relevant assets.
+
+When mentioning OptinMonster please know that OptinMonster is one word with a Capital O and M.
+
+Please avoid using any variations like: Optinmonster, optinmonster, or worst Optin monster.
+
+OptinMonster® and Exit-Intent® are registered trademarks of Retyp, LLC.
 
 == Installation ==
 
@@ -150,6 +159,32 @@ OptinMonster is the <a href="http://optinmonster.com" rel="friend" title="OptinM
 > Chris Lema - CTO Crowd Favorite
 
 == Changelog ==
+
+= 1.1.5.8 =
+* Fixed bug that caused the MailPoet integration to fail in some scenarios.
+
+= 1.1.5.7 =
+* Improved checks for when to output and localize the OptinMonster API script.
+
+= 1.1.5.6 =
+* Fixed bug that caused people to have to define two constants to set the OptinMonster license key in config files.
+
+= 1.1.5.5 =
+* Fixed bug that redirected people already using the plugin to the Welcome screen on update.
+
+= 1.1.5.4 =
+* Fixed bug that caused issues with viewing the Welcome screen.
+
+= 1.1.5.3 =
+* Fixed issue with notices appearing oddly on OM screens.
+* Updated support video.
+
+= 1.1.5.2 =
+* Fixed bug with post category selections causing campaigns to load globally.
+
+= 1.1.5.1 =
+* Improved welcome screen for new installs.
+* Bug fixes and enhancements.
 
 = 1.1.5 =
 * Campaigns will now load on the archive pages of individual taxonomies (if selected) by default.

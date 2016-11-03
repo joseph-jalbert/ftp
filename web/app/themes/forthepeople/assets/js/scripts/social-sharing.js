@@ -2,21 +2,21 @@ jQuery(function($){
 
     var limit = 100;
 
-    var scroll = jQuery(document).scrollTop();
+    var scroll = $(document).scrollTop();
     if (scroll > limit) {
         show_social_icons();
     } else {
         hide_social_icons();
     }
 
-    $(document).scroll(function() {
+    $(document).scroll($.debounce( 250, function() {
         var y = $(this).scrollTop();
         if (y > limit) {
             show_social_icons();
         } else {
             hide_social_icons();
         }
-    });
+    }));
 
 
     function show_social_icons() {

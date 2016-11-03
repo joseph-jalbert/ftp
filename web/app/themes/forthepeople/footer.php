@@ -218,8 +218,8 @@ if ( Social_Sharing::check_page() ) :
 
     <div id="social-share-icons" class="a2a_kit a2a_kit_size_32 a2a_floating_style a2a_default_style hidden" <?php echo wp_kses( $custom_url ); ?> <?php echo wp_kses( $custom_title ); ?> >
         <div id="post-info-wrapper">
-            <div class="post-image"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/logos/ftp-logo1.jpg" alt="Morgan & Morgan" /></div>
-            <div class="post-title"><?php echo $post->post_title; ?></div>
+            <div class="post-image"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/logos/ftp-logo1.jpg" alt="Morgan &amp; Morgan" /></div>
+            <div class="post-title"><?php echo esc_html( $post->post_title ); ?></div>
         </div>
         <div class="icon-wrapper">
             <a class="a2a_button_email">

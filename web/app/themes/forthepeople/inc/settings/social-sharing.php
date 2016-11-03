@@ -71,6 +71,7 @@ class Social_Sharing {
     public static function check_page() {
 	    the_post();
 
+	    $post_type  = get_post_type();
 	    $categories = get_field( 'category_pages', 'option' );
 	    $post_types = get_field( 'post_types', 'option' );
 
@@ -83,7 +84,11 @@ class Social_Sharing {
 	    }
 
 	    if  ( ! empty( $post_types ) ) {
-		    return true;
+		    foreach( $post_types as $type ) {
+			    if ( $type === $post_type ) {
+				    return true;
+			    }
+		    }
 	    }
 
 	    return false;

@@ -150,7 +150,7 @@ if ( $menu_override ) {
             <span class="number tk-minion-pro">877.667.4265</span>
         </div>
     </div>
-	<div class="mobile-only">Se habla español</div>
+	<div class="mobile-only">Para ayuda en español visitenos en <a href="https://abogados.com">abogados.com</a></div>
 </header><!-- #masthead -->
 
 

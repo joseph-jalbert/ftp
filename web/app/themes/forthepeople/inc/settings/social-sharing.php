@@ -64,7 +64,154 @@ class Social_Sharing {
 
     public static function add_global_options() {
         if( function_exists('acf_add_local_field_group') ):
+	        acf_add_local_field_group(array (
+		        'key' => 'group_581a17a71dc01',
+		        'title' => 'Social Share Settings',
+		        'fields' => array (
+			        array (
+				        'key' => 'field_581a17b04f229',
+				        'label' => 'Categories',
+				        'name' => 'category_pages',
+				        'type' => 'taxonomy',
+				        'instructions' => 'Select which category pages you would like the sharing icons to be displayed on.',
+				        'required' => 0,
+				        'conditional_logic' => 0,
+				        'wrapper' => array (
+					        'width' => '',
+					        'class' => '',
+					        'id' => '',
+				        ),
+				        'taxonomy' => 'category',
+				        'field_type' => 'checkbox',
+				        'allow_null' => 0,
+				        'add_term' => 0,
+				        'save_terms' => 0,
+				        'load_terms' => 0,
+				        'return_format' => 'id',
+				        'multiple' => 0,
+			        ),
+			        array (
+				        'key' => 'field_581a26a34d868',
+				        'label' => 'Post Types',
+				        'name' => 'post_types',
+				        'type' => 'select',
+				        'instructions' => 'Select which post type pages you would like the sharing icons to be displayed on.',
+				        'required' => 0,
+				        'conditional_logic' => 0,
+				        'wrapper' => array (
+					        'width' => '',
+					        'class' => '',
+					        'id' => '',
+				        ),
+				        'choices' => array (
+					        'featured_news' => 'Featured News',
+					        'attorney' => 'Attorneys',
+					        'office' => 'Offices',
+					        'verdict' => 'Verdicts',
+					        'multimedia' => 'Multimedia',
+					        'testimonial' => 'Testimonials',
+					        'kads' => 'KADS',
+					        'btg_news' => 'BTG Blog',
+					        'local_news' => 'Local News',
+					        'classactionlawyers' => 'Class Action Cases ',
+				        ),
+				        'default_value' => array (
+				        ),
+				        'allow_null' => 0,
+				        'multiple' => 1,
+				        'ui' => 1,
+				        'ajax' => 0,
+				        'return_format' => 'value',
+				        'placeholder' => '',
+			        ),
+		        ),
+		        'location' => array (
+			        array (
+				        array (
+					        'param' => 'options_page',
+					        'operator' => '==',
+					        'value' => 'social-sharing',
+				        ),
+			        ),
+		        ),
+		        'menu_order' => 0,
+		        'position' => 'normal',
+		        'style' => 'default',
+		        'label_placement' => 'top',
+		        'instruction_placement' => 'label',
+		        'hide_on_screen' => '',
+		        'active' => 1,
+		        'description' => '',
+	        ));
 
+	        acf_add_local_field_group(array (
+		        'key' => 'group_581a2d4aa9011',
+		        'title' => 'Social Sharing',
+		        'fields' => array (
+			        array (
+				        'key' => 'field_581a2d50fc8a9',
+				        'label' => 'Custom URL',
+				        'name' => 'custom_url',
+				        'type' => 'text',
+				        'instructions' => 'Custom URL to override default sharing functionality.',
+				        'required' => 0,
+				        'conditional_logic' => 0,
+				        'wrapper' => array (
+					        'width' => '',
+					        'class' => '',
+					        'id' => '',
+				        ),
+				        'default_value' => '',
+				        'placeholder' => '',
+				        'prepend' => '',
+				        'append' => '',
+				        'maxlength' => '',
+			        ),
+			        array (
+				        'key' => 'field_581a2ddefc8aa',
+				        'label' => 'Custom Title',
+				        'name' => 'custom_title',
+				        'type' => 'text',
+				        'instructions' => 'Custom title to override default sharing functionality.',
+				        'required' => 0,
+				        'conditional_logic' => 0,
+				        'wrapper' => array (
+					        'width' => '',
+					        'class' => '',
+					        'id' => '',
+				        ),
+				        'default_value' => '',
+				        'placeholder' => '',
+				        'prepend' => '',
+				        'append' => '',
+				        'maxlength' => '',
+			        ),
+		        ),
+		        'location' => array (
+			        array (
+				        array (
+					        'param' => 'post_type',
+					        'operator' => '!=',
+					        'value' => 'omapi',
+				        ),
+			        ),
+			        array (
+				        array (
+					        'param' => 'post_type',
+					        'operator' => '!=',
+					        'value' => 'slack_integration',
+				        ),
+			        ),
+		        ),
+		        'menu_order' => 0,
+		        'position' => 'normal',
+		        'style' => 'default',
+		        'label_placement' => 'top',
+		        'instruction_placement' => 'label',
+		        'hide_on_screen' => '',
+		        'active' => 1,
+		        'description' => '',
+	        ));
         endif;
     }
 

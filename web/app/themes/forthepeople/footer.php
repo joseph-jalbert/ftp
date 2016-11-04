@@ -206,4 +206,40 @@ jQuery(document).ready(function($) {
     }(document, 'script', 'facebook-jssdk'));
 </script>
 
+
+<?php
+
+if ( Social_Sharing::check_page() ) :
+    $custom_title_value = get_field( 'custom_title', $post->ID );
+    $custom_title       = ! empty( $custom_title_value ) ? 'data-a2a-title="' . $custom_title_value . '"' : '';
+
+    $custom_url_value   = get_field( 'custom_url', $post->ID );
+    $custom_url         = ! empty( $custom_title_value ) ? 'data-a2a-url="' . $custom_url_value . '"' : '';  ?>
+
+    <div id="social-share-icons" class="a2a_kit a2a_kit_size_32 a2a_floating_style a2a_default_style hidden" <?php echo wp_kses_post( $custom_url ); ?> <?php echo wp_kses_post( $custom_title ); ?> >
+        <div id="post-info-wrapper">
+            <div class="post-image"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/logos/ftp-logo1.jpg" alt="Morgan &amp; Morgan" /></div>
+            <div class="post-title"><?php echo esc_html( $post->post_title ); ?></div>
+        </div>
+        <div class="icon-wrapper">
+            <a class="a2a_button_email">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/socialmedia/email.png" border="0" alt="eMail" />
+            </a>
+            <a class="a2a_button_google_plus">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/socialmedia/google_plusone.png" border="0" alt="eMail" />
+            </a>
+            <a class="a2a_button_pinterest">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/socialmedia/pinterest.png" border="0" alt="eMail" />
+            </a>
+            <a class="a2a_button_twitter">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/socialmedia/twitter.png" border="0" alt="eMail" />
+            </a>
+            <a class="a2a_button_facebook">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/socialmedia/facebook.png" border="0" alt="eMail" />
+            </a>
+        </div>
+    </div><?php
+
+endif; ?>
+
 </body></html>

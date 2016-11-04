@@ -49,7 +49,7 @@ class Actions {
 	public static function enqueue() {
 		wp_enqueue_script( 'hubspot-ie8-script', '//js.hsforms.net/forms/v2-legacy.js' );
 		wp_enqueue_script( 'hubspot-script', '//js.hsforms.net/forms/v2.js' );
-
+		wp_enqueue_script( 'addtoany-script', get_template_directory_uri() . '/assets/js/libs/addtoany.js' );
 	}
 
 

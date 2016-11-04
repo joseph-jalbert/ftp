@@ -218,6 +218,10 @@ class Social_Sharing {
     public static function check_page() {
 	    the_post();
 
+	    if ( ! is_singular() ) {
+		    return false;
+	    }
+
 	    $post_type  = get_post_type();
 	    $categories = get_field( 'category_pages', 'option' );
 	    $post_types = get_field( 'post_types', 'option' );

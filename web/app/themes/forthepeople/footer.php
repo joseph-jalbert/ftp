@@ -31,7 +31,15 @@
           </ul>
         </div>
         <div class="span4">
-          <div class="phone"><a href="tel:8776674265" onclick="trackEventGA('Click to Call', 'Call', 'Footer', 550);">877.667.4265</a></div>
+          <div class="phone">
+              <a href="tel:8776674265" onclick="trackEventGA('Click to Call', 'Call', 'Footer', 550);">877.667.4265</a>
+              <ul class="footer-links">
+                  <li><a href="/free-case-evaluation/">Free Case Evaluation • </a></li>
+                  <li><a href="http://employment.forthepeople.com">Employment • </a></li>
+                  <li><a href="/disclaimer-and-terms-of-use/">Terms & Conditions • </a></li>
+                  <li><a href="/site-accessibility/">Site Accessibility</a></li>
+              </ul>
+          </div>
           <div class="offices hidden-phone"> <span><a href="/office-locations/">Offices Throughout</a></span>
             <div class="row-fluid">
               <div class="span4"> Florida

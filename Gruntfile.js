@@ -1,6 +1,7 @@
 var themeBase = 'web/app/themes/forthepeople',
     projectJsFileList = [
         themeBase + '/js/aria.js',
+        themeBase + '/js/mobile.js',
         themeBase + '/js/navigation.js',
         themeBase + '/js/skip-link-focus-fix.js',
         themeBase + '/bootstrap/js/bootstrap.min.js',

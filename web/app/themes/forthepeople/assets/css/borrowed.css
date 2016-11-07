@@ -4647,12 +4647,14 @@ blockquote small {
     font-size: 12px
 }
 
-.footer-layer1 li a {
-    padding: 0 0 20px 30px;
-    color: #FFF;
-    display: block;
-    font-style: italic;
-    font-size: 14px
+@media screen and (min-width: 768px) {
+    .footer-layer1 li a {
+        padding: 0 0 20px 30px;
+        color: #FFF;
+        display: block;
+        font-style: italic;
+        font-size: 14px
+    }
 }
 
 .footer-layer2 {

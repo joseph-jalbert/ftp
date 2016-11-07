@@ -12,21 +12,21 @@ endif;
 if ( ! $custom_hubspot_form_id ) {
 	$custom_hubspot_form_id = '69d9a0d1-408f-4ba0-9781-1e834effd8c0';
 }
-$gray_box_title = get_field('gray_box_title');
+$gray_box_title = get_field( 'gray_box_title' );
 if ( ! $gray_box_title ) {
 	$gray_box_title = 'At Morgan & Morgan, we are dedicated to our clients.';
 }
-$gray_box_content = get_field('gray_box_content');
+$gray_box_content = get_field( 'gray_box_content' );
 if ( ! $gray_box_content ) {
 	$gray_box_content = 'Every day, we help people like you get their lives back on track by fighting their legal battles for them.';
 }
-$verdicts_and_settlements_title = get_field('verdicts_and_settlements_title');
+$verdicts_and_settlements_title = get_field( 'verdicts_and_settlements_title' );
 
 if ( ! $verdicts_and_settlements_title ) {
 	$verdicts_and_settlements_title = 'Verdicts &amp; Settlements';
 }
 
-$testimonials_title = get_field('testimonials_title');
+$testimonials_title = get_field( 'testimonials_title' );
 
 if ( ! $testimonials_title ) {
 	$testimonials_title = 'Recent Client Testimonials';
@@ -107,7 +107,7 @@ get_header(); ?>
 								<?php while ( have_rows( 'verdicts_settlements' ) ) : the_row(); ?>
 
 									<?php
-									$verdict_text = get_sub_field('verdict_text');
+									$verdict_text = get_sub_field( 'verdict_text' );
 									if ( ! $verdict_text ) {
 										$verdict_text = 'Verdict';
 									}
@@ -115,7 +115,7 @@ get_header(); ?>
 									?>
 									<li>
 										<div class="type">
-											<span><?php esc_html_e($verdict_text); ?></span><?php esc_html_e( get_sub_field( 'litigation_type' ) ); ?>
+											<span><?php esc_html_e( $verdict_text ); ?></span><?php esc_html_e( get_sub_field( 'litigation_type' ) ); ?>
 										</div>
 										<div
 											class="result"><?php esc_html_e( get_sub_field( 'litigation_value' ) ); ?></div>
@@ -127,6 +127,63 @@ get_header(); ?>
 						</ul>
 					</div>
 					<div class="foot"></div>
+					<?php
+					if ( (int) get_field( 'office_location' ) ):
+						$office_info = new WP_Query( array( 'post__in' => (int) get_field( 'office_location' ) ) );
+						if ( $office_info->have_posts() ):
+							while ( $office_info->have_posts() ): $office_info->the_post();
+								?>
+								<div class="">
+									<?php
+
+									echo '<div class="widgetWrap aside row-leading">';
+									echo '<div class="title"><span>Contact Us</span></div>';
+									echo '<div class="body"><div class="row-fluid"><div class="span12"><address itemtype="http://schema.org/Attorney" itemscope="">';
+									echo '<strong>';
+									echo the_title();
+									echo ', ';
+									echo esc_html( get_field( 'state' ) );
+									echo '</strong>';
+									echo '<br /><span itemprop="name">Morgan & Morgan</span>';
+									echo '<p><span itemtype="http://schema.org/PostalAddress" itemscope="" itemprop="address"><span itemprop="streetAddress">';
+									echo esc_html( get_field( ( 'street_address' ) ) );
+									if ( get_field( 'suite_information' ) ) {
+										echo '<br />';
+										echo esc_html( get_field( 'suite_information' ) );
+									}
+									echo '<br /></span>';
+									echo '<span itemprop="addressLocality">';
+									// if we have a locality that we want to override, there's an ACF field to override it called state_override
+									if ( $locality = get_field( 'state_override' ) ) :
+										echo esc_html( $locality );
+									else:
+										the_title();
+									endif;
+									echo '</span>';
+
+									echo ', ';
+									echo '<span itemprop="addressRegion">';
+									echo esc_html( get_field( 'state' ) );
+									echo '</span> ';
+									echo '<span itemprop="postalCode">';
+									echo esc_html( get_field( 'zip_code' ) );
+									echo '</span></span><br />';
+									echo '<span itemprop="telephone">';
+									$phone = esc_html( get_field( 'telephone' ) );
+									echo esc_html( "(" . substr( $phone, 0, 3 ) . ") " . substr( $phone, 3, 3 ) . "-" . substr( $phone, 6 ) );
+									echo '</span></span></p></address></div></div></div>';
+									echo '<div class="foot"></div></div>';
+
+									?>
+									<div class="foot"></div>
+
+
+								</div>
+							<?php endwhile; ?>
+							<?php wp_reset_postdata(); ?>
+						<?php endif; ?>
+					<?php endif; ?>
+
 				</div>
 			</div>
 			<!-- #col1 -->

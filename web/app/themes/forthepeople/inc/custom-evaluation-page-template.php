@@ -271,6 +271,28 @@ class Custom_Evaluation_Page_Template {
 
 						),
 					),
+					array(
+						'key'               => 'field_5820e47511573',
+						'label'             => 'Office Location',
+						'name'              => 'office_location',
+						'type'              => 'post_object',
+						'instructions'      => '',
+						'required'          => 0,
+						'conditional_logic' => 0,
+						'wrapper'           => array(
+							'width' => '',
+							'class' => '',
+							'id'    => '',
+						),
+						'post_type'         => array(
+							0 => 'office',
+						),
+						'taxonomy'          => array(),
+						'allow_null'        => 0,
+						'multiple'          => 0,
+						'return_format'     => 'id',
+						'ui'                => 1,
+					),
 				),
 				'location'              => array(
 					array(

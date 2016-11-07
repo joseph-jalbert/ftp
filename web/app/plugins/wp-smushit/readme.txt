@@ -22,7 +22,7 @@ Our servers do all the heavy lifting. Strip hidden bulky information from your i
 
 Large image files may be slowing down your site without you even knowing it. WP Smush uses WPMU DEV’s super servers to quickly smush every single one of your images and cuts all the unnecessary data without slowing down your site.
 
-[youtube https://www.youtube.com/watch?v=BLqk4KPRz28&feature=youtu.be]
+[youtube https://www.youtube.com/watch?v=BDtgVJZEajg&feature=youtu.be]
 
 WP Smush meticulously scans every image you upload – or have already added to your site – cuts all the unnecessary data and scales it for you before adding it to your media library.
 

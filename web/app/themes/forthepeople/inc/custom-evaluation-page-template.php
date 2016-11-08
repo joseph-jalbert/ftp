@@ -113,6 +113,22 @@ class Custom_Evaluation_Page_Template {
 						'default_value'     => '',
 						'placeholder'       => '',
 					),
+					array(
+						'key'               => 'field_5fasdfadbb999c6c',
+						'label'             => 'Map URL',
+						'name'              => 'map_url',
+						'type'              => 'url',
+						'instructions'      => '',
+						'required'          => 0,
+						'conditional_logic' => 0,
+						'wrapper'           => array(
+							'width' => '',
+							'class' => '',
+							'id'    => '',
+						),
+						'default_value'     => '',
+						'placeholder'       => '',
+					),
 
 					array(
 						'key'               => 'field_5817fadsf99c70',

@@ -1,9 +1,0 @@
-{
-    "name": "morgan-and-morgan/facebook-buttons",
-    "type": "wordpress-plugin",
-    "description": "Morgan and Morgan Facebook Buttons shortcodes",
-    "homepage": "http://www.forthepeople.com",
-    "require": {
-        "composer/installers": "~1.0"
-    }
-}

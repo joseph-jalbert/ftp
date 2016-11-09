@@ -7,14 +7,8 @@ jQuery(document).ready(function ($) {
     });
 
     $(document).on('click', '#more-button-wrapper .free-case-evaluation', function() {
+        goToByScroll('.widget-area')
         $('div.hs-wrapper').removeClass('hsform-hide');
-        target = $('div.hs-wrapper');
-        if (target.length) {
-            var top = target.offset().top;
-            jQuery('html,body').animate({
-                scrollTop: top
-            }, 500);
-        }
         $('#more-button-wrapper .free-case-evaluation').remove();
     });
 
@@ -27,3 +21,10 @@ jQuery(document).ready(function ($) {
         }
     }
 });
+
+function goToByScroll(selector){
+    selector = selector.replace("link", "");
+    jQuery('html,body').animate({
+        scrollTop: jQuery(selector).offset().top
+    }, 500);
+}

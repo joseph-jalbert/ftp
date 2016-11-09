@@ -8,6 +8,13 @@ jQuery(document).ready(function ($) {
 
     $(document).on('click', '#more-button-wrapper .free-case-evaluation', function() {
         $('div.hs-wrapper').removeClass('hsform-hide');
+        target = $('div.hs-wrapper');
+        if (target.length) {
+            var top = target.offset().top;
+            jQuery('html,body').animate({
+                scrollTop: top
+            }, 500);
+        }
         $('#more-button-wrapper .free-case-evaluation').remove();
     });
 

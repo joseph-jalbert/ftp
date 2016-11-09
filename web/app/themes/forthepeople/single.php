@@ -34,7 +34,7 @@ get_header(); ?>
 		<?php endwhile; // end of the loop. ?>
 		</main><!-- #main -->
 	</div><!-- #primary -->
-<div id="col2" class="span4">
+<div id="col2" class="widget-area span4">
 
 <?php if(in_category('Blog')) { include('template-parts/blog-sidebar.php');  }  ?>
 			

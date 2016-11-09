@@ -113,6 +113,22 @@ class Custom_Evaluation_Page_Template {
 						'default_value'     => '',
 						'placeholder'       => '',
 					),
+					array(
+						'key'               => 'field_5fasdfadbb999c6c',
+						'label'             => 'Map URL',
+						'name'              => 'map_url',
+						'type'              => 'url',
+						'instructions'      => '',
+						'required'          => 0,
+						'conditional_logic' => 0,
+						'wrapper'           => array(
+							'width' => '',
+							'class' => '',
+							'id'    => '',
+						),
+						'default_value'     => '',
+						'placeholder'       => '',
+					),
 
 					array(
 						'key'               => 'field_5817fadsf99c70',
@@ -270,6 +286,28 @@ class Custom_Evaluation_Page_Template {
 							),
 
 						),
+					),
+					array(
+						'key'               => 'field_5820e47511573',
+						'label'             => 'Office Location',
+						'name'              => 'office_location',
+						'type'              => 'post_object',
+						'instructions'      => '',
+						'required'          => 0,
+						'conditional_logic' => 0,
+						'wrapper'           => array(
+							'width' => '',
+							'class' => '',
+							'id'    => '',
+						),
+						'post_type'         => array(
+							0 => 'office',
+						),
+						'taxonomy'          => array(),
+						'allow_null'        => 0,
+						'multiple'          => 0,
+						'return_format'     => 'id',
+						'ui'                => 1,
 					),
 				),
 				'location'              => array(

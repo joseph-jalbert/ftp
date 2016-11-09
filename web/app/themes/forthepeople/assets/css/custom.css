@@ -18,6 +18,41 @@ ul.footer-links {
     display: inline;
 }
 
+@media screen and (max-width: 767px) {
+    .footer-links li a {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 530px) {
+    .footer-links li a {
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width: 490px) {
+    .footer-links li a {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 460px) {
+    .footer-links li a {
+        font-size: 11px;
+    }
+}
+@media screen and (max-width: 411px) {
+    .footer-links li a {
+        font-size: 10px;
+    }
+}
+
+@media screen and (max-width: 359px) {
+    .footer-links li a {
+        font-size: 9px;
+    }
+}
+
 
 @media screen and (min-width: 768px) {
     ul.footer-links {

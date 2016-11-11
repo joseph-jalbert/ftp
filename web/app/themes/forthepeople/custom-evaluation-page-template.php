@@ -236,6 +236,11 @@ get_header(); ?>
 						<?php endif; ?>
 						<?php $map_url = get_field( 'map_url' ); ?>
 						<?php if ( $map_url ) : ?>
+
+							<?php $map_title = get_field( 'map_title' ); ?>
+							<?php if ( $map_title ) : ?>
+								<br><div class="title"><span><?php esc_html_e( $map_title ); ?></span></div>
+							<?php endif; ?>
 							<div class="outer-map">
 								<iframe class="map" src="<?php echo esc_url( $map_url ); ?>" width="600" height="450" frameborder="0"
 							        style="border:0" allowfullscreen></iframe>

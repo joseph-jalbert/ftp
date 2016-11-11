@@ -124,6 +124,32 @@ class Social_Sharing {
 				        'return_format' => 'value',
 				        'placeholder' => '',
 			        ),
+			        array (
+				        'key' => 'field_5825e5366a780',
+				        'label' => 'Buttons To Show',
+				        'name' => 'buttons_to_show',
+				        'type' => 'checkbox',
+				        'instructions' => '',
+				        'required' => 0,
+				        'conditional_logic' => 0,
+				        'wrapper' => array (
+					        'width' => '',
+					        'class' => '',
+					        'id' => '',
+				        ),
+				        'choices' => array (
+					        'facebook' => 'Facebook',
+					        'twitter' => 'Twitter',
+					        'pinterest' => 'Pinterest',
+					        'google' => 'Google+',
+					        'email' => 'Email',
+				        ),
+				        'default_value' => array (
+				        ),
+				        'layout' => 'horizontal',
+				        'toggle' => 1,
+				        'return_format' => 'value',
+			        ),
 		        ),
 		        'location' => array (
 			        array (

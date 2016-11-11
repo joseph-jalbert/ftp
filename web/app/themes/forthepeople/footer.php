@@ -210,6 +210,8 @@ jQuery(document).ready(function($) {
 <?php
 
 if ( Social_Sharing::check_page() ) :
+    $buttons            = get_field( 'buttons_to_show', 'option' );
+
     $custom_title_value = get_field( 'custom_title', $post->ID );
     $custom_title       = ! empty( $custom_title_value ) ? 'data-a2a-title="' . $custom_title_value . '"' : '';
 
@@ -222,21 +224,36 @@ if ( Social_Sharing::check_page() ) :
             <div class="post-title"><?php echo esc_html( $post->post_title ); ?></div>
         </div>
         <div class="icon-wrapper">
+            <?php if ( in_array( 'email', array_values( $buttons ) ) ) : ?>
             <a class="a2a_button_email">
                 <img src="<?php echo get_template_directory_uri(); ?>/assets/images/socialmedia/email.png" border="0" alt="eMail" />
             </a>
+            <?php endif; ?>
+
+            <?php if ( in_array( 'google', array_values( $buttons ) ) ) : ?>
             <a class="a2a_button_google_plus">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/socialmedia/google_plusone.png" border="0" alt="eMail" />
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/socialmedia/google_plusone.png" border="0" alt="Google+" />
             </a>
+            <?php endif; ?>
+
+            <?php if ( in_array( 'pinterest', array_values( $buttons ) ) ) : ?>
             <a class="a2a_button_pinterest">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/socialmedia/pinterest.png" border="0" alt="eMail" />
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/socialmedia/pinterest.png" border="0" alt="Pinterest" />
             </a>
+            <?php endif; ?>
+
+            <?php if ( in_array( 'twitter', array_values( $buttons ) ) ) : ?>
             <a class="a2a_button_twitter">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/socialmedia/twitter.png" border="0" alt="eMail" />
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/socialmedia/twitter.png" border="0" alt="Twitter" />
             </a>
+            <?php endif; ?>
+
+            <?php if ( in_array( 'facebook', array_values( $buttons ) ) ) : ?>
             <a class="a2a_button_facebook">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/socialmedia/facebook.png" border="0" alt="eMail" />
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/socialmedia/facebook.png" border="0" alt="Facebook" />
             </a>
+            <?php endif; ?>
+
         </div>
     </div><?php
 

@@ -113,23 +113,6 @@ class Custom_Evaluation_Page_Template {
 						'default_value'     => '',
 						'placeholder'       => '',
 					),
-
-					array(
-						'key'               => 'field_5ffaddf99c6c',
-						'label'             => 'Map Title',
-						'name'              => 'map_title',
-						'type'              => 'text',
-						'instructions'      => 'Leave blank for no title',
-						'required'          => 0,
-						'conditional_logic' => 0,
-						'wrapper'           => array(
-							'width' => '',
-							'class' => '',
-							'id'    => '',
-						),
-						'default_value'     => '',
-						'placeholder'       => '',
-					),
 					array(
 						'key'               => 'field_5fasdfadbb999c6c',
 						'label'             => 'Map URL',
@@ -146,7 +129,6 @@ class Custom_Evaluation_Page_Template {
 						'default_value'     => '',
 						'placeholder'       => '',
 					),
-
 					array(
 						'key'               => 'field_5817fadsf99c70',
 						'label'             => 'Verdicts & Settlements',
@@ -301,8 +283,23 @@ class Custom_Evaluation_Page_Template {
 								'append'            => '',
 								'maxlength'         => '',
 							),
-
 						),
+					),
+					array(
+						'key'               => 'field_5ffaddf99c6c',
+						'label'             => 'Office Location Title',
+						'name'              => 'office_location_title',
+						'type'              => 'text',
+						'instructions'      => 'Leave blank for no title',
+						'required'          => 0,
+						'conditional_logic' => 0,
+						'wrapper'           => array(
+							'width' => '',
+							'class' => '',
+							'id'    => '',
+						),
+						'default_value'     => '',
+						'placeholder'       => '',
 					),
 					array(
 						'key'               => 'field_5820e47511573',

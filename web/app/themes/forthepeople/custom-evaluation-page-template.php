@@ -123,71 +123,8 @@ get_header(); ?>
 									</li>
 								<?php endwhile; ?>
 							<?php endif; ?>
-
 						</ul>
 					</div>
-					<div class="foot"></div>
-					<?php
-					if ( (int) get_field( 'office_location' ) ):
-
-						global $post;
-						$backup_post = $post;
-						$post = get_post( get_field( 'office_location' ) );
-
-
-							?>
-							<div class="">
-								<?php
-
-								echo '<div class="widgetWrap aside row-leading">';
-								echo '<div class="title"><span>Contact Us</span></div>';
-								echo '<div class="body"><div class="row-fluid"><div class="span12"><address itemtype="http://schema.org/Attorney" itemscope="">';
-								echo '<strong>';
-								echo the_title();
-								echo ', ';
-								echo esc_html( get_field( 'state' ) );
-								echo '</strong>';
-								echo '<br /><span itemprop="name">Morgan & Morgan</span>';
-								echo '<p><span itemtype="http://schema.org/PostalAddress" itemscope="" itemprop="address"><span itemprop="streetAddress">';
-								echo esc_html( get_field( ( 'street_address' ) ) );
-								if ( get_field( 'suite_information' ) ) {
-									echo '<br />';
-									echo esc_html( get_field( 'suite_information' ) );
-								}
-								echo '<br /></span>';
-								echo '<span itemprop="addressLocality">';
-								// if we have a locality that we want to override, there's an ACF field to override it called state_override
-								if ( $locality = get_field( 'state_override' ) ) :
-									echo esc_html( $locality );
-								else:
-									the_title();
-								endif;
-								echo '</span>';
-
-								echo ', ';
-								echo '<span itemprop="addressRegion">';
-								echo esc_html( get_field( 'state' ) );
-								echo '</span> ';
-								echo '<span itemprop="postalCode">';
-								echo esc_html( get_field( 'zip_code' ) );
-								echo '</span></span><br />';
-								echo '<span itemprop="telephone">';
-								$phone = esc_html( get_field( 'telephone' ) );
-								echo esc_html( "(" . substr( $phone, 0, 3 ) . ") " . substr( $phone, 3, 3 ) . "-" . substr( $phone, 6 ) );
-								echo '</span></span></p></address></div></div></div>';
-								echo '<div class="foot"></div></div>';
-
-								?>
-								<div class="foot"></div>
-
-
-							</div>
-
-						<?php wp_reset_postdata(); ?>
-						<?php $post = $backup_post; ?>
-					<?php endif; ?>
-
-
 				</div>
 			</div>
 			<!-- #col1 -->
@@ -234,24 +171,81 @@ get_header(); ?>
 								</div>
 							<?php endwhile; ?>
 						<?php endif; ?>
-						<?php $map_url = get_field( 'map_url' ); ?>
-						<?php if ( $map_url ) : ?>
-
-							<?php $map_title = get_field( 'map_title' ); ?>
-							<?php if ( $map_title ) : ?>
-								<br><div class="title"><span><?php esc_html_e( $map_title ); ?></span></div>
-							<?php endif; ?>
-							<div class="outer-map">
-								<iframe class="map" src="<?php echo esc_url( $map_url ); ?>" width="600" height="450" frameborder="0"
-							        style="border:0" allowfullscreen></iframe>
-							</div>
-						<?php endif; ?>
 
 						<div class="foot"></div>
 
 					</div>
 				</div>
 			</div>
+		</div>
+		<div class="row-fluid row-leading row-follow">
+			<div class="span6"><?php
+
+			if ( get_field( 'office_location_title' ) ) :
+				$office_location_title = get_field( 'office_location_title' );
+			endif;
+			if ( (int) get_field( 'office_location' ) ):
+
+
+				global $post;
+				$backup_post = $post;
+				$post = get_post( get_field( 'office_location' ) );
+
+
+				?><div><?php
+					echo '<div class="widgetWrap section" style="padding:0;">';
+					if ( $office_location_title ) :
+						?><div class="title" style="margin-top:0px!important;"><span><?php esc_html_e( $office_location_title ); ?></span></div><?php
+					endif;
+					echo '<div class="body"><div class="row-fluid"><div class="span11 offset1"><address itemtype="http://schema.org/Attorney" itemscope="">';
+					echo '<strong>';
+					echo the_title();
+					echo ', ';
+					echo esc_html( get_field( 'state' ) );
+					echo '</strong>';
+					echo '<br /><span itemprop="name">Morgan & Morgan</span>';
+					echo '<p><span itemtype="http://schema.org/PostalAddress" itemscope="" itemprop="address"><span itemprop="streetAddress">';
+					echo esc_html( get_field( ( 'street_address' ) ) );
+					if ( get_field( 'suite_information' ) ) {
+						echo '<br />';
+						echo esc_html( get_field( 'suite_information' ) );
+					}
+					echo '<br /></span>';
+					echo '<span itemprop="addressLocality">';
+					// if we have a locality that we want to override, there's an ACF field to override it called state_override
+					if ( $locality = get_field( 'state_override' ) ) :
+						echo esc_html( $locality );
+					else:
+						the_title();
+					endif;
+					echo '</span>';
+
+					echo ', ';
+					echo '<span itemprop="addressRegion">';
+					echo esc_html( get_field( 'state' ) );
+					echo '</span> ';
+					echo '<span itemprop="postalCode">';
+					echo esc_html( get_field( 'zip_code' ) );
+					echo '</span></span><br />';
+					echo '<span itemprop="telephone">';
+					$phone = esc_html( get_field( 'telephone' ) );
+					echo esc_html( "(" . substr( $phone, 0, 3 ) . ") " . substr( $phone, 3, 3 ) . "-" . substr( $phone, 6 ) );
+					echo '</span></span></p></address></div></div></div>';
+					echo '<div class="foot"></div></div>';
+				?></div><?php
+
+				wp_reset_postdata();
+				$post = $backup_post;
+			endif;
+			?></div>
+			<div class="span6"><?php
+				$map_url = get_field( 'map_url' );
+				if ( $map_url ) :
+					?><div class="outer-map">
+						<iframe class="map" src="<?php echo esc_url( $map_url ); ?>" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+					</div><?php
+				endif;
+			?></div>
 		</div>
 	</div>
 

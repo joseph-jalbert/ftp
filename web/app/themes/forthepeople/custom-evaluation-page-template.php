@@ -245,8 +245,8 @@ get_header(); ?>
 			<div class="span6 offset1"><?php
 				$map_url = get_field( 'map_url' );
 				if ( $map_url ) :
-					?><div class="outer-map" style="padding-left: 5px; padding-right: 5px;">
-						<iframe class="map" src="<?php echo esc_url( $map_url ); ?>" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen></iframe>
+					?><div class="outer-map" style="padding-left: 5px; padding-right: 5px; position: relative;">
+						<iframe class="map" src="<?php echo esc_url( $map_url ); ?>" width="100%" height="450" frameborder="0" style="border:0; margin-left:0;" allowfullscreen></iframe>
 					</div><?php
 				endif;
 			?></div>

@@ -54,7 +54,7 @@ get_header(); ?>
 </div>
 <div id="content" class="site-content container">
 	<div id="interior-page">
-		<div class="row-fluid row-leading row-follow">
+		<div class="row-fluid row-leading row-follow" style="padding-bottom: 0;">
 			<div id="col1" class="span6">
 				<main id="main" class="site-main" role="main">
 
@@ -97,7 +97,7 @@ get_header(); ?>
 
 				<div id="verdictScroll" data-practicearea="-1" data-attorney="-1" data-officelocation="-1"
 				     data-stateabb="" data-startrow="9" data-type="all" class="widgetWrap section"
-				     style="margin-top:70px;">
+				     style="margin-top:70px; padding-bottom:0;">
 					<div class="title" role="complementary">
 						<span><?php esc_html_e( $verdicts_and_settlements_title ); ?></span></div>
 					<div class="body">
@@ -179,11 +179,18 @@ get_header(); ?>
 			</div>
 		</div>
 		<div class="row-fluid row-leading row-follow">
-			<div class="span6"><?php
-
+			<div class="span12"><div class="row-fluid"><?php
 			if ( get_field( 'office_location_title' ) ) :
 				$office_location_title = get_field( 'office_location_title' );
 			endif;
+				?><div class="widgetWrap section" style="padding:0;"><?php
+				if ( $office_location_title ) :
+					?><div class="title" style="margin-top:0px!important;"><span><?php esc_html_e( $office_location_title ); ?></span></div><?php
+				endif;
+				?></div>
+			</div></div>
+			<div class="span5"><?php
+
 			if ( (int) get_field( 'office_location' ) ):
 
 
@@ -194,10 +201,7 @@ get_header(); ?>
 
 				?><div><?php
 					echo '<div class="widgetWrap section" style="padding:0;">';
-					if ( $office_location_title ) :
-						?><div class="title" style="margin-top:0px!important;"><span><?php esc_html_e( $office_location_title ); ?></span></div><?php
-					endif;
-					echo '<div class="body"><div class="row-fluid"><div class="span11 offset1"><address itemtype="http://schema.org/Attorney" itemscope="">';
+					echo '<div class="body"><div class="row-fluid"><div class="span12"><address itemtype="http://schema.org/Attorney" itemscope="">';
 					echo '<strong>';
 					echo the_title();
 					echo ', ';

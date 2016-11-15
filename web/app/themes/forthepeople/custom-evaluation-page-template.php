@@ -52,7 +52,7 @@ get_header(); ?>
 		</div>
 	</div>
 </div>
-<div id="content" class="site-content container">
+<div id="content" class="site-content container" style="padding-left: 5px; padding-right: 5px;">
 	<div id="interior-page">
 		<div class="row-fluid row-leading row-follow" style="padding-bottom: 0;">
 			<div id="col1" class="span6">
@@ -185,7 +185,7 @@ get_header(); ?>
 			endif;
 				?><div class="widgetWrap section" style="padding:0;"><?php
 				if ( $office_location_title ) :
-					?><div class="title" style="margin-top:0px!important;"><span><?php esc_html_e( $office_location_title ); ?></span></div><?php
+					?><div class="title" style="margin-top:0px!important; background: none;"><span><?php esc_html_e( $office_location_title ); ?></span></div><?php
 				endif;
 				?></div>
 			</div></div>
@@ -245,7 +245,7 @@ get_header(); ?>
 			<div class="span6 offset1"><?php
 				$map_url = get_field( 'map_url' );
 				if ( $map_url ) :
-					?><div class="outer-map">
+					?><div class="outer-map" style="padding-left: 5px; padding-right: 5px;">
 						<iframe class="map" src="<?php echo esc_url( $map_url ); ?>" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
 					</div><?php
 				endif;

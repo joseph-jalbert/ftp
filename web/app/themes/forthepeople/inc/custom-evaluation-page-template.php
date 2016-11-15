@@ -118,7 +118,7 @@ class Custom_Evaluation_Page_Template {
 						'label'             => 'Map URL',
 						'name'              => 'map_url',
 						'type'              => 'url',
-						'instructions'      => '',
+						'instructions'      => 'Should follow this format: https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14179.958280781844!2d-82.530206!3d27.313515!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xbb26e3f827702ceb!2sMorgan+%26+Morgan!5e0!3m2!1sen!2sus!4v1447198759586',
 						'required'          => 0,
 						'conditional_logic' => 0,
 						'wrapper'           => array(
@@ -129,7 +129,6 @@ class Custom_Evaluation_Page_Template {
 						'default_value'     => '',
 						'placeholder'       => '',
 					),
-
 					array(
 						'key'               => 'field_5817fadsf99c70',
 						'label'             => 'Verdicts & Settlements',
@@ -284,8 +283,23 @@ class Custom_Evaluation_Page_Template {
 								'append'            => '',
 								'maxlength'         => '',
 							),
-
 						),
+					),
+					array(
+						'key'               => 'field_5ffaddf99c6c',
+						'label'             => 'Office Location Title',
+						'name'              => 'office_location_title',
+						'type'              => 'text',
+						'instructions'      => 'Leave blank for no title',
+						'required'          => 0,
+						'conditional_logic' => 0,
+						'wrapper'           => array(
+							'width' => '',
+							'class' => '',
+							'id'    => '',
+						),
+						'default_value'     => '',
+						'placeholder'       => '',
 					),
 					array(
 						'key'               => 'field_5820e47511573',

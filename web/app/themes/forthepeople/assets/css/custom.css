@@ -1,5 +1,67 @@
 /* Enter Your Custom CSS Here */
 
+
+ul.footer-links {
+    width: 100%;
+    margin-left: 0;
+}
+
+.footer-links li {
+    display: inline;
+}
+
+.footer-links li a {
+    font-family: ff-basic-gothic-web-pro, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-style: italic;
+    color: white;
+    padding: 0;
+    display: inline;
+}
+
+@media screen and (max-width: 767px) {
+    .footer-links li a {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 530px) {
+    .footer-links li a {
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width: 490px) {
+    .footer-links li a {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 460px) {
+    .footer-links li a {
+        font-size: 11px;
+    }
+}
+@media screen and (max-width: 411px) {
+    .footer-links li a {
+        font-size: 10px;
+    }
+}
+
+@media screen and (max-width: 359px) {
+    .footer-links li a {
+        font-size: 9px;
+    }
+}
+
+
+@media screen and (min-width: 768px) {
+    ul.footer-links {
+        display: none !important;
+    }
+}
+
+
+
 div #content {
     outline: none;
 }

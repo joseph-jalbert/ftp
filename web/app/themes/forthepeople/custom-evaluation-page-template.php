@@ -189,7 +189,7 @@ get_header(); ?>
 				endif;
 				?></div>
 			</div></div>
-			<div class="span5"><?php
+			<div class="span5" style="margin-left:0;"><?php
 
 			if ( (int) get_field( 'office_location' ) ):
 
@@ -201,7 +201,7 @@ get_header(); ?>
 
 				?><div><?php
 					echo '<div class="widgetWrap section" style="padding:0;">';
-					echo '<div class="body"><div class="row-fluid"><div class="span12"><address itemtype="http://schema.org/Attorney" itemscope="">';
+					echo '<div class="body"><div class="row-fluid"><div class="span11 offset1"><address itemtype="http://schema.org/Attorney" itemscope="">';
 					echo '<strong>';
 					echo the_title();
 					echo ', ';
@@ -242,7 +242,7 @@ get_header(); ?>
 				$post = $backup_post;
 			endif;
 			?></div>
-			<div class="span6"><?php
+			<div class="span6 offset1"><?php
 				$map_url = get_field( 'map_url' );
 				if ( $map_url ) :
 					?><div class="outer-map">

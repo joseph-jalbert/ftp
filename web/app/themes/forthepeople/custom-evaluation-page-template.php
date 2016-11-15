@@ -52,8 +52,8 @@ get_header(); ?>
 		</div>
 	</div>
 </div>
-<div id="content" class="site-content container" style="padding-left: 5px; padding-right: 5px;">
-	<div id="interior-page">
+<div id="content" class="site-content container">
+	<div id="interior-page" style="padding-left: 5px; padding-right: 5px;">
 		<div class="row-fluid row-leading row-follow" style="padding-bottom: 0;">
 			<div id="col1" class="span6">
 				<main id="main" class="site-main" role="main">
@@ -246,7 +246,7 @@ get_header(); ?>
 				$map_url = get_field( 'map_url' );
 				if ( $map_url ) :
 					?><div class="outer-map" style="padding-left: 5px; padding-right: 5px;">
-						<iframe class="map" src="<?php echo esc_url( $map_url ); ?>" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+						<iframe class="map" src="<?php echo esc_url( $map_url ); ?>" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen></iframe>
 					</div><?php
 				endif;
 			?></div>

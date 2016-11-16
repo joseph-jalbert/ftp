@@ -202,11 +202,6 @@ get_header(); ?>
 				?><div><?php
 					echo '<div class="widgetWrap section" style="padding:0;">';
 					echo '<div class="body"><div class="row-fluid"><div class="span11 offset1"><address itemtype="http://schema.org/Attorney" itemscope="">';
-					echo '<span>';
-					echo the_title();
-					echo ', ';
-					echo esc_html( get_field( 'state' ) );
-					echo '</span>';
 					echo '<br /><span itemprop="name">Morgan & Morgan</span>';
 					echo '<p><span itemtype="http://schema.org/PostalAddress" itemscope="" itemprop="address"><span itemprop="streetAddress">';
 					echo esc_html( get_field( ( 'street_address' ) ) );

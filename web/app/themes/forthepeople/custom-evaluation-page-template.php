@@ -53,8 +53,8 @@ get_header(); ?>
 	</div>
 </div>
 <div id="content" class="site-content container">
-	<div id="interior-page">
-		<div class="row-fluid row-leading row-follow">
+	<div id="interior-page" style="padding-left: 5px; padding-right: 5px;">
+		<div class="row-fluid row-leading row-follow" style="padding-bottom: 0;">
 			<div id="col1" class="span6">
 				<main id="main" class="site-main" role="main">
 
@@ -97,7 +97,7 @@ get_header(); ?>
 
 				<div id="verdictScroll" data-practicearea="-1" data-attorney="-1" data-officelocation="-1"
 				     data-stateabb="" data-startrow="9" data-type="all" class="widgetWrap section"
-				     style="margin-top:70px;">
+				     style="margin-top:70px; padding-bottom:0;">
 					<div class="title" role="complementary">
 						<span><?php esc_html_e( $verdicts_and_settlements_title ); ?></span></div>
 					<div class="body">
@@ -143,14 +143,14 @@ get_header(); ?>
 					</div>
 				</div>
 				<div class="well">
-					<p class="no-margin-topbottom"><span
-							class="blue bold format italic"><?php esc_html_e( $gray_box_title ); ?></span><br/>
-						<?php esc_html_e( nl2br( $gray_box_content ) ); ?></p>
+					<p style="margin-top:0;margin-bottom:0;"><span
+							class="blue bold format italic"><?php esc_html_e( $gray_box_title ); ?></span></p>
+						<?php echo wp_kses_post( wpautop( $gray_box_content ) ); ?>
 				</div>
 
 
 				<div id="testimonialScroll" data-practicearea="-1" data-attorney="-1" data-officelocation="-1"
-				     data-stateabb="" data-startrow="9" class="widgetWrap section">
+				     data-stateabb="" data-startrow="9" class="widgetWrap section" style="padding-bottom:0;">
 
 					<div class="title"><span><?php esc_html_e( $testimonials_title ); ?></span></div>
 
@@ -179,11 +179,18 @@ get_header(); ?>
 			</div>
 		</div>
 		<div class="row-fluid row-leading row-follow">
-			<div class="span6"><?php
-
+			<div class="span12"><div class="row-fluid"><?php
 			if ( get_field( 'office_location_title' ) ) :
 				$office_location_title = get_field( 'office_location_title' );
 			endif;
+				?><div class="widgetWrap section" style="padding:0;"><?php
+				if ( $office_location_title ) :
+					?><div class="title" style="margin-top:0px!important; background: none;"><span><?php esc_html_e( $office_location_title ); ?></span></div><?php
+				endif;
+				?></div>
+			</div></div>
+			<div class="span5" style="margin-left:0;"><?php
+
 			if ( (int) get_field( 'office_location' ) ):
 
 
@@ -194,15 +201,7 @@ get_header(); ?>
 
 				?><div><?php
 					echo '<div class="widgetWrap section" style="padding:0;">';
-					if ( $office_location_title ) :
-						?><div class="title" style="margin-top:0px!important;"><span><?php esc_html_e( $office_location_title ); ?></span></div><?php
-					endif;
 					echo '<div class="body"><div class="row-fluid"><div class="span11 offset1"><address itemtype="http://schema.org/Attorney" itemscope="">';
-					echo '<strong>';
-					echo the_title();
-					echo ', ';
-					echo esc_html( get_field( 'state' ) );
-					echo '</strong>';
 					echo '<br /><span itemprop="name">Morgan & Morgan</span>';
 					echo '<p><span itemtype="http://schema.org/PostalAddress" itemscope="" itemprop="address"><span itemprop="streetAddress">';
 					echo esc_html( get_field( ( 'street_address' ) ) );
@@ -238,11 +237,11 @@ get_header(); ?>
 				$post = $backup_post;
 			endif;
 			?></div>
-			<div class="span6"><?php
+			<div class="span6 offset1"><?php
 				$map_url = get_field( 'map_url' );
 				if ( $map_url ) :
-					?><div class="outer-map">
-						<iframe class="map" src="<?php echo esc_url( $map_url ); ?>" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+					?><div class="outer-map" style="padding-left: 5px; padding-right: 5px; position: relative;">
+						<iframe class="map" src="<?php echo esc_url( $map_url ); ?>" width="100%" height="450" frameborder="0" style="border:0; margin-left:0;" allowfullscreen></iframe>
 					</div><?php
 				endif;
 			?></div>

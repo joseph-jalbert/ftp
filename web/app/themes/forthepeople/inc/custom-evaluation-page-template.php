@@ -67,7 +67,7 @@ class Custom_Evaluation_Page_Template {
 						'key'               => 'field_5fafasdfbb999c6c',
 						'label'             => 'Gray Box Content',
 						'name'              => 'gray_box_content',
-						'type'              => 'text',
+						'type'              => 'wysiwyg',
 						'instructions'      => '',
 						'required'          => 0,
 						'conditional_logic' => 0,
@@ -77,7 +77,9 @@ class Custom_Evaluation_Page_Template {
 							'id'    => '',
 						),
 						'default_value'     => '',
-						'placeholder'       => '',
+						'tabs' => 'all',
+						'toolbar' => 'full',
+						'media_upload' => 1,
 					),
 
 					array(
